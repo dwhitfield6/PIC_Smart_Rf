@@ -1,32 +1,53 @@
-/* this file contains miscilenous functions*/
+/******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains misceleneous functions.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
+#define USE_OR_MASKS
 #if defined(__XC)
-    #include <xc.h>         /* XC8 General Include File */
+    #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
-    #include <htc.h>        /* HiTech General Include File */
+    #include <htc.h>       /* HiTech General Include File */
 #elif defined(__18CXX)
-    #include <p18cxxx.h>    /* C18 General Include File */
+    #include <p18cxxx.h>   /* C18 General Include File */
 #endif
 
 #if defined(__XC) || defined(HI_TECH_C)
 
-#include <stdint.h>         /* For uint8_t definition */
-#include <stdbool.h>        /* For true/false definition */
+#include <stdint.h>        /* For uint8_t definition */
+#include <stdbool.h>       /* For true/false definition */
+#include <stdio.h>       /* For true/false definition */
 
 #endif
 
 #include "MISC.h"
 #include "system.h"
 
-#define SYS_FREQ_US 41
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
 
-//inverse relationship
-#define delayConst 31
-
+/******************************************************************************/
 /* DelayUs
- * Input: number in microseconds to be delayed
+ * Input the number in microseconds to be delayed.
  *
- * The actual delay can be scewed when interruots are enabled
- */
+ * The function waists loops for the entered bumber of cycles.
+ * The actual delay can be scewed when interrupts are enabled.
+/******************************************************************************/
 void delayUS(long US)
 {
     long i;
@@ -40,6 +61,11 @@ void delayUS(long US)
     }
 }
 
+/******************************************************************************/
+/* cleanBuffer
+ *
+ * This function sets an amount of data in the array as 0.
+/******************************************************************************/
 void cleanBuffer(unsigned char* data, int count)
 {
     unsigned char i=0;
@@ -49,6 +75,11 @@ void cleanBuffer(unsigned char* data, int count)
     }
 }
 
+/******************************************************************************/
+/* BufferCopy
+ *
+ * This function copies the 'from' array to the 'to' array.
+/******************************************************************************/
 void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsigned char shift)
 {
     unsigned char i=0;
@@ -67,6 +98,11 @@ void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsi
     }
 }
 
+/******************************************************************************/
+/* StringMatch
+ *
+ * This function returns TRUE if the array 'This' matches the array 'That'.
+/******************************************************************************/
 unsigned char StringMatch(unsigned char* This,const unsigned char* That)
 {
     while(*This != 0)
@@ -88,6 +124,12 @@ unsigned char StringMatch(unsigned char* This,const unsigned char* That)
     }
 }
 
+/******************************************************************************/
+/* StringContains
+ *
+ * This function returns TRUE if the array 'That' is contained in the array
+ *   'This'.
+/******************************************************************************/
 unsigned char StringContains(unsigned char* This, const unsigned char* That)
 {
     while(*This != 0)
@@ -110,6 +152,12 @@ unsigned char StringContains(unsigned char* This, const unsigned char* That)
     return 0;
 }
 
+/******************************************************************************/
+/* StartsWith
+ *
+ * This function returns TRUE if the array 'That' is contained in the array
+ *   'This'.
+/******************************************************************************/
 unsigned char StartsWith(unsigned char* This,const unsigned char* That)
 {
     while(*This != 0)
@@ -130,14 +178,21 @@ unsigned char StartsWith(unsigned char* This,const unsigned char* That)
     }
     if(*This == 0 && *That == 0)
     {
+        // the arrays are equal
         return 1;
     }
     else
     {
+        // array 'That' is bigger than array 'This'
         return 0;
     }
 }
 
+/******************************************************************************/
+/* GetEnteredNumber
+ *
+ * This function returns the number that is contained in the string.
+/******************************************************************************/
 int GetEnteredNumber(unsigned char* This)
 {
     unsigned char i =0;
@@ -201,6 +256,12 @@ int GetEnteredNumber(unsigned char* This)
     return temp;
 
 }
+
+/******************************************************************************/
+/* RemoveSpaces
+ *
+ * This function removes any spaces in the string.
+/******************************************************************************/
 void RemoveSpaces(unsigned char* This)
 {
     //must match size of *This which is 100
@@ -219,6 +280,12 @@ void RemoveSpaces(unsigned char* This)
     }
     BufferCopy(That,address, 100, 0);
 }
+
+/******************************************************************************/
+/* lowercase
+ *
+ * This function turns all characters to in the string to lowercase.
+/******************************************************************************/
 void lowercase(unsigned char* Input)
 {
     unsigned char i =0;
@@ -231,6 +298,12 @@ void lowercase(unsigned char* Input)
         i++;
     }
 }
+
+/******************************************************************************/
+/* StringAddEqual
+ *
+ * This function puts an equal sign between letters and a number value.
+/******************************************************************************/
 unsigned char StringAddEqual(unsigned char* Input)
 {
     unsigned char i =0;
@@ -268,22 +341,41 @@ unsigned char StringAddEqual(unsigned char* Input)
     return 1;
 }
 
-unsigned char CheckSum_byte(unsigned int This)
+/******************************************************************************/
+/* CheckSum_byte
+ *
+ * The function reads the value of 'This' and retunrn the checksum. The Odd_Even
+ * parameter determines if it returns an even polarity bit or an odd polarity
+ * bit.
+/******************************************************************************/
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
 {
-    unsigned char i = 0;
-    unsigned char oddParity = 0;
+    char i = 0;
+    unsigned char Parity = 0;
+    unsigned int ThisTemp = This;
 
-    for (i =0; i<7;i++)
+    for (i =0; i<8; i++)
     {
-        if(This & 1 == 1)
+        if((ThisTemp & 0x01) == 1)
         {
-            oddParity++;
+            Parity++;
         }
-        This >> 1;
+        ThisTemp >>= 1;
     }
-    if(oddParity % 2 == 0) //even
+    if(Odd_Even == Odd)
     {
-        return 1;
+        if(Parity % 2 == 0) //even
+        {
+            return 1;
+        }
+        return 0;
     }
-    return 0;
+    else
+    {
+        if(Parity % 2 == 1) //odd
+        {
+            return 1;
+        }
+        return 0;
+    }
 }

@@ -19522,7 +19522,7 @@ typedef unsigned char bool;
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 26 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19533,6 +19533,7 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
 # 20 "system.h"
 void ConfigureOscillator(void);
@@ -19636,7 +19637,7 @@ void InitApp(void);
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 26 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19647,6 +19648,7 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
 # 20 "system.h"
 void ConfigureOscillator(void);
@@ -19674,25 +19676,24 @@ int InternalADC_Read(unsigned char channel);
 # 23 "StringCommand.h"
 void Command(unsigned char* Input);
 
-# 24 "interrupts.c"
+# 45 "interrupts.c"
 extern char Txdata[100];
 extern char Rxdata[100];
 extern unsigned char bufferCount;
 
-# 34
+# 58
 void interrupt high_isr(void)
 
-# 43
+# 67
 {
 
-# 70
+# 94
 }
 
-
-
+# 100
 void low_priority interrupt low_isr(void)
 
-# 82
+# 108
 {
 unsigned char rx;
 unsigned char TEMP_Rxdata[100];

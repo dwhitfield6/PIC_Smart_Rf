@@ -1,4 +1,20 @@
 /******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains functions that control the internal ADC.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
 #define USE_OR_MASKS
@@ -21,59 +37,72 @@
 #include "user.h"          /* User funct/params, such as InitApp */
 #include "UART.h"          /* User funct/params, such as InitApp */
 
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
 
+/******************************************************************************/
+/* EnableInternalADC
+ *
+ * The function initializes the internal ADCs.
+/******************************************************************************/
 void EnableInternalADC(unsigned char channels)
 {
-unsigned char config =0;
-     //-----configure USART -----
-if(channels == 1)
-{
-    config |= ADC_1ANA_0REF;
-}
-else if(channels ==2)
-{
-    config |= ADC_2ANA_0REF;
-}
-else if(channels ==3)
-{
-    config |= ADC_3ANA_0REF;
-}
-else if(channels ==4)
-{
-    config |= ADC_4ANA_0REF;
-}
-else if(channels ==5)
-{
-    config |= ADC_5ANA_0REF;
-}
-else if(channels ==6)
-{
-    config |= ADC_6ANA_0REF;
-}
-else if(channels ==7)
-{
-    config |= ADC_7ANA_0REF;
-}
-else if(channels ==8)
-{
-    config |= ADC_8ANA_0REF;
-}
-else if(channels ==9)
-{
-    config |= ADC_9ANA_0REF;
-}
-else if(channels ==10)
-{
-    config |= ADC_10ANA_0REF;
-}
-else
-{
-    config |= ADC_11ANA_0REF;
+    unsigned char config =0;
+         //-----configure USART -----
+    if(channels == 1)
+    {
+        config |= ADC_1ANA_0REF;
+    }
+    else if(channels ==2)
+    {
+        config |= ADC_2ANA_0REF;
+    }
+    else if(channels ==3)
+    {
+        config |= ADC_3ANA_0REF;
+    }
+    else if(channels ==4)
+    {
+        config |= ADC_4ANA_0REF;
+    }
+    else if(channels ==5)
+    {
+        config |= ADC_5ANA_0REF;
+    }
+    else if(channels ==6)
+    {
+        config |= ADC_6ANA_0REF;
+    }
+    else if(channels ==7)
+    {
+        config |= ADC_7ANA_0REF;
+    }
+    else if(channels ==8)
+    {
+        config |= ADC_8ANA_0REF;
+    }
+    else if(channels ==9)
+    {
+        config |= ADC_9ANA_0REF;
+    }
+    else if(channels ==10)
+    {
+        config |= ADC_10ANA_0REF;
+    }
+    else
+    {
+        config |= ADC_11ANA_0REF;
+    }
+
+    ADCON1 = config;
 }
 
-ADCON1 = config;
-}
-
+/******************************************************************************/
+/* InternalADC_Read
+ *
+ * The function reads the internal ADC channel.
+/******************************************************************************/
 int InternalADC_Read(unsigned char channel)
 {
     ADCON0 =0;
@@ -91,6 +120,12 @@ int InternalADC_Read(unsigned char channel)
     while(ADCON0 & ADC_GO);
     return ((ADRESH << 8) + ADRESL);
 }
+
+/******************************************************************************/
+/* DisableInternalADC
+ *
+ * The function disables the internal ADCs.
+/******************************************************************************/
 void DisableInternalADC(void)
 {
     ADCON0 &= ~ADON;

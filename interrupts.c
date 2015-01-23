@@ -1,18 +1,35 @@
 /******************************************************************************/
-/*Files to Include                                                            */
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
 /******************************************************************************/
+
+/******************************************************************************/
+/* Contains ISR
+ *
+/******************************************************************************/
+
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
+#define USE_OR_MASKS
 #if defined(__XC)
-    #include <xc.h>         /* XC8 General Include File */
+    #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
-    #include <htc.h>        /* HiTech General Include File */
+    #include <htc.h>       /* HiTech General Include File */
 #elif defined(__18CXX)
-    #include <p18cxxx.h>    /* C18 General Include File */
+    #include <p18cxxx.h>   /* C18 General Include File */
 #endif
 
 #if defined(__XC) || defined(HI_TECH_C)
 
-#include <stdint.h>         /* For uint8_t definition */
-#include <stdbool.h>        /* For true/false definition */
+#include <stdint.h>        /* For uint8_t definition */
+#include <stdbool.h>       /* For true/false definition */
 
 #endif
 
@@ -21,14 +38,21 @@
 #include "LCD.h"
 #include "StringCommand.h"
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
 extern char Txdata[100];
 extern char Rxdata[100];
 extern unsigned char bufferCount;
+
 /******************************************************************************/
 /* Interrupt Routines                                                         */
 /******************************************************************************/
 
-/* High-priority service */
+/******************************************************************************/
+/* High-Priority Interrupt Routine                                            */
+/******************************************************************************/
 
 #if defined(__XC) || defined(HI_TECH_C)
 void interrupt high_isr(void)
@@ -69,7 +93,9 @@ void high_isr(void)
 
 }
 
-/* Low-priority interrupt routine */
+/******************************************************************************/
+/* Low-Priority Interrupt Routine                                             */
+/******************************************************************************/
 #if defined(__XC) || defined(HI_TECH_C)
 void low_priority interrupt low_isr(void)
 #elif defined (__18CXX)
@@ -168,5 +194,5 @@ void low_isr(void)
         PIE1bits.RCIE = 1; //Enable RX interrupt
         RCSTAbits.CREN = 1;
     }
-INTCONbits.PEIE = 1; //Enable pheripheral interrupt
+    INTCONbits.PEIE = 1; //Enable pheripheral interrupt
 }

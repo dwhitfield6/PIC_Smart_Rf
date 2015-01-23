@@ -19545,7 +19545,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 
-# 25 "ADC.c"
+# 49 "ADC.c"
 void EnableInternalADC(unsigned char channels)
 {
 unsigned char config =0;
@@ -19598,6 +19598,7 @@ config |= 0b00000100;
 ADCON1 = config;
 }
 
+# 106
 int InternalADC_Read(unsigned char channel)
 {
 ADCON0 =0;
@@ -19615,6 +19616,8 @@ ADCON0 |= 0b00000010;
 while(ADCON0 & 0b00000010);
 return ((ADRESH << 8) + ADRESL);
 }
+
+# 129
 void DisableInternalADC(void)
 {
 ADCON0 &= ~0b00000001;

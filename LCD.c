@@ -1,4 +1,20 @@
 /******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains functions that control the LCD screen.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
 #define USE_OR_MASKS
@@ -21,6 +37,10 @@
 #include "LCD.h"          /* User funct/params, such as InitApp */
 #include "MISC.h"          /* User funct/params, such as InitApp */
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
 unsigned char Scroll_1[16];
 unsigned char Scroll_2[16];
 unsigned char Scroll_3[16];
@@ -31,10 +51,14 @@ unsigned char Scroll_7[16];
 unsigned char Scroll_8[16];
 unsigned char Scroll_9[16];
 unsigned char Scroll_10[16];
-
 unsigned char ScrollDisplayPosition=0;
 unsigned char ScrollFIFOCount = 0;
 
+/******************************************************************************/
+/* init_LCD
+ *
+ * The function initializes LCD screen. The Module is the 1602A.
+/******************************************************************************/
 void init_LCD()
 {
     LATD &= ~(RW);//write mode
@@ -70,6 +94,11 @@ void init_LCD()
 
 }
 
+/******************************************************************************/
+/* SendLCDbyte
+ *
+ * The function sends one byte over the parallel port to the lcd.
+/******************************************************************************/
 void SendLCDbyte(unsigned char data, unsigned char isCommand)
 {
     unsigned char MSB_nibble=0;
@@ -135,6 +164,12 @@ void SendLCDbyte(unsigned char data, unsigned char isCommand)
     }
 }
 
+/******************************************************************************/
+/* PulseEnablePin
+ *
+ * The function pulses the Enable pin. The toggling of this pin is required for
+ *   reset and to put into 4-bit mode.
+/******************************************************************************/
 void PulseEnablePin()
 {
     // pull EN bit high
@@ -145,6 +180,11 @@ void PulseEnablePin()
     delayUS(2500);
 }
 
+/******************************************************************************/
+/* SetLCDcursor
+ *
+ * The function sets the LCD curcor so that a print is on the correct line.
+/******************************************************************************/
 void SetLCDcursor(char Row, char Col)
 {
     char address;
@@ -166,17 +206,12 @@ void SetLCDcursor(char Row, char Col)
     }
 }
 
-// Clear the screen data and return the
-// cursor to home position
-//
-// Parameters:
-//
-//    void.
-//
-// Return
-//
-//     void.
-//
+/******************************************************************************/
+/* ClearLCD
+ *
+ * The function clears the lcd screen data and returns the
+ * cursor to home position.
+/******************************************************************************/
 void ClearLCD()
 {
     //
@@ -186,6 +221,11 @@ void ClearLCD()
     SendLCDbyte(0x02, FALSE);
 }
 
+/******************************************************************************/
+/* LCDPrintString
+ *
+ * The function prints a string of characters on the LCD.
+/******************************************************************************/
 void LCDPrintString(unsigned char *Text)
 {
     unsigned char *c;
@@ -199,6 +239,12 @@ void LCDPrintString(unsigned char *Text)
     }
 }
 
+/******************************************************************************/
+/* LCDdisplayFeedback
+ *
+ * The function prints a string of characters on the second line of the lcd
+ *   after a command is sent aka the enter key is hit.
+/******************************************************************************/
 void LCDdisplayFeedback(unsigned char *Text)
 {
     ClearLCD();
@@ -208,11 +254,22 @@ void LCDdisplayFeedback(unsigned char *Text)
     LCDclearCount =0;
 }
 
+/******************************************************************************/
+/* LCDPrintChar
+ *
+ * The function prints a char on the LCD screen.
+/******************************************************************************/
 void LCDPrintChar(unsigned char character)
 {
         SendLCDbyte(character, TRUE);
 }
 
+/******************************************************************************/
+/* LCDScreenUpdate
+ *
+ * The function is called to know when to update the lcd. The screen must not
+ *   change too fast and can not be written to until the delay is cleared.
+/******************************************************************************/
 void LCDScreenUpdate(void)
 {
     //Timer for clearing screen
@@ -340,6 +397,11 @@ void LCDScreenUpdate(void)
     }
 }
 
+/******************************************************************************/
+/* LCD_Scroll
+ *
+ * The function is called when lines are qued up on the buffer.
+/******************************************************************************/
 void LCD_Scroll(unsigned char* This)
 {
     if(!LCDwait)

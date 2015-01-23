@@ -1,3 +1,22 @@
+/******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains functions for I2C.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
 #define USE_OR_MASKS
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
@@ -19,6 +38,12 @@
 #include "user.h"
 #include "MISC.h"
 
+/******************************************************************************/
+/* Init_I2C_Master
+ *
+ * The function initializes the I2C bus. This function initializes the system
+ *   as an I2C master.
+/******************************************************************************/
 void Init_I2C_Master(void)
 {
     unsigned int baud = 0;
@@ -33,6 +58,11 @@ void Init_I2C_Master(void)
     OpenI2C(MASTER, SLEW_OFF);
 }
 
+/******************************************************************************/
+/* OpenI2C
+ *
+ * The function activates teh I2C bus.
+/******************************************************************************/
 void OpenI2C( unsigned char sync_mode, unsigned char slew )
 {
   SSPSTAT &= 0x3F;                // power on state
@@ -47,6 +77,11 @@ void OpenI2C( unsigned char sync_mode, unsigned char slew )
 
 }
 
+/******************************************************************************/
+/* ResetI2C
+ *
+ * The function resets the I2C bus. It "clocks" through the problem.
+/******************************************************************************/
 void ResetI2C( void )
 {
     SSPCON1 &= 0xDF;                // disable synchronous serial port
@@ -57,15 +92,22 @@ void ResetI2C( void )
     Init_I2C_Master();
 }
 
-
-
-
+/******************************************************************************/
+/* IdleI2C
+ *
+ * The function waits until the bus is idle.
+/******************************************************************************/
 void IdleI2C( void )
 {
   while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
      continue;
 }
 
+/******************************************************************************/
+/* WriteI2C
+ *
+ * The function sends a byte over the I2C bus.
+/******************************************************************************/
 signed char WriteI2C( unsigned char data_out )
 {
   SSPBUF = data_out;           // write single byte to SSPBUF
@@ -103,6 +145,11 @@ signed char WriteI2C( unsigned char data_out )
   }
 }
 
+/******************************************************************************/
+/* I2C_Write_At_Address
+ *
+ * The function writes the address then register then data.
+/******************************************************************************/
 char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data )
 {
   IdleI2C();                      // ensure module is idle
@@ -161,6 +208,11 @@ char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, uns
   return ( 0 );                   // return with no error
 }
 
+/******************************************************************************/
+/* I2C_Read_At_Address
+ *
+ * The function reads data after telling the slave which register to read from.
+/******************************************************************************/
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register )
 {
   IdleI2C();                      // ensure module is idle
@@ -239,6 +291,11 @@ int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register )
   return ( (unsigned int) SSPBUF );     // return with data
 }
 
+/******************************************************************************/
+/* I2C_Read_Sequential
+ *
+ * The function reads a length of bytes and stores it at the pointer.
+/******************************************************************************/
 char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length )
 {
   IdleI2C();                      // ensure module is idle
@@ -314,6 +371,11 @@ char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsi
   return ( 0 );                   // return with no error
 }
 
+/******************************************************************************/
+/* Multiple_I2C_Read
+ *
+ * The function reads a lenght of data and stores it at the pointer.
+/******************************************************************************/
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length )
 {
     while ( length-- )           // perform getcI2C() for 'length' number of bytes
@@ -340,6 +402,11 @@ char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length )
     return ( 0 );                 // last byte received so don't send ACK
 }
 
+/******************************************************************************/
+/* readI2C
+ *
+ * The function does a single byte i2c read.
+/******************************************************************************/
 unsigned char readI2C( void )
 {
 if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )	//master mode only

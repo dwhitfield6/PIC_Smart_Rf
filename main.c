@@ -1,8 +1,23 @@
 /******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains the main function.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
 #define USE_OR_MASKS
-
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -14,8 +29,8 @@
 #if defined(__XC) || defined(HI_TECH_C)
 
 #include <stdint.h>        /* For uint8_t definition */
-#include <stdio.h>
 #include <stdbool.h>       /* For true/false definition */
+#include <stdio.h>       /* For true/false definition */
 
 #endif
 
@@ -31,19 +46,20 @@
 #include "LCD.h"
 #include "I2C.h"
 #include "RTC.h"
+
 /******************************************************************************/
-/* User Global Variable Declaration                                           */
+/* Global Variables                                                           */
 /******************************************************************************/
 
 extern unsigned char config;
 extern unsigned int spbrg;
 extern unsigned char baudconfig;
 extern struct TIME NowTime;
-
 extern char Txdata[100];
 extern char Rxdata[100];
 unsigned char buf[100];
 unsigned char bufferCount =0;
+
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/

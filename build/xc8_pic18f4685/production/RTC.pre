@@ -19516,6 +19516,9 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
+typedef unsigned char bool;
+
 # 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
 typedef void * va_list[1];
 
@@ -19579,9 +19582,6 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
-typedef unsigned char bool;
-
 # 33 "I2C.h"
 void Init_I2C_Master(void);
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
@@ -19627,7 +19627,7 @@ unsigned char Parse_Time(unsigned char* This);
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 26 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19638,6 +19638,7 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
 # 66 "user.h"
 void InitApp(void);
@@ -19647,7 +19648,7 @@ void EnableInternalADC(unsigned char channels);
 void DisableInternalADC(void);
 int InternalADC_Read(unsigned char channel);
 
-# 26 "RTC.c"
+# 42 "RTC.c"
 TIME NowTime;
 
 void RTC_INIT(void)
@@ -19659,7 +19660,7 @@ InternalADC_Read(2);
 void RTC_Clock_Enable(void)
 {
 int tempSeconds =0;
-unsigned char Error=0;
+char Error=0;
 
 tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
 Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds & 0x7F) );
@@ -19697,7 +19698,7 @@ ResetI2C();
 void RTC_Clock_Disable(void)
 {
 int tempSeconds =0;
-unsigned char Error=0;
+char Error=0;
 
 tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
 Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds | 0x80) );

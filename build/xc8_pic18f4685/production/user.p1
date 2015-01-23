@@ -45,7 +45,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISEbits `VS1882 ~T0 @X0 0 e@3990 ]
 "29294
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"18 MISC.h
+"26 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
@@ -15428,117 +15428,148 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 23: extern int errno;
+[; ;stdio.h: 54: struct __prbuf
+[; ;stdio.h: 55: {
+[; ;stdio.h: 56: char * ptr;
+[; ;stdio.h: 57: void (* func)(char);
+[; ;stdio.h: 58: };
+[; ;conio.h: 17: extern int errno;
+[; ;conio.h: 20: extern void init_uart(void);
+[; ;conio.h: 22: extern char getch(void);
+[; ;conio.h: 23: extern char getche(void);
+[; ;conio.h: 24: extern void putch(char);
+[; ;conio.h: 25: extern void ungetch(char);
+[; ;conio.h: 27: extern __bit kbhit(void);
+[; ;conio.h: 31: extern char * cgets(char *);
+[; ;conio.h: 32: extern void cputs(const char *);
+[; ;stdio.h: 99: extern int cprintf(char *, ...);
+[; ;stdio.h: 104: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 194: extern char * gets(char *);
+[; ;stdio.h: 195: extern int puts(const char *);
+[; ;stdio.h: 196: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 197: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 198: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 199: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 200: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 206: extern int printf(const char *, ...);
 [; ;user.h: 66: void InitApp(void);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-"27 user.c
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+"44 user.c
 [v _InitApp `(v ~T0 @X0 1 ef ]
-"28
+"45
 {
-[; ;user.c: 27: void InitApp(void)
-[; ;user.c: 28: {
+[; ;user.c: 44: void InitApp(void)
+[; ;user.c: 45: {
 [e :U _InitApp ]
 [f ]
-[; ;user.c: 29: TRISDbits.TRISD1 = 0;
-"29
-[e = . . _TRISDbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 30: TRISDbits.TRISD2 = 0;
-"30
-[e = . . _TRISDbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 31: TRISDbits.TRISD0 = 0;
-"31
-[e = . . _TRISDbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 32: TRISAbits.TRISA0 = 1;
-"32
-[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
-[; ;user.c: 33: TRISCbits.TRISC2 = 0;
-"33
-[e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
-[; ;user.c: 34: TRISCbits.TRISC1 = 0;
-"34
-[e = . . _TRISCbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 35: TRISEbits.TRISE2 = 1;
-"35
-[e = . . _TRISEbits 0 2 -> -> 1 `i `uc ]
-[; ;user.c: 36: TRISEbits.TRISE1 = 0;
-"36
-[e = . . _TRISEbits 0 1 -> -> 0 `i `uc ]
-[; ;user.c: 38: TRISCbits.TRISC3 = 0;
-"38
-[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 39: TRISCbits.TRISC4 = 0;
-"39
-[e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 41: LATC &= ~0b00001000;
-"41
-[e =& _LATC -> ~ -> 8 `i `uc ]
-[; ;user.c: 42: delayUS(200);
-"42
-[e ( _delayUS (1 -> -> 200 `i `l ]
-[; ;user.c: 43: TRISCbits.TRISC3 = 1;
-"43
-[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
-[; ;user.c: 45: LATD &= ~(0b00000010 + 0b00000100 + 0b00000001);
-"45
-[e =& _LATD -> ~ + + -> 2 `i -> 4 `i -> 1 `i `uc ]
-[; ;user.c: 46: LATE &= ~0b00000010;
+[; ;user.c: 46: TRISDbits.TRISD1 = 0;
 "46
-[e =& _LATE -> ~ -> 2 `i `uc ]
-[; ;user.c: 47: LATC &= ~(0b00000010);
+[e = . . _TRISDbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 47: TRISDbits.TRISD2 = 0;
 "47
-[e =& _LATC -> ~ -> 2 `i `uc ]
-[; ;user.c: 50: TRISAbits.TRISA3 = 0;
+[e = . . _TRISDbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 48: TRISDbits.TRISD0 = 0;
+"48
+[e = . . _TRISDbits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 49: TRISAbits.TRISA0 = 1;
+"49
+[e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
+[; ;user.c: 50: TRISCbits.TRISC2 = 0;
 "50
-[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
-[; ;user.c: 51: TRISAbits.TRISA4 = 0;
+[e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 51: TRISCbits.TRISC1 = 0;
 "51
-[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 52: TRISAbits.TRISA5 = 0;
+[e = . . _TRISCbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 52: TRISEbits.TRISE2 = 1;
 "52
-[e = . . _TRISAbits 0 5 -> -> 0 `i `uc ]
-[; ;user.c: 53: TRISEbits.TRISE0 = 0;
+[e = . . _TRISEbits 0 2 -> -> 1 `i `uc ]
+[; ;user.c: 53: TRISEbits.TRISE1 = 0;
 "53
-[e = . . _TRISEbits 0 0 -> -> 0 `i `uc ]
-[; ;user.c: 54: TRISDbits.TRISD4 = 0;
-"54
-[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
-[; ;user.c: 55: TRISDbits.TRISD7 = 0;
+[e = . . _TRISEbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 55: TRISCbits.TRISC3 = 0;
 "55
-[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
-[; ;user.c: 56: TRISDbits.TRISD6 = 0;
+[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 56: TRISCbits.TRISC4 = 0;
 "56
-[e = . . _TRISDbits 0 6 -> -> 0 `i `uc ]
-[; ;user.c: 57: TRISDbits.TRISD5 = 0;
-"57
-[e = . . _TRISDbits 0 5 -> -> 0 `i `uc ]
-[; ;user.c: 59: LATA &= ~(0b00001000+0b00010000+0b00100000);
+[e = . . _TRISCbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 58: LATC &= ~0b00001000;
+"58
+[e =& _LATC -> ~ -> 8 `i `uc ]
+[; ;user.c: 59: delayUS(200);
 "59
-[e =& _LATA -> ~ + + -> 8 `i -> 16 `i -> 32 `i `uc ]
-[; ;user.c: 60: LATD &= ~(0b10000000 + 0b00100000 + 0b01000000);
+[e ( _delayUS (1 -> -> 200 `i `l ]
+[; ;user.c: 60: TRISCbits.TRISC3 = 1;
 "60
-[e =& _LATD -> ~ + + -> 128 `i -> 32 `i -> 64 `i `uc ]
-[; ;user.c: 61: LATE &= ~0b00000001;
-"61
-[e =& _LATE -> ~ -> 1 `i `uc ]
-[; ;user.c: 63: RCONbits.IPEN = 1;
+[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
+[; ;user.c: 62: LATD &= ~(0b00000010 + 0b00000100 + 0b00000001);
+"62
+[e =& _LATD -> ~ + + -> 2 `i -> 4 `i -> 1 `i `uc ]
+[; ;user.c: 63: LATE &= ~0b00000010;
 "63
-[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
-[; ;user.c: 64: INTCONbits.PEIE = 1;
+[e =& _LATE -> ~ -> 2 `i `uc ]
+[; ;user.c: 64: LATC &= ~(0b00000010);
 "64
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;user.c: 65: INTCONbits.GIE = 1;
-"65
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;user.c: 74: }
+[e =& _LATC -> ~ -> 2 `i `uc ]
+[; ;user.c: 67: TRISAbits.TRISA3 = 0;
+"67
+[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 68: TRISAbits.TRISA4 = 0;
+"68
+[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 69: TRISAbits.TRISA5 = 0;
+"69
+[e = . . _TRISAbits 0 5 -> -> 0 `i `uc ]
+[; ;user.c: 70: TRISEbits.TRISE0 = 0;
+"70
+[e = . . _TRISEbits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 71: TRISDbits.TRISD4 = 0;
+"71
+[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 72: TRISDbits.TRISD7 = 0;
+"72
+[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
+[; ;user.c: 73: TRISDbits.TRISD6 = 0;
+"73
+[e = . . _TRISDbits 0 6 -> -> 0 `i `uc ]
+[; ;user.c: 74: TRISDbits.TRISD5 = 0;
 "74
-[e :UE 2160 ]
+[e = . . _TRISDbits 0 5 -> -> 0 `i `uc ]
+[; ;user.c: 76: LATA &= ~(0b00001000+0b00010000+0b00100000);
+"76
+[e =& _LATA -> ~ + + -> 8 `i -> 16 `i -> 32 `i `uc ]
+[; ;user.c: 77: LATD &= ~(0b10000000 + 0b00100000 + 0b01000000);
+"77
+[e =& _LATD -> ~ + + -> 128 `i -> 32 `i -> 64 `i `uc ]
+[; ;user.c: 78: LATE &= ~0b00000001;
+"78
+[e =& _LATE -> ~ -> 1 `i `uc ]
+[; ;user.c: 80: RCONbits.IPEN = 1;
+"80
+[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
+[; ;user.c: 81: INTCONbits.PEIE = 1;
+"81
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;user.c: 82: INTCONbits.GIE = 1;
+"82
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;user.c: 91: }
+"91
+[e :UE 2161 ]
 }

@@ -1,4 +1,20 @@
 /******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains the PWM functions.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
 #define USE_OR_MASKS
@@ -14,6 +30,7 @@
 
 #include <stdint.h>        /* For uint8_t definition */
 #include <stdbool.h>       /* For true/false definition */
+#include <stdio.h>       /* For true/false definition */
 
 #endif
 
@@ -21,6 +38,15 @@
 #include "user.h"
 #include "system.h"
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
+/******************************************************************************/
+/* PWM_init
+ *
+ * The function initializes the Pulse width modulation module.
+/******************************************************************************/
 void PWM_init()
 {
     //this is for CCP1
@@ -42,6 +68,12 @@ void PWM_init()
     T2CON |= TMR2ON;
     CCP1CON |= 0b00001100; //pwm mode
 }
+
+/******************************************************************************/
+/* ContrastPWM_init
+ *
+ * The function initializes the pwm channel for the LCD contrast.
+/******************************************************************************/
 void ContrastPWM_init()
 {
     //this is for ECCP1
@@ -49,6 +81,12 @@ void ContrastPWM_init()
     SetDuty(0);
     ECCP1CON |= 0b00001100; //Single pwm mode
 }
+
+/******************************************************************************/
+/* SetContrast
+ *
+ * The function sets the LCD contrast duty cycle.
+/******************************************************************************/
 void SetContrast(unsigned char Duty)
 {
     unsigned int temp=0;
@@ -69,6 +107,12 @@ void SetContrast(unsigned char Duty)
     ECCPR1L = LSB;
     NOP();
 }
+
+/******************************************************************************/
+/* SetDuty
+ *
+ * The function sets the duty cycle for the Red LED.
+/******************************************************************************/
 void SetDuty(unsigned char Duty)
 {
     unsigned int temp=0;
@@ -87,6 +131,12 @@ void SetDuty(unsigned char Duty)
     NOP();
 
 }
+
+/******************************************************************************/
+/* SetFreq
+ *
+ * The function sets the frequency of the PWM signal.
+/******************************************************************************/
 void SetFreq(unsigned int freq)
 {
     //lowest number is 39.25 kHz

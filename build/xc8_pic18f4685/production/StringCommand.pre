@@ -19516,6 +19516,9 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
+typedef unsigned char bool;
+
 # 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
 typedef void * va_list[1];
 
@@ -19579,9 +19582,6 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
-typedef unsigned char bool;
-
 # 20 "system.h"
 void ConfigureOscillator(void);
 
@@ -19591,7 +19591,7 @@ void InitApp(void);
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 26 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19602,6 +19602,7 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
 # 20 "system.h"
 void ConfigureOscillator(void);
@@ -19627,7 +19628,7 @@ void InitApp(void);
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 26 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19638,6 +19639,7 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
 # 20 "system.h"
 void ConfigureOscillator(void);
@@ -19759,7 +19761,7 @@ void RTC_INIT(void);
 unsigned char SET_RTC_TIME(TIME SetTime);
 unsigned char Parse_Time(unsigned char* This);
 
-# 28 "StringCommand.c"
+# 48 "StringCommand.c"
 extern TIME NowTime;
 extern unsigned char LCDwait;
 extern unsigned long LCDclearCount;

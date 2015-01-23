@@ -15346,6 +15346,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15376,7 +15377,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;I2C.h: 33: void Init_I2C_Master(void);
 [; ;I2C.h: 34: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 [; ;I2C.h: 35: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -15412,1306 +15412,1307 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 55: unsigned char SET_RTC_TIME(TIME SetTime);
 [; ;RTC.h: 56: unsigned char Parse_Time(unsigned char* This);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 [; ;user.h: 66: void InitApp(void);
 [; ;ADC.h: 42: void EnableInternalADC(unsigned char channels);
 [; ;ADC.h: 43: void DisableInternalADC(void);
 [; ;ADC.h: 44: int InternalADC_Read(unsigned char channel);
-"26 RTC.c
+"42 RTC.c
 [v _NowTime `S2161 ~T0 @X0 1 e ]
-[; ;RTC.c: 26: TIME NowTime;
-"28
+[; ;RTC.c: 42: TIME NowTime;
+"44
 [v _RTC_INIT `(v ~T0 @X0 1 ef ]
-"29
+"45
 {
-[; ;RTC.c: 28: void RTC_INIT(void)
-[; ;RTC.c: 29: {
+[; ;RTC.c: 44: void RTC_INIT(void)
+[; ;RTC.c: 45: {
 [e :U _RTC_INIT ]
 [f ]
-[; ;RTC.c: 30: RTC_Clock_Enable();
-"30
+[; ;RTC.c: 46: RTC_Clock_Enable();
+"46
 [e ( _RTC_Clock_Enable ..  ]
-[; ;RTC.c: 31: RTC_TIME_NONMilitary();
-"31
+[; ;RTC.c: 47: RTC_TIME_NONMilitary();
+"47
 [e ( _RTC_TIME_NONMilitary ..  ]
-[; ;RTC.c: 32: InternalADC_Read(2);
-"32
+[; ;RTC.c: 48: InternalADC_Read(2);
+"48
 [e ( _InternalADC_Read (1 -> -> 2 `i `uc ]
-[; ;RTC.c: 33: }
-"33
+[; ;RTC.c: 49: }
+"49
 [e :UE 2162 ]
 }
-"34
+"50
 [v _RTC_Clock_Enable `(v ~T0 @X0 1 ef ]
-"35
+"51
 {
-[; ;RTC.c: 34: void RTC_Clock_Enable(void)
-[; ;RTC.c: 35: {
+[; ;RTC.c: 50: void RTC_Clock_Enable(void)
+[; ;RTC.c: 51: {
 [e :U _RTC_Clock_Enable ]
 [f ]
-"36
+"52
 [v _tempSeconds `i ~T0 @X0 1 a ]
-[; ;RTC.c: 36: int tempSeconds =0;
+[; ;RTC.c: 52: int tempSeconds =0;
 [e = _tempSeconds -> 0 `i ]
-"37
-[v _Error `uc ~T0 @X0 1 a ]
-[; ;RTC.c: 37: unsigned char Error=0;
-[e = _Error -> -> 0 `i `uc ]
-[; ;RTC.c: 39: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-"39
-[e = _tempSeconds ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 0 `i `uc ]
-[; ;RTC.c: 40: Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds & 0x7F) );
-"40
-[e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 0 `i `uc -> & _tempSeconds -> 127 `i `uc ]
-[; ;RTC.c: 42: if(Error < 0 )
-"42
-[e $ ! < -> _Error `i -> 0 `i 2164  ]
-[; ;RTC.c: 43: {
-"43
-{
-[; ;RTC.c: 44: ResetI2C();
-"44
-[e ( _ResetI2C ..  ]
-"45
-}
-[e :U 2164 ]
-[; ;RTC.c: 45: }
-[; ;RTC.c: 46: }
-"46
-[e :UE 2163 ]
-}
-"48
-[v _RTC_TIME_NONMilitary `(v ~T0 @X0 1 ef ]
-"49
-{
-[; ;RTC.c: 48: void RTC_TIME_NONMilitary(void)
-[; ;RTC.c: 49: {
-[e :U _RTC_TIME_NONMilitary ]
-[f ]
-"50
-[v _temphours `i ~T0 @X0 1 a ]
-[; ;RTC.c: 50: int temphours = 0;
-[e = _temphours -> 0 `i ]
-"51
-[v _Error `i ~T0 @X0 1 a ]
-[; ;RTC.c: 51: int Error = -1;
-[e = _Error -U -> 1 `i ]
-[; ;RTC.c: 53: temphours = I2C_Read_At_Address(0b1101000, 0x02);
 "53
-[e = _temphours ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 2 `i `uc ]
-[; ;RTC.c: 54: if(temphours >= 0)
-"54
-[e $ ! >= _temphours -> 0 `i 2166  ]
-[; ;RTC.c: 55: {
+[v _Error `uc ~T0 @X0 1 a ]
+[; ;RTC.c: 53: char Error=0;
+[e = _Error -> -> 0 `i `uc ]
+[; ;RTC.c: 55: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
 "55
-{
-[; ;RTC.c: 56: if((temphours & 0x40) == 0)
+[e = _tempSeconds ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 0 `i `uc ]
+[; ;RTC.c: 56: Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds & 0x7F) );
 "56
-[e $ ! == & _temphours -> 64 `i -> 0 `i 2167  ]
-[; ;RTC.c: 57: {
-"57
-{
-[; ;RTC.c: 58: temphours |= 0x40;
+[e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 0 `i `uc -> & _tempSeconds -> 127 `i `uc ]
+[; ;RTC.c: 58: if(Error < 0 )
 "58
-[e =| _temphours -> 64 `i ]
-[; ;RTC.c: 59: Error = I2C_Write_At_Address( 0b1101000, 0x02, temphours );
+[e $ ! < -> _Error `i -> 0 `i 2164  ]
+[; ;RTC.c: 59: {
 "59
-[e = _Error -> ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 2 `i `uc -> _temphours `uc `i ]
+{
+[; ;RTC.c: 60: ResetI2C();
 "60
-}
-[e :U 2167 ]
+[e ( _ResetI2C ..  ]
 "61
 }
-[; ;RTC.c: 60: }
+[e :U 2164 ]
 [; ;RTC.c: 61: }
-[e $U 2168  ]
+[; ;RTC.c: 62: }
 "62
-[e :U 2166 ]
-[; ;RTC.c: 62: else
-[; ;RTC.c: 63: {
-"63
-{
-[; ;RTC.c: 64: Error = -1;
+[e :UE 2163 ]
+}
 "64
-[e = _Error -U -> 1 `i ]
+[v _RTC_TIME_NONMilitary `(v ~T0 @X0 1 ef ]
 "65
-}
-[e :U 2168 ]
-[; ;RTC.c: 65: }
-[; ;RTC.c: 66: if(Error < 0 )
-"66
-[e $ ! < _Error -> 0 `i 2169  ]
-[; ;RTC.c: 67: {
-"67
 {
-[; ;RTC.c: 68: ResetI2C();
-"68
-[e ( _ResetI2C ..  ]
+[; ;RTC.c: 64: void RTC_TIME_NONMilitary(void)
+[; ;RTC.c: 65: {
+[e :U _RTC_TIME_NONMilitary ]
+[f ]
+"66
+[v _temphours `i ~T0 @X0 1 a ]
+[; ;RTC.c: 66: int temphours = 0;
+[e = _temphours -> 0 `i ]
+"67
+[v _Error `i ~T0 @X0 1 a ]
+[; ;RTC.c: 67: int Error = -1;
+[e = _Error -U -> 1 `i ]
+[; ;RTC.c: 69: temphours = I2C_Read_At_Address(0b1101000, 0x02);
 "69
-}
-[e :U 2169 ]
-[; ;RTC.c: 69: }
-[; ;RTC.c: 70: }
+[e = _temphours ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 2 `i `uc ]
+[; ;RTC.c: 70: if(temphours >= 0)
 "70
-[e :UE 2165 ]
-}
+[e $ ! >= _temphours -> 0 `i 2166  ]
+[; ;RTC.c: 71: {
+"71
+{
+[; ;RTC.c: 72: if((temphours & 0x40) == 0)
 "72
-[v _RTC_Clock_Disable `(v ~T0 @X0 1 ef ]
+[e $ ! == & _temphours -> 64 `i -> 0 `i 2167  ]
+[; ;RTC.c: 73: {
 "73
 {
-[; ;RTC.c: 72: void RTC_Clock_Disable(void)
-[; ;RTC.c: 73: {
+[; ;RTC.c: 74: temphours |= 0x40;
+"74
+[e =| _temphours -> 64 `i ]
+[; ;RTC.c: 75: Error = I2C_Write_At_Address( 0b1101000, 0x02, temphours );
+"75
+[e = _Error -> ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 2 `i `uc -> _temphours `uc `i ]
+"76
+}
+[e :U 2167 ]
+"77
+}
+[; ;RTC.c: 76: }
+[; ;RTC.c: 77: }
+[e $U 2168  ]
+"78
+[e :U 2166 ]
+[; ;RTC.c: 78: else
+[; ;RTC.c: 79: {
+"79
+{
+[; ;RTC.c: 80: Error = -1;
+"80
+[e = _Error -U -> 1 `i ]
+"81
+}
+[e :U 2168 ]
+[; ;RTC.c: 81: }
+[; ;RTC.c: 82: if(Error < 0 )
+"82
+[e $ ! < _Error -> 0 `i 2169  ]
+[; ;RTC.c: 83: {
+"83
+{
+[; ;RTC.c: 84: ResetI2C();
+"84
+[e ( _ResetI2C ..  ]
+"85
+}
+[e :U 2169 ]
+[; ;RTC.c: 85: }
+[; ;RTC.c: 86: }
+"86
+[e :UE 2165 ]
+}
+"88
+[v _RTC_Clock_Disable `(v ~T0 @X0 1 ef ]
+"89
+{
+[; ;RTC.c: 88: void RTC_Clock_Disable(void)
+[; ;RTC.c: 89: {
 [e :U _RTC_Clock_Disable ]
 [f ]
-"74
+"90
 [v _tempSeconds `i ~T0 @X0 1 a ]
-[; ;RTC.c: 74: int tempSeconds =0;
+[; ;RTC.c: 90: int tempSeconds =0;
 [e = _tempSeconds -> 0 `i ]
-"75
+"91
 [v _Error `uc ~T0 @X0 1 a ]
-[; ;RTC.c: 75: unsigned char Error=0;
+[; ;RTC.c: 91: char Error=0;
 [e = _Error -> -> 0 `i `uc ]
-[; ;RTC.c: 77: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-"77
+[; ;RTC.c: 93: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
+"93
 [e = _tempSeconds ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 0 `i `uc ]
-[; ;RTC.c: 78: Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds | 0x80) );
-"78
+[; ;RTC.c: 94: Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds | 0x80) );
+"94
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 0 `i `uc -> | _tempSeconds -> 128 `i `uc ]
-[; ;RTC.c: 80: if(Error < 0 )
-"80
+[; ;RTC.c: 96: if(Error < 0 )
+"96
 [e $ ! < -> _Error `i -> 0 `i 2171  ]
-[; ;RTC.c: 81: {
-"81
+[; ;RTC.c: 97: {
+"97
 {
-[; ;RTC.c: 82: ResetI2C();
-"82
+[; ;RTC.c: 98: ResetI2C();
+"98
 [e ( _ResetI2C ..  ]
-"83
+"99
 }
 [e :U 2171 ]
-[; ;RTC.c: 83: }
-[; ;RTC.c: 84: }
-"84
+[; ;RTC.c: 99: }
+[; ;RTC.c: 100: }
+"100
 [e :UE 2170 ]
 }
-"86
+"102
 [v _READ_RTC_TIME `(uc ~T0 @X0 1 ef ]
-"87
+"103
 {
-[; ;RTC.c: 86: unsigned char READ_RTC_TIME(void)
-[; ;RTC.c: 87: {
+[; ;RTC.c: 102: unsigned char READ_RTC_TIME(void)
+[; ;RTC.c: 103: {
 [e :U _READ_RTC_TIME ]
 [f ]
-"88
-[v _Error `uc ~T0 @X0 1 a ]
-[; ;RTC.c: 88: unsigned char Error =0;
-[e = _Error -> -> 0 `i `uc ]
-"89
-[v _temp `uc ~T0 @X0 -> 7 `i a ]
-[; ;RTC.c: 89: unsigned char temp[7];
-[; ;RTC.c: 91: Error = I2C_Read_Sequential( 0b1101000, 0x00, temp, 7 );
-"91
-[e = _Error ( _I2C_Read_Sequential (4 , , , -> -> 104 `i `uc -> -> 0 `i `uc &U _temp -> -> 7 `i `uc ]
-[; ;RTC.c: 93: if(Error == 0 )
-"93
-[e $ ! == -> _Error `i -> 0 `i 2173  ]
-[; ;RTC.c: 94: {
-"94
-{
-[; ;RTC.c: 95: NowTime.Seconds = (temp[0] & 0x0F) + (((temp[0] & 0x70)>> 4) * 10);
-"95
-[e = . _NowTime 0 -> + & -> *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
-[; ;RTC.c: 96: NowTime.Minutes = (temp[1] & 0x0F) + (((temp[1] & 0x70) >> 4) * 10);
-"96
-[e = . _NowTime 1 -> + & -> *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
-[; ;RTC.c: 97: NowTime.Hours = (temp[2] & 0x0F) + (((temp[2] & 0x10) >> 4) * 10);
-"97
-[e = . _NowTime 2 -> + & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 16 `i -> 4 `i -> 10 `i `uc ]
-[; ;RTC.c: 98: NowTime.HoursAM_PM = temp[2] & 0x20;
-"98
-[e = . _NowTime 4 -> & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 32 `i `uc ]
-[; ;RTC.c: 99: NowTime.HoursMilitary = NowTime.Hours + 12 * NowTime.HoursAM_PM;
-"99
-[e = . _NowTime 3 -> + -> . _NowTime 2 `i * -> 12 `i -> . _NowTime 4 `i `uc ]
-[; ;RTC.c: 100: NowTime.Day = temp[3] & 0x07;
-"100
-[e = . _NowTime 5 -> & -> *U + &U _temp * -> -> -> 3 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 7 `i `uc ]
-[; ;RTC.c: 101: NowTime.Date = (temp[4] & 0x0F) + (((temp[4] & 0x30)>> 4) * 10);
-"101
-[e = . _NowTime 6 -> + & -> *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 48 `i -> 4 `i -> 10 `i `uc ]
-[; ;RTC.c: 102: NowTime.Month = (temp[5] & 0x0F) + (((temp[5] & 0x10) >> 4) * 10);
-"102
-[e = . _NowTime 7 -> + & -> *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 16 `i -> 4 `i -> 10 `i `uc ]
-[; ;RTC.c: 103: NowTime.Year = (temp[6] & 0x0F) + (((temp[6] & 0xF0) >> 4) * 10);
-"103
-[e = . _NowTime 8 -> + & -> *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 240 `i -> 4 `i -> 10 `i `uc ]
 "104
-}
-[; ;RTC.c: 104: }
-[e $U 2174  ]
+[v _Error `uc ~T0 @X0 1 a ]
+[; ;RTC.c: 104: unsigned char Error =0;
+[e = _Error -> -> 0 `i `uc ]
 "105
-[e :U 2173 ]
-[; ;RTC.c: 105: else
-[; ;RTC.c: 106: {
-"106
-{
-[; ;RTC.c: 107: ResetI2C();
+[v _temp `uc ~T0 @X0 -> 7 `i a ]
+[; ;RTC.c: 105: unsigned char temp[7];
+[; ;RTC.c: 107: Error = I2C_Read_Sequential( 0b1101000, 0x00, temp, 7 );
 "107
+[e = _Error ( _I2C_Read_Sequential (4 , , , -> -> 104 `i `uc -> -> 0 `i `uc &U _temp -> -> 7 `i `uc ]
+[; ;RTC.c: 109: if(Error == 0 )
+"109
+[e $ ! == -> _Error `i -> 0 `i 2173  ]
+[; ;RTC.c: 110: {
+"110
+{
+[; ;RTC.c: 111: NowTime.Seconds = (temp[0] & 0x0F) + (((temp[0] & 0x70)>> 4) * 10);
+"111
+[e = . _NowTime 0 -> + & -> *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
+[; ;RTC.c: 112: NowTime.Minutes = (temp[1] & 0x0F) + (((temp[1] & 0x70) >> 4) * 10);
+"112
+[e = . _NowTime 1 -> + & -> *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
+[; ;RTC.c: 113: NowTime.Hours = (temp[2] & 0x0F) + (((temp[2] & 0x10) >> 4) * 10);
+"113
+[e = . _NowTime 2 -> + & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 16 `i -> 4 `i -> 10 `i `uc ]
+[; ;RTC.c: 114: NowTime.HoursAM_PM = temp[2] & 0x20;
+"114
+[e = . _NowTime 4 -> & -> *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 32 `i `uc ]
+[; ;RTC.c: 115: NowTime.HoursMilitary = NowTime.Hours + 12 * NowTime.HoursAM_PM;
+"115
+[e = . _NowTime 3 -> + -> . _NowTime 2 `i * -> 12 `i -> . _NowTime 4 `i `uc ]
+[; ;RTC.c: 116: NowTime.Day = temp[3] & 0x07;
+"116
+[e = . _NowTime 5 -> & -> *U + &U _temp * -> -> -> 3 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 7 `i `uc ]
+[; ;RTC.c: 117: NowTime.Date = (temp[4] & 0x0F) + (((temp[4] & 0x30)>> 4) * 10);
+"117
+[e = . _NowTime 6 -> + & -> *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 48 `i -> 4 `i -> 10 `i `uc ]
+[; ;RTC.c: 118: NowTime.Month = (temp[5] & 0x0F) + (((temp[5] & 0x10) >> 4) * 10);
+"118
+[e = . _NowTime 7 -> + & -> *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 16 `i -> 4 `i -> 10 `i `uc ]
+[; ;RTC.c: 119: NowTime.Year = (temp[6] & 0x0F) + (((temp[6] & 0xF0) >> 4) * 10);
+"119
+[e = . _NowTime 8 -> + & -> *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 15 `i * >> & -> *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux `i -> 240 `i -> 4 `i -> 10 `i `uc ]
+"120
+}
+[; ;RTC.c: 120: }
+[e $U 2174  ]
+"121
+[e :U 2173 ]
+[; ;RTC.c: 121: else
+[; ;RTC.c: 122: {
+"122
+{
+[; ;RTC.c: 123: ResetI2C();
+"123
 [e ( _ResetI2C ..  ]
-"108
+"124
 }
 [e :U 2174 ]
-[; ;RTC.c: 108: }
-[; ;RTC.c: 109: return Error;
-"109
+[; ;RTC.c: 124: }
+[; ;RTC.c: 125: return Error;
+"125
 [e ) _Error ]
 [e $UE 2172  ]
-[; ;RTC.c: 110: }
-"110
+[; ;RTC.c: 126: }
+"126
 [e :UE 2172 ]
 }
-"111
+"127
 [v _SET_RTC_TIME `(uc ~T0 @X0 1 ef1`S2161 ]
-"112
+"128
 {
-[; ;RTC.c: 111: unsigned char SET_RTC_TIME(TIME SetTime)
-[; ;RTC.c: 112: {
+[; ;RTC.c: 127: unsigned char SET_RTC_TIME(TIME SetTime)
+[; ;RTC.c: 128: {
 [e :U _SET_RTC_TIME ]
-"111
+"127
 [v _SetTime `S2161 ~T0 @X0 1 r1 ]
-"112
+"128
 [f ]
-"113
+"129
 [v _Error `uc ~T0 @X0 1 a ]
-[; ;RTC.c: 113: unsigned char Error =0;
+[; ;RTC.c: 129: unsigned char Error =0;
 [e = _Error -> -> 0 `i `uc ]
-"114
+"130
 [v _temp `uc ~T0 @X0 -> 7 `i a ]
-[; ;RTC.c: 114: unsigned char temp[7];
-[; ;RTC.c: 116: temp[0] = ((SetTime.Seconds /10) << 4) + (SetTime.Seconds % 10);
-"116
+[; ;RTC.c: 130: unsigned char temp[7];
+[; ;RTC.c: 132: temp[0] = ((SetTime.Seconds /10) << 4) + (SetTime.Seconds % 10);
+"132
 [e = *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + << / -> . _SetTime 0 `i -> 10 `i -> 4 `i % -> . _SetTime 0 `i -> 10 `i `uc ]
-[; ;RTC.c: 117: Error = I2C_Write_At_Address( 0b1101000, 0x00, temp[0] );
-"117
+[; ;RTC.c: 133: Error = I2C_Write_At_Address( 0b1101000, 0x00, temp[0] );
+"133
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 0 `i `uc *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 118: if(Error)
-"118
+[; ;RTC.c: 134: if(Error)
+"134
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2176  ]
-[; ;RTC.c: 119: {
-"119
+[; ;RTC.c: 135: {
+"135
 {
-[; ;RTC.c: 120: return 1;
-"120
+[; ;RTC.c: 136: return 1;
+"136
 [e ) -> -> 1 `i `uc ]
 [e $UE 2175  ]
-"121
+"137
 }
 [e :U 2176 ]
-[; ;RTC.c: 121: }
-[; ;RTC.c: 123: temp[1] = ((SetTime.Minutes /10) << 4) + (SetTime.Minutes % 10);
-"123
+[; ;RTC.c: 137: }
+[; ;RTC.c: 139: temp[1] = ((SetTime.Minutes /10) << 4) + (SetTime.Minutes % 10);
+"139
 [e = *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + << / -> . _SetTime 1 `i -> 10 `i -> 4 `i % -> . _SetTime 1 `i -> 10 `i `uc ]
-[; ;RTC.c: 124: Error = I2C_Write_At_Address( 0b1101000, 0x01, temp[1] );
-"124
+[; ;RTC.c: 140: Error = I2C_Write_At_Address( 0b1101000, 0x01, temp[1] );
+"140
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 1 `i `uc *U + &U _temp * -> -> -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 125: if(Error)
-"125
+[; ;RTC.c: 141: if(Error)
+"141
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2177  ]
-[; ;RTC.c: 126: {
-"126
+[; ;RTC.c: 142: {
+"142
 {
-[; ;RTC.c: 127: return 2;
-"127
+[; ;RTC.c: 143: return 2;
+"143
 [e ) -> -> 2 `i `uc ]
 [e $UE 2175  ]
-"128
+"144
 }
 [e :U 2177 ]
-[; ;RTC.c: 128: }
-[; ;RTC.c: 130: temp[2] = ((SetTime.Hours /10) << 4) + (SetTime.Hours % 10) + (SetTime.HoursAM_PM << 5);
-"130
+[; ;RTC.c: 144: }
+[; ;RTC.c: 146: temp[2] = ((SetTime.Hours /10) << 4) + (SetTime.Hours % 10) + (SetTime.HoursAM_PM << 5);
+"146
 [e = *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + + << / -> . _SetTime 2 `i -> 10 `i -> 4 `i % -> . _SetTime 2 `i -> 10 `i << -> . _SetTime 4 `i -> 5 `i `uc ]
-[; ;RTC.c: 131: Error = I2C_Write_At_Address( 0b1101000, 0x02, temp[2] );
-"131
+[; ;RTC.c: 147: Error = I2C_Write_At_Address( 0b1101000, 0x02, temp[2] );
+"147
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 2 `i `uc *U + &U _temp * -> -> -> 2 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 132: if(Error)
-"132
+[; ;RTC.c: 148: if(Error)
+"148
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2178  ]
-[; ;RTC.c: 133: {
-"133
+[; ;RTC.c: 149: {
+"149
 {
-[; ;RTC.c: 134: return 3;
-"134
+[; ;RTC.c: 150: return 3;
+"150
 [e ) -> -> 3 `i `uc ]
 [e $UE 2175  ]
-"135
+"151
 }
 [e :U 2178 ]
-[; ;RTC.c: 135: }
-[; ;RTC.c: 137: temp[3] = (SetTime.Day);
-"137
+[; ;RTC.c: 151: }
+[; ;RTC.c: 153: temp[3] = (SetTime.Day);
+"153
 [e = *U + &U _temp * -> -> -> 3 `i `ui `ux -> -> # *U &U _temp `ui `ux . _SetTime 5 ]
-[; ;RTC.c: 138: Error = I2C_Write_At_Address( 0b1101000, 0x03, temp[3] );
-"138
+[; ;RTC.c: 154: Error = I2C_Write_At_Address( 0b1101000, 0x03, temp[3] );
+"154
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 3 `i `uc *U + &U _temp * -> -> -> 3 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 139: if(Error)
-"139
+[; ;RTC.c: 155: if(Error)
+"155
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2179  ]
-[; ;RTC.c: 140: {
-"140
+[; ;RTC.c: 156: {
+"156
 {
-[; ;RTC.c: 141: return 4;
-"141
+[; ;RTC.c: 157: return 4;
+"157
 [e ) -> -> 4 `i `uc ]
 [e $UE 2175  ]
-"142
+"158
 }
 [e :U 2179 ]
-[; ;RTC.c: 142: }
-[; ;RTC.c: 144: temp[4] = ((SetTime.Date /10) << 4) + (SetTime.Date % 10);
-"144
+[; ;RTC.c: 158: }
+[; ;RTC.c: 160: temp[4] = ((SetTime.Date /10) << 4) + (SetTime.Date % 10);
+"160
 [e = *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + << / -> . _SetTime 6 `i -> 10 `i -> 4 `i % -> . _SetTime 6 `i -> 10 `i `uc ]
-[; ;RTC.c: 145: Error = I2C_Write_At_Address( 0b1101000, 0x04, temp[4] );
-"145
+[; ;RTC.c: 161: Error = I2C_Write_At_Address( 0b1101000, 0x04, temp[4] );
+"161
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 4 `i `uc *U + &U _temp * -> -> -> 4 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 146: if(Error)
-"146
+[; ;RTC.c: 162: if(Error)
+"162
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2180  ]
-[; ;RTC.c: 147: {
-"147
+[; ;RTC.c: 163: {
+"163
 {
-[; ;RTC.c: 148: return 5;
-"148
+[; ;RTC.c: 164: return 5;
+"164
 [e ) -> -> 5 `i `uc ]
 [e $UE 2175  ]
-"149
+"165
 }
 [e :U 2180 ]
-[; ;RTC.c: 149: }
-[; ;RTC.c: 151: temp[5] = ((SetTime.Month /10) << 4) + (SetTime.Month % 10);
-"151
+[; ;RTC.c: 165: }
+[; ;RTC.c: 167: temp[5] = ((SetTime.Month /10) << 4) + (SetTime.Month % 10);
+"167
 [e = *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + << / -> . _SetTime 7 `i -> 10 `i -> 4 `i % -> . _SetTime 7 `i -> 10 `i `uc ]
-[; ;RTC.c: 152: Error = I2C_Write_At_Address( 0b1101000, 0x05, temp[5] );
-"152
+[; ;RTC.c: 168: Error = I2C_Write_At_Address( 0b1101000, 0x05, temp[5] );
+"168
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 5 `i `uc *U + &U _temp * -> -> -> 5 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 153: if(Error)
-"153
+[; ;RTC.c: 169: if(Error)
+"169
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2181  ]
-[; ;RTC.c: 154: {
-"154
+[; ;RTC.c: 170: {
+"170
 {
-[; ;RTC.c: 155: return 6;
-"155
+[; ;RTC.c: 171: return 6;
+"171
 [e ) -> -> 6 `i `uc ]
 [e $UE 2175  ]
-"156
+"172
 }
 [e :U 2181 ]
-[; ;RTC.c: 156: }
-[; ;RTC.c: 158: temp[6] = ((SetTime.Year /10) << 4) + (SetTime.Year % 10);
-"158
+[; ;RTC.c: 172: }
+[; ;RTC.c: 174: temp[6] = ((SetTime.Year /10) << 4) + (SetTime.Year % 10);
+"174
 [e = *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + << / -> . _SetTime 8 `i -> 10 `i -> 4 `i % -> . _SetTime 8 `i -> 10 `i `uc ]
-[; ;RTC.c: 159: Error = I2C_Write_At_Address( 0b1101000, 0x06, temp[6] );
-"159
+[; ;RTC.c: 175: Error = I2C_Write_At_Address( 0b1101000, 0x06, temp[6] );
+"175
 [e = _Error ( _I2C_Write_At_Address (3 , , -> -> 104 `i `uc -> -> 6 `i `uc *U + &U _temp * -> -> -> 6 `i `ui `ux -> -> # *U &U _temp `ui `ux ]
-[; ;RTC.c: 160: if(Error)
-"160
+[; ;RTC.c: 176: if(Error)
+"176
 [e $ ! != -> _Error `i -> -> -> 0 `i `uc `i 2182  ]
-[; ;RTC.c: 161: {
-"161
+[; ;RTC.c: 177: {
+"177
 {
-[; ;RTC.c: 162: return 7;
-"162
+[; ;RTC.c: 178: return 7;
+"178
 [e ) -> -> 7 `i `uc ]
 [e $UE 2175  ]
-"163
+"179
 }
 [e :U 2182 ]
-[; ;RTC.c: 163: }
-[; ;RTC.c: 165: return 0;
-"165
+[; ;RTC.c: 179: }
+[; ;RTC.c: 181: return 0;
+"181
 [e ) -> -> 0 `i `uc ]
 [e $UE 2175  ]
-[; ;RTC.c: 166: }
-"166
+[; ;RTC.c: 182: }
+"182
 [e :UE 2175 ]
 }
-"167
-[v _READ_RTC_SECONDS `(v ~T0 @X0 1 ef ]
-"168
-{
-[; ;RTC.c: 167: void READ_RTC_SECONDS(void)
-[; ;RTC.c: 168: {
-[e :U _READ_RTC_SECONDS ]
-[f ]
-"169
-[v _tempSeconds `i ~T0 @X0 1 a ]
-[; ;RTC.c: 169: int tempSeconds =0;
-[e = _tempSeconds -> 0 `i ]
-[; ;RTC.c: 171: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-"171
-[e = _tempSeconds ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 0 `i `uc ]
-[; ;RTC.c: 173: if(tempSeconds >= 0 )
-"173
-[e $ ! >= _tempSeconds -> 0 `i 2184  ]
-[; ;RTC.c: 174: {
-"174
-{
-[; ;RTC.c: 175: NowTime.Seconds = (unsigned char)tempSeconds;
-"175
-[e = . _NowTime 0 -> _tempSeconds `uc ]
-"176
-}
-[; ;RTC.c: 176: }
-[e $U 2185  ]
-"177
-[e :U 2184 ]
-[; ;RTC.c: 177: else
-[; ;RTC.c: 178: {
-"178
-{
-[; ;RTC.c: 179: ResetI2C();
-"179
-[e ( _ResetI2C ..  ]
-"180
-}
-[e :U 2185 ]
-[; ;RTC.c: 180: }
-[; ;RTC.c: 181: }
-"181
-[e :UE 2183 ]
-}
 "183
-[v _SprintDate `(v ~T0 @X0 1 ef3`*uc`S2161`uc ]
+[v _READ_RTC_SECONDS `(v ~T0 @X0 1 ef ]
 "184
 {
-[; ;RTC.c: 183: void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military)
+[; ;RTC.c: 183: void READ_RTC_SECONDS(void)
 [; ;RTC.c: 184: {
+[e :U _READ_RTC_SECONDS ]
+[f ]
+"185
+[v _tempSeconds `i ~T0 @X0 1 a ]
+[; ;RTC.c: 185: int tempSeconds =0;
+[e = _tempSeconds -> 0 `i ]
+[; ;RTC.c: 187: tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
+"187
+[e = _tempSeconds ( _I2C_Read_At_Address (2 , -> -> 104 `i `uc -> -> 0 `i `uc ]
+[; ;RTC.c: 189: if(tempSeconds >= 0 )
+"189
+[e $ ! >= _tempSeconds -> 0 `i 2184  ]
+[; ;RTC.c: 190: {
+"190
+{
+[; ;RTC.c: 191: NowTime.Seconds = (unsigned char)tempSeconds;
+"191
+[e = . _NowTime 0 -> _tempSeconds `uc ]
+"192
+}
+[; ;RTC.c: 192: }
+[e $U 2185  ]
+"193
+[e :U 2184 ]
+[; ;RTC.c: 193: else
+[; ;RTC.c: 194: {
+"194
+{
+[; ;RTC.c: 195: ResetI2C();
+"195
+[e ( _ResetI2C ..  ]
+"196
+}
+[e :U 2185 ]
+[; ;RTC.c: 196: }
+[; ;RTC.c: 197: }
+"197
+[e :UE 2183 ]
+}
+"199
+[v _SprintDate `(v ~T0 @X0 1 ef3`*uc`S2161`uc ]
+"200
+{
+[; ;RTC.c: 199: void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military)
+[; ;RTC.c: 200: {
 [e :U _SprintDate ]
-"183
+"199
 [v _ReturnBuf `*uc ~T0 @X0 1 r1 ]
 [v _DisplayTime `S2161 ~T0 @X0 1 r2 ]
 [v _Military `uc ~T0 @X0 1 r3 ]
-"184
-[f ]
-[; ;RTC.c: 185: if(!Military)
-"185
-[e $ ! ! != -> _Military `i -> -> -> 0 `i `uc `i 2187  ]
-[; ;RTC.c: 186: {
-"186
-{
-[; ;RTC.c: 187: if(!DisplayTime.HoursAM_PM)
-"187
-[e $ ! ! != -> . _DisplayTime 4 `i -> -> -> 0 `i `uc `i 2188  ]
-[; ;RTC.c: 188: {
-"188
-{
-[; ;RTC.c: 189: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d AM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
-"189
-[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 1C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 2 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
-"190
-}
-[; ;RTC.c: 190: }
-[e $U 2189  ]
-"191
-[e :U 2188 ]
-[; ;RTC.c: 191: else
-[; ;RTC.c: 192: {
-"192
-{
-[; ;RTC.c: 193: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d PM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
-"193
-[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 2C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 2 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
-"194
-}
-[e :U 2189 ]
-"195
-}
-[; ;RTC.c: 194: }
-[; ;RTC.c: 195: }
-[e $U 2190  ]
-"196
-[e :U 2187 ]
-[; ;RTC.c: 196: else
-[; ;RTC.c: 197: {
-"197
-{
-[; ;RTC.c: 198: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.HoursMilitary, DisplayTime.Minutes, DisplayTime.Seconds);
-"198
-[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 3C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 3 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
-"199
-}
-[e :U 2190 ]
-[; ;RTC.c: 199: }
-[; ;RTC.c: 200: }
 "200
-[e :UE 2186 ]
-}
-"202
-[v _Parse_Time `(uc ~T0 @X0 1 ef1`*uc ]
-"203
-{
-[; ;RTC.c: 202: unsigned char Parse_Time(unsigned char* This)
-[; ;RTC.c: 203: {
-[e :U _Parse_Time ]
-"202
-[v _This `*uc ~T0 @X0 1 r1 ]
-"203
 [f ]
+[; ;RTC.c: 201: if(!Military)
+"201
+[e $ ! ! != -> _Military `i -> -> -> 0 `i `uc `i 2187  ]
+[; ;RTC.c: 202: {
+"202
+{
+[; ;RTC.c: 203: if(!DisplayTime.HoursAM_PM)
+"203
+[e $ ! ! != -> . _DisplayTime 4 `i -> -> -> 0 `i `uc `i 2188  ]
+[; ;RTC.c: 204: {
 "204
-[v _TempTime `S2161 ~T0 @X0 1 a ]
+{
+[; ;RTC.c: 205: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d AM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
 "205
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;RTC.c: 204: TIME TempTime;
-[; ;RTC.c: 205: unsigned char temp = 0;
-[e = _temp -> -> 0 `i `uc ]
-[; ;RTC.c: 207: if(*This != 0 && *This == ' ')
+[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 1C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 2 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
+"206
+}
+[; ;RTC.c: 206: }
+[e $U 2189  ]
 "207
-[e $ ! && != -> *U _This `i -> 0 `i == -> *U _This `ui -> 32 `ui 2192  ]
+[e :U 2188 ]
+[; ;RTC.c: 207: else
 [; ;RTC.c: 208: {
 "208
 {
-[; ;RTC.c: 209: This++;
+[; ;RTC.c: 209: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d PM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
 "209
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 2C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 2 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
 "210
 }
-[e :U 2192 ]
-[; ;RTC.c: 210: }
-[; ;RTC.c: 213: if (*This >= 48 && *This <= 57)
-"213
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2193  ]
-[; ;RTC.c: 214: {
-"214
-{
-[; ;RTC.c: 215: temp = *This - 48;
-"215
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 216: This++;
-"216
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"217
+[e :U 2189 ]
+"211
 }
-[; ;RTC.c: 217: }
-[e $U 2194  ]
+[; ;RTC.c: 210: }
+[; ;RTC.c: 211: }
+[e $U 2190  ]
+"212
+[e :U 2187 ]
+[; ;RTC.c: 212: else
+[; ;RTC.c: 213: {
+"213
+{
+[; ;RTC.c: 214: sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.HoursMilitary, DisplayTime.Minutes, DisplayTime.Seconds);
+"214
+[e ( _sprintf (1 , , , , , , (. , _ReturnBuf :s 3C -> . _DisplayTime 7 `i -> . _DisplayTime 6 `i -> . _DisplayTime 8 `i -> . _DisplayTime 3 `i -> . _DisplayTime 1 `i -> . _DisplayTime 0 `i ]
+"215
+}
+[e :U 2190 ]
+[; ;RTC.c: 215: }
+[; ;RTC.c: 216: }
+"216
+[e :UE 2186 ]
+}
 "218
-[e :U 2193 ]
-[; ;RTC.c: 218: else
-[; ;RTC.c: 219: {
+[v _Parse_Time `(uc ~T0 @X0 1 ef1`*uc ]
 "219
 {
-[; ;RTC.c: 220: return 0;
+[; ;RTC.c: 218: unsigned char Parse_Time(unsigned char* This)
+[; ;RTC.c: 219: {
+[e :U _Parse_Time ]
+"218
+[v _This `*uc ~T0 @X0 1 r1 ]
+"219
+[f ]
 "220
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
+[v _TempTime `S2161 ~T0 @X0 1 a ]
 "221
-}
-[e :U 2194 ]
-[; ;RTC.c: 221: }
-[; ;RTC.c: 223: if(*This >= 48 && *This <= 57)
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;RTC.c: 220: TIME TempTime;
+[; ;RTC.c: 221: unsigned char temp = 0;
+[e = _temp -> -> 0 `i `uc ]
+[; ;RTC.c: 223: if(*This != 0 && *This == ' ')
 "223
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2195  ]
+[e $ ! && != -> *U _This `i -> 0 `i == -> *U _This `ui -> 32 `ui 2192  ]
 [; ;RTC.c: 224: {
 "224
 {
-[; ;RTC.c: 225: temp *= 10;
+[; ;RTC.c: 225: This++;
 "225
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 226: temp += *This - 48;
-"226
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 227: This++;
-"227
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"228
+"226
 }
-[; ;RTC.c: 228: }
-[e $U 2196  ]
+[e :U 2192 ]
+[; ;RTC.c: 226: }
+[; ;RTC.c: 229: if (*This >= 48 && *This <= 57)
 "229
-[e :U 2195 ]
-[; ;RTC.c: 229: else if(*This == '/')
-[e $ ! == -> *U _This `ui -> 47 `ui 2197  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2193  ]
 [; ;RTC.c: 230: {
 "230
 {
+[; ;RTC.c: 231: temp = *This - 48;
+"231
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 232: This++;
 "232
-}
-[; ;RTC.c: 232: }
-[e $U 2198  ]
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "233
-[e :U 2197 ]
-[; ;RTC.c: 233: else
-[; ;RTC.c: 234: {
+}
+[; ;RTC.c: 233: }
+[e $U 2194  ]
 "234
-{
-[; ;RTC.c: 235: return 0;
+[e :U 2193 ]
+[; ;RTC.c: 234: else
+[; ;RTC.c: 235: {
 "235
+{
+[; ;RTC.c: 236: return 0;
+"236
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"236
-}
-[e :U 2198 ]
-[e :U 2196 ]
-[; ;RTC.c: 236: }
-[; ;RTC.c: 237: TempTime.Month = temp;
 "237
-[e = . _TempTime 7 _temp ]
-[; ;RTC.c: 239: if(*This == '/')
+}
+[e :U 2194 ]
+[; ;RTC.c: 237: }
+[; ;RTC.c: 239: if(*This >= 48 && *This <= 57)
 "239
-[e $ ! == -> *U _This `ui -> 47 `ui 2199  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2195  ]
 [; ;RTC.c: 240: {
 "240
 {
-[; ;RTC.c: 241: This++;
+[; ;RTC.c: 241: temp *= 10;
 "241
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 242: temp += *This - 48;
 "242
-}
-[; ;RTC.c: 242: }
-[e $U 2200  ]
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 243: This++;
 "243
-[e :U 2199 ]
-[; ;RTC.c: 243: else
-[; ;RTC.c: 244: {
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "244
-{
-[; ;RTC.c: 245: return 0;
-"245
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
-"246
 }
-[e :U 2200 ]
-[; ;RTC.c: 246: }
-[; ;RTC.c: 249: if (*This >= 48 && *This <= 57)
+[; ;RTC.c: 244: }
+[e $U 2196  ]
+"245
+[e :U 2195 ]
+[; ;RTC.c: 245: else if(*This == '/')
+[e $ ! == -> *U _This `ui -> 47 `ui 2197  ]
+[; ;RTC.c: 246: {
+"246
+{
+"248
+}
+[; ;RTC.c: 248: }
+[e $U 2198  ]
 "249
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2201  ]
+[e :U 2197 ]
+[; ;RTC.c: 249: else
 [; ;RTC.c: 250: {
 "250
 {
-[; ;RTC.c: 251: temp = *This - 48;
+[; ;RTC.c: 251: return 0;
 "251
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 252: This++;
-"252
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"253
-}
-[; ;RTC.c: 253: }
-[e $U 2202  ]
-"254
-[e :U 2201 ]
-[; ;RTC.c: 254: else
-[; ;RTC.c: 255: {
-"255
-{
-[; ;RTC.c: 256: return 0;
-"256
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"257
+"252
 }
-[e :U 2202 ]
-[; ;RTC.c: 257: }
-[; ;RTC.c: 259: if(*This >= 48 && *This <= 57)
+[e :U 2198 ]
+[e :U 2196 ]
+[; ;RTC.c: 252: }
+[; ;RTC.c: 253: TempTime.Month = temp;
+"253
+[e = . _TempTime 7 _temp ]
+[; ;RTC.c: 255: if(*This == '/')
+"255
+[e $ ! == -> *U _This `ui -> 47 `ui 2199  ]
+[; ;RTC.c: 256: {
+"256
+{
+[; ;RTC.c: 257: This++;
+"257
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"258
+}
+[; ;RTC.c: 258: }
+[e $U 2200  ]
 "259
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2203  ]
+[e :U 2199 ]
+[; ;RTC.c: 259: else
 [; ;RTC.c: 260: {
 "260
 {
-[; ;RTC.c: 261: temp *= 10;
+[; ;RTC.c: 261: return 0;
 "261
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 262: temp += *This - 48;
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
 "262
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 263: This++;
-"263
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"264
 }
-[; ;RTC.c: 264: }
-[e $U 2204  ]
+[e :U 2200 ]
+[; ;RTC.c: 262: }
+[; ;RTC.c: 265: if (*This >= 48 && *This <= 57)
 "265
-[e :U 2203 ]
-[; ;RTC.c: 265: else if(*This == '/')
-[e $ ! == -> *U _This `ui -> 47 `ui 2205  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2201  ]
 [; ;RTC.c: 266: {
 "266
 {
+[; ;RTC.c: 267: temp = *This - 48;
+"267
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 268: This++;
 "268
-}
-[; ;RTC.c: 268: }
-[e $U 2206  ]
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "269
-[e :U 2205 ]
-[; ;RTC.c: 269: else
-[; ;RTC.c: 270: {
+}
+[; ;RTC.c: 269: }
+[e $U 2202  ]
 "270
-{
-[; ;RTC.c: 271: return 0;
+[e :U 2201 ]
+[; ;RTC.c: 270: else
+[; ;RTC.c: 271: {
 "271
+{
+[; ;RTC.c: 272: return 0;
+"272
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"272
-}
-[e :U 2206 ]
-[e :U 2204 ]
-[; ;RTC.c: 272: }
-[; ;RTC.c: 273: TempTime.Date = temp;
 "273
-[e = . _TempTime 6 _temp ]
-[; ;RTC.c: 275: if(*This == '/')
+}
+[e :U 2202 ]
+[; ;RTC.c: 273: }
+[; ;RTC.c: 275: if(*This >= 48 && *This <= 57)
 "275
-[e $ ! == -> *U _This `ui -> 47 `ui 2207  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2203  ]
 [; ;RTC.c: 276: {
 "276
 {
-[; ;RTC.c: 277: This++;
+[; ;RTC.c: 277: temp *= 10;
 "277
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 278: temp += *This - 48;
 "278
-}
-[; ;RTC.c: 278: }
-[e $U 2208  ]
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 279: This++;
 "279
-[e :U 2207 ]
-[; ;RTC.c: 279: else
-[; ;RTC.c: 280: {
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "280
-{
-[; ;RTC.c: 281: return 0;
-"281
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
-"282
 }
-[e :U 2208 ]
-[; ;RTC.c: 282: }
-[; ;RTC.c: 285: if (*This >= 48 && *This <= 57)
+[; ;RTC.c: 280: }
+[e $U 2204  ]
+"281
+[e :U 2203 ]
+[; ;RTC.c: 281: else if(*This == '/')
+[e $ ! == -> *U _This `ui -> 47 `ui 2205  ]
+[; ;RTC.c: 282: {
+"282
+{
+"284
+}
+[; ;RTC.c: 284: }
+[e $U 2206  ]
 "285
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2209  ]
+[e :U 2205 ]
+[; ;RTC.c: 285: else
 [; ;RTC.c: 286: {
 "286
 {
-[; ;RTC.c: 287: temp = *This - 48;
+[; ;RTC.c: 287: return 0;
 "287
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 288: This++;
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
 "288
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+}
+[e :U 2206 ]
+[e :U 2204 ]
+[; ;RTC.c: 288: }
+[; ;RTC.c: 289: TempTime.Date = temp;
 "289
-}
-[; ;RTC.c: 289: }
-[e $U 2210  ]
-"290
-[e :U 2209 ]
-[; ;RTC.c: 290: else
-[; ;RTC.c: 291: {
+[e = . _TempTime 6 _temp ]
+[; ;RTC.c: 291: if(*This == '/')
 "291
-{
-[; ;RTC.c: 292: return 0;
+[e $ ! == -> *U _This `ui -> 47 `ui 2207  ]
+[; ;RTC.c: 292: {
 "292
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
+{
+[; ;RTC.c: 293: This++;
 "293
-}
-[e :U 2210 ]
-[; ;RTC.c: 293: }
-[; ;RTC.c: 294: if (*This >= 48 && *This <= 57)
-"294
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2211  ]
-[; ;RTC.c: 295: {
-"295
-{
-[; ;RTC.c: 296: temp *= 10;
-"296
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 297: temp += *This - 48;
-"297
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 298: This++;
-"298
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"299
+"294
 }
-[; ;RTC.c: 299: }
-[e $U 2212  ]
-"300
-[e :U 2211 ]
-[; ;RTC.c: 300: else
-[; ;RTC.c: 301: {
-"301
+[; ;RTC.c: 294: }
+[e $U 2208  ]
+"295
+[e :U 2207 ]
+[; ;RTC.c: 295: else
+[; ;RTC.c: 296: {
+"296
 {
-[; ;RTC.c: 302: return 0;
-"302
+[; ;RTC.c: 297: return 0;
+"297
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"303
+"298
 }
-[e :U 2212 ]
-[; ;RTC.c: 303: }
-[; ;RTC.c: 304: TempTime.Year = temp;
+[e :U 2208 ]
+[; ;RTC.c: 298: }
+[; ;RTC.c: 301: if (*This >= 48 && *This <= 57)
+"301
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2209  ]
+[; ;RTC.c: 302: {
+"302
+{
+[; ;RTC.c: 303: temp = *This - 48;
+"303
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 304: This++;
 "304
-[e = . _TempTime 8 _temp ]
-[; ;RTC.c: 306: if(*This == ' ')
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"305
+}
+[; ;RTC.c: 305: }
+[e $U 2210  ]
 "306
-[e $ ! == -> *U _This `ui -> 32 `ui 2213  ]
+[e :U 2209 ]
+[; ;RTC.c: 306: else
 [; ;RTC.c: 307: {
 "307
 {
-[; ;RTC.c: 308: This++;
+[; ;RTC.c: 308: return 0;
 "308
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"309
-}
-[e :U 2213 ]
-[; ;RTC.c: 309: }
-[; ;RTC.c: 312: if (*This >= 48 && *This <= 57)
-"312
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2214  ]
-[; ;RTC.c: 313: {
-"313
-{
-[; ;RTC.c: 314: temp = *This - 48;
-"314
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 315: This++;
-"315
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"316
-}
-[; ;RTC.c: 316: }
-[e $U 2215  ]
-"317
-[e :U 2214 ]
-[; ;RTC.c: 317: else
-[; ;RTC.c: 318: {
-"318
-{
-[; ;RTC.c: 319: return 0;
-"319
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"320
+"309
 }
-[e :U 2215 ]
-[; ;RTC.c: 320: }
-[; ;RTC.c: 322: if(*This >= 48 && *This <= 57)
+[e :U 2210 ]
+[; ;RTC.c: 309: }
+[; ;RTC.c: 310: if (*This >= 48 && *This <= 57)
+"310
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2211  ]
+[; ;RTC.c: 311: {
+"311
+{
+[; ;RTC.c: 312: temp *= 10;
+"312
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 313: temp += *This - 48;
+"313
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 314: This++;
+"314
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"315
+}
+[; ;RTC.c: 315: }
+[e $U 2212  ]
+"316
+[e :U 2211 ]
+[; ;RTC.c: 316: else
+[; ;RTC.c: 317: {
+"317
+{
+[; ;RTC.c: 318: return 0;
+"318
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
+"319
+}
+[e :U 2212 ]
+[; ;RTC.c: 319: }
+[; ;RTC.c: 320: TempTime.Year = temp;
+"320
+[e = . _TempTime 8 _temp ]
+[; ;RTC.c: 322: if(*This == ' ')
 "322
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2216  ]
+[e $ ! == -> *U _This `ui -> 32 `ui 2213  ]
 [; ;RTC.c: 323: {
 "323
 {
-[; ;RTC.c: 324: temp *= 10;
+[; ;RTC.c: 324: This++;
 "324
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 325: temp += *This - 48;
-"325
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 326: This++;
-"326
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"327
+"325
 }
-[; ;RTC.c: 327: }
-[e $U 2217  ]
+[e :U 2213 ]
+[; ;RTC.c: 325: }
+[; ;RTC.c: 328: if (*This >= 48 && *This <= 57)
 "328
-[e :U 2216 ]
-[; ;RTC.c: 328: else if(*This == ':')
-[e $ ! == -> *U _This `ui -> 58 `ui 2218  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2214  ]
 [; ;RTC.c: 329: {
 "329
 {
+[; ;RTC.c: 330: temp = *This - 48;
+"330
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 331: This++;
 "331
-}
-[; ;RTC.c: 331: }
-[e $U 2219  ]
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "332
-[e :U 2218 ]
-[; ;RTC.c: 332: else
-[; ;RTC.c: 333: {
+}
+[; ;RTC.c: 332: }
+[e $U 2215  ]
 "333
-{
-[; ;RTC.c: 334: return 0;
+[e :U 2214 ]
+[; ;RTC.c: 333: else
+[; ;RTC.c: 334: {
 "334
+{
+[; ;RTC.c: 335: return 0;
+"335
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"335
-}
-[e :U 2219 ]
-[e :U 2217 ]
-[; ;RTC.c: 335: }
-[; ;RTC.c: 336: TempTime.Hours = temp;
 "336
-[e = . _TempTime 2 _temp ]
-[; ;RTC.c: 338: if(*This == ':')
+}
+[e :U 2215 ]
+[; ;RTC.c: 336: }
+[; ;RTC.c: 338: if(*This >= 48 && *This <= 57)
 "338
-[e $ ! == -> *U _This `ui -> 58 `ui 2220  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2216  ]
 [; ;RTC.c: 339: {
 "339
 {
-[; ;RTC.c: 340: This++;
+[; ;RTC.c: 340: temp *= 10;
 "340
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 341: temp += *This - 48;
 "341
-}
-[; ;RTC.c: 341: }
-[e $U 2221  ]
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 342: This++;
 "342
-[e :U 2220 ]
-[; ;RTC.c: 342: else
-[; ;RTC.c: 343: {
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "343
-{
-[; ;RTC.c: 344: return 0;
-"344
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
-"345
 }
-[e :U 2221 ]
-[; ;RTC.c: 345: }
-[; ;RTC.c: 348: if (*This >= 48 && *This <= 57)
+[; ;RTC.c: 343: }
+[e $U 2217  ]
+"344
+[e :U 2216 ]
+[; ;RTC.c: 344: else if(*This == ':')
+[e $ ! == -> *U _This `ui -> 58 `ui 2218  ]
+[; ;RTC.c: 345: {
+"345
+{
+"347
+}
+[; ;RTC.c: 347: }
+[e $U 2219  ]
 "348
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2222  ]
+[e :U 2218 ]
+[; ;RTC.c: 348: else
 [; ;RTC.c: 349: {
 "349
 {
-[; ;RTC.c: 350: temp = *This - 48;
+[; ;RTC.c: 350: return 0;
 "350
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 351: This++;
-"351
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"352
-}
-[; ;RTC.c: 352: }
-[e $U 2223  ]
-"353
-[e :U 2222 ]
-[; ;RTC.c: 353: else
-[; ;RTC.c: 354: {
-"354
-{
-[; ;RTC.c: 355: return 0;
-"355
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"356
+"351
 }
-[e :U 2223 ]
-[; ;RTC.c: 356: }
-[; ;RTC.c: 358: if(*This >= 48 && *This <= 57)
+[e :U 2219 ]
+[e :U 2217 ]
+[; ;RTC.c: 351: }
+[; ;RTC.c: 352: TempTime.Hours = temp;
+"352
+[e = . _TempTime 2 _temp ]
+[; ;RTC.c: 354: if(*This == ':')
+"354
+[e $ ! == -> *U _This `ui -> 58 `ui 2220  ]
+[; ;RTC.c: 355: {
+"355
+{
+[; ;RTC.c: 356: This++;
+"356
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"357
+}
+[; ;RTC.c: 357: }
+[e $U 2221  ]
 "358
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2224  ]
+[e :U 2220 ]
+[; ;RTC.c: 358: else
 [; ;RTC.c: 359: {
 "359
 {
-[; ;RTC.c: 360: temp *= 10;
+[; ;RTC.c: 360: return 0;
 "360
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 361: temp += *This - 48;
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
 "361
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 362: This++;
-"362
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"363
 }
-[; ;RTC.c: 363: }
-[e $U 2225  ]
+[e :U 2221 ]
+[; ;RTC.c: 361: }
+[; ;RTC.c: 364: if (*This >= 48 && *This <= 57)
 "364
-[e :U 2224 ]
-[; ;RTC.c: 364: else if(*This == ':')
-[e $ ! == -> *U _This `ui -> 58 `ui 2226  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2222  ]
 [; ;RTC.c: 365: {
 "365
 {
+[; ;RTC.c: 366: temp = *This - 48;
+"366
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 367: This++;
 "367
-}
-[; ;RTC.c: 367: }
-[e $U 2227  ]
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "368
-[e :U 2226 ]
-[; ;RTC.c: 368: else
-[; ;RTC.c: 369: {
+}
+[; ;RTC.c: 368: }
+[e $U 2223  ]
 "369
-{
-[; ;RTC.c: 370: return 0;
+[e :U 2222 ]
+[; ;RTC.c: 369: else
+[; ;RTC.c: 370: {
 "370
+{
+[; ;RTC.c: 371: return 0;
+"371
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"371
-}
-[e :U 2227 ]
-[e :U 2225 ]
-[; ;RTC.c: 371: }
-[; ;RTC.c: 372: TempTime.Minutes = temp;
 "372
-[e = . _TempTime 1 _temp ]
-[; ;RTC.c: 374: if(*This == ':')
+}
+[e :U 2223 ]
+[; ;RTC.c: 372: }
+[; ;RTC.c: 374: if(*This >= 48 && *This <= 57)
 "374
-[e $ ! == -> *U _This `ui -> 58 `ui 2228  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2224  ]
 [; ;RTC.c: 375: {
 "375
 {
-[; ;RTC.c: 376: This++;
+[; ;RTC.c: 376: temp *= 10;
 "376
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 377: temp += *This - 48;
 "377
-}
-[; ;RTC.c: 377: }
-[e $U 2229  ]
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 378: This++;
 "378
-[e :U 2228 ]
-[; ;RTC.c: 378: else
-[; ;RTC.c: 379: {
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "379
-{
-[; ;RTC.c: 380: return 0;
-"380
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
-"381
 }
-[e :U 2229 ]
-[; ;RTC.c: 381: }
-[; ;RTC.c: 384: if (*This >= 48 && *This <= 57)
+[; ;RTC.c: 379: }
+[e $U 2225  ]
+"380
+[e :U 2224 ]
+[; ;RTC.c: 380: else if(*This == ':')
+[e $ ! == -> *U _This `ui -> 58 `ui 2226  ]
+[; ;RTC.c: 381: {
+"381
+{
+"383
+}
+[; ;RTC.c: 383: }
+[e $U 2227  ]
 "384
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2230  ]
+[e :U 2226 ]
+[; ;RTC.c: 384: else
 [; ;RTC.c: 385: {
 "385
 {
-[; ;RTC.c: 386: temp = *This - 48;
+[; ;RTC.c: 386: return 0;
 "386
-[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 387: This++;
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
 "387
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+}
+[e :U 2227 ]
+[e :U 2225 ]
+[; ;RTC.c: 387: }
+[; ;RTC.c: 388: TempTime.Minutes = temp;
 "388
-}
-[; ;RTC.c: 388: }
-[e $U 2231  ]
-"389
-[e :U 2230 ]
-[; ;RTC.c: 389: else
-[; ;RTC.c: 390: {
+[e = . _TempTime 1 _temp ]
+[; ;RTC.c: 390: if(*This == ':')
 "390
-{
-[; ;RTC.c: 391: return 0;
+[e $ ! == -> *U _This `ui -> 58 `ui 2228  ]
+[; ;RTC.c: 391: {
 "391
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
+{
+[; ;RTC.c: 392: This++;
 "392
-}
-[e :U 2231 ]
-[; ;RTC.c: 392: }
-[; ;RTC.c: 393: if (*This >= 48 && *This <= 57)
-"393
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2232  ]
-[; ;RTC.c: 394: {
-"394
-{
-[; ;RTC.c: 395: temp *= 10;
-"395
-[e =* _temp -> -> 10 `i `uc ]
-[; ;RTC.c: 396: temp += *This - 48;
-"396
-[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
-[; ;RTC.c: 397: This++;
-"397
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"398
+"393
 }
-[; ;RTC.c: 398: }
-[e $U 2233  ]
-"399
-[e :U 2232 ]
-[; ;RTC.c: 399: else
-[; ;RTC.c: 400: {
-"400
+[; ;RTC.c: 393: }
+[e $U 2229  ]
+"394
+[e :U 2228 ]
+[; ;RTC.c: 394: else
+[; ;RTC.c: 395: {
+"395
 {
-[; ;RTC.c: 401: return 0;
-"401
+[; ;RTC.c: 396: return 0;
+"396
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"402
+"397
 }
-[e :U 2233 ]
-[; ;RTC.c: 402: }
-[; ;RTC.c: 403: TempTime.Seconds = temp;
+[e :U 2229 ]
+[; ;RTC.c: 397: }
+[; ;RTC.c: 400: if (*This >= 48 && *This <= 57)
+"400
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2230  ]
+[; ;RTC.c: 401: {
+"401
+{
+[; ;RTC.c: 402: temp = *This - 48;
+"402
+[e = _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 403: This++;
 "403
-[e = . _TempTime 0 _temp ]
-[; ;RTC.c: 405: if(*This == ' ')
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"404
+}
+[; ;RTC.c: 404: }
+[e $U 2231  ]
 "405
-[e $ ! == -> *U _This `ui -> 32 `ui 2234  ]
+[e :U 2230 ]
+[; ;RTC.c: 405: else
 [; ;RTC.c: 406: {
 "406
 {
-[; ;RTC.c: 407: This++;
+[; ;RTC.c: 407: return 0;
 "407
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
 "408
 }
-[e :U 2234 ]
+[e :U 2231 ]
 [; ;RTC.c: 408: }
-[; ;RTC.c: 409: if(*This == 'a')
+[; ;RTC.c: 409: if (*This >= 48 && *This <= 57)
 "409
-[e $ ! == -> *U _This `ui -> 97 `ui 2235  ]
+[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2232  ]
 [; ;RTC.c: 410: {
 "410
 {
-[; ;RTC.c: 411: This++;
+[; ;RTC.c: 411: temp *= 10;
 "411
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;RTC.c: 412: if(*This == 'm')
+[e =* _temp -> -> 10 `i `uc ]
+[; ;RTC.c: 412: temp += *This - 48;
 "412
-[e $ ! == -> *U _This `ui -> 109 `ui 2236  ]
-[; ;RTC.c: 413: {
+[e =+ _temp -> - -> *U _This `i -> 48 `i `uc ]
+[; ;RTC.c: 413: This++;
 "413
-{
-[; ;RTC.c: 414: TempTime.HoursAM_PM = 0;
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "414
-[e = . _TempTime 4 -> -> 0 `i `uc ]
-"415
 }
-[; ;RTC.c: 415: }
-[e $U 2237  ]
+[; ;RTC.c: 414: }
+[e $U 2233  ]
+"415
+[e :U 2232 ]
+[; ;RTC.c: 415: else
+[; ;RTC.c: 416: {
 "416
-[e :U 2236 ]
-[; ;RTC.c: 416: else
-[; ;RTC.c: 417: {
-"417
 {
-[; ;RTC.c: 418: return 0;
-"418
+[; ;RTC.c: 417: return 0;
+"417
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
+"418
+}
+[e :U 2233 ]
+[; ;RTC.c: 418: }
+[; ;RTC.c: 419: TempTime.Seconds = temp;
 "419
-}
-[e :U 2237 ]
-"420
-}
-[; ;RTC.c: 419: }
-[; ;RTC.c: 420: }
-[e $U 2238  ]
+[e = . _TempTime 0 _temp ]
+[; ;RTC.c: 421: if(*This == ' ')
 "421
-[e :U 2235 ]
-[; ;RTC.c: 421: else if(*This == 'p')
-[e $ ! == -> *U _This `ui -> 112 `ui 2239  ]
+[e $ ! == -> *U _This `ui -> 32 `ui 2234  ]
 [; ;RTC.c: 422: {
 "422
 {
 [; ;RTC.c: 423: This++;
 "423
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;RTC.c: 424: if(*This == 'm')
 "424
-[e $ ! == -> *U _This `ui -> 109 `ui 2240  ]
-[; ;RTC.c: 425: {
-"425
-{
-[; ;RTC.c: 426: TempTime.HoursAM_PM = 1;
-"426
-[e = . _TempTime 4 -> -> 1 `i `uc ]
-"427
 }
-[; ;RTC.c: 427: }
-[e $U 2241  ]
+[e :U 2234 ]
+[; ;RTC.c: 424: }
+[; ;RTC.c: 425: if(*This == 'a')
+"425
+[e $ ! == -> *U _This `ui -> 97 `ui 2235  ]
+[; ;RTC.c: 426: {
+"426
+{
+[; ;RTC.c: 427: This++;
+"427
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[; ;RTC.c: 428: if(*This == 'm')
 "428
-[e :U 2240 ]
-[; ;RTC.c: 428: else
+[e $ ! == -> *U _This `ui -> 109 `ui 2236  ]
 [; ;RTC.c: 429: {
 "429
 {
-[; ;RTC.c: 430: return 0;
+[; ;RTC.c: 430: TempTime.HoursAM_PM = 0;
 "430
-[e ) -> -> 0 `i `uc ]
-[e $UE 2191  ]
+[e = . _TempTime 4 -> -> 0 `i `uc ]
 "431
 }
-[e :U 2241 ]
-"432
-}
 [; ;RTC.c: 431: }
-[; ;RTC.c: 432: }
-[e $U 2242  ]
+[e $U 2237  ]
+"432
+[e :U 2236 ]
+[; ;RTC.c: 432: else
+[; ;RTC.c: 433: {
 "433
-[e :U 2239 ]
-[; ;RTC.c: 433: else
-[; ;RTC.c: 434: {
-"434
 {
-[; ;RTC.c: 435: return 0;
-"435
+[; ;RTC.c: 434: return 0;
+"434
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
+"435
+}
+[e :U 2237 ]
 "436
 }
-[e :U 2242 ]
-[e :U 2238 ]
+[; ;RTC.c: 435: }
 [; ;RTC.c: 436: }
-[; ;RTC.c: 437: if(TempTime.Month > 12 || TempTime.Date > 31 || TempTime.Year > 99 || TempTime.Hours > 12 || TempTime.Minutes > 59 || TempTime.Seconds > 59)
+[e $U 2238  ]
 "437
-[e $ ! || || || || || > -> . _TempTime 7 `i -> 12 `i > -> . _TempTime 6 `i -> 31 `i > -> . _TempTime 8 `i -> 99 `i > -> . _TempTime 2 `i -> 12 `i > -> . _TempTime 1 `i -> 59 `i > -> . _TempTime 0 `i -> 59 `i 2243  ]
+[e :U 2235 ]
+[; ;RTC.c: 437: else if(*This == 'p')
+[e $ ! == -> *U _This `ui -> 112 `ui 2239  ]
 [; ;RTC.c: 438: {
 "438
 {
-[; ;RTC.c: 439: return 0;
+[; ;RTC.c: 439: This++;
 "439
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[; ;RTC.c: 440: if(*This == 'm')
+"440
+[e $ ! == -> *U _This `ui -> 109 `ui 2240  ]
+[; ;RTC.c: 441: {
+"441
+{
+[; ;RTC.c: 442: TempTime.HoursAM_PM = 1;
+"442
+[e = . _TempTime 4 -> -> 1 `i `uc ]
+"443
+}
+[; ;RTC.c: 443: }
+[e $U 2241  ]
+"444
+[e :U 2240 ]
+[; ;RTC.c: 444: else
+[; ;RTC.c: 445: {
+"445
+{
+[; ;RTC.c: 446: return 0;
+"446
 [e ) -> -> 0 `i `uc ]
 [e $UE 2191  ]
-"440
-}
-[; ;RTC.c: 440: }
-[e $U 2244  ]
-"441
-[e :U 2243 ]
-[; ;RTC.c: 441: else
-[; ;RTC.c: 442: {
-"442
-{
-[; ;RTC.c: 443: NowTime.Month = TempTime.Month;
-"443
-[e = . _NowTime 7 . _TempTime 7 ]
-[; ;RTC.c: 444: NowTime.Date = TempTime.Date;
-"444
-[e = . _NowTime 6 . _TempTime 6 ]
-[; ;RTC.c: 445: NowTime.Year= TempTime.Year;
-"445
-[e = . _NowTime 8 . _TempTime 8 ]
-[; ;RTC.c: 446: NowTime.Hours = TempTime.Hours;
-"446
-[e = . _NowTime 2 . _TempTime 2 ]
-[; ;RTC.c: 447: NowTime.Minutes = TempTime.Minutes;
 "447
-[e = . _NowTime 1 . _TempTime 1 ]
-[; ;RTC.c: 448: NowTime.Seconds= TempTime.Seconds;
+}
+[e :U 2241 ]
 "448
-[e = . _NowTime 0 . _TempTime 0 ]
-[; ;RTC.c: 449: NowTime.HoursAM_PM = TempTime.HoursAM_PM;
+}
+[; ;RTC.c: 447: }
+[; ;RTC.c: 448: }
+[e $U 2242  ]
 "449
-[e = . _NowTime 4 . _TempTime 4 ]
-[; ;RTC.c: 450: return 1;
+[e :U 2239 ]
+[; ;RTC.c: 449: else
+[; ;RTC.c: 450: {
 "450
+{
+[; ;RTC.c: 451: return 0;
+"451
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
+"452
+}
+[e :U 2242 ]
+[e :U 2238 ]
+[; ;RTC.c: 452: }
+[; ;RTC.c: 453: if(TempTime.Month > 12 || TempTime.Date > 31 || TempTime.Year > 99 || TempTime.Hours > 12 || TempTime.Minutes > 59 || TempTime.Seconds > 59)
+"453
+[e $ ! || || || || || > -> . _TempTime 7 `i -> 12 `i > -> . _TempTime 6 `i -> 31 `i > -> . _TempTime 8 `i -> 99 `i > -> . _TempTime 2 `i -> 12 `i > -> . _TempTime 1 `i -> 59 `i > -> . _TempTime 0 `i -> 59 `i 2243  ]
+[; ;RTC.c: 454: {
+"454
+{
+[; ;RTC.c: 455: return 0;
+"455
+[e ) -> -> 0 `i `uc ]
+[e $UE 2191  ]
+"456
+}
+[; ;RTC.c: 456: }
+[e $U 2244  ]
+"457
+[e :U 2243 ]
+[; ;RTC.c: 457: else
+[; ;RTC.c: 458: {
+"458
+{
+[; ;RTC.c: 459: NowTime.Month = TempTime.Month;
+"459
+[e = . _NowTime 7 . _TempTime 7 ]
+[; ;RTC.c: 460: NowTime.Date = TempTime.Date;
+"460
+[e = . _NowTime 6 . _TempTime 6 ]
+[; ;RTC.c: 461: NowTime.Year= TempTime.Year;
+"461
+[e = . _NowTime 8 . _TempTime 8 ]
+[; ;RTC.c: 462: NowTime.Hours = TempTime.Hours;
+"462
+[e = . _NowTime 2 . _TempTime 2 ]
+[; ;RTC.c: 463: NowTime.Minutes = TempTime.Minutes;
+"463
+[e = . _NowTime 1 . _TempTime 1 ]
+[; ;RTC.c: 464: NowTime.Seconds= TempTime.Seconds;
+"464
+[e = . _NowTime 0 . _TempTime 0 ]
+[; ;RTC.c: 465: NowTime.HoursAM_PM = TempTime.HoursAM_PM;
+"465
+[e = . _NowTime 4 . _TempTime 4 ]
+[; ;RTC.c: 466: return 1;
+"466
 [e ) -> -> 1 `i `uc ]
 [e $UE 2191  ]
-"451
+"467
 }
 [e :U 2244 ]
-[; ;RTC.c: 451: }
-[; ;RTC.c: 452: }
-"452
+[; ;RTC.c: 467: }
+[; ;RTC.c: 468: }
+"468
 [e :UE 2191 ]
 }
 [p f _sprintf 8421508 ]

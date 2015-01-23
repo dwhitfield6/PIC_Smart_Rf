@@ -1,15 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "24 UART.h
 [v _UARTstring `(v ~T0 @X0 0 ef1`*Cuc ]
-"26 MISC.h
+"34 MISC.h
 [v _lowercase `(v ~T0 @X0 0 ef1`*uc ]
-"25
+"33
 [v _RemoveSpaces `(v ~T0 @X0 0 ef1`*uc ]
-"23
+"31
 [v _StartsWith `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"22
+"30
 [v _StringContains `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"21
+"29
 [v _StringMatch `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
@@ -41,19 +41,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Send_Config1 `(v ~T0 @X0 0 ef2`uc`*Cuc ]
 "85
 [v _Send_Config2 `(v ~T0 @X0 0 ef2`uc`*Cuc ]
-"24 MISC.h
+"32 MISC.h
 [v _GetEnteredNumber `(i ~T0 @X0 0 ef1`*uc ]
 "25 PWM.h
 [v _SetDuty `(v ~T0 @X0 0 ef1`uc ]
 "205 C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"27 MISC.h
+"35 MISC.h
 [v _StringAddEqual `(uc ~T0 @X0 0 ef1`*uc ]
 "27 PWM.h
 [v _SetContrast `(v ~T0 @X0 0 ef1`uc ]
 "29558 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
-"18 MISC.h
+"26 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "44 ADC.h
 [v _InternalADC_Read `(i ~T0 @X0 0 ef1`uc ]
@@ -70,7 +70,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
 "31
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*uc ]
-"19 MISC.h
+"27 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
 "56 RTC.h
 [v _Parse_Time `(uc ~T0 @X0 0 ef1`*uc ]
@@ -15404,6 +15404,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15434,20 +15435,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;UART.h: 23: void InitUART(void);
@@ -15460,16 +15461,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;UART.h: 23: void InitUART(void);
@@ -15984,204 +15986,204 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 54: void RTC_INIT(void);
 [; ;RTC.h: 55: unsigned char SET_RTC_TIME(TIME SetTime);
 [; ;RTC.h: 56: unsigned char Parse_Time(unsigned char* This);
-[; ;StringCommand.c: 28: extern TIME NowTime;
-[; ;StringCommand.c: 29: extern unsigned char LCDwait;
-[; ;StringCommand.c: 30: extern unsigned long LCDclearCount;
-"32 StringCommand.c
+[; ;StringCommand.c: 48: extern TIME NowTime;
+[; ;StringCommand.c: 49: extern unsigned char LCDwait;
+[; ;StringCommand.c: 50: extern unsigned long LCDclearCount;
+"52 StringCommand.c
 [v _Command `(v ~T0 @X0 1 ef1`*uc ]
-"33
-{
-[; ;StringCommand.c: 32: void Command(char* Input)
-[; ;StringCommand.c: 33: {
-[e :U _Command ]
-"32
-[v _Input `*uc ~T0 @X0 1 r1 ]
-"33
-[f ]
-"34
-[v _channel `i ~T0 @X0 1 a ]
-[; ;StringCommand.c: 34: int channel = 20;
-[e = _channel -> 20 `i ]
-"35
-[v _ADC_Value `ui ~T0 @X0 1 a ]
-[; ;StringCommand.c: 35: unsigned int ADC_Value = 0;
-[e = _ADC_Value -> -> 0 `i `ui ]
-"36
-[v _RTC_Battery_Value `ui ~T0 @X0 1 a ]
-[; ;StringCommand.c: 36: unsigned int RTC_Battery_Value =0;
-[e = _RTC_Battery_Value -> -> 0 `i `ui ]
-"37
-[v _RTC_Battery_Value_HIGH_decimal `ui ~T0 @X0 1 a ]
-[; ;StringCommand.c: 37: unsigned int RTC_Battery_Value_HIGH_decimal =0;
-[e = _RTC_Battery_Value_HIGH_decimal -> -> 0 `i `ui ]
-"38
-[v _RTC_Battery_Value_LOW_decimal `ui ~T0 @X0 1 a ]
-[; ;StringCommand.c: 38: unsigned int RTC_Battery_Value_LOW_decimal =0;
-[e = _RTC_Battery_Value_LOW_decimal -> -> 0 `i `ui ]
-"39
-[v _duty `i ~T0 @X0 1 a ]
-[; ;StringCommand.c: 39: int duty = 0;
-[e = _duty -> 0 `i ]
-"40
-[v _contrast `i ~T0 @X0 1 a ]
-[; ;StringCommand.c: 40: int contrast = 0;
-[e = _contrast -> 0 `i ]
-"41
-[v _buf `uc ~T0 @X0 -> 200 `i a ]
-[; ;StringCommand.c: 41: unsigned char buf[200];
-[; ;StringCommand.c: 43: UARTstring("\r\n\n");
-"43
-[e ( _UARTstring (1 :s 1C ]
-[; ;StringCommand.c: 44: lowercase(Input);
-"44
-[e ( _lowercase (1 _Input ]
-[; ;StringCommand.c: 45: RemoveSpaces(Input);
-"45
-[e ( _RemoveSpaces (1 _Input ]
-[; ;StringCommand.c: 48: if (StartsWith(Input, "led"))
-"48
-[e $ ! != -> ( _StartsWith (2 , _Input :s 2C `i -> -> -> 0 `i `uc `i 2163  ]
-[; ;StringCommand.c: 49: {
-"49
-{
-[; ;StringCommand.c: 50: if (!StringContains(Input, "?"))
-"50
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 3C `i -> -> -> 0 `i `uc `i 2164  ]
-[; ;StringCommand.c: 51: {
-"51
-{
-[; ;StringCommand.c: 52: if (StringMatch(Input, "led0"))
-"52
-[e $ ! != -> ( _StringMatch (2 , _Input :s 4C `i -> -> -> 0 `i `uc `i 2165  ]
-[; ;StringCommand.c: 53: {
 "53
 {
-[; ;StringCommand.c: 54: LATD ^= 0b00000010;
+[; ;StringCommand.c: 52: void Command(char* Input)
+[; ;StringCommand.c: 53: {
+[e :U _Command ]
+"52
+[v _Input `*uc ~T0 @X0 1 r1 ]
+"53
+[f ]
 "54
-[e =^ _LATD -> -> 2 `i `uc ]
-[; ;StringCommand.c: 55: UARTstring("LED0 Toggled");
+[v _channel `i ~T0 @X0 1 a ]
+[; ;StringCommand.c: 54: int channel = 20;
+[e = _channel -> 20 `i ]
 "55
-[e ( _UARTstring (1 :s 5C ]
-[; ;StringCommand.c: 56: LCDdisplayFeedback("LED0 Toggled");
+[v _ADC_Value `ui ~T0 @X0 1 a ]
+[; ;StringCommand.c: 55: unsigned int ADC_Value = 0;
+[e = _ADC_Value -> -> 0 `i `ui ]
 "56
-[e ( _LCDdisplayFeedback (1 -> :s 6C `*uc ]
+[v _RTC_Battery_Value `ui ~T0 @X0 1 a ]
+[; ;StringCommand.c: 56: unsigned int RTC_Battery_Value =0;
+[e = _RTC_Battery_Value -> -> 0 `i `ui ]
 "57
-}
-[; ;StringCommand.c: 57: }
-[e $U 2166  ]
+[v _RTC_Battery_Value_HIGH_decimal `ui ~T0 @X0 1 a ]
+[; ;StringCommand.c: 57: unsigned int RTC_Battery_Value_HIGH_decimal =0;
+[e = _RTC_Battery_Value_HIGH_decimal -> -> 0 `i `ui ]
 "58
-[e :U 2165 ]
-[; ;StringCommand.c: 58: else if (StringMatch(Input, "led0=on"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 7C `i -> -> -> 0 `i `uc `i 2167  ]
-[; ;StringCommand.c: 59: {
+[v _RTC_Battery_Value_LOW_decimal `ui ~T0 @X0 1 a ]
+[; ;StringCommand.c: 58: unsigned int RTC_Battery_Value_LOW_decimal =0;
+[e = _RTC_Battery_Value_LOW_decimal -> -> 0 `i `ui ]
 "59
-{
-[; ;StringCommand.c: 60: LATD |= 0b00000010;
+[v _duty `i ~T0 @X0 1 a ]
+[; ;StringCommand.c: 59: int duty = 0;
+[e = _duty -> 0 `i ]
 "60
-[e =| _LATD -> -> 2 `i `uc ]
-[; ;StringCommand.c: 61: UARTstring("LED0 On");
+[v _contrast `i ~T0 @X0 1 a ]
+[; ;StringCommand.c: 60: int contrast = 0;
+[e = _contrast -> 0 `i ]
 "61
-[e ( _UARTstring (1 :s 8C ]
-[; ;StringCommand.c: 62: LCDdisplayFeedback("LED0 On");
-"62
-[e ( _LCDdisplayFeedback (1 -> :s 9C `*uc ]
+[v _buf `uc ~T0 @X0 -> 200 `i a ]
+[; ;StringCommand.c: 61: unsigned char buf[200];
+[; ;StringCommand.c: 63: UARTstring("\r\n\n");
 "63
-}
-[; ;StringCommand.c: 63: }
-[e $U 2168  ]
+[e ( _UARTstring (1 :s 1C ]
+[; ;StringCommand.c: 64: lowercase(Input);
 "64
-[e :U 2167 ]
-[; ;StringCommand.c: 64: else if (StringMatch(Input, "led0=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 10C `i -> -> -> 0 `i `uc `i 2169  ]
-[; ;StringCommand.c: 65: {
+[e ( _lowercase (1 _Input ]
+[; ;StringCommand.c: 65: RemoveSpaces(Input);
 "65
-{
-[; ;StringCommand.c: 66: LATD &= ~0b00000010;
-"66
-[e =& _LATD -> ~ -> 2 `i `uc ]
-[; ;StringCommand.c: 67: UARTstring("LED0 Off");
-"67
-[e ( _UARTstring (1 :s 11C ]
-[; ;StringCommand.c: 68: LCDdisplayFeedback("LED0 Off");
+[e ( _RemoveSpaces (1 _Input ]
+[; ;StringCommand.c: 68: if (StartsWith(Input, "led"))
 "68
-[e ( _LCDdisplayFeedback (1 -> :s 12C `*uc ]
+[e $ ! != -> ( _StartsWith (2 , _Input :s 2C `i -> -> -> 0 `i `uc `i 2163  ]
+[; ;StringCommand.c: 69: {
 "69
-}
-[; ;StringCommand.c: 69: }
-[e $U 2170  ]
+{
+[; ;StringCommand.c: 70: if (!StringContains(Input, "?"))
 "70
-[e :U 2169 ]
-[; ;StringCommand.c: 70: else if (StringMatch(Input, "led1"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 13C `i -> -> -> 0 `i `uc `i 2171  ]
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 3C `i -> -> -> 0 `i `uc `i 2164  ]
 [; ;StringCommand.c: 71: {
 "71
 {
-[; ;StringCommand.c: 72: LATD ^= 0b00000100;
+[; ;StringCommand.c: 72: if (StringMatch(Input, "led0"))
 "72
-[e =^ _LATD -> -> 4 `i `uc ]
-[; ;StringCommand.c: 73: UARTstring("LED1 Toggled");
+[e $ ! != -> ( _StringMatch (2 , _Input :s 4C `i -> -> -> 0 `i `uc `i 2165  ]
+[; ;StringCommand.c: 73: {
 "73
-[e ( _UARTstring (1 :s 14C ]
-[; ;StringCommand.c: 74: LCDdisplayFeedback("LED1 Toggled");
+{
+[; ;StringCommand.c: 74: LATD ^= 0b00000010;
 "74
-[e ( _LCDdisplayFeedback (1 -> :s 15C `*uc ]
+[e =^ _LATD -> -> 2 `i `uc ]
+[; ;StringCommand.c: 75: UARTstring("LED0 Toggled");
 "75
-}
-[; ;StringCommand.c: 75: }
-[e $U 2172  ]
+[e ( _UARTstring (1 :s 5C ]
+[; ;StringCommand.c: 76: LCDdisplayFeedback("LED0 Toggled");
 "76
-[e :U 2171 ]
-[; ;StringCommand.c: 76: else if (StringMatch(Input, "led1=on"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 16C `i -> -> -> 0 `i `uc `i 2173  ]
-[; ;StringCommand.c: 77: {
+[e ( _LCDdisplayFeedback (1 -> :s 6C `*uc ]
 "77
-{
-[; ;StringCommand.c: 78: LATD |= 0b00000100;
+}
+[; ;StringCommand.c: 77: }
+[e $U 2166  ]
 "78
-[e =| _LATD -> -> 4 `i `uc ]
-[; ;StringCommand.c: 79: UARTstring("LED1 On");
+[e :U 2165 ]
+[; ;StringCommand.c: 78: else if (StringMatch(Input, "led0=on"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 7C `i -> -> -> 0 `i `uc `i 2167  ]
+[; ;StringCommand.c: 79: {
 "79
-[e ( _UARTstring (1 :s 17C ]
-[; ;StringCommand.c: 80: LCDdisplayFeedback("LED1 On");
+{
+[; ;StringCommand.c: 80: LATD |= 0b00000010;
 "80
-[e ( _LCDdisplayFeedback (1 -> :s 18C `*uc ]
+[e =| _LATD -> -> 2 `i `uc ]
+[; ;StringCommand.c: 81: UARTstring("LED0 On");
 "81
-}
-[; ;StringCommand.c: 81: }
-[e $U 2174  ]
+[e ( _UARTstring (1 :s 8C ]
+[; ;StringCommand.c: 82: LCDdisplayFeedback("LED0 On");
 "82
-[e :U 2173 ]
-[; ;StringCommand.c: 82: else if (StringMatch(Input, "led1=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 19C `i -> -> -> 0 `i `uc `i 2175  ]
-[; ;StringCommand.c: 83: {
+[e ( _LCDdisplayFeedback (1 -> :s 9C `*uc ]
 "83
-{
-[; ;StringCommand.c: 84: LATD &= ~0b00000100;
-"84
-[e =& _LATD -> ~ -> 4 `i `uc ]
-[; ;StringCommand.c: 85: UARTstring("LED1 Off");
-"85
-[e ( _UARTstring (1 :s 20C ]
-[; ;StringCommand.c: 86: LCDdisplayFeedback("LED1 Off");
-"86
-[e ( _LCDdisplayFeedback (1 -> :s 21C `*uc ]
-"87
 }
-[; ;StringCommand.c: 87: }
-[e $U 2176  ]
-"88
-[e :U 2175 ]
-[; ;StringCommand.c: 88: else
-[; ;StringCommand.c: 89: {
-"89
+[; ;StringCommand.c: 83: }
+[e $U 2168  ]
+"84
+[e :U 2167 ]
+[; ;StringCommand.c: 84: else if (StringMatch(Input, "led0=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 10C `i -> -> -> 0 `i `uc `i 2169  ]
+[; ;StringCommand.c: 85: {
+"85
 {
-[; ;StringCommand.c: 90: UARTstring("LED What???");
+[; ;StringCommand.c: 86: LATD &= ~0b00000010;
+"86
+[e =& _LATD -> ~ -> 2 `i `uc ]
+[; ;StringCommand.c: 87: UARTstring("LED0 Off");
+"87
+[e ( _UARTstring (1 :s 11C ]
+[; ;StringCommand.c: 88: LCDdisplayFeedback("LED0 Off");
+"88
+[e ( _LCDdisplayFeedback (1 -> :s 12C `*uc ]
+"89
+}
+[; ;StringCommand.c: 89: }
+[e $U 2170  ]
 "90
-[e ( _UARTstring (1 :s 22C ]
-[; ;StringCommand.c: 91: LCDdisplayFeedback("LED What???");
+[e :U 2169 ]
+[; ;StringCommand.c: 90: else if (StringMatch(Input, "led1"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 13C `i -> -> -> 0 `i `uc `i 2171  ]
+[; ;StringCommand.c: 91: {
 "91
-[e ( _LCDdisplayFeedback (1 -> :s 23C `*uc ]
+{
+[; ;StringCommand.c: 92: LATD ^= 0b00000100;
 "92
+[e =^ _LATD -> -> 4 `i `uc ]
+[; ;StringCommand.c: 93: UARTstring("LED1 Toggled");
+"93
+[e ( _UARTstring (1 :s 14C ]
+[; ;StringCommand.c: 94: LCDdisplayFeedback("LED1 Toggled");
+"94
+[e ( _LCDdisplayFeedback (1 -> :s 15C `*uc ]
+"95
+}
+[; ;StringCommand.c: 95: }
+[e $U 2172  ]
+"96
+[e :U 2171 ]
+[; ;StringCommand.c: 96: else if (StringMatch(Input, "led1=on"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 16C `i -> -> -> 0 `i `uc `i 2173  ]
+[; ;StringCommand.c: 97: {
+"97
+{
+[; ;StringCommand.c: 98: LATD |= 0b00000100;
+"98
+[e =| _LATD -> -> 4 `i `uc ]
+[; ;StringCommand.c: 99: UARTstring("LED1 On");
+"99
+[e ( _UARTstring (1 :s 17C ]
+[; ;StringCommand.c: 100: LCDdisplayFeedback("LED1 On");
+"100
+[e ( _LCDdisplayFeedback (1 -> :s 18C `*uc ]
+"101
+}
+[; ;StringCommand.c: 101: }
+[e $U 2174  ]
+"102
+[e :U 2173 ]
+[; ;StringCommand.c: 102: else if (StringMatch(Input, "led1=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 19C `i -> -> -> 0 `i `uc `i 2175  ]
+[; ;StringCommand.c: 103: {
+"103
+{
+[; ;StringCommand.c: 104: LATD &= ~0b00000100;
+"104
+[e =& _LATD -> ~ -> 4 `i `uc ]
+[; ;StringCommand.c: 105: UARTstring("LED1 Off");
+"105
+[e ( _UARTstring (1 :s 20C ]
+[; ;StringCommand.c: 106: LCDdisplayFeedback("LED1 Off");
+"106
+[e ( _LCDdisplayFeedback (1 -> :s 21C `*uc ]
+"107
+}
+[; ;StringCommand.c: 107: }
+[e $U 2176  ]
+"108
+[e :U 2175 ]
+[; ;StringCommand.c: 108: else
+[; ;StringCommand.c: 109: {
+"109
+{
+[; ;StringCommand.c: 110: UARTstring("LED What???");
+"110
+[e ( _UARTstring (1 :s 22C ]
+[; ;StringCommand.c: 111: LCDdisplayFeedback("LED What???");
+"111
+[e ( _LCDdisplayFeedback (1 -> :s 23C `*uc ]
+"112
 }
 [e :U 2176 ]
 [e :U 2174 ]
@@ -16189,1970 +16191,1970 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2170 ]
 [e :U 2168 ]
 [e :U 2166 ]
-"93
-}
-[; ;StringCommand.c: 92: }
-[; ;StringCommand.c: 93: }
-[e $U 2177  ]
-"94
-[e :U 2164 ]
-[; ;StringCommand.c: 94: else
-[; ;StringCommand.c: 95: {
-"95
-{
-[; ;StringCommand.c: 96: UARTstring("LED Help Menu\r\n\n");
-"96
-[e ( _UARTstring (1 :s 24C ]
-[; ;StringCommand.c: 97: UARTstring("Devices:\r\n");
-"97
-[e ( _UARTstring (1 :s 25C ]
-[; ;StringCommand.c: 98: UARTstring("LED0\r\n");
-"98
-[e ( _UARTstring (1 :s 26C ]
-[; ;StringCommand.c: 99: UARTstring("LED1\r\n\n");
-"99
-[e ( _UARTstring (1 :s 27C ]
-[; ;StringCommand.c: 100: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
-"100
-[e ( _UARTstring (1 :s 28C ]
-[; ;StringCommand.c: 101: UARTstring("i.e. LED1 = On\r\n");
-"101
-[e ( _UARTstring (1 :s 29C ]
-[; ;StringCommand.c: 102: LCD_Scroll("LED Menu");
-"102
-[e ( _LCD_Scroll (1 -> :s 30C `*uc ]
-[; ;StringCommand.c: 103: LCD_Scroll("Devices:");
-"103
-[e ( _LCD_Scroll (1 -> :s 31C `*uc ]
-[; ;StringCommand.c: 104: LCD_Scroll("LED0");
-"104
-[e ( _LCD_Scroll (1 -> :s 32C `*uc ]
-[; ;StringCommand.c: 105: LCD_Scroll("LED1");
-"105
-[e ( _LCD_Scroll (1 -> :s 33C `*uc ]
-"106
-}
-[e :U 2177 ]
-"107
-}
-[; ;StringCommand.c: 106: }
-[; ;StringCommand.c: 107: }
-[e $U 2178  ]
-"109
-[e :U 2163 ]
-[; ;StringCommand.c: 109: else if (StartsWith(Input, "livingroom"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 34C `i -> -> -> 0 `i `uc `i 2179  ]
-[; ;StringCommand.c: 110: {
-"110
-{
-[; ;StringCommand.c: 111: if (!StringContains(Input, "?"))
-"111
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 35C `i -> -> -> 0 `i `uc `i 2180  ]
-[; ;StringCommand.c: 112: {
-"112
-{
-[; ;StringCommand.c: 113: if (StringMatch(Input, "livingroomlight=on") || StringMatch(Input, "livingroomlight=off"))
 "113
-[e $ ! || != -> ( _StringMatch (2 , _Input :s 36C `i -> -> -> 0 `i `uc `i != -> ( _StringMatch (2 , _Input :s 37C `i -> -> -> 0 `i `uc `i 2181  ]
-[; ;StringCommand.c: 114: {
+}
+[; ;StringCommand.c: 112: }
+[; ;StringCommand.c: 113: }
+[e $U 2177  ]
 "114
-{
-[; ;StringCommand.c: 115: INTCONbits.GIE = 0;
+[e :U 2164 ]
+[; ;StringCommand.c: 114: else
+[; ;StringCommand.c: 115: {
 "115
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 116: Send_Config1(0b00000001, TXdataD);
+{
+[; ;StringCommand.c: 116: UARTstring("LED Help Menu\r\n\n");
 "116
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 117: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 24C ]
+[; ;StringCommand.c: 117: UARTstring("Devices:\r\n");
 "117
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 118: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 25C ]
+[; ;StringCommand.c: 118: UARTstring("LED0\r\n");
 "118
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 119: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 26C ]
+[; ;StringCommand.c: 119: UARTstring("LED1\r\n\n");
 "119
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 120: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 27C ]
+[; ;StringCommand.c: 120: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
 "120
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 121: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 28C ]
+[; ;StringCommand.c: 121: UARTstring("i.e. LED1 = On\r\n");
 "121
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 122: Send_Config1(0b00000001, TXdataD);
+[e ( _UARTstring (1 :s 29C ]
+[; ;StringCommand.c: 122: LCD_Scroll("LED Menu");
 "122
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
-[; ;StringCommand.c: 123: INTCONbits.GIE = 1;
+[e ( _LCD_Scroll (1 -> :s 30C `*uc ]
+[; ;StringCommand.c: 123: LCD_Scroll("Devices:");
 "123
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 124: UARTstring("Livingroom Light Toggled");
+[e ( _LCD_Scroll (1 -> :s 31C `*uc ]
+[; ;StringCommand.c: 124: LCD_Scroll("LED0");
 "124
-[e ( _UARTstring (1 :s 38C ]
-[; ;StringCommand.c: 125: LCDdisplayFeedback("LVNG Rm Lt TGLD");
+[e ( _LCD_Scroll (1 -> :s 32C `*uc ]
+[; ;StringCommand.c: 125: LCD_Scroll("LED1");
 "125
-[e ( _LCDdisplayFeedback (1 -> :s 39C `*uc ]
+[e ( _LCD_Scroll (1 -> :s 33C `*uc ]
 "126
 }
-[; ;StringCommand.c: 126: }
-[e $U 2182  ]
+[e :U 2177 ]
 "127
-[e :U 2181 ]
-[; ;StringCommand.c: 127: else if (StringMatch(Input, "livingroomfan=on"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 40C `i -> -> -> 0 `i `uc `i 2183  ]
-[; ;StringCommand.c: 128: {
-"128
-{
-[; ;StringCommand.c: 129: INTCONbits.GIE = 0;
+}
+[; ;StringCommand.c: 126: }
+[; ;StringCommand.c: 127: }
+[e $U 2178  ]
 "129
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 130: Send_Config2(0b00000001, fanON);
+[e :U 2163 ]
+[; ;StringCommand.c: 129: else if (StartsWith(Input, "livingroom"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 34C `i -> -> -> 0 `i `uc `i 2179  ]
+[; ;StringCommand.c: 130: {
 "130
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 131: Send_Config2(0b00000001, fanON);
+{
+[; ;StringCommand.c: 131: if (!StringContains(Input, "?"))
 "131
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 132: Send_Config2(0b00000001, fanON);
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 35C `i -> -> -> 0 `i `uc `i 2180  ]
+[; ;StringCommand.c: 132: {
 "132
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 133: Send_Config2(0b00000001, fanON);
+{
+[; ;StringCommand.c: 133: if (StringMatch(Input, "livingroomlight=on") || StringMatch(Input, "livingroomlight=off"))
 "133
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 134: Send_Config2(0b00000001, fanON);
+[e $ ! || != -> ( _StringMatch (2 , _Input :s 36C `i -> -> -> 0 `i `uc `i != -> ( _StringMatch (2 , _Input :s 37C `i -> -> -> 0 `i `uc `i 2181  ]
+[; ;StringCommand.c: 134: {
 "134
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 135: Send_Config2(0b00000001, fanON);
+{
+[; ;StringCommand.c: 135: INTCONbits.GIE = 0;
 "135
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 136: Send_Config2(0b00000001, fanON);
-"136
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 137: Send_Config2(0b00000001, fanON);
-"137
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
-[; ;StringCommand.c: 138: INTCONbits.GIE = 1;
-"138
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 139: UARTstring("Livingroom Fan On");
-"139
-[e ( _UARTstring (1 :s 41C ]
-[; ;StringCommand.c: 140: LCDdisplayFeedback("LVNG Rm Lt On");
-"140
-[e ( _LCDdisplayFeedback (1 -> :s 42C `*uc ]
-"141
-}
-[; ;StringCommand.c: 141: }
-[e $U 2184  ]
-"142
-[e :U 2183 ]
-[; ;StringCommand.c: 142: else if (StringMatch(Input, "livingroomfan=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 43C `i -> -> -> 0 `i `uc `i 2185  ]
-[; ;StringCommand.c: 143: {
-"143
-{
-[; ;StringCommand.c: 144: INTCONbits.GIE = 0;
-"144
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 145: Send_Config2(0b00000001, fanOFF);
-"145
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 146: Send_Config2(0b00000001, fanOFF);
-"146
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 147: Send_Config2(0b00000001, fanOFF);
-"147
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 148: Send_Config2(0b00000001, fanOFF);
-"148
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 149: Send_Config2(0b00000001, fanOFF);
-"149
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 150: Send_Config2(0b00000001, fanOFF);
-"150
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 151: Send_Config2(0b00000001, fanOFF);
-"151
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 152: Send_Config2(0b00000001, fanOFF);
-"152
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 153: Send_Config2(0b00000001, fanOFF);
-"153
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
-[; ;StringCommand.c: 154: INTCONbits.GIE = 1;
-"154
+[; ;StringCommand.c: 136: Send_Config1(0b00000001, TXdataD);
+"136
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 137: Send_Config1(0b00000001, TXdataD);
+"137
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 138: Send_Config1(0b00000001, TXdataD);
+"138
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 139: Send_Config1(0b00000001, TXdataD);
+"139
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 140: Send_Config1(0b00000001, TXdataD);
+"140
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 141: Send_Config1(0b00000001, TXdataD);
+"141
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 142: Send_Config1(0b00000001, TXdataD);
+"142
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataD ]
+[; ;StringCommand.c: 143: INTCONbits.GIE = 1;
+"143
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 155: UARTstring("Livingroom Fan Off");
-"155
-[e ( _UARTstring (1 :s 44C ]
-[; ;StringCommand.c: 156: LCDdisplayFeedback("LVNG Rm Lt Off");
-"156
-[e ( _LCDdisplayFeedback (1 -> :s 45C `*uc ]
-"157
+[; ;StringCommand.c: 144: UARTstring("Livingroom Light Toggled");
+"144
+[e ( _UARTstring (1 :s 38C ]
+[; ;StringCommand.c: 145: LCDdisplayFeedback("LVNG Rm Lt TGLD");
+"145
+[e ( _LCDdisplayFeedback (1 -> :s 39C `*uc ]
+"146
 }
-[; ;StringCommand.c: 157: }
-[e $U 2186  ]
-"158
-[e :U 2185 ]
-[; ;StringCommand.c: 158: else
-[; ;StringCommand.c: 159: {
-"159
+[; ;StringCommand.c: 146: }
+[e $U 2182  ]
+"147
+[e :U 2181 ]
+[; ;StringCommand.c: 147: else if (StringMatch(Input, "livingroomfan=on"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 40C `i -> -> -> 0 `i `uc `i 2183  ]
+[; ;StringCommand.c: 148: {
+"148
 {
-[; ;StringCommand.c: 160: UARTstring("Livingroom Task???");
+[; ;StringCommand.c: 149: INTCONbits.GIE = 0;
+"149
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 150: Send_Config2(0b00000001, fanON);
+"150
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 151: Send_Config2(0b00000001, fanON);
+"151
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 152: Send_Config2(0b00000001, fanON);
+"152
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 153: Send_Config2(0b00000001, fanON);
+"153
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 154: Send_Config2(0b00000001, fanON);
+"154
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 155: Send_Config2(0b00000001, fanON);
+"155
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 156: Send_Config2(0b00000001, fanON);
+"156
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 157: Send_Config2(0b00000001, fanON);
+"157
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanON ]
+[; ;StringCommand.c: 158: INTCONbits.GIE = 1;
+"158
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 159: UARTstring("Livingroom Fan On");
+"159
+[e ( _UARTstring (1 :s 41C ]
+[; ;StringCommand.c: 160: LCDdisplayFeedback("LVNG Rm Lt On");
 "160
-[e ( _UARTstring (1 :s 46C ]
-[; ;StringCommand.c: 161: LCDdisplayFeedback("LVNG Rm Task???");
+[e ( _LCDdisplayFeedback (1 -> :s 42C `*uc ]
 "161
-[e ( _LCDdisplayFeedback (1 -> :s 47C `*uc ]
+}
+[; ;StringCommand.c: 161: }
+[e $U 2184  ]
 "162
+[e :U 2183 ]
+[; ;StringCommand.c: 162: else if (StringMatch(Input, "livingroomfan=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 43C `i -> -> -> 0 `i `uc `i 2185  ]
+[; ;StringCommand.c: 163: {
+"163
+{
+[; ;StringCommand.c: 164: INTCONbits.GIE = 0;
+"164
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 165: Send_Config2(0b00000001, fanOFF);
+"165
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 166: Send_Config2(0b00000001, fanOFF);
+"166
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 167: Send_Config2(0b00000001, fanOFF);
+"167
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 168: Send_Config2(0b00000001, fanOFF);
+"168
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 169: Send_Config2(0b00000001, fanOFF);
+"169
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 170: Send_Config2(0b00000001, fanOFF);
+"170
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 171: Send_Config2(0b00000001, fanOFF);
+"171
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 172: Send_Config2(0b00000001, fanOFF);
+"172
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 173: Send_Config2(0b00000001, fanOFF);
+"173
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _fanOFF ]
+[; ;StringCommand.c: 174: INTCONbits.GIE = 1;
+"174
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 175: UARTstring("Livingroom Fan Off");
+"175
+[e ( _UARTstring (1 :s 44C ]
+[; ;StringCommand.c: 176: LCDdisplayFeedback("LVNG Rm Lt Off");
+"176
+[e ( _LCDdisplayFeedback (1 -> :s 45C `*uc ]
+"177
+}
+[; ;StringCommand.c: 177: }
+[e $U 2186  ]
+"178
+[e :U 2185 ]
+[; ;StringCommand.c: 178: else
+[; ;StringCommand.c: 179: {
+"179
+{
+[; ;StringCommand.c: 180: UARTstring("Livingroom Task???");
+"180
+[e ( _UARTstring (1 :s 46C ]
+[; ;StringCommand.c: 181: LCDdisplayFeedback("LVNG Rm Task???");
+"181
+[e ( _LCDdisplayFeedback (1 -> :s 47C `*uc ]
+"182
 }
 [e :U 2186 ]
 [e :U 2184 ]
 [e :U 2182 ]
-"163
-}
-[; ;StringCommand.c: 162: }
-[; ;StringCommand.c: 163: }
-[e $U 2187  ]
-"164
-[e :U 2180 ]
-[; ;StringCommand.c: 164: else
-[; ;StringCommand.c: 165: {
-"165
-{
-[; ;StringCommand.c: 166: UARTstring("Livingroom Help Menu\r\n\n");
-"166
-[e ( _UARTstring (1 :s 48C ]
-[; ;StringCommand.c: 167: UARTstring("Devices:\r\n");
-"167
-[e ( _UARTstring (1 :s 49C ]
-[; ;StringCommand.c: 168: UARTstring("light\r\n");
-"168
-[e ( _UARTstring (1 :s 50C ]
-[; ;StringCommand.c: 169: UARTstring("fan\r\n\n");
-"169
-[e ( _UARTstring (1 :s 51C ]
-[; ;StringCommand.c: 170: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
-"170
-[e ( _UARTstring (1 :s 52C ]
-[; ;StringCommand.c: 171: UARTstring("i.e. Livingroom fan = On\r\n");
-"171
-[e ( _UARTstring (1 :s 53C ]
-[; ;StringCommand.c: 172: LCDdisplayFeedback("LVNG Rm Lt help");
-"172
-[e ( _LCDdisplayFeedback (1 -> :s 54C `*uc ]
-[; ;StringCommand.c: 173: LCD_Scroll("LVNGroom Menu");
-"173
-[e ( _LCD_Scroll (1 -> :s 55C `*uc ]
-[; ;StringCommand.c: 174: LCD_Scroll("Devices:");
-"174
-[e ( _LCD_Scroll (1 -> :s 56C `*uc ]
-[; ;StringCommand.c: 175: LCD_Scroll("Light");
-"175
-[e ( _LCD_Scroll (1 -> :s 57C `*uc ]
-[; ;StringCommand.c: 176: LCD_Scroll("Fan");
-"176
-[e ( _LCD_Scroll (1 -> :s 58C `*uc ]
-"177
-}
-[e :U 2187 ]
-"178
-}
-[; ;StringCommand.c: 177: }
-[; ;StringCommand.c: 178: }
-[e $U 2188  ]
-"180
-[e :U 2179 ]
-[; ;StringCommand.c: 180: else if (StartsWith(Input, "bedroom"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 59C `i -> -> -> 0 `i `uc `i 2189  ]
-[; ;StringCommand.c: 181: {
-"181
-{
-[; ;StringCommand.c: 182: if (!StringContains(Input, "?"))
-"182
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 60C `i -> -> -> 0 `i `uc `i 2190  ]
-[; ;StringCommand.c: 183: {
 "183
-{
-[; ;StringCommand.c: 184: if (StringContains(Input, "light") || StringContains(Input, "fan"))
+}
+[; ;StringCommand.c: 182: }
+[; ;StringCommand.c: 183: }
+[e $U 2187  ]
 "184
-[e $ ! || != -> ( _StringContains (2 , _Input :s 61C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 62C `i -> -> -> 0 `i `uc `i 2191  ]
+[e :U 2180 ]
+[; ;StringCommand.c: 184: else
 [; ;StringCommand.c: 185: {
 "185
 {
-[; ;StringCommand.c: 186: if (StringMatch(Input, "bedroomlight=on") || StringMatch(Input, "bedroomlight=off"))
+[; ;StringCommand.c: 186: UARTstring("Livingroom Help Menu\r\n\n");
 "186
-[e $ ! || != -> ( _StringMatch (2 , _Input :s 63C `i -> -> -> 0 `i `uc `i != -> ( _StringMatch (2 , _Input :s 64C `i -> -> -> 0 `i `uc `i 2192  ]
-[; ;StringCommand.c: 187: {
+[e ( _UARTstring (1 :s 48C ]
+[; ;StringCommand.c: 187: UARTstring("Devices:\r\n");
 "187
-{
-[; ;StringCommand.c: 188: INTCONbits.GIE = 0;
+[e ( _UARTstring (1 :s 49C ]
+[; ;StringCommand.c: 188: UARTstring("light\r\n");
 "188
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 189: Send_Config1(0b00000001, TXdataE);
+[e ( _UARTstring (1 :s 50C ]
+[; ;StringCommand.c: 189: UARTstring("fan\r\n\n");
 "189
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 190: Send_Config1(0b00000001, TXdataE);
+[e ( _UARTstring (1 :s 51C ]
+[; ;StringCommand.c: 190: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
 "190
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 191: Send_Config1(0b00000001, TXdataE);
+[e ( _UARTstring (1 :s 52C ]
+[; ;StringCommand.c: 191: UARTstring("i.e. Livingroom fan = On\r\n");
 "191
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 192: Send_Config1(0b00000001, TXdataE);
+[e ( _UARTstring (1 :s 53C ]
+[; ;StringCommand.c: 192: LCDdisplayFeedback("LVNG Rm Lt help");
 "192
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 193: Send_Config1(0b00000001, TXdataE);
+[e ( _LCDdisplayFeedback (1 -> :s 54C `*uc ]
+[; ;StringCommand.c: 193: LCD_Scroll("LVNGroom Menu");
 "193
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 194: Send_Config1(0b00000001, TXdataE);
+[e ( _LCD_Scroll (1 -> :s 55C `*uc ]
+[; ;StringCommand.c: 194: LCD_Scroll("Devices:");
 "194
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 195: Send_Config1(0b00000001, TXdataE);
+[e ( _LCD_Scroll (1 -> :s 56C `*uc ]
+[; ;StringCommand.c: 195: LCD_Scroll("Light");
 "195
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
-[; ;StringCommand.c: 196: INTCONbits.GIE = 1;
+[e ( _LCD_Scroll (1 -> :s 57C `*uc ]
+[; ;StringCommand.c: 196: LCD_Scroll("Fan");
 "196
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 197: UARTstring("Bedroom Light Toggled");
+[e ( _LCD_Scroll (1 -> :s 58C `*uc ]
 "197
-[e ( _UARTstring (1 :s 65C ]
-[; ;StringCommand.c: 198: LCDdisplayFeedback("Bedroom Lt TGLD");
-"198
-[e ( _LCDdisplayFeedback (1 -> :s 66C `*uc ]
-"199
 }
-[; ;StringCommand.c: 199: }
-[e $U 2193  ]
+[e :U 2187 ]
+"198
+}
+[; ;StringCommand.c: 197: }
+[; ;StringCommand.c: 198: }
+[e $U 2188  ]
 "200
-[e :U 2192 ]
-[; ;StringCommand.c: 200: else if (StringMatch(Input, "bedroomfan=on"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 67C `i -> -> -> 0 `i `uc `i 2194  ]
+[e :U 2179 ]
+[; ;StringCommand.c: 200: else if (StartsWith(Input, "bedroom"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 59C `i -> -> -> 0 `i `uc `i 2189  ]
 [; ;StringCommand.c: 201: {
 "201
 {
-[; ;StringCommand.c: 202: INTCONbits.GIE = 0;
+[; ;StringCommand.c: 202: if (!StringContains(Input, "?"))
 "202
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 203: Send_Config2(0b00000001, AuxON);
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 60C `i -> -> -> 0 `i `uc `i 2190  ]
+[; ;StringCommand.c: 203: {
 "203
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 204: Send_Config2(0b00000001, AuxON);
+{
+[; ;StringCommand.c: 204: if (StringContains(Input, "light") || StringContains(Input, "fan"))
 "204
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 205: Send_Config2(0b00000001, AuxON);
+[e $ ! || != -> ( _StringContains (2 , _Input :s 61C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 62C `i -> -> -> 0 `i `uc `i 2191  ]
+[; ;StringCommand.c: 205: {
 "205
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 206: Send_Config2(0b00000001, AuxON);
+{
+[; ;StringCommand.c: 206: if (StringMatch(Input, "bedroomlight=on") || StringMatch(Input, "bedroomlight=off"))
 "206
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 207: Send_Config2(0b00000001, AuxON);
+[e $ ! || != -> ( _StringMatch (2 , _Input :s 63C `i -> -> -> 0 `i `uc `i != -> ( _StringMatch (2 , _Input :s 64C `i -> -> -> 0 `i `uc `i 2192  ]
+[; ;StringCommand.c: 207: {
 "207
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 208: Send_Config2(0b00000001, AuxON);
+{
+[; ;StringCommand.c: 208: INTCONbits.GIE = 0;
 "208
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 209: Send_Config2(0b00000001, AuxON);
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 209: Send_Config1(0b00000001, TXdataE);
 "209
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 210: Send_Config2(0b00000001, AuxON);
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 210: Send_Config1(0b00000001, TXdataE);
 "210
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
-[; ;StringCommand.c: 211: INTCONbits.GIE = 1;
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 211: Send_Config1(0b00000001, TXdataE);
 "211
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 212: UARTstring("Bedroom Fan On");
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 212: Send_Config1(0b00000001, TXdataE);
 "212
-[e ( _UARTstring (1 :s 68C ]
-[; ;StringCommand.c: 213: LCDdisplayFeedback("Bedroom Lt On");
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 213: Send_Config1(0b00000001, TXdataE);
 "213
-[e ( _LCDdisplayFeedback (1 -> :s 69C `*uc ]
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 214: Send_Config1(0b00000001, TXdataE);
 "214
-}
-[; ;StringCommand.c: 214: }
-[e $U 2195  ]
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 215: Send_Config1(0b00000001, TXdataE);
 "215
-[e :U 2194 ]
-[; ;StringCommand.c: 215: else if (StringMatch(Input, "bedroomfan=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 70C `i -> -> -> 0 `i `uc `i 2196  ]
-[; ;StringCommand.c: 216: {
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataE ]
+[; ;StringCommand.c: 216: INTCONbits.GIE = 1;
 "216
-{
-[; ;StringCommand.c: 217: INTCONbits.GIE = 0;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 217: UARTstring("Bedroom Light Toggled");
 "217
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 218: Send_Config2(0b00000001, AuxOFF);
+[e ( _UARTstring (1 :s 65C ]
+[; ;StringCommand.c: 218: LCDdisplayFeedback("Bedroom Lt TGLD");
 "218
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 219: Send_Config2(0b00000001, AuxOFF);
+[e ( _LCDdisplayFeedback (1 -> :s 66C `*uc ]
 "219
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 220: Send_Config2(0b00000001, AuxOFF);
+}
+[; ;StringCommand.c: 219: }
+[e $U 2193  ]
 "220
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 221: Send_Config2(0b00000001, AuxOFF);
+[e :U 2192 ]
+[; ;StringCommand.c: 220: else if (StringMatch(Input, "bedroomfan=on"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 67C `i -> -> -> 0 `i `uc `i 2194  ]
+[; ;StringCommand.c: 221: {
 "221
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 222: Send_Config2(0b00000001, AuxOFF);
+{
+[; ;StringCommand.c: 222: INTCONbits.GIE = 0;
 "222
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 223: Send_Config2(0b00000001, AuxOFF);
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 223: Send_Config2(0b00000001, AuxON);
 "223
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 224: Send_Config2(0b00000001, AuxOFF);
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 224: Send_Config2(0b00000001, AuxON);
 "224
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 225: Send_Config2(0b00000001, AuxOFF);
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 225: Send_Config2(0b00000001, AuxON);
 "225
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 226: Send_Config2(0b00000001, AuxOFF);
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 226: Send_Config2(0b00000001, AuxON);
 "226
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
-[; ;StringCommand.c: 227: INTCONbits.GIE = 1;
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 227: Send_Config2(0b00000001, AuxON);
 "227
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 228: UARTstring("Bedroom Fan Off");
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 228: Send_Config2(0b00000001, AuxON);
 "228
-[e ( _UARTstring (1 :s 71C ]
-[; ;StringCommand.c: 229: LCDdisplayFeedback("Bedroom Lt Off");
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 229: Send_Config2(0b00000001, AuxON);
 "229
-[e ( _LCDdisplayFeedback (1 -> :s 72C `*uc ]
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 230: Send_Config2(0b00000001, AuxON);
 "230
-}
-[; ;StringCommand.c: 230: }
-[e $U 2197  ]
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxON ]
+[; ;StringCommand.c: 231: INTCONbits.GIE = 1;
 "231
-[e :U 2196 ]
-[; ;StringCommand.c: 231: else if (StringMatch(Input, "bedroomshaker=on"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 73C `i -> -> -> 0 `i `uc `i 2198  ]
-[; ;StringCommand.c: 232: {
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 232: UARTstring("Bedroom Fan On");
 "232
-{
-[; ;StringCommand.c: 233: INTCONbits.GIE = 0;
+[e ( _UARTstring (1 :s 68C ]
+[; ;StringCommand.c: 233: LCDdisplayFeedback("Bedroom Lt On");
 "233
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 234: Send_Config2(0b00000001, BedON);
+[e ( _LCDdisplayFeedback (1 -> :s 69C `*uc ]
 "234
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 235: Send_Config2(0b00000001, BedON);
-"235
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 236: Send_Config2(0b00000001, BedON);
-"236
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 237: Send_Config2(0b00000001, BedON);
-"237
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 238: Send_Config2(0b00000001, BedON);
-"238
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 239: Send_Config2(0b00000001, BedON);
-"239
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 240: Send_Config2(0b00000001, BedON);
-"240
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 241: Send_Config2(0b00000001, BedON);
-"241
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
-[; ;StringCommand.c: 242: INTCONbits.GIE = 1;
-"242
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 243: UARTstring("Bedroom Shaker On");
-"243
-[e ( _UARTstring (1 :s 74C ]
-[; ;StringCommand.c: 244: LCDdisplayFeedback("Bedroom SKR On");
-"244
-[e ( _LCDdisplayFeedback (1 -> :s 75C `*uc ]
-"245
 }
-[; ;StringCommand.c: 245: }
-[e $U 2199  ]
-"246
-[e :U 2198 ]
-[; ;StringCommand.c: 246: else if (StringMatch(Input, "bedroomshaker=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 76C `i -> -> -> 0 `i `uc `i 2200  ]
-[; ;StringCommand.c: 247: {
-"247
+[; ;StringCommand.c: 234: }
+[e $U 2195  ]
+"235
+[e :U 2194 ]
+[; ;StringCommand.c: 235: else if (StringMatch(Input, "bedroomfan=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 70C `i -> -> -> 0 `i `uc `i 2196  ]
+[; ;StringCommand.c: 236: {
+"236
 {
-[; ;StringCommand.c: 248: INTCONbits.GIE = 0;
-"248
+[; ;StringCommand.c: 237: INTCONbits.GIE = 0;
+"237
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 249: Send_Config2(0b00000001, BedOFF);
-"249
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 250: Send_Config2(0b00000001, BedOFF);
-"250
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 251: Send_Config2(0b00000001, BedOFF);
-"251
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 252: Send_Config2(0b00000001, BedOFF);
-"252
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 253: Send_Config2(0b00000001, BedOFF);
-"253
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 254: Send_Config2(0b00000001, BedOFF);
-"254
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 255: Send_Config2(0b00000001, BedOFF);
-"255
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 256: Send_Config2(0b00000001, BedOFF);
-"256
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
-[; ;StringCommand.c: 257: INTCONbits.GIE = 1;
-"257
+[; ;StringCommand.c: 238: Send_Config2(0b00000001, AuxOFF);
+"238
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 239: Send_Config2(0b00000001, AuxOFF);
+"239
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 240: Send_Config2(0b00000001, AuxOFF);
+"240
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 241: Send_Config2(0b00000001, AuxOFF);
+"241
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 242: Send_Config2(0b00000001, AuxOFF);
+"242
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 243: Send_Config2(0b00000001, AuxOFF);
+"243
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 244: Send_Config2(0b00000001, AuxOFF);
+"244
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 245: Send_Config2(0b00000001, AuxOFF);
+"245
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 246: Send_Config2(0b00000001, AuxOFF);
+"246
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _AuxOFF ]
+[; ;StringCommand.c: 247: INTCONbits.GIE = 1;
+"247
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 258: UARTstring("Bedroom Shaker Off");
+[; ;StringCommand.c: 248: UARTstring("Bedroom Fan Off");
+"248
+[e ( _UARTstring (1 :s 71C ]
+[; ;StringCommand.c: 249: LCDdisplayFeedback("Bedroom Lt Off");
+"249
+[e ( _LCDdisplayFeedback (1 -> :s 72C `*uc ]
+"250
+}
+[; ;StringCommand.c: 250: }
+[e $U 2197  ]
+"251
+[e :U 2196 ]
+[; ;StringCommand.c: 251: else if (StringMatch(Input, "bedroomshaker=on"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 73C `i -> -> -> 0 `i `uc `i 2198  ]
+[; ;StringCommand.c: 252: {
+"252
+{
+[; ;StringCommand.c: 253: INTCONbits.GIE = 0;
+"253
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 254: Send_Config2(0b00000001, BedON);
+"254
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 255: Send_Config2(0b00000001, BedON);
+"255
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 256: Send_Config2(0b00000001, BedON);
+"256
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 257: Send_Config2(0b00000001, BedON);
+"257
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 258: Send_Config2(0b00000001, BedON);
 "258
-[e ( _UARTstring (1 :s 77C ]
-[; ;StringCommand.c: 259: LCDdisplayFeedback("Bedroom SKR Off");
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 259: Send_Config2(0b00000001, BedON);
 "259
-[e ( _LCDdisplayFeedback (1 -> :s 78C `*uc ]
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 260: Send_Config2(0b00000001, BedON);
 "260
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 261: Send_Config2(0b00000001, BedON);
+"261
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedON ]
+[; ;StringCommand.c: 262: INTCONbits.GIE = 1;
+"262
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 263: UARTstring("Bedroom Shaker On");
+"263
+[e ( _UARTstring (1 :s 74C ]
+[; ;StringCommand.c: 264: LCDdisplayFeedback("Bedroom SKR On");
+"264
+[e ( _LCDdisplayFeedback (1 -> :s 75C `*uc ]
+"265
+}
+[; ;StringCommand.c: 265: }
+[e $U 2199  ]
+"266
+[e :U 2198 ]
+[; ;StringCommand.c: 266: else if (StringMatch(Input, "bedroomshaker=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 76C `i -> -> -> 0 `i `uc `i 2200  ]
+[; ;StringCommand.c: 267: {
+"267
+{
+[; ;StringCommand.c: 268: INTCONbits.GIE = 0;
+"268
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 269: Send_Config2(0b00000001, BedOFF);
+"269
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 270: Send_Config2(0b00000001, BedOFF);
+"270
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 271: Send_Config2(0b00000001, BedOFF);
+"271
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 272: Send_Config2(0b00000001, BedOFF);
+"272
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 273: Send_Config2(0b00000001, BedOFF);
+"273
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 274: Send_Config2(0b00000001, BedOFF);
+"274
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 275: Send_Config2(0b00000001, BedOFF);
+"275
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 276: Send_Config2(0b00000001, BedOFF);
+"276
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _BedOFF ]
+[; ;StringCommand.c: 277: INTCONbits.GIE = 1;
+"277
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 278: UARTstring("Bedroom Shaker Off");
+"278
+[e ( _UARTstring (1 :s 77C ]
+[; ;StringCommand.c: 279: LCDdisplayFeedback("Bedroom SKR Off");
+"279
+[e ( _LCDdisplayFeedback (1 -> :s 78C `*uc ]
+"280
 }
 [e :U 2200 ]
-"261
+"281
 [e :U 2199 ]
 [e :U 2197 ]
 [e :U 2195 ]
 [e :U 2193 ]
 }
-[; ;StringCommand.c: 260: }
-[; ;StringCommand.c: 261: }
+[; ;StringCommand.c: 280: }
+[; ;StringCommand.c: 281: }
 [e $U 2201  ]
-"262
+"282
 [e :U 2191 ]
-[; ;StringCommand.c: 262: else
-[; ;StringCommand.c: 263: {
-"263
+[; ;StringCommand.c: 282: else
+[; ;StringCommand.c: 283: {
+"283
 {
-[; ;StringCommand.c: 264: UARTstring("Bedroom Task???");
-"264
+[; ;StringCommand.c: 284: UARTstring("Bedroom Task???");
+"284
 [e ( _UARTstring (1 :s 79C ]
-[; ;StringCommand.c: 265: LCDdisplayFeedback("Bedroom Task???");
-"265
+[; ;StringCommand.c: 285: LCDdisplayFeedback("Bedroom Task???");
+"285
 [e ( _LCDdisplayFeedback (1 -> :s 80C `*uc ]
-"266
+"286
 }
 [e :U 2201 ]
-"267
-}
-[; ;StringCommand.c: 266: }
-[; ;StringCommand.c: 267: }
-[e $U 2202  ]
-"268
-[e :U 2190 ]
-[; ;StringCommand.c: 268: else
-[; ;StringCommand.c: 269: {
-"269
-{
-[; ;StringCommand.c: 270: UARTstring("Bedroom Help Menu\r\n\n");
-"270
-[e ( _UARTstring (1 :s 81C ]
-[; ;StringCommand.c: 271: UARTstring("Devices:\r\n");
-"271
-[e ( _UARTstring (1 :s 82C ]
-[; ;StringCommand.c: 272: UARTstring("light\r\n");
-"272
-[e ( _UARTstring (1 :s 83C ]
-[; ;StringCommand.c: 273: UARTstring("fan\r\n");
-"273
-[e ( _UARTstring (1 :s 84C ]
-[; ;StringCommand.c: 274: UARTstring("shaker\r\n\n");
-"274
-[e ( _UARTstring (1 :s 85C ]
-[; ;StringCommand.c: 275: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
-"275
-[e ( _UARTstring (1 :s 86C ]
-[; ;StringCommand.c: 276: UARTstring("i.e. Bedroom fan = On\r\n");
-"276
-[e ( _UARTstring (1 :s 87C ]
-[; ;StringCommand.c: 277: LCDdisplayFeedback("Bedroom Help???");
-"277
-[e ( _LCDdisplayFeedback (1 -> :s 88C `*uc ]
-[; ;StringCommand.c: 278: LCD_Scroll("Bedroom Menu");
-"278
-[e ( _LCD_Scroll (1 -> :s 89C `*uc ]
-[; ;StringCommand.c: 279: LCD_Scroll("Devices:");
-"279
-[e ( _LCD_Scroll (1 -> :s 90C `*uc ]
-[; ;StringCommand.c: 280: LCD_Scroll("Light");
-"280
-[e ( _LCD_Scroll (1 -> :s 91C `*uc ]
-[; ;StringCommand.c: 281: LCD_Scroll("Fan");
-"281
-[e ( _LCD_Scroll (1 -> :s 92C `*uc ]
-[; ;StringCommand.c: 282: LCD_Scroll("Shaker");
-"282
-[e ( _LCD_Scroll (1 -> :s 93C `*uc ]
-"283
-}
-[e :U 2202 ]
-"284
-}
-[; ;StringCommand.c: 283: }
-[; ;StringCommand.c: 284: }
-[e $U 2203  ]
-"286
-[e :U 2189 ]
-[; ;StringCommand.c: 286: else if (StringContains(Input, "color") || StringContains(Input, "white") || StringContains(Input, "christmas"))
-[e $ ! || || != -> ( _StringContains (2 , _Input :s 94C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 95C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 96C `i -> -> -> 0 `i `uc `i 2204  ]
-[; ;StringCommand.c: 287: {
 "287
-{
-[; ;StringCommand.c: 288: if (!StringContains(Input, "?"))
+}
+[; ;StringCommand.c: 286: }
+[; ;StringCommand.c: 287: }
+[e $U 2202  ]
 "288
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 97C `i -> -> -> 0 `i `uc `i 2205  ]
+[e :U 2190 ]
+[; ;StringCommand.c: 288: else
 [; ;StringCommand.c: 289: {
 "289
 {
-[; ;StringCommand.c: 290: if (StringContains(Input, "color") && StringContains(Input, "="))
+[; ;StringCommand.c: 290: UARTstring("Bedroom Help Menu\r\n\n");
 "290
-[e $ ! && != -> ( _StringContains (2 , _Input :s 98C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 99C `i -> -> -> 0 `i `uc `i 2206  ]
-[; ;StringCommand.c: 291: {
+[e ( _UARTstring (1 :s 81C ]
+[; ;StringCommand.c: 291: UARTstring("Devices:\r\n");
 "291
-{
-[; ;StringCommand.c: 292: INTCONbits.GIE = 0;
+[e ( _UARTstring (1 :s 82C ]
+[; ;StringCommand.c: 292: UARTstring("light\r\n");
 "292
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 293: Send_Config1(0b00000001, TXdataF);
+[e ( _UARTstring (1 :s 83C ]
+[; ;StringCommand.c: 293: UARTstring("fan\r\n");
 "293
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 294: Send_Config1(0b00000001, TXdataF);
+[e ( _UARTstring (1 :s 84C ]
+[; ;StringCommand.c: 294: UARTstring("shaker\r\n\n");
 "294
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 295: Send_Config1(0b00000001, TXdataF);
+[e ( _UARTstring (1 :s 85C ]
+[; ;StringCommand.c: 295: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
 "295
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 296: Send_Config1(0b00000001, TXdataF);
+[e ( _UARTstring (1 :s 86C ]
+[; ;StringCommand.c: 296: UARTstring("i.e. Bedroom fan = On\r\n");
 "296
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 297: Send_Config1(0b00000001, TXdataF);
+[e ( _UARTstring (1 :s 87C ]
+[; ;StringCommand.c: 297: LCDdisplayFeedback("Bedroom Help???");
 "297
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 298: Send_Config1(0b00000001, TXdataF);
+[e ( _LCDdisplayFeedback (1 -> :s 88C `*uc ]
+[; ;StringCommand.c: 298: LCD_Scroll("Bedroom Menu");
 "298
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 299: Send_Config1(0b00000001, TXdataF);
+[e ( _LCD_Scroll (1 -> :s 89C `*uc ]
+[; ;StringCommand.c: 299: LCD_Scroll("Devices:");
 "299
-[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
-[; ;StringCommand.c: 300: INTCONbits.GIE = 1;
+[e ( _LCD_Scroll (1 -> :s 90C `*uc ]
+[; ;StringCommand.c: 300: LCD_Scroll("Light");
 "300
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 301: UARTstring("Christmas Tree Colored Lights Toggled");
+[e ( _LCD_Scroll (1 -> :s 91C `*uc ]
+[; ;StringCommand.c: 301: LCD_Scroll("Fan");
 "301
-[e ( _UARTstring (1 :s 100C ]
-[; ;StringCommand.c: 302: LCDdisplayFeedback("XMAS Color TGLD");
+[e ( _LCD_Scroll (1 -> :s 92C `*uc ]
+[; ;StringCommand.c: 302: LCD_Scroll("Shaker");
 "302
-[e ( _LCDdisplayFeedback (1 -> :s 101C `*uc ]
+[e ( _LCD_Scroll (1 -> :s 93C `*uc ]
 "303
 }
-[; ;StringCommand.c: 303: }
-[e $U 2207  ]
+[e :U 2202 ]
 "304
-[e :U 2206 ]
-[; ;StringCommand.c: 304: else if (StringContains(Input, "white") && StringContains(Input, "=on"))
-[e $ ! && != -> ( _StringContains (2 , _Input :s 102C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 103C `i -> -> -> 0 `i `uc `i 2208  ]
-[; ;StringCommand.c: 305: {
-"305
-{
-[; ;StringCommand.c: 306: INTCONbits.GIE = 0;
+}
+[; ;StringCommand.c: 303: }
+[; ;StringCommand.c: 304: }
+[e $U 2203  ]
 "306
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 307: Send_Config2(0b00000001, Aux2ON);
+[e :U 2189 ]
+[; ;StringCommand.c: 306: else if (StringContains(Input, "color") || StringContains(Input, "white") || StringContains(Input, "christmas"))
+[e $ ! || || != -> ( _StringContains (2 , _Input :s 94C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 95C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 96C `i -> -> -> 0 `i `uc `i 2204  ]
+[; ;StringCommand.c: 307: {
 "307
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 308: Send_Config2(0b00000001, Aux2ON);
+{
+[; ;StringCommand.c: 308: if (!StringContains(Input, "?"))
 "308
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 309: Send_Config2(0b00000001, Aux2ON);
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 97C `i -> -> -> 0 `i `uc `i 2205  ]
+[; ;StringCommand.c: 309: {
 "309
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 310: Send_Config2(0b00000001, Aux2ON);
+{
+[; ;StringCommand.c: 310: if (StringContains(Input, "color") && StringContains(Input, "="))
 "310
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 311: Send_Config2(0b00000001, Aux2ON);
+[e $ ! && != -> ( _StringContains (2 , _Input :s 98C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 99C `i -> -> -> 0 `i `uc `i 2206  ]
+[; ;StringCommand.c: 311: {
 "311
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 312: Send_Config2(0b00000001, Aux2ON);
+{
+[; ;StringCommand.c: 312: INTCONbits.GIE = 0;
 "312
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 313: Send_Config2(0b00000001, Aux2ON);
-"313
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
-[; ;StringCommand.c: 314: INTCONbits.GIE = 1;
-"314
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 315: UARTstring("Christmas Tree White Lights On");
-"315
-[e ( _UARTstring (1 :s 104C ]
-[; ;StringCommand.c: 316: LCDdisplayFeedback("XMAS White On");
-"316
-[e ( _LCDdisplayFeedback (1 -> :s 105C `*uc ]
-"317
-}
-[; ;StringCommand.c: 317: }
-[e $U 2209  ]
-"318
-[e :U 2208 ]
-[; ;StringCommand.c: 318: else if (StringContains(Input, "white") && StringContains(Input, "=off"))
-[e $ ! && != -> ( _StringContains (2 , _Input :s 106C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 107C `i -> -> -> 0 `i `uc `i 2210  ]
-[; ;StringCommand.c: 319: {
-"319
-{
-[; ;StringCommand.c: 320: INTCONbits.GIE = 0;
-"320
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 321: Send_Config2(0b00000001, Aux2OFF);
-"321
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 322: Send_Config2(0b00000001, Aux2OFF);
-"322
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 323: Send_Config2(0b00000001, Aux2OFF);
-"323
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 324: Send_Config2(0b00000001, Aux2OFF);
-"324
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 325: Send_Config2(0b00000001, Aux2OFF);
-"325
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 326: Send_Config2(0b00000001, Aux2OFF);
-"326
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 327: Send_Config2(0b00000001, Aux2OFF);
-"327
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
-[; ;StringCommand.c: 328: INTCONbits.GIE = 1;
-"328
+[; ;StringCommand.c: 313: Send_Config1(0b00000001, TXdataF);
+"313
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 314: Send_Config1(0b00000001, TXdataF);
+"314
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 315: Send_Config1(0b00000001, TXdataF);
+"315
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 316: Send_Config1(0b00000001, TXdataF);
+"316
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 317: Send_Config1(0b00000001, TXdataF);
+"317
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 318: Send_Config1(0b00000001, TXdataF);
+"318
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 319: Send_Config1(0b00000001, TXdataF);
+"319
+[e ( _Send_Config1 (2 , -> -> 1 `i `uc &U _TXdataF ]
+[; ;StringCommand.c: 320: INTCONbits.GIE = 1;
+"320
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 329: UARTstring("Christmas Tree White Lights Off");
-"329
-[e ( _UARTstring (1 :s 108C ]
-[; ;StringCommand.c: 330: LCDdisplayFeedback("XMAS White Off");
-"330
-[e ( _LCDdisplayFeedback (1 -> :s 109C `*uc ]
-"331
+[; ;StringCommand.c: 321: UARTstring("Christmas Tree Colored Lights Toggled");
+"321
+[e ( _UARTstring (1 :s 100C ]
+[; ;StringCommand.c: 322: LCDdisplayFeedback("XMAS Color TGLD");
+"322
+[e ( _LCDdisplayFeedback (1 -> :s 101C `*uc ]
+"323
 }
-[; ;StringCommand.c: 331: }
-[e $U 2211  ]
-"332
-[e :U 2210 ]
-[; ;StringCommand.c: 332: else
-[; ;StringCommand.c: 333: {
-"333
+[; ;StringCommand.c: 323: }
+[e $U 2207  ]
+"324
+[e :U 2206 ]
+[; ;StringCommand.c: 324: else if (StringContains(Input, "white") && StringContains(Input, "=on"))
+[e $ ! && != -> ( _StringContains (2 , _Input :s 102C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 103C `i -> -> -> 0 `i `uc `i 2208  ]
+[; ;StringCommand.c: 325: {
+"325
 {
-[; ;StringCommand.c: 334: UARTstring("Christmas What???");
+[; ;StringCommand.c: 326: INTCONbits.GIE = 0;
+"326
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 327: Send_Config2(0b00000001, Aux2ON);
+"327
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 328: Send_Config2(0b00000001, Aux2ON);
+"328
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 329: Send_Config2(0b00000001, Aux2ON);
+"329
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 330: Send_Config2(0b00000001, Aux2ON);
+"330
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 331: Send_Config2(0b00000001, Aux2ON);
+"331
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 332: Send_Config2(0b00000001, Aux2ON);
+"332
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 333: Send_Config2(0b00000001, Aux2ON);
+"333
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2ON ]
+[; ;StringCommand.c: 334: INTCONbits.GIE = 1;
 "334
-[e ( _UARTstring (1 :s 110C ]
-[; ;StringCommand.c: 335: LCDdisplayFeedback("XMAS What???");
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 335: UARTstring("Christmas Tree White Lights On");
 "335
-[e ( _LCDdisplayFeedback (1 -> :s 111C `*uc ]
+[e ( _UARTstring (1 :s 104C ]
+[; ;StringCommand.c: 336: LCDdisplayFeedback("XMAS White On");
 "336
+[e ( _LCDdisplayFeedback (1 -> :s 105C `*uc ]
+"337
+}
+[; ;StringCommand.c: 337: }
+[e $U 2209  ]
+"338
+[e :U 2208 ]
+[; ;StringCommand.c: 338: else if (StringContains(Input, "white") && StringContains(Input, "=off"))
+[e $ ! && != -> ( _StringContains (2 , _Input :s 106C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 107C `i -> -> -> 0 `i `uc `i 2210  ]
+[; ;StringCommand.c: 339: {
+"339
+{
+[; ;StringCommand.c: 340: INTCONbits.GIE = 0;
+"340
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 341: Send_Config2(0b00000001, Aux2OFF);
+"341
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 342: Send_Config2(0b00000001, Aux2OFF);
+"342
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 343: Send_Config2(0b00000001, Aux2OFF);
+"343
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 344: Send_Config2(0b00000001, Aux2OFF);
+"344
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 345: Send_Config2(0b00000001, Aux2OFF);
+"345
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 346: Send_Config2(0b00000001, Aux2OFF);
+"346
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 347: Send_Config2(0b00000001, Aux2OFF);
+"347
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _Aux2OFF ]
+[; ;StringCommand.c: 348: INTCONbits.GIE = 1;
+"348
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 349: UARTstring("Christmas Tree White Lights Off");
+"349
+[e ( _UARTstring (1 :s 108C ]
+[; ;StringCommand.c: 350: LCDdisplayFeedback("XMAS White Off");
+"350
+[e ( _LCDdisplayFeedback (1 -> :s 109C `*uc ]
+"351
+}
+[; ;StringCommand.c: 351: }
+[e $U 2211  ]
+"352
+[e :U 2210 ]
+[; ;StringCommand.c: 352: else
+[; ;StringCommand.c: 353: {
+"353
+{
+[; ;StringCommand.c: 354: UARTstring("Christmas What???");
+"354
+[e ( _UARTstring (1 :s 110C ]
+[; ;StringCommand.c: 355: LCDdisplayFeedback("XMAS What???");
+"355
+[e ( _LCDdisplayFeedback (1 -> :s 111C `*uc ]
+"356
 }
 [e :U 2211 ]
 [e :U 2209 ]
 [e :U 2207 ]
-"337
+"357
 }
-[; ;StringCommand.c: 336: }
-[; ;StringCommand.c: 337: }
+[; ;StringCommand.c: 356: }
+[; ;StringCommand.c: 357: }
 [e $U 2212  ]
-"338
+"358
 [e :U 2205 ]
-[; ;StringCommand.c: 338: else
-[; ;StringCommand.c: 339: {
-"339
+[; ;StringCommand.c: 358: else
+[; ;StringCommand.c: 359: {
+"359
 {
-[; ;StringCommand.c: 340: UARTstring("Christmas tree Help Menu\r\n\n");
-"340
+[; ;StringCommand.c: 360: UARTstring("Christmas tree Help Menu\r\n\n");
+"360
 [e ( _UARTstring (1 :s 112C ]
-[; ;StringCommand.c: 341: UARTstring("Devices:\r\n");
-"341
+[; ;StringCommand.c: 361: UARTstring("Devices:\r\n");
+"361
 [e ( _UARTstring (1 :s 113C ]
-[; ;StringCommand.c: 342: UARTstring("white lights\r\n");
-"342
+[; ;StringCommand.c: 362: UARTstring("white lights\r\n");
+"362
 [e ( _UARTstring (1 :s 114C ]
-[; ;StringCommand.c: 343: UARTstring("colored lights\r\n\n");
-"343
+[; ;StringCommand.c: 363: UARTstring("colored lights\r\n\n");
+"363
 [e ( _UARTstring (1 :s 115C ]
-[; ;StringCommand.c: 344: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
-"344
+[; ;StringCommand.c: 364: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
+"364
 [e ( _UARTstring (1 :s 116C ]
-[; ;StringCommand.c: 345: UARTstring("i.e. Christmas Colored lights = On\r\n");
-"345
+[; ;StringCommand.c: 365: UARTstring("i.e. Christmas Colored lights = On\r\n");
+"365
 [e ( _UARTstring (1 :s 117C ]
-[; ;StringCommand.c: 346: LCD_Scroll("XMAS Menu");
-"346
+[; ;StringCommand.c: 366: LCD_Scroll("XMAS Menu");
+"366
 [e ( _LCD_Scroll (1 -> :s 118C `*uc ]
-[; ;StringCommand.c: 347: LCD_Scroll("Devices:");
-"347
+[; ;StringCommand.c: 367: LCD_Scroll("Devices:");
+"367
 [e ( _LCD_Scroll (1 -> :s 119C `*uc ]
-[; ;StringCommand.c: 348: LCD_Scroll("white");
-"348
+[; ;StringCommand.c: 368: LCD_Scroll("white");
+"368
 [e ( _LCD_Scroll (1 -> :s 120C `*uc ]
-[; ;StringCommand.c: 349: LCD_Scroll("color");
-"349
+[; ;StringCommand.c: 369: LCD_Scroll("color");
+"369
 [e ( _LCD_Scroll (1 -> :s 121C `*uc ]
-"350
+"370
 }
 [e :U 2212 ]
-"351
-}
-[; ;StringCommand.c: 350: }
-[; ;StringCommand.c: 351: }
-[e $U 2213  ]
-"353
-[e :U 2204 ]
-[; ;StringCommand.c: 353: else if (StartsWith(Input, "red"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 122C `i -> -> -> 0 `i `uc `i 2214  ]
-[; ;StringCommand.c: 354: {
-"354
-{
-[; ;StringCommand.c: 355: if (!StringContains(Input, "?"))
-"355
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 123C `i -> -> -> 0 `i `uc `i 2215  ]
-[; ;StringCommand.c: 356: {
-"356
-{
-[; ;StringCommand.c: 357: if (StartsWith(Input, "redled") || StartsWith(Input, "redledbrightness"))
-"357
-[e $ ! || != -> ( _StartsWith (2 , _Input :s 124C `i -> -> -> 0 `i `uc `i != -> ( _StartsWith (2 , _Input :s 125C `i -> -> -> 0 `i `uc `i 2216  ]
-[; ;StringCommand.c: 358: {
-"358
-{
-[; ;StringCommand.c: 359: if (!StringContains(Input, "="))
-"359
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 126C `i -> -> -> 0 `i `uc `i 2217  ]
-[; ;StringCommand.c: 360: {
-"360
-{
-[; ;StringCommand.c: 361: UARTstring("there is no question mark\r\n");
-"361
-[e ( _UARTstring (1 :s 127C ]
-"362
-}
-[e :U 2217 ]
-[; ;StringCommand.c: 362: }
-[; ;StringCommand.c: 363: duty = GetEnteredNumber(Input);
-"363
-[e = _duty ( _GetEnteredNumber (1 _Input ]
-[; ;StringCommand.c: 364: if (duty == 32001)
-"364
-[e $ ! == _duty -> 32001 `i 2218  ]
-[; ;StringCommand.c: 365: {
-"365
-{
-[; ;StringCommand.c: 366: UARTstring("Error: No number entered\r\n");
-"366
-[e ( _UARTstring (1 :s 128C ]
-[; ;StringCommand.c: 367: LCDdisplayFeedback("ERR: no number");
-"367
-[e ( _LCDdisplayFeedback (1 -> :s 129C `*uc ]
-"368
-}
-[; ;StringCommand.c: 368: }
-[e $U 2219  ]
-"369
-[e :U 2218 ]
-[; ;StringCommand.c: 369: else if (duty > 100)
-[e $ ! > _duty -> 100 `i 2220  ]
-[; ;StringCommand.c: 370: {
-"370
-{
-[; ;StringCommand.c: 371: UARTstring("Invalid Dutycycle: Greater than 100\r\n");
 "371
-[e ( _UARTstring (1 :s 130C ]
-[; ;StringCommand.c: 372: LCDdisplayFeedback("ERR: Duty > 100");
-"372
-[e ( _LCDdisplayFeedback (1 -> :s 131C `*uc ]
+}
+[; ;StringCommand.c: 370: }
+[; ;StringCommand.c: 371: }
+[e $U 2213  ]
 "373
-}
-[; ;StringCommand.c: 373: }
-[e $U 2221  ]
+[e :U 2204 ]
+[; ;StringCommand.c: 373: else if (StartsWith(Input, "red"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 122C `i -> -> -> 0 `i `uc `i 2214  ]
+[; ;StringCommand.c: 374: {
 "374
-[e :U 2220 ]
-[; ;StringCommand.c: 374: else if (duty < 0)
-[e $ ! < _duty -> 0 `i 2222  ]
-[; ;StringCommand.c: 375: {
-"375
 {
-[; ;StringCommand.c: 376: UARTstring("Invalid Dutycycle: Less than 0\r\n");
+[; ;StringCommand.c: 375: if (!StringContains(Input, "?"))
+"375
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 123C `i -> -> -> 0 `i `uc `i 2215  ]
+[; ;StringCommand.c: 376: {
 "376
-[e ( _UARTstring (1 :s 132C ]
-[; ;StringCommand.c: 377: LCDdisplayFeedback("ERR: Duty < 0");
+{
+[; ;StringCommand.c: 377: if (StartsWith(Input, "redled") || StartsWith(Input, "redledbrightness"))
 "377
-[e ( _LCDdisplayFeedback (1 -> :s 133C `*uc ]
+[e $ ! || != -> ( _StartsWith (2 , _Input :s 124C `i -> -> -> 0 `i `uc `i != -> ( _StartsWith (2 , _Input :s 125C `i -> -> -> 0 `i `uc `i 2216  ]
+[; ;StringCommand.c: 378: {
 "378
-}
-[; ;StringCommand.c: 378: }
-[e $U 2223  ]
+{
+[; ;StringCommand.c: 379: if (!StringContains(Input, "="))
 "379
-[e :U 2222 ]
-[; ;StringCommand.c: 379: else
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 126C `i -> -> -> 0 `i `uc `i 2217  ]
 [; ;StringCommand.c: 380: {
 "380
 {
-[; ;StringCommand.c: 381: SetDuty(duty);
+[; ;StringCommand.c: 381: UARTstring("there is no question mark\r\n");
 "381
-[e ( _SetDuty (1 -> _duty `uc ]
-[; ;StringCommand.c: 382: sprintf(buf, "Dutycycle set to %d\r\n", duty);
+[e ( _UARTstring (1 :s 127C ]
 "382
-[e ( _sprintf (1 , (. , &U _buf :s 134C _duty ]
-[; ;StringCommand.c: 383: UARTstring(buf);
+}
+[e :U 2217 ]
+[; ;StringCommand.c: 382: }
+[; ;StringCommand.c: 383: duty = GetEnteredNumber(Input);
 "383
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 384: sprintf(buf, "Duty set to %d", duty);
+[e = _duty ( _GetEnteredNumber (1 _Input ]
+[; ;StringCommand.c: 384: if (duty == 32001)
 "384
-[e ( _sprintf (1 , (. , &U _buf :s 135C _duty ]
-[; ;StringCommand.c: 385: LCDdisplayFeedback(buf);
+[e $ ! == _duty -> 32001 `i 2218  ]
+[; ;StringCommand.c: 385: {
 "385
-[e ( _LCDdisplayFeedback (1 &U _buf ]
+{
+[; ;StringCommand.c: 386: UARTstring("Error: No number entered\r\n");
 "386
+[e ( _UARTstring (1 :s 128C ]
+[; ;StringCommand.c: 387: LCDdisplayFeedback("ERR: no number");
+"387
+[e ( _LCDdisplayFeedback (1 -> :s 129C `*uc ]
+"388
+}
+[; ;StringCommand.c: 388: }
+[e $U 2219  ]
+"389
+[e :U 2218 ]
+[; ;StringCommand.c: 389: else if (duty > 100)
+[e $ ! > _duty -> 100 `i 2220  ]
+[; ;StringCommand.c: 390: {
+"390
+{
+[; ;StringCommand.c: 391: UARTstring("Invalid Dutycycle: Greater than 100\r\n");
+"391
+[e ( _UARTstring (1 :s 130C ]
+[; ;StringCommand.c: 392: LCDdisplayFeedback("ERR: Duty > 100");
+"392
+[e ( _LCDdisplayFeedback (1 -> :s 131C `*uc ]
+"393
+}
+[; ;StringCommand.c: 393: }
+[e $U 2221  ]
+"394
+[e :U 2220 ]
+[; ;StringCommand.c: 394: else if (duty < 0)
+[e $ ! < _duty -> 0 `i 2222  ]
+[; ;StringCommand.c: 395: {
+"395
+{
+[; ;StringCommand.c: 396: UARTstring("Invalid Dutycycle: Less than 0\r\n");
+"396
+[e ( _UARTstring (1 :s 132C ]
+[; ;StringCommand.c: 397: LCDdisplayFeedback("ERR: Duty < 0");
+"397
+[e ( _LCDdisplayFeedback (1 -> :s 133C `*uc ]
+"398
+}
+[; ;StringCommand.c: 398: }
+[e $U 2223  ]
+"399
+[e :U 2222 ]
+[; ;StringCommand.c: 399: else
+[; ;StringCommand.c: 400: {
+"400
+{
+[; ;StringCommand.c: 401: SetDuty(duty);
+"401
+[e ( _SetDuty (1 -> _duty `uc ]
+[; ;StringCommand.c: 402: sprintf(buf, "Dutycycle set to %d\r\n", duty);
+"402
+[e ( _sprintf (1 , (. , &U _buf :s 134C _duty ]
+[; ;StringCommand.c: 403: UARTstring(buf);
+"403
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 404: sprintf(buf, "Duty set to %d", duty);
+"404
+[e ( _sprintf (1 , (. , &U _buf :s 135C _duty ]
+[; ;StringCommand.c: 405: LCDdisplayFeedback(buf);
+"405
+[e ( _LCDdisplayFeedback (1 &U _buf ]
+"406
 }
 [e :U 2223 ]
 [e :U 2221 ]
 [e :U 2219 ]
-"387
-}
-[; ;StringCommand.c: 386: }
-[; ;StringCommand.c: 387: }
-[e $U 2224  ]
-"388
-[e :U 2216 ]
-[; ;StringCommand.c: 388: else
-[; ;StringCommand.c: 389: {
-"389
-{
-[; ;StringCommand.c: 390: UARTstring("redled what??? Do you mean Red Led Brightness???");
-"390
-[e ( _UARTstring (1 :s 136C ]
-[; ;StringCommand.c: 391: LCDdisplayFeedback("Red LED What???");
-"391
-[e ( _LCDdisplayFeedback (1 -> :s 137C `*uc ]
-"392
-}
-[e :U 2224 ]
-"393
-}
-[; ;StringCommand.c: 392: }
-[; ;StringCommand.c: 393: }
-[e $U 2225  ]
-"394
-[e :U 2215 ]
-[; ;StringCommand.c: 394: else
-[; ;StringCommand.c: 395: {
-"395
-{
-[; ;StringCommand.c: 396: UARTstring("Red LED PWM Help Menu\r\n\n");
-"396
-[e ( _UARTstring (1 :s 138C ]
-[; ;StringCommand.c: 397: UARTstring("To set te PWM brightness enter 'Red LED brightness = dutycycle'\r\n");
-"397
-[e ( _UARTstring (1 :s 139C ]
-[; ;StringCommand.c: 398: UARTstring("where the dutycycle is a number 0 - 100\r\n");
-"398
-[e ( _UARTstring (1 :s 140C ]
-[; ;StringCommand.c: 399: LCD_Scroll("Red LED Contrast");
-"399
-[e ( _LCD_Scroll (1 -> :s 141C `*uc ]
-[; ;StringCommand.c: 400: LCD_Scroll("Commands:");
-"400
-[e ( _LCD_Scroll (1 -> :s 142C `*uc ]
-[; ;StringCommand.c: 401: LCD_Scroll("Red LED=#");
-"401
-[e ( _LCD_Scroll (1 -> :s 143C `*uc ]
-"402
-}
-[e :U 2225 ]
-"403
-}
-[; ;StringCommand.c: 402: }
-[; ;StringCommand.c: 403: }
-[e $U 2226  ]
-"405
-[e :U 2214 ]
-[; ;StringCommand.c: 405: else if (StartsWith(Input, "contrast"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 144C `i -> -> -> 0 `i `uc `i 2227  ]
-[; ;StringCommand.c: 406: {
-"406
-{
-[; ;StringCommand.c: 407: if (!StringContains(Input, "?"))
 "407
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 145C `i -> -> -> 0 `i `uc `i 2228  ]
-[; ;StringCommand.c: 408: {
+}
+[; ;StringCommand.c: 406: }
+[; ;StringCommand.c: 407: }
+[e $U 2224  ]
 "408
-{
-[; ;StringCommand.c: 409: if (!StringContains(Input, "="))
+[e :U 2216 ]
+[; ;StringCommand.c: 408: else
+[; ;StringCommand.c: 409: {
 "409
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 146C `i -> -> -> 0 `i `uc `i 2229  ]
-[; ;StringCommand.c: 410: {
-"410
 {
-[; ;StringCommand.c: 411: StringAddEqual(Input);
+[; ;StringCommand.c: 410: UARTstring("redled what??? Do you mean Red Led Brightness???");
+"410
+[e ( _UARTstring (1 :s 136C ]
+[; ;StringCommand.c: 411: LCDdisplayFeedback("Red LED What???");
 "411
-[e ( _StringAddEqual (1 _Input ]
+[e ( _LCDdisplayFeedback (1 -> :s 137C `*uc ]
 "412
 }
-[e :U 2229 ]
-[; ;StringCommand.c: 412: }
-[; ;StringCommand.c: 413: contrast = GetEnteredNumber(Input);
+[e :U 2224 ]
 "413
-[e = _contrast ( _GetEnteredNumber (1 _Input ]
-[; ;StringCommand.c: 414: if (contrast == 32001)
+}
+[; ;StringCommand.c: 412: }
+[; ;StringCommand.c: 413: }
+[e $U 2225  ]
 "414
-[e $ ! == _contrast -> 32001 `i 2230  ]
+[e :U 2215 ]
+[; ;StringCommand.c: 414: else
 [; ;StringCommand.c: 415: {
 "415
 {
-[; ;StringCommand.c: 416: UARTstring("Error: No number entered\r\n");
+[; ;StringCommand.c: 416: UARTstring("Red LED PWM Help Menu\r\n\n");
 "416
-[e ( _UARTstring (1 :s 147C ]
-[; ;StringCommand.c: 417: LCDdisplayFeedback("ERR: No number");
+[e ( _UARTstring (1 :s 138C ]
+[; ;StringCommand.c: 417: UARTstring("To set te PWM brightness enter 'Red LED brightness = dutycycle'\r\n");
 "417
-[e ( _LCDdisplayFeedback (1 -> :s 148C `*uc ]
+[e ( _UARTstring (1 :s 139C ]
+[; ;StringCommand.c: 418: UARTstring("where the dutycycle is a number 0 - 100\r\n");
 "418
-}
-[; ;StringCommand.c: 418: }
-[e $U 2231  ]
+[e ( _UARTstring (1 :s 140C ]
+[; ;StringCommand.c: 419: LCD_Scroll("Red LED Contrast");
 "419
-[e :U 2230 ]
-[; ;StringCommand.c: 419: else if (contrast > 100)
-[e $ ! > _contrast -> 100 `i 2232  ]
-[; ;StringCommand.c: 420: {
+[e ( _LCD_Scroll (1 -> :s 141C `*uc ]
+[; ;StringCommand.c: 420: LCD_Scroll("Commands:");
 "420
-{
-[; ;StringCommand.c: 421: UARTstring("Invalid Contrast Duty cycle: Greater than 100\r\n");
+[e ( _LCD_Scroll (1 -> :s 142C `*uc ]
+[; ;StringCommand.c: 421: LCD_Scroll("Red LED=#");
 "421
-[e ( _UARTstring (1 :s 149C ]
-[; ;StringCommand.c: 422: LCDdisplayFeedback("ERR: CNST > 100");
+[e ( _LCD_Scroll (1 -> :s 143C `*uc ]
 "422
-[e ( _LCDdisplayFeedback (1 -> :s 150C `*uc ]
+}
+[e :U 2225 ]
 "423
 }
+[; ;StringCommand.c: 422: }
 [; ;StringCommand.c: 423: }
-[e $U 2233  ]
-"424
-[e :U 2232 ]
-[; ;StringCommand.c: 424: else if (contrast < 0)
-[e $ ! < _contrast -> 0 `i 2234  ]
-[; ;StringCommand.c: 425: {
+[e $U 2226  ]
 "425
-{
-[; ;StringCommand.c: 426: UARTstring("Invalid Contrast Duty Cycle: Less than 0\r\n");
+[e :U 2214 ]
+[; ;StringCommand.c: 425: else if (StartsWith(Input, "contrast"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 144C `i -> -> -> 0 `i `uc `i 2227  ]
+[; ;StringCommand.c: 426: {
 "426
-[e ( _UARTstring (1 :s 151C ]
-[; ;StringCommand.c: 427: LCDdisplayFeedback("ERR: CNST < 0");
+{
+[; ;StringCommand.c: 427: if (!StringContains(Input, "?"))
 "427
-[e ( _LCDdisplayFeedback (1 -> :s 152C `*uc ]
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 145C `i -> -> -> 0 `i `uc `i 2228  ]
+[; ;StringCommand.c: 428: {
 "428
-}
-[; ;StringCommand.c: 428: }
-[e $U 2235  ]
+{
+[; ;StringCommand.c: 429: if (!StringContains(Input, "="))
 "429
-[e :U 2234 ]
-[; ;StringCommand.c: 429: else
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 146C `i -> -> -> 0 `i `uc `i 2229  ]
 [; ;StringCommand.c: 430: {
 "430
 {
-[; ;StringCommand.c: 431: SetContrast(contrast);
+[; ;StringCommand.c: 431: StringAddEqual(Input);
 "431
-[e ( _SetContrast (1 -> _contrast `uc ]
-[; ;StringCommand.c: 432: sprintf(buf, "Contrast Duty Cycle set to %d\r\n", contrast);
+[e ( _StringAddEqual (1 _Input ]
 "432
-[e ( _sprintf (1 , (. , &U _buf :s 153C _contrast ]
-[; ;StringCommand.c: 433: UARTstring(buf);
+}
+[e :U 2229 ]
+[; ;StringCommand.c: 432: }
+[; ;StringCommand.c: 433: contrast = GetEnteredNumber(Input);
 "433
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 434: sprintf(buf, "CNST set to %d", duty);
+[e = _contrast ( _GetEnteredNumber (1 _Input ]
+[; ;StringCommand.c: 434: if (contrast == 32001)
 "434
-[e ( _sprintf (1 , (. , &U _buf :s 154C _duty ]
-[; ;StringCommand.c: 435: LCDdisplayFeedback(buf);
+[e $ ! == _contrast -> 32001 `i 2230  ]
+[; ;StringCommand.c: 435: {
 "435
-[e ( _LCDdisplayFeedback (1 &U _buf ]
+{
+[; ;StringCommand.c: 436: UARTstring("Error: No number entered\r\n");
 "436
+[e ( _UARTstring (1 :s 147C ]
+[; ;StringCommand.c: 437: LCDdisplayFeedback("ERR: No number");
+"437
+[e ( _LCDdisplayFeedback (1 -> :s 148C `*uc ]
+"438
+}
+[; ;StringCommand.c: 438: }
+[e $U 2231  ]
+"439
+[e :U 2230 ]
+[; ;StringCommand.c: 439: else if (contrast > 100)
+[e $ ! > _contrast -> 100 `i 2232  ]
+[; ;StringCommand.c: 440: {
+"440
+{
+[; ;StringCommand.c: 441: UARTstring("Invalid Contrast Duty cycle: Greater than 100\r\n");
+"441
+[e ( _UARTstring (1 :s 149C ]
+[; ;StringCommand.c: 442: LCDdisplayFeedback("ERR: CNST > 100");
+"442
+[e ( _LCDdisplayFeedback (1 -> :s 150C `*uc ]
+"443
+}
+[; ;StringCommand.c: 443: }
+[e $U 2233  ]
+"444
+[e :U 2232 ]
+[; ;StringCommand.c: 444: else if (contrast < 0)
+[e $ ! < _contrast -> 0 `i 2234  ]
+[; ;StringCommand.c: 445: {
+"445
+{
+[; ;StringCommand.c: 446: UARTstring("Invalid Contrast Duty Cycle: Less than 0\r\n");
+"446
+[e ( _UARTstring (1 :s 151C ]
+[; ;StringCommand.c: 447: LCDdisplayFeedback("ERR: CNST < 0");
+"447
+[e ( _LCDdisplayFeedback (1 -> :s 152C `*uc ]
+"448
+}
+[; ;StringCommand.c: 448: }
+[e $U 2235  ]
+"449
+[e :U 2234 ]
+[; ;StringCommand.c: 449: else
+[; ;StringCommand.c: 450: {
+"450
+{
+[; ;StringCommand.c: 451: SetContrast(contrast);
+"451
+[e ( _SetContrast (1 -> _contrast `uc ]
+[; ;StringCommand.c: 452: sprintf(buf, "Contrast Duty Cycle set to %d\r\n", contrast);
+"452
+[e ( _sprintf (1 , (. , &U _buf :s 153C _contrast ]
+[; ;StringCommand.c: 453: UARTstring(buf);
+"453
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 454: sprintf(buf, "CNST set to %d", duty);
+"454
+[e ( _sprintf (1 , (. , &U _buf :s 154C _duty ]
+[; ;StringCommand.c: 455: LCDdisplayFeedback(buf);
+"455
+[e ( _LCDdisplayFeedback (1 &U _buf ]
+"456
 }
 [e :U 2235 ]
 [e :U 2233 ]
 [e :U 2231 ]
-"437
-}
-[; ;StringCommand.c: 436: }
-[; ;StringCommand.c: 437: }
-[e $U 2236  ]
-"438
-[e :U 2228 ]
-[; ;StringCommand.c: 438: else
-[; ;StringCommand.c: 439: {
-"439
-{
-[; ;StringCommand.c: 440: UARTstring("Contrast PWM Help Menu\r\n\n");
-"440
-[e ( _UARTstring (1 :s 155C ]
-[; ;StringCommand.c: 441: UARTstring("To set Contrast PWM brightness enter 'Contrast = dutycycle'\r\n");
-"441
-[e ( _UARTstring (1 :s 156C ]
-[; ;StringCommand.c: 442: UARTstring("where the dutycycle is a number 0 - 100\r\n");
-"442
-[e ( _UARTstring (1 :s 157C ]
-[; ;StringCommand.c: 443: LCD_Scroll("LCD Contrast");
-"443
-[e ( _LCD_Scroll (1 -> :s 158C `*uc ]
-[; ;StringCommand.c: 444: LCD_Scroll("Commands:");
-"444
-[e ( _LCD_Scroll (1 -> :s 159C `*uc ]
-[; ;StringCommand.c: 445: LCD_Scroll("Contrast#");
-"445
-[e ( _LCD_Scroll (1 -> :s 160C `*uc ]
-"446
-}
-[e :U 2236 ]
-"447
-}
-[; ;StringCommand.c: 446: }
-[; ;StringCommand.c: 447: }
-[e $U 2237  ]
-"449
-[e :U 2227 ]
-[; ;StringCommand.c: 449: else if (StartsWith(Input, "adc"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 161C `i -> -> -> 0 `i `uc `i 2238  ]
-[; ;StringCommand.c: 450: {
-"450
-{
-[; ;StringCommand.c: 451: if (!StringContains(Input, "?"))
-"451
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 162C `i -> -> -> 0 `i `uc `i 2239  ]
-[; ;StringCommand.c: 452: {
-"452
-{
-[; ;StringCommand.c: 453: if (!StringContains(Input, "="))
-"453
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 163C `i -> -> -> 0 `i `uc `i 2240  ]
-[; ;StringCommand.c: 454: {
-"454
-{
-[; ;StringCommand.c: 455: StringAddEqual(Input);
-"455
-[e ( _StringAddEqual (1 _Input ]
-"456
-}
-[e :U 2240 ]
-[; ;StringCommand.c: 456: }
-[; ;StringCommand.c: 457: channel = GetEnteredNumber(Input);
 "457
-[e = _channel ( _GetEnteredNumber (1 _Input ]
-[; ;StringCommand.c: 458: if (channel == 32002) {
-"458
-[e $ ! == _channel -> 32002 `i 2241  ]
-{
-[; ;StringCommand.c: 459: UARTstring("Error: only use one equal sign\r\n");
-"459
-[e ( _UARTstring (1 :s 164C ]
-[; ;StringCommand.c: 460: LCDdisplayFeedback("ERR: Use 1 =");
-"460
-[e ( _LCDdisplayFeedback (1 -> :s 165C `*uc ]
-"461
 }
-[; ;StringCommand.c: 461: }
-[e $U 2242  ]
-"462
-[e :U 2241 ]
-[; ;StringCommand.c: 462: else if (channel < 0)
-[e $ ! < _channel -> 0 `i 2243  ]
-[; ;StringCommand.c: 463: {
-"463
+[; ;StringCommand.c: 456: }
+[; ;StringCommand.c: 457: }
+[e $U 2236  ]
+"458
+[e :U 2228 ]
+[; ;StringCommand.c: 458: else
+[; ;StringCommand.c: 459: {
+"459
 {
-[; ;StringCommand.c: 464: UARTstring("Error: No negative channels\r\n");
+[; ;StringCommand.c: 460: UARTstring("Contrast PWM Help Menu\r\n\n");
+"460
+[e ( _UARTstring (1 :s 155C ]
+[; ;StringCommand.c: 461: UARTstring("To set Contrast PWM brightness enter 'Contrast = dutycycle'\r\n");
+"461
+[e ( _UARTstring (1 :s 156C ]
+[; ;StringCommand.c: 462: UARTstring("where the dutycycle is a number 0 - 100\r\n");
+"462
+[e ( _UARTstring (1 :s 157C ]
+[; ;StringCommand.c: 463: LCD_Scroll("LCD Contrast");
+"463
+[e ( _LCD_Scroll (1 -> :s 158C `*uc ]
+[; ;StringCommand.c: 464: LCD_Scroll("Commands:");
 "464
-[e ( _UARTstring (1 :s 166C ]
-[; ;StringCommand.c: 465: LCDdisplayFeedback("ERR: Use + Chnl");
+[e ( _LCD_Scroll (1 -> :s 159C `*uc ]
+[; ;StringCommand.c: 465: LCD_Scroll("Contrast#");
 "465
-[e ( _LCDdisplayFeedback (1 -> :s 167C `*uc ]
+[e ( _LCD_Scroll (1 -> :s 160C `*uc ]
 "466
 }
-[; ;StringCommand.c: 466: }
-[e $U 2244  ]
+[e :U 2236 ]
 "467
-[e :U 2243 ]
-[; ;StringCommand.c: 467: else if (channel >= 32000)
-[e $ ! >= _channel -> 32000 `i 2245  ]
-[; ;StringCommand.c: 468: {
-"468
-{
-[; ;StringCommand.c: 469: UARTstring("Error: in parsing command\r\n");
+}
+[; ;StringCommand.c: 466: }
+[; ;StringCommand.c: 467: }
+[e $U 2237  ]
 "469
-[e ( _UARTstring (1 :s 168C ]
-[; ;StringCommand.c: 470: LCDdisplayFeedback("ERR: Cant parse");
+[e :U 2227 ]
+[; ;StringCommand.c: 469: else if (StartsWith(Input, "adc"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 161C `i -> -> -> 0 `i `uc `i 2238  ]
+[; ;StringCommand.c: 470: {
 "470
-[e ( _LCDdisplayFeedback (1 -> :s 169C `*uc ]
+{
+[; ;StringCommand.c: 471: if (!StringContains(Input, "?"))
 "471
-}
-[; ;StringCommand.c: 471: }
-[e $U 2246  ]
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 162C `i -> -> -> 0 `i `uc `i 2239  ]
+[; ;StringCommand.c: 472: {
 "472
-[e :U 2245 ]
-[; ;StringCommand.c: 472: else if (channel != 0)
-[e $ ! != _channel -> 0 `i 2247  ]
-[; ;StringCommand.c: 473: {
+{
+[; ;StringCommand.c: 473: if (!StringContains(Input, "="))
 "473
-{
-[; ;StringCommand.c: 474: sprintf(buf, "Channel %d is not configured", channel);
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 163C `i -> -> -> 0 `i `uc `i 2240  ]
+[; ;StringCommand.c: 474: {
 "474
-[e ( _sprintf (1 , (. , &U _buf :s 170C _channel ]
-[; ;StringCommand.c: 475: UARTstring(buf);
-"475
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 476: sprintf(buf, "Chnl set to %d\r\n", duty);
-"476
-[e ( _sprintf (1 , (. , &U _buf :s 171C _duty ]
-[; ;StringCommand.c: 477: LCDdisplayFeedback(buf);
-"477
-[e ( _LCDdisplayFeedback (1 &U _buf ]
-"478
-}
-[; ;StringCommand.c: 478: }
-[e $U 2248  ]
-"479
-[e :U 2247 ]
-[; ;StringCommand.c: 479: else
-[; ;StringCommand.c: 480: {
-"480
 {
-[; ;StringCommand.c: 481: LATE |= 0b00000010;
+[; ;StringCommand.c: 475: StringAddEqual(Input);
+"475
+[e ( _StringAddEqual (1 _Input ]
+"476
+}
+[e :U 2240 ]
+[; ;StringCommand.c: 476: }
+[; ;StringCommand.c: 477: channel = GetEnteredNumber(Input);
+"477
+[e = _channel ( _GetEnteredNumber (1 _Input ]
+[; ;StringCommand.c: 478: if (channel == 32002) {
+"478
+[e $ ! == _channel -> 32002 `i 2241  ]
+{
+[; ;StringCommand.c: 479: UARTstring("Error: only use one equal sign\r\n");
+"479
+[e ( _UARTstring (1 :s 164C ]
+[; ;StringCommand.c: 480: LCDdisplayFeedback("ERR: Use 1 =");
+"480
+[e ( _LCDdisplayFeedback (1 -> :s 165C `*uc ]
 "481
-[e =| _LATE -> -> 2 `i `uc ]
-[; ;StringCommand.c: 482: delayUS(1000);
+}
+[; ;StringCommand.c: 481: }
+[e $U 2242  ]
 "482
-[e ( _delayUS (1 -> -> 1000 `i `l ]
-[; ;StringCommand.c: 483: ADC_Value = InternalADC_Read(channel);
+[e :U 2241 ]
+[; ;StringCommand.c: 482: else if (channel < 0)
+[e $ ! < _channel -> 0 `i 2243  ]
+[; ;StringCommand.c: 483: {
 "483
-[e = _ADC_Value -> ( _InternalADC_Read (1 -> _channel `uc `ui ]
-[; ;StringCommand.c: 484: sprintf(buf, "ADC channel %d = %d", channel, ADC_Value);
+{
+[; ;StringCommand.c: 484: UARTstring("Error: No negative channels\r\n");
 "484
-[e ( _sprintf (1 , , (. , &U _buf :s 172C _channel _ADC_Value ]
-[; ;StringCommand.c: 485: LATE &= ~0b00000010;
+[e ( _UARTstring (1 :s 166C ]
+[; ;StringCommand.c: 485: LCDdisplayFeedback("ERR: Use + Chnl");
 "485
-[e =& _LATE -> ~ -> 2 `i `uc ]
-[; ;StringCommand.c: 486: UARTstring(buf);
+[e ( _LCDdisplayFeedback (1 -> :s 167C `*uc ]
 "486
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 487: sprintf(buf, "Chnl %d = %d", channel, ADC_Value);
+}
+[; ;StringCommand.c: 486: }
+[e $U 2244  ]
 "487
-[e ( _sprintf (1 , , (. , &U _buf :s 173C _channel _ADC_Value ]
-[; ;StringCommand.c: 488: LCDdisplayFeedback(buf);
+[e :U 2243 ]
+[; ;StringCommand.c: 487: else if (channel >= 32000)
+[e $ ! >= _channel -> 32000 `i 2245  ]
+[; ;StringCommand.c: 488: {
 "488
-[e ( _LCDdisplayFeedback (1 &U _buf ]
+{
+[; ;StringCommand.c: 489: UARTstring("Error: in parsing command\r\n");
 "489
+[e ( _UARTstring (1 :s 168C ]
+[; ;StringCommand.c: 490: LCDdisplayFeedback("ERR: Cant parse");
+"490
+[e ( _LCDdisplayFeedback (1 -> :s 169C `*uc ]
+"491
+}
+[; ;StringCommand.c: 491: }
+[e $U 2246  ]
+"492
+[e :U 2245 ]
+[; ;StringCommand.c: 492: else if (channel != 0)
+[e $ ! != _channel -> 0 `i 2247  ]
+[; ;StringCommand.c: 493: {
+"493
+{
+[; ;StringCommand.c: 494: sprintf(buf, "Channel %d is not configured", channel);
+"494
+[e ( _sprintf (1 , (. , &U _buf :s 170C _channel ]
+[; ;StringCommand.c: 495: UARTstring(buf);
+"495
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 496: sprintf(buf, "Chnl set to %d\r\n", duty);
+"496
+[e ( _sprintf (1 , (. , &U _buf :s 171C _duty ]
+[; ;StringCommand.c: 497: LCDdisplayFeedback(buf);
+"497
+[e ( _LCDdisplayFeedback (1 &U _buf ]
+"498
+}
+[; ;StringCommand.c: 498: }
+[e $U 2248  ]
+"499
+[e :U 2247 ]
+[; ;StringCommand.c: 499: else
+[; ;StringCommand.c: 500: {
+"500
+{
+[; ;StringCommand.c: 501: LATE |= 0b00000010;
+"501
+[e =| _LATE -> -> 2 `i `uc ]
+[; ;StringCommand.c: 502: delayUS(1000);
+"502
+[e ( _delayUS (1 -> -> 1000 `i `l ]
+[; ;StringCommand.c: 503: ADC_Value = InternalADC_Read(channel);
+"503
+[e = _ADC_Value -> ( _InternalADC_Read (1 -> _channel `uc `ui ]
+[; ;StringCommand.c: 504: sprintf(buf, "ADC channel %d = %d", channel, ADC_Value);
+"504
+[e ( _sprintf (1 , , (. , &U _buf :s 172C _channel _ADC_Value ]
+[; ;StringCommand.c: 505: LATE &= ~0b00000010;
+"505
+[e =& _LATE -> ~ -> 2 `i `uc ]
+[; ;StringCommand.c: 506: UARTstring(buf);
+"506
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 507: sprintf(buf, "Chnl %d = %d", channel, ADC_Value);
+"507
+[e ( _sprintf (1 , , (. , &U _buf :s 173C _channel _ADC_Value ]
+[; ;StringCommand.c: 508: LCDdisplayFeedback(buf);
+"508
+[e ( _LCDdisplayFeedback (1 &U _buf ]
+"509
 }
 [e :U 2248 ]
 [e :U 2246 ]
 [e :U 2244 ]
 [e :U 2242 ]
-"490
+"510
 }
-[; ;StringCommand.c: 489: }
-[; ;StringCommand.c: 490: }
+[; ;StringCommand.c: 509: }
+[; ;StringCommand.c: 510: }
 [e $U 2249  ]
-"491
+"511
 [e :U 2239 ]
-[; ;StringCommand.c: 491: else
-[; ;StringCommand.c: 492: {
-"492
+[; ;StringCommand.c: 511: else
+[; ;StringCommand.c: 512: {
+"512
 {
-[; ;StringCommand.c: 493: UARTstring("ADC Help Menu\r\n\n");
-"493
+[; ;StringCommand.c: 513: UARTstring("ADC Help Menu\r\n\n");
+"513
 [e ( _UARTstring (1 :s 174C ]
-[; ;StringCommand.c: 494: UARTstring("Channels:\r\n");
-"494
+[; ;StringCommand.c: 514: UARTstring("Channels:\r\n");
+"514
 [e ( _UARTstring (1 :s 175C ]
-[; ;StringCommand.c: 495: UARTstring("0\r\n\n");
-"495
+[; ;StringCommand.c: 515: UARTstring("0\r\n\n");
+"515
 [e ( _UARTstring (1 :s 176C ]
-[; ;StringCommand.c: 496: UARTstring("To read and adc channel, type the command\r\n ADC"
-[; ;StringCommand.c: 497: " followed by 'Channel' \r\n");
-"497
+[; ;StringCommand.c: 516: UARTstring("To read and adc channel, type the command\r\n ADC"
+[; ;StringCommand.c: 517: " followed by 'Channel' \r\n");
+"517
 [e ( _UARTstring (1 :s 177C ]
-[; ;StringCommand.c: 498: UARTstring("i.e. ADC 0\r\n");
-"498
+[; ;StringCommand.c: 518: UARTstring("i.e. ADC 0\r\n");
+"518
 [e ( _UARTstring (1 :s 178C ]
-[; ;StringCommand.c: 499: LCD_Scroll("ADC Menu");
-"499
+[; ;StringCommand.c: 519: LCD_Scroll("ADC Menu");
+"519
 [e ( _LCD_Scroll (1 -> :s 179C `*uc ]
-[; ;StringCommand.c: 500: LCD_Scroll("Commands:");
-"500
+[; ;StringCommand.c: 520: LCD_Scroll("Commands:");
+"520
 [e ( _LCD_Scroll (1 -> :s 180C `*uc ]
-[; ;StringCommand.c: 501: LCD_Scroll("0");
-"501
+[; ;StringCommand.c: 521: LCD_Scroll("0");
+"521
 [e ( _LCD_Scroll (1 -> :s 181C `*uc ]
-"502
+"522
 }
 [e :U 2249 ]
-"503
-}
-[; ;StringCommand.c: 502: }
-[; ;StringCommand.c: 503: }
-[e $U 2250  ]
-"505
-[e :U 2238 ]
-[; ;StringCommand.c: 505: else if (StartsWith(Input, "rtc"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 182C `i -> -> -> 0 `i `uc `i 2251  ]
-[; ;StringCommand.c: 506: {
-"506
-{
-[; ;StringCommand.c: 507: if (!StringContains(Input, "?"))
-"507
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 183C `i -> -> -> 0 `i `uc `i 2252  ]
-[; ;StringCommand.c: 508: {
-"508
-{
-[; ;StringCommand.c: 509: if (StringContains(Input, "battery"))
-"509
-[e $ ! != -> ( _StringContains (2 , _Input :s 184C `i -> -> -> 0 `i `uc `i 2253  ]
-[; ;StringCommand.c: 510: {
-"510
-{
-[; ;StringCommand.c: 511: RTC_Battery_Value = (InternalADC_Read(2) + 8);
-"511
-[e = _RTC_Battery_Value -> + ( _InternalADC_Read (1 -> -> 2 `i `uc -> 8 `i `ui ]
-[; ;StringCommand.c: 512: RTC_Battery_Value_HIGH_decimal = (unsigned int)(((float)RTC_Battery_Value / 1024) * 5);
-"512
-[e = _RTC_Battery_Value_HIGH_decimal -> * / -> _RTC_Battery_Value `f -> -> 1024 `i `f -> -> 5 `i `f `ui ]
-[; ;StringCommand.c: 513: RTC_Battery_Value_LOW_decimal = (unsigned int)((((float)RTC_Battery_Value / 1024) * 500));
-"513
-[e = _RTC_Battery_Value_LOW_decimal -> * / -> _RTC_Battery_Value `f -> -> 1024 `i `f -> -> 500 `i `f `ui ]
-[; ;StringCommand.c: 514: RTC_Battery_Value_LOW_decimal = RTC_Battery_Value_LOW_decimal % 100;
-"514
-[e = _RTC_Battery_Value_LOW_decimal % _RTC_Battery_Value_LOW_decimal -> -> 100 `i `ui ]
-[; ;StringCommand.c: 515: sprintf(buf, " 3 Volt RTC Battery Voltage = %d.%d",
-[; ;StringCommand.c: 516: RTC_Battery_Value_HIGH_decimal, RTC_Battery_Value_LOW_decimal);
-"516
-[e ( _sprintf (1 , , (. , &U _buf :s 185C _RTC_Battery_Value_HIGH_decimal _RTC_Battery_Value_LOW_decimal ]
-[; ;StringCommand.c: 517: UARTstring(buf);
-"517
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 518: sprintf(buf, "RTC Bty = %d.%d", RTC_Battery_Value_HIGH_decimal,
-[; ;StringCommand.c: 519: RTC_Battery_Value_LOW_decimal);
-"519
-[e ( _sprintf (1 , , (. , &U _buf :s 186C _RTC_Battery_Value_HIGH_decimal _RTC_Battery_Value_LOW_decimal ]
-[; ;StringCommand.c: 520: LCDdisplayFeedback(buf);
-"520
-[e ( _LCDdisplayFeedback (1 &U _buf ]
-"521
-}
-[; ;StringCommand.c: 521: }
-[e $U 2254  ]
-"522
-[e :U 2253 ]
-[; ;StringCommand.c: 522: else if(StringContains(Input, "read"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 187C `i -> -> -> 0 `i `uc `i 2255  ]
-[; ;StringCommand.c: 523: {
 "523
-{
-[; ;StringCommand.c: 524: if(!READ_RTC_TIME())
-"524
-[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2256  ]
-[; ;StringCommand.c: 525: {
+}
+[; ;StringCommand.c: 522: }
+[; ;StringCommand.c: 523: }
+[e $U 2250  ]
 "525
-{
-[; ;StringCommand.c: 526: SprintDate(buf, NowTime, 0);
+[e :U 2238 ]
+[; ;StringCommand.c: 525: else if (StartsWith(Input, "rtc"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 182C `i -> -> -> 0 `i `uc `i 2251  ]
+[; ;StringCommand.c: 526: {
 "526
-[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
-[; ;StringCommand.c: 527: UARTstring(buf);
+{
+[; ;StringCommand.c: 527: if (!StringContains(Input, "?"))
 "527
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 528: UARTstring("\r\n");
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 183C `i -> -> -> 0 `i `uc `i 2252  ]
+[; ;StringCommand.c: 528: {
 "528
-[e ( _UARTstring (1 :s 188C ]
-[; ;StringCommand.c: 529: SetLCDcursor(0, 0);
+{
+[; ;StringCommand.c: 529: if (StringContains(Input, "battery"))
 "529
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 530: LCDPrintString("RTC Time is:    ");
+[e $ ! != -> ( _StringContains (2 , _Input :s 184C `i -> -> -> 0 `i `uc `i 2253  ]
+[; ;StringCommand.c: 530: {
 "530
-[e ( _LCDPrintString (1 -> :s 189C `*uc ]
-[; ;StringCommand.c: 531: if(NowTime.HoursAM_PM)
+{
+[; ;StringCommand.c: 531: RTC_Battery_Value = (InternalADC_Read(2) + 8);
 "531
-[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2257  ]
-[; ;StringCommand.c: 532: {
+[e = _RTC_Battery_Value -> + ( _InternalADC_Read (1 -> -> 2 `i `uc -> 8 `i `ui ]
+[; ;StringCommand.c: 532: RTC_Battery_Value_HIGH_decimal = (unsigned int)(((float)RTC_Battery_Value / 1024) * 5);
 "532
-{
-[; ;StringCommand.c: 533: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+[e = _RTC_Battery_Value_HIGH_decimal -> * / -> _RTC_Battery_Value `f -> -> 1024 `i `f -> -> 5 `i `f `ui ]
+[; ;StringCommand.c: 533: RTC_Battery_Value_LOW_decimal = (unsigned int)((((float)RTC_Battery_Value / 1024) * 500));
 "533
-[e ( _sprintf (1 , , , , , (. , &U _buf :s 190C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+[e = _RTC_Battery_Value_LOW_decimal -> * / -> _RTC_Battery_Value `f -> -> 1024 `i `f -> -> 500 `i `f `ui ]
+[; ;StringCommand.c: 534: RTC_Battery_Value_LOW_decimal = RTC_Battery_Value_LOW_decimal % 100;
 "534
-}
-[; ;StringCommand.c: 534: }
-[e $U 2258  ]
-"535
-[e :U 2257 ]
-[; ;StringCommand.c: 535: else
-[; ;StringCommand.c: 536: {
+[e = _RTC_Battery_Value_LOW_decimal % _RTC_Battery_Value_LOW_decimal -> -> 100 `i `ui ]
+[; ;StringCommand.c: 535: sprintf(buf, " 3 Volt RTC Battery Voltage = %d.%d",
+[; ;StringCommand.c: 536: RTC_Battery_Value_HIGH_decimal, RTC_Battery_Value_LOW_decimal);
 "536
-{
-[; ;StringCommand.c: 537: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+[e ( _sprintf (1 , , (. , &U _buf :s 185C _RTC_Battery_Value_HIGH_decimal _RTC_Battery_Value_LOW_decimal ]
+[; ;StringCommand.c: 537: UARTstring(buf);
 "537
-[e ( _sprintf (1 , , , , , (. , &U _buf :s 191C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
-"538
-}
-[e :U 2258 ]
-[; ;StringCommand.c: 538: }
-[; ;StringCommand.c: 539: SetLCDcursor(1, 0);
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 538: sprintf(buf, "RTC Bty = %d.%d", RTC_Battery_Value_HIGH_decimal,
+[; ;StringCommand.c: 539: RTC_Battery_Value_LOW_decimal);
 "539
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 540: LCDPrintString(buf);
+[e ( _sprintf (1 , , (. , &U _buf :s 186C _RTC_Battery_Value_HIGH_decimal _RTC_Battery_Value_LOW_decimal ]
+[; ;StringCommand.c: 540: LCDdisplayFeedback(buf);
 "540
-[e ( _LCDPrintString (1 &U _buf ]
+[e ( _LCDdisplayFeedback (1 &U _buf ]
 "541
 }
 [; ;StringCommand.c: 541: }
-[e $U 2259  ]
+[e $U 2254  ]
 "542
-[e :U 2256 ]
-[; ;StringCommand.c: 542: else
+[e :U 2253 ]
+[; ;StringCommand.c: 542: else if(StringContains(Input, "read"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 187C `i -> -> -> 0 `i `uc `i 2255  ]
 [; ;StringCommand.c: 543: {
 "543
 {
-[; ;StringCommand.c: 544: UARTstring("ERROR: Can't Read RTC\r\n");
+[; ;StringCommand.c: 544: if(!READ_RTC_TIME())
 "544
-[e ( _UARTstring (1 :s 192C ]
-[; ;StringCommand.c: 545: SetLCDcursor(1, 0);
+[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2256  ]
+[; ;StringCommand.c: 545: {
 "545
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 546: LCDPrintString("RTC isnt working");
+{
+[; ;StringCommand.c: 546: SprintDate(buf, NowTime, 0);
 "546
-[e ( _LCDPrintString (1 -> :s 193C `*uc ]
+[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
+[; ;StringCommand.c: 547: UARTstring(buf);
 "547
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 548: UARTstring("\r\n");
+"548
+[e ( _UARTstring (1 :s 188C ]
+[; ;StringCommand.c: 549: SetLCDcursor(0, 0);
+"549
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 550: LCDPrintString("RTC Time is:    ");
+"550
+[e ( _LCDPrintString (1 -> :s 189C `*uc ]
+[; ;StringCommand.c: 551: if(NowTime.HoursAM_PM)
+"551
+[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2257  ]
+[; ;StringCommand.c: 552: {
+"552
+{
+[; ;StringCommand.c: 553: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+"553
+[e ( _sprintf (1 , , , , , (. , &U _buf :s 190C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"554
+}
+[; ;StringCommand.c: 554: }
+[e $U 2258  ]
+"555
+[e :U 2257 ]
+[; ;StringCommand.c: 555: else
+[; ;StringCommand.c: 556: {
+"556
+{
+[; ;StringCommand.c: 557: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+"557
+[e ( _sprintf (1 , , , , , (. , &U _buf :s 191C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"558
+}
+[e :U 2258 ]
+[; ;StringCommand.c: 558: }
+[; ;StringCommand.c: 559: SetLCDcursor(1, 0);
+"559
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 560: LCDPrintString(buf);
+"560
+[e ( _LCDPrintString (1 &U _buf ]
+"561
+}
+[; ;StringCommand.c: 561: }
+[e $U 2259  ]
+"562
+[e :U 2256 ]
+[; ;StringCommand.c: 562: else
+[; ;StringCommand.c: 563: {
+"563
+{
+[; ;StringCommand.c: 564: UARTstring("ERROR: Can't Read RTC\r\n");
+"564
+[e ( _UARTstring (1 :s 192C ]
+[; ;StringCommand.c: 565: SetLCDcursor(1, 0);
+"565
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 566: LCDPrintString("RTC isnt working");
+"566
+[e ( _LCDPrintString (1 -> :s 193C `*uc ]
+"567
 }
 [e :U 2259 ]
-[; ;StringCommand.c: 547: }
-[; ;StringCommand.c: 548: LCDclearCount =0;
-"548
-[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
-"549
-}
-[; ;StringCommand.c: 549: }
-[e $U 2260  ]
-"550
-[e :U 2255 ]
-[; ;StringCommand.c: 550: else if(StringContains(Input, "set"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 194C `i -> -> -> 0 `i `uc `i 2261  ]
-[; ;StringCommand.c: 551: {
-"551
-{
-[; ;StringCommand.c: 552: UARTstring("Enter Time MM/DD/YY HH:MM:SS AM or\r\n");
-"552
-[e ( _UARTstring (1 :s 195C ]
-[; ;StringCommand.c: 553: UARTstring("Enter Time MM/DD/YY HH:MM:SS PM\r\n");
-"553
-[e ( _UARTstring (1 :s 196C ]
-[; ;StringCommand.c: 554: cleanBuffer(Input, 100);
-"554
-[e ( _cleanBuffer (2 , _Input -> 100 `i ]
-[; ;StringCommand.c: 555: UARTstring(">");
-"555
-[e ( _UARTstring (1 :s 197C ]
-[; ;StringCommand.c: 556: while(1)
-"556
-[e :U 2263 ]
-[; ;StringCommand.c: 557: {
-"557
-{
-[; ;StringCommand.c: 558: if(Input[0] != 0)
-"558
-[e $ ! != -> *U + _Input * -> -> 0 `i `x -> -> # *U _Input `i `x `i -> 0 `i 2265  ]
-[; ;StringCommand.c: 559: {
-"559
-{
-[; ;StringCommand.c: 560: lowercase(Input);
-"560
-[e ( _lowercase (1 _Input ]
-[; ;StringCommand.c: 561: if(Parse_Time(Input))
-"561
-[e $ ! != -> ( _Parse_Time (1 _Input `i -> -> -> 0 `i `uc `i 2266  ]
-[; ;StringCommand.c: 562: {
-"562
-{
-[; ;StringCommand.c: 563: if(!SET_RTC_TIME(NowTime))
-"563
-[e $ ! ! != -> ( _SET_RTC_TIME (1 _NowTime `i -> -> -> 0 `i `uc `i 2267  ]
-[; ;StringCommand.c: 564: {
-"564
-{
-[; ;StringCommand.c: 565: UARTstring("\r\nTime Set Successfully\r\n");
-"565
-[e ( _UARTstring (1 :s 198C ]
-[; ;StringCommand.c: 566: READ_RTC_TIME();
-"566
-[e ( _READ_RTC_TIME ..  ]
-[; ;StringCommand.c: 567: SprintDate(buf, NowTime, 0);
-"567
-[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
-[; ;StringCommand.c: 568: UARTstring(buf);
+[; ;StringCommand.c: 567: }
+[; ;StringCommand.c: 568: LCDclearCount =0;
 "568
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 569: UARTstring("\r\n");
+[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
 "569
-[e ( _UARTstring (1 :s 199C ]
+}
+[; ;StringCommand.c: 569: }
+[e $U 2260  ]
 "570
-}
-[; ;StringCommand.c: 570: }
-[e $U 2268  ]
+[e :U 2255 ]
+[; ;StringCommand.c: 570: else if(StringContains(Input, "set"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 194C `i -> -> -> 0 `i `uc `i 2261  ]
+[; ;StringCommand.c: 571: {
 "571
-[e :U 2267 ]
-[; ;StringCommand.c: 571: else
-[; ;StringCommand.c: 572: {
-"572
 {
-[; ;StringCommand.c: 573: UARTstring("\r\nTime Not Set Successfully");
+[; ;StringCommand.c: 572: UARTstring("Enter Time MM/DD/YY HH:MM:SS AM or\r\n");
+"572
+[e ( _UARTstring (1 :s 195C ]
+[; ;StringCommand.c: 573: UARTstring("Enter Time MM/DD/YY HH:MM:SS PM\r\n");
 "573
-[e ( _UARTstring (1 :s 200C ]
+[e ( _UARTstring (1 :s 196C ]
+[; ;StringCommand.c: 574: cleanBuffer(Input, 100);
 "574
-}
-[e :U 2268 ]
+[e ( _cleanBuffer (2 , _Input -> 100 `i ]
+[; ;StringCommand.c: 575: UARTstring(">");
 "575
-}
-[; ;StringCommand.c: 574: }
-[; ;StringCommand.c: 575: }
-[e $U 2269  ]
+[e ( _UARTstring (1 :s 197C ]
+[; ;StringCommand.c: 576: while(1)
 "576
-[e :U 2266 ]
-[; ;StringCommand.c: 576: else
+[e :U 2263 ]
 [; ;StringCommand.c: 577: {
 "577
 {
-[; ;StringCommand.c: 578: UARTstring("\r\nInvalid Time Entered\r\n");
+[; ;StringCommand.c: 578: if(Input[0] != 0)
 "578
-[e ( _UARTstring (1 :s 201C ]
-[; ;StringCommand.c: 579: UARTstring("Format is MM/DD/YY HH:MM:SS AM\r\n");
+[e $ ! != -> *U + _Input * -> -> 0 `i `x -> -> # *U _Input `i `x `i -> 0 `i 2265  ]
+[; ;StringCommand.c: 579: {
 "579
-[e ( _UARTstring (1 :s 202C ]
+{
+[; ;StringCommand.c: 580: lowercase(Input);
 "580
+[e ( _lowercase (1 _Input ]
+[; ;StringCommand.c: 581: if(Parse_Time(Input))
+"581
+[e $ ! != -> ( _Parse_Time (1 _Input `i -> -> -> 0 `i `uc `i 2266  ]
+[; ;StringCommand.c: 582: {
+"582
+{
+[; ;StringCommand.c: 583: if(!SET_RTC_TIME(NowTime))
+"583
+[e $ ! ! != -> ( _SET_RTC_TIME (1 _NowTime `i -> -> -> 0 `i `uc `i 2267  ]
+[; ;StringCommand.c: 584: {
+"584
+{
+[; ;StringCommand.c: 585: UARTstring("\r\nTime Set Successfully\r\n");
+"585
+[e ( _UARTstring (1 :s 198C ]
+[; ;StringCommand.c: 586: READ_RTC_TIME();
+"586
+[e ( _READ_RTC_TIME ..  ]
+[; ;StringCommand.c: 587: SprintDate(buf, NowTime, 0);
+"587
+[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
+[; ;StringCommand.c: 588: UARTstring(buf);
+"588
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 589: UARTstring("\r\n");
+"589
+[e ( _UARTstring (1 :s 199C ]
+"590
+}
+[; ;StringCommand.c: 590: }
+[e $U 2268  ]
+"591
+[e :U 2267 ]
+[; ;StringCommand.c: 591: else
+[; ;StringCommand.c: 592: {
+"592
+{
+[; ;StringCommand.c: 593: UARTstring("\r\nTime Not Set Successfully");
+"593
+[e ( _UARTstring (1 :s 200C ]
+"594
+}
+[e :U 2268 ]
+"595
+}
+[; ;StringCommand.c: 594: }
+[; ;StringCommand.c: 595: }
+[e $U 2269  ]
+"596
+[e :U 2266 ]
+[; ;StringCommand.c: 596: else
+[; ;StringCommand.c: 597: {
+"597
+{
+[; ;StringCommand.c: 598: UARTstring("\r\nInvalid Time Entered\r\n");
+"598
+[e ( _UARTstring (1 :s 201C ]
+[; ;StringCommand.c: 599: UARTstring("Format is MM/DD/YY HH:MM:SS AM\r\n");
+"599
+[e ( _UARTstring (1 :s 202C ]
+"600
 }
 [e :U 2269 ]
-[; ;StringCommand.c: 580: }
-[; ;StringCommand.c: 581: break;
-"581
+[; ;StringCommand.c: 600: }
+[; ;StringCommand.c: 601: break;
+"601
 [e $U 2264  ]
-"582
+"602
 }
 [e :U 2265 ]
-"583
+"603
 }
 [e :U 2262 ]
-"556
+"576
 [e $U 2263  ]
 [e :U 2264 ]
-"584
+"604
 }
-[; ;StringCommand.c: 582: }
-[; ;StringCommand.c: 583: }
-[; ;StringCommand.c: 584: }
+[; ;StringCommand.c: 602: }
+[; ;StringCommand.c: 603: }
+[; ;StringCommand.c: 604: }
 [e $U 2270  ]
-"585
+"605
 [e :U 2261 ]
-[; ;StringCommand.c: 585: else
-[; ;StringCommand.c: 586: {
-"586
+[; ;StringCommand.c: 605: else
+[; ;StringCommand.c: 606: {
+"606
 {
-[; ;StringCommand.c: 587: UARTstring("RTC What???\n");
-"587
+[; ;StringCommand.c: 607: UARTstring("RTC What???\n");
+"607
 [e ( _UARTstring (1 :s 203C ]
-"588
+"608
 }
 [e :U 2270 ]
 [e :U 2260 ]
 [e :U 2254 ]
-"589
+"609
 }
-[; ;StringCommand.c: 588: }
-[; ;StringCommand.c: 589: }
-[e $U 2271  ]
-"590
-[e :U 2252 ]
-[; ;StringCommand.c: 590: else
-[; ;StringCommand.c: 591: {
-"591
-{
-[; ;StringCommand.c: 592: UARTstring("Real Time Clock Help Menu\r\n\n");
-"592
-[e ( _UARTstring (1 :s 204C ]
-[; ;StringCommand.c: 593: UARTstring("Actions:\r\n");
-"593
-[e ( _UARTstring (1 :s 205C ]
-[; ;StringCommand.c: 594: UARTstring("Battery\r\n");
-"594
-[e ( _UARTstring (1 :s 206C ]
-[; ;StringCommand.c: 595: UARTstring("Read\r\n");
-"595
-[e ( _UARTstring (1 :s 207C ]
-[; ;StringCommand.c: 596: UARTstring("Set\r\n\n");
-"596
-[e ( _UARTstring (1 :s 208C ]
-[; ;StringCommand.c: 597: UARTstring("To command the RTC, type the action\r\n followed by"
-[; ;StringCommand.c: 598: " the parameters \r\n\n");
-"598
-[e ( _UARTstring (1 :s 209C ]
-[; ;StringCommand.c: 599: UARTstring("further sub menus available by entering the action and a '?'");
-"599
-[e ( _UARTstring (1 :s 210C ]
-[; ;StringCommand.c: 600: UARTstring("i.e. RTC Set Time?\r\n");
-"600
-[e ( _UARTstring (1 :s 211C ]
-[; ;StringCommand.c: 601: LCD_Scroll("RTC Menu");
-"601
-[e ( _LCD_Scroll (1 -> :s 212C `*uc ]
-[; ;StringCommand.c: 602: LCD_Scroll("Commands:");
-"602
-[e ( _LCD_Scroll (1 -> :s 213C `*uc ]
-[; ;StringCommand.c: 603: LCD_Scroll("Battery");
-"603
-[e ( _LCD_Scroll (1 -> :s 214C `*uc ]
-[; ;StringCommand.c: 604: LCD_Scroll("Read");
-"604
-[e ( _LCD_Scroll (1 -> :s 215C `*uc ]
-[; ;StringCommand.c: 605: LCD_Scroll("Set");
-"605
-[e ( _LCD_Scroll (1 -> :s 216C `*uc ]
-"607
-}
-[e :U 2271 ]
-"608
-}
-[; ;StringCommand.c: 607: }
 [; ;StringCommand.c: 608: }
-[e $U 2272  ]
+[; ;StringCommand.c: 609: }
+[e $U 2271  ]
 "610
-[e :U 2251 ]
-[; ;StringCommand.c: 610: else if (StartsWith(Input, "joe"))
-[e $ ! != -> ( _StartsWith (2 , _Input :s 217C `i -> -> -> 0 `i `uc `i 2273  ]
+[e :U 2252 ]
+[; ;StringCommand.c: 610: else
 [; ;StringCommand.c: 611: {
 "611
 {
-[; ;StringCommand.c: 612: if (!StringContains(Input, "?"))
+[; ;StringCommand.c: 612: UARTstring("Real Time Clock Help Menu\r\n\n");
 "612
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 218C `i -> -> -> 0 `i `uc `i 2274  ]
-[; ;StringCommand.c: 613: {
+[e ( _UARTstring (1 :s 204C ]
+[; ;StringCommand.c: 613: UARTstring("Actions:\r\n");
 "613
-{
-[; ;StringCommand.c: 614: if (StringMatch(Input, "joesroomlight=on"))
+[e ( _UARTstring (1 :s 205C ]
+[; ;StringCommand.c: 614: UARTstring("Battery\r\n");
 "614
-[e $ ! != -> ( _StringMatch (2 , _Input :s 219C `i -> -> -> 0 `i `uc `i 2275  ]
-[; ;StringCommand.c: 615: {
+[e ( _UARTstring (1 :s 206C ]
+[; ;StringCommand.c: 615: UARTstring("Read\r\n");
 "615
-{
-[; ;StringCommand.c: 616: INTCONbits.GIE = 0;
+[e ( _UARTstring (1 :s 207C ]
+[; ;StringCommand.c: 616: UARTstring("Set\r\n\n");
 "616
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 617: Send_Config2(0b00000001, SubLightON);
-"617
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 618: Send_Config2(0b00000001, SubLightON);
+[e ( _UARTstring (1 :s 208C ]
+[; ;StringCommand.c: 617: UARTstring("To command the RTC, type the action\r\n followed by"
+[; ;StringCommand.c: 618: " the parameters \r\n\n");
 "618
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 619: Send_Config2(0b00000001, SubLightON);
+[e ( _UARTstring (1 :s 209C ]
+[; ;StringCommand.c: 619: UARTstring("further sub menus available by entering the action and a '?'");
 "619
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 620: Send_Config2(0b00000001, SubLightON);
+[e ( _UARTstring (1 :s 210C ]
+[; ;StringCommand.c: 620: UARTstring("i.e. RTC Set Time?\r\n");
 "620
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 621: Send_Config2(0b00000001, SubLightON);
+[e ( _UARTstring (1 :s 211C ]
+[; ;StringCommand.c: 621: LCD_Scroll("RTC Menu");
 "621
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 622: Send_Config2(0b00000001, SubLightON);
+[e ( _LCD_Scroll (1 -> :s 212C `*uc ]
+[; ;StringCommand.c: 622: LCD_Scroll("Commands:");
 "622
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 623: Send_Config2(0b00000001, SubLightON);
+[e ( _LCD_Scroll (1 -> :s 213C `*uc ]
+[; ;StringCommand.c: 623: LCD_Scroll("Battery");
 "623
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 624: Send_Config2(0b00000001, SubLightON);
+[e ( _LCD_Scroll (1 -> :s 214C `*uc ]
+[; ;StringCommand.c: 624: LCD_Scroll("Read");
 "624
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 625: Send_Config2(0b00000001, SubLightON);
+[e ( _LCD_Scroll (1 -> :s 215C `*uc ]
+[; ;StringCommand.c: 625: LCD_Scroll("Set");
 "625
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
-[; ;StringCommand.c: 626: INTCONbits.GIE = 1;
-"626
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 627: UARTstring("Joe's room light On");
+[e ( _LCD_Scroll (1 -> :s 216C `*uc ]
 "627
-[e ( _UARTstring (1 :s 220C ]
-[; ;StringCommand.c: 628: LCDdisplayFeedback("Joe room lt On");
-"628
-[e ( _LCDdisplayFeedback (1 -> :s 221C `*uc ]
-"629
 }
-[; ;StringCommand.c: 629: }
-[e $U 2276  ]
+[e :U 2271 ]
+"628
+}
+[; ;StringCommand.c: 627: }
+[; ;StringCommand.c: 628: }
+[e $U 2272  ]
 "630
-[e :U 2275 ]
-[; ;StringCommand.c: 630: else if (StringMatch(Input, "joesroomlight=off"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 222C `i -> -> -> 0 `i `uc `i 2277  ]
+[e :U 2251 ]
+[; ;StringCommand.c: 630: else if (StartsWith(Input, "joe"))
+[e $ ! != -> ( _StartsWith (2 , _Input :s 217C `i -> -> -> 0 `i `uc `i 2273  ]
 [; ;StringCommand.c: 631: {
 "631
 {
-[; ;StringCommand.c: 632: INTCONbits.GIE = 0;
+[; ;StringCommand.c: 632: if (!StringContains(Input, "?"))
 "632
-[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;StringCommand.c: 633: Send_Config2(0b00000001, SubLightOFF);
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 218C `i -> -> -> 0 `i `uc `i 2274  ]
+[; ;StringCommand.c: 633: {
 "633
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 634: Send_Config2(0b00000001, SubLightOFF);
-"634
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 635: Send_Config2(0b00000001, SubLightOFF);
-"635
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 636: Send_Config2(0b00000001, SubLightOFF);
-"636
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 637: Send_Config2(0b00000001, SubLightOFF);
-"637
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 638: Send_Config2(0b00000001, SubLightOFF);
-"638
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 639: Send_Config2(0b00000001, SubLightOFF);
-"639
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 640: Send_Config2(0b00000001, SubLightOFF);
-"640
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 641: Send_Config2(0b00000001, SubLightOFF);
-"641
-[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
-[; ;StringCommand.c: 642: INTCONbits.GIE = 1;
-"642
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;StringCommand.c: 643: UARTstring("Joes room light Off");
-"643
-[e ( _UARTstring (1 :s 223C ]
-[; ;StringCommand.c: 644: LCDdisplayFeedback("Joe room lt Off");
-"644
-[e ( _LCDdisplayFeedback (1 -> :s 224C `*uc ]
-"645
-}
-[; ;StringCommand.c: 645: }
-[e $U 2278  ]
-"646
-[e :U 2277 ]
-[; ;StringCommand.c: 646: else
-[; ;StringCommand.c: 647: {
-"647
 {
-[; ;StringCommand.c: 648: UARTstring("Joe's room what???");
+[; ;StringCommand.c: 634: if (StringMatch(Input, "joesroomlight=on"))
+"634
+[e $ ! != -> ( _StringMatch (2 , _Input :s 219C `i -> -> -> 0 `i `uc `i 2275  ]
+[; ;StringCommand.c: 635: {
+"635
+{
+[; ;StringCommand.c: 636: INTCONbits.GIE = 0;
+"636
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 637: Send_Config2(0b00000001, SubLightON);
+"637
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 638: Send_Config2(0b00000001, SubLightON);
+"638
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 639: Send_Config2(0b00000001, SubLightON);
+"639
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 640: Send_Config2(0b00000001, SubLightON);
+"640
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 641: Send_Config2(0b00000001, SubLightON);
+"641
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 642: Send_Config2(0b00000001, SubLightON);
+"642
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 643: Send_Config2(0b00000001, SubLightON);
+"643
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 644: Send_Config2(0b00000001, SubLightON);
+"644
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 645: Send_Config2(0b00000001, SubLightON);
+"645
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightON ]
+[; ;StringCommand.c: 646: INTCONbits.GIE = 1;
+"646
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 647: UARTstring("Joe's room light On");
+"647
+[e ( _UARTstring (1 :s 220C ]
+[; ;StringCommand.c: 648: LCDdisplayFeedback("Joe room lt On");
 "648
-[e ( _UARTstring (1 :s 225C ]
-[; ;StringCommand.c: 649: LCDdisplayFeedback("Joe room what??");
+[e ( _LCDdisplayFeedback (1 -> :s 221C `*uc ]
 "649
-[e ( _LCDdisplayFeedback (1 -> :s 226C `*uc ]
+}
+[; ;StringCommand.c: 649: }
+[e $U 2276  ]
 "650
+[e :U 2275 ]
+[; ;StringCommand.c: 650: else if (StringMatch(Input, "joesroomlight=off"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 222C `i -> -> -> 0 `i `uc `i 2277  ]
+[; ;StringCommand.c: 651: {
+"651
+{
+[; ;StringCommand.c: 652: INTCONbits.GIE = 0;
+"652
+[e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
+[; ;StringCommand.c: 653: Send_Config2(0b00000001, SubLightOFF);
+"653
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 654: Send_Config2(0b00000001, SubLightOFF);
+"654
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 655: Send_Config2(0b00000001, SubLightOFF);
+"655
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 656: Send_Config2(0b00000001, SubLightOFF);
+"656
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 657: Send_Config2(0b00000001, SubLightOFF);
+"657
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 658: Send_Config2(0b00000001, SubLightOFF);
+"658
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 659: Send_Config2(0b00000001, SubLightOFF);
+"659
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 660: Send_Config2(0b00000001, SubLightOFF);
+"660
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 661: Send_Config2(0b00000001, SubLightOFF);
+"661
+[e ( _Send_Config2 (2 , -> -> 1 `i `uc &U _SubLightOFF ]
+[; ;StringCommand.c: 662: INTCONbits.GIE = 1;
+"662
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;StringCommand.c: 663: UARTstring("Joes room light Off");
+"663
+[e ( _UARTstring (1 :s 223C ]
+[; ;StringCommand.c: 664: LCDdisplayFeedback("Joe room lt Off");
+"664
+[e ( _LCDdisplayFeedback (1 -> :s 224C `*uc ]
+"665
+}
+[; ;StringCommand.c: 665: }
+[e $U 2278  ]
+"666
+[e :U 2277 ]
+[; ;StringCommand.c: 666: else
+[; ;StringCommand.c: 667: {
+"667
+{
+[; ;StringCommand.c: 668: UARTstring("Joe's room what???");
+"668
+[e ( _UARTstring (1 :s 225C ]
+[; ;StringCommand.c: 669: LCDdisplayFeedback("Joe room what??");
+"669
+[e ( _LCDdisplayFeedback (1 -> :s 226C `*uc ]
+"670
 }
 [e :U 2278 ]
 [e :U 2276 ]
-"651
+"671
 }
-[; ;StringCommand.c: 650: }
-[; ;StringCommand.c: 651: }
+[; ;StringCommand.c: 670: }
+[; ;StringCommand.c: 671: }
 [e $U 2279  ]
-"652
+"672
 [e :U 2274 ]
-[; ;StringCommand.c: 652: else
-[; ;StringCommand.c: 653: {
-"653
+[; ;StringCommand.c: 672: else
+[; ;StringCommand.c: 673: {
+"673
 {
-[; ;StringCommand.c: 654: UARTstring("Joes Room Help Menu\r\n\n");
-"654
+[; ;StringCommand.c: 674: UARTstring("Joes Room Help Menu\r\n\n");
+"674
 [e ( _UARTstring (1 :s 227C ]
-[; ;StringCommand.c: 655: UARTstring("Devices:\r\n");
-"655
+[; ;StringCommand.c: 675: UARTstring("Devices:\r\n");
+"675
 [e ( _UARTstring (1 :s 228C ]
-[; ;StringCommand.c: 656: UARTstring("Light\r\n\n");
-"656
+[; ;StringCommand.c: 676: UARTstring("Light\r\n\n");
+"676
 [e ( _UARTstring (1 :s 229C ]
-[; ;StringCommand.c: 657: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
-"657
+[; ;StringCommand.c: 677: UARTstring("To control a device enter the device followed by '=' and 'On/Off'\r\n");
+"677
 [e ( _UARTstring (1 :s 230C ]
-[; ;StringCommand.c: 658: UARTstring("i.e. Joes room light = On\r\n");
-"658
+[; ;StringCommand.c: 678: UARTstring("i.e. Joes room light = On\r\n");
+"678
 [e ( _UARTstring (1 :s 231C ]
-[; ;StringCommand.c: 659: LCD_Scroll("Joe room Menu");
-"659
+[; ;StringCommand.c: 679: LCD_Scroll("Joe room Menu");
+"679
 [e ( _LCD_Scroll (1 -> :s 232C `*uc ]
-[; ;StringCommand.c: 660: LCD_Scroll("Devices:");
-"660
+[; ;StringCommand.c: 680: LCD_Scroll("Devices:");
+"680
 [e ( _LCD_Scroll (1 -> :s 233C `*uc ]
-[; ;StringCommand.c: 661: LCD_Scroll("Light");
-"661
+[; ;StringCommand.c: 681: LCD_Scroll("Light");
+"681
 [e ( _LCD_Scroll (1 -> :s 234C `*uc ]
-"662
+"682
 }
 [e :U 2279 ]
-"663
-}
-[; ;StringCommand.c: 662: }
-[; ;StringCommand.c: 663: }
-[e $U 2280  ]
-"665
-[e :U 2273 ]
-[; ;StringCommand.c: 665: else if (StringMatch(Input, "?"))
-[e $ ! != -> ( _StringMatch (2 , _Input :s 235C `i -> -> -> 0 `i `uc `i 2281  ]
-[; ;StringCommand.c: 666: {
-"666
-{
-[; ;StringCommand.c: 667: UARTstring("Devices:\r\n\n");
-"667
-[e ( _UARTstring (1 :s 236C ]
-[; ;StringCommand.c: 668: UARTstring("Bedroom\r\n");
-"668
-[e ( _UARTstring (1 :s 237C ]
-[; ;StringCommand.c: 669: UARTstring("Livingroom\r\n");
-"669
-[e ( _UARTstring (1 :s 238C ]
-[; ;StringCommand.c: 670: UARTstring("Joes room\r\n");
-"670
-[e ( _UARTstring (1 :s 239C ]
-[; ;StringCommand.c: 671: UARTstring("Christmas Tree\r\n");
-"671
-[e ( _UARTstring (1 :s 240C ]
-[; ;StringCommand.c: 672: UARTstring("Contrast\r\n");
-"672
-[e ( _UARTstring (1 :s 241C ]
-[; ;StringCommand.c: 673: UARTstring("ADC\r\n");
-"673
-[e ( _UARTstring (1 :s 242C ]
-[; ;StringCommand.c: 674: UARTstring("RTC\r\n\n");
-"674
-[e ( _UARTstring (1 :s 243C ]
-[; ;StringCommand.c: 675: UARTstring("For Device help enter device followed by a '?' \r\n");
-"675
-[e ( _UARTstring (1 :s 244C ]
-[; ;StringCommand.c: 676: UARTstring("i.e.  Livingroom?\r\n\r\n");
-"676
-[e ( _UARTstring (1 :s 245C ]
-[; ;StringCommand.c: 677: UARTstring("Current Time\r\n");
-"677
-[e ( _UARTstring (1 :s 246C ]
-[; ;StringCommand.c: 678: SetLCDcursor(0, 0);
-"678
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 679: LCDPrintString("Help Menu");
-"679
-[e ( _LCDPrintString (1 -> :s 247C `*uc ]
-[; ;StringCommand.c: 680: if(!READ_RTC_TIME())
-"680
-[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2282  ]
-[; ;StringCommand.c: 681: {
-"681
-{
-[; ;StringCommand.c: 682: SprintDate(buf, NowTime, 0);
-"682
-[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
-[; ;StringCommand.c: 683: UARTstring(buf);
 "683
-[e ( _UARTstring (1 -> &U _buf `*Cuc ]
-[; ;StringCommand.c: 684: UARTstring("\r\n");
-"684
-[e ( _UARTstring (1 :s 248C ]
-[; ;StringCommand.c: 686: if(NowTime.HoursAM_PM)
-"686
-[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2283  ]
-[; ;StringCommand.c: 687: {
-"687
-{
-[; ;StringCommand.c: 688: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
-"688
-[e ( _sprintf (1 , , , , , (. , &U _buf :s 249C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
-"689
 }
-[; ;StringCommand.c: 689: }
-[e $U 2284  ]
-"690
-[e :U 2283 ]
-[; ;StringCommand.c: 690: else
-[; ;StringCommand.c: 691: {
-"691
+[; ;StringCommand.c: 682: }
+[; ;StringCommand.c: 683: }
+[e $U 2280  ]
+"685
+[e :U 2273 ]
+[; ;StringCommand.c: 685: else if (StringMatch(Input, "?"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 235C `i -> -> -> 0 `i `uc `i 2281  ]
+[; ;StringCommand.c: 686: {
+"686
 {
-[; ;StringCommand.c: 692: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+[; ;StringCommand.c: 687: UARTstring("Devices:\r\n\n");
+"687
+[e ( _UARTstring (1 :s 236C ]
+[; ;StringCommand.c: 688: UARTstring("Bedroom\r\n");
+"688
+[e ( _UARTstring (1 :s 237C ]
+[; ;StringCommand.c: 689: UARTstring("Livingroom\r\n");
+"689
+[e ( _UARTstring (1 :s 238C ]
+[; ;StringCommand.c: 690: UARTstring("Joes room\r\n");
+"690
+[e ( _UARTstring (1 :s 239C ]
+[; ;StringCommand.c: 691: UARTstring("Christmas Tree\r\n");
+"691
+[e ( _UARTstring (1 :s 240C ]
+[; ;StringCommand.c: 692: UARTstring("Contrast\r\n");
 "692
-[e ( _sprintf (1 , , , , , (. , &U _buf :s 250C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+[e ( _UARTstring (1 :s 241C ]
+[; ;StringCommand.c: 693: UARTstring("ADC\r\n");
 "693
+[e ( _UARTstring (1 :s 242C ]
+[; ;StringCommand.c: 694: UARTstring("RTC\r\n\n");
+"694
+[e ( _UARTstring (1 :s 243C ]
+[; ;StringCommand.c: 695: UARTstring("For Device help enter device followed by a '?' \r\n");
+"695
+[e ( _UARTstring (1 :s 244C ]
+[; ;StringCommand.c: 696: UARTstring("i.e.  Livingroom?\r\n\r\n");
+"696
+[e ( _UARTstring (1 :s 245C ]
+[; ;StringCommand.c: 697: UARTstring("Current Time\r\n");
+"697
+[e ( _UARTstring (1 :s 246C ]
+[; ;StringCommand.c: 698: SetLCDcursor(0, 0);
+"698
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 699: LCDPrintString("Help Menu");
+"699
+[e ( _LCDPrintString (1 -> :s 247C `*uc ]
+[; ;StringCommand.c: 700: if(!READ_RTC_TIME())
+"700
+[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2282  ]
+[; ;StringCommand.c: 701: {
+"701
+{
+[; ;StringCommand.c: 702: SprintDate(buf, NowTime, 0);
+"702
+[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
+[; ;StringCommand.c: 703: UARTstring(buf);
+"703
+[e ( _UARTstring (1 -> &U _buf `*Cuc ]
+[; ;StringCommand.c: 704: UARTstring("\r\n");
+"704
+[e ( _UARTstring (1 :s 248C ]
+[; ;StringCommand.c: 706: if(NowTime.HoursAM_PM)
+"706
+[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2283  ]
+[; ;StringCommand.c: 707: {
+"707
+{
+[; ;StringCommand.c: 708: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+"708
+[e ( _sprintf (1 , , , , , (. , &U _buf :s 249C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"709
+}
+[; ;StringCommand.c: 709: }
+[e $U 2284  ]
+"710
+[e :U 2283 ]
+[; ;StringCommand.c: 710: else
+[; ;StringCommand.c: 711: {
+"711
+{
+[; ;StringCommand.c: 712: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+"712
+[e ( _sprintf (1 , , , , , (. , &U _buf :s 250C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"713
 }
 [e :U 2284 ]
-[; ;StringCommand.c: 693: }
-[; ;StringCommand.c: 694: SetLCDcursor(1, 0);
-"694
+[; ;StringCommand.c: 713: }
+[; ;StringCommand.c: 714: SetLCDcursor(1, 0);
+"714
 [e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 695: LCDPrintString(buf);
-"695
+[; ;StringCommand.c: 715: LCDPrintString(buf);
+"715
 [e ( _LCDPrintString (1 &U _buf ]
-[; ;StringCommand.c: 696: LCD_Scroll("Device Menus:");
-"696
+[; ;StringCommand.c: 716: LCD_Scroll("Device Menus:");
+"716
 [e ( _LCD_Scroll (1 -> :s 251C `*uc ]
-[; ;StringCommand.c: 697: LCD_Scroll("Bedroom?");
-"697
+[; ;StringCommand.c: 717: LCD_Scroll("Bedroom?");
+"717
 [e ( _LCD_Scroll (1 -> :s 252C `*uc ]
-[; ;StringCommand.c: 698: LCD_Scroll("Livingroom?");
-"698
+[; ;StringCommand.c: 718: LCD_Scroll("Livingroom?");
+"718
 [e ( _LCD_Scroll (1 -> :s 253C `*uc ]
-[; ;StringCommand.c: 699: LCD_Scroll("Joes Room?");
-"699
+[; ;StringCommand.c: 719: LCD_Scroll("Joes Room?");
+"719
 [e ( _LCD_Scroll (1 -> :s 254C `*uc ]
-[; ;StringCommand.c: 700: LCD_Scroll("Christmas Tree?");
-"700
+[; ;StringCommand.c: 720: LCD_Scroll("Christmas Tree?");
+"720
 [e ( _LCD_Scroll (1 -> :s 255C `*uc ]
-[; ;StringCommand.c: 701: LCD_Scroll("Contrast?");
-"701
+[; ;StringCommand.c: 721: LCD_Scroll("Contrast?");
+"721
 [e ( _LCD_Scroll (1 -> :s 256C `*uc ]
-[; ;StringCommand.c: 702: LCD_Scroll("ADC?");
-"702
+[; ;StringCommand.c: 722: LCD_Scroll("ADC?");
+"722
 [e ( _LCD_Scroll (1 -> :s 257C `*uc ]
-[; ;StringCommand.c: 703: LCD_Scroll("RTC?");
-"703
+[; ;StringCommand.c: 723: LCD_Scroll("RTC?");
+"723
 [e ( _LCD_Scroll (1 -> :s 258C `*uc ]
-"704
+"724
 }
-[; ;StringCommand.c: 704: }
+[; ;StringCommand.c: 724: }
 [e $U 2285  ]
-"705
+"725
 [e :U 2282 ]
-[; ;StringCommand.c: 705: else
-[; ;StringCommand.c: 706: {
-"706
+[; ;StringCommand.c: 725: else
+[; ;StringCommand.c: 726: {
+"726
 {
-[; ;StringCommand.c: 707: UARTstring("ERROR: Can't Read RTC\r\n");
-"707
+[; ;StringCommand.c: 727: UARTstring("ERROR: Can't Read RTC\r\n");
+"727
 [e ( _UARTstring (1 :s 259C ]
-[; ;StringCommand.c: 708: SetLCDcursor(1, 0);
-"708
+[; ;StringCommand.c: 728: SetLCDcursor(1, 0);
+"728
 [e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 709: LCDPrintString("RTC isnt working");
-"709
+[; ;StringCommand.c: 729: LCDPrintString("RTC isnt working");
+"729
 [e ( _LCDPrintString (1 -> :s 260C `*uc ]
-"710
+"730
 }
 [e :U 2285 ]
-[; ;StringCommand.c: 710: }
-[; ;StringCommand.c: 711: LCDclearCount =0;
-"711
+[; ;StringCommand.c: 730: }
+[; ;StringCommand.c: 731: LCDclearCount =0;
+"731
 [e = _LCDclearCount -> -> -> 0 `i `l `ul ]
-"712
+"732
 }
-[; ;StringCommand.c: 712: }
+[; ;StringCommand.c: 732: }
 [e $U 2286  ]
-"714
+"734
 [e :U 2281 ]
-[; ;StringCommand.c: 714: else
-[; ;StringCommand.c: 715: {
-"715
+[; ;StringCommand.c: 734: else
+[; ;StringCommand.c: 735: {
+"735
 {
-[; ;StringCommand.c: 716: UARTstring("Invalid Command");
-"716
+[; ;StringCommand.c: 736: UARTstring("Invalid Command");
+"736
 [e ( _UARTstring (1 :s 261C ]
-[; ;StringCommand.c: 717: LCDdisplayFeedback("Invalid Command");
-"717
+[; ;StringCommand.c: 737: LCDdisplayFeedback("Invalid Command");
+"737
 [e ( _LCDdisplayFeedback (1 -> :s 262C `*uc ]
-"718
+"738
 }
 [e :U 2286 ]
 [e :U 2280 ]
@@ -18164,12 +18166,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2203 ]
 [e :U 2188 ]
 [e :U 2178 ]
-[; ;StringCommand.c: 718: }
-[; ;StringCommand.c: 720: UARTstring("\r\n\r\n");
-"720
+[; ;StringCommand.c: 738: }
+[; ;StringCommand.c: 740: UARTstring("\r\n\r\n");
+"740
 [e ( _UARTstring (1 :s 263C ]
-[; ;StringCommand.c: 721: }
-"721
+[; ;StringCommand.c: 741: }
+"741
 [e :UE 2162 ]
 }
 [p f _sprintf 15435181 ]

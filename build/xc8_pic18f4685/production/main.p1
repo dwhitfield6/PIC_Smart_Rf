@@ -20,7 +20,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RTC_INIT `(v ~T0 @X0 0 ef ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"18 MISC.h
+"26 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "27 PWM.h
 [v _SetContrast `(v ~T0 @X0 0 ef1`uc ]
@@ -40,11 +40,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
 "33
 [v _LCDScreenUpdate `(v ~T0 @X0 0 ef ]
-"44 main.c
+"59 main.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
 "23 StringCommand.h
 [v _Command `(v ~T0 @X0 0 ef1`*uc ]
-"19 MISC.h
+"27 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15374,6 +15374,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15404,20 +15405,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;UART.h: 23: void InitUART(void);
@@ -15430,16 +15431,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 26: void delayUS(long US);
+[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 34: void lowercase(unsigned char* Input);
+[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 66: void InitApp(void);
 [; ;UART.h: 23: void InitUART(void);
@@ -15965,293 +15967,293 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RTC.h: 54: void RTC_INIT(void);
 [; ;RTC.h: 55: unsigned char SET_RTC_TIME(TIME SetTime);
 [; ;RTC.h: 56: unsigned char Parse_Time(unsigned char* This);
-[; ;main.c: 38: extern unsigned char config;
-[; ;main.c: 39: extern unsigned int spbrg;
-[; ;main.c: 40: extern unsigned char baudconfig;
-[; ;main.c: 41: extern struct TIME NowTime;
-[; ;main.c: 43: extern char Txdata[100];
-[; ;main.c: 44: extern char Rxdata[100];
-"45 main.c
+[; ;main.c: 54: extern unsigned char config;
+[; ;main.c: 55: extern unsigned int spbrg;
+[; ;main.c: 56: extern unsigned char baudconfig;
+[; ;main.c: 57: extern struct TIME NowTime;
+[; ;main.c: 58: extern char Txdata[100];
+[; ;main.c: 59: extern char Rxdata[100];
+"60 main.c
 [v _buf `uc ~T0 @X0 -> 100 `i e ]
-[; ;main.c: 45: unsigned char buf[100];
-"46
+[; ;main.c: 60: unsigned char buf[100];
+"61
 [v _bufferCount `uc ~T0 @X0 1 e ]
 [i _bufferCount
 -> -> 0 `i `uc
 ]
-[; ;main.c: 46: unsigned char bufferCount =0;
-"51
+[; ;main.c: 61: unsigned char bufferCount =0;
+"67
 [v _main `(v ~T0 @X0 1 ef ]
-"52
+"68
 {
-[; ;main.c: 51: void main(void)
-[; ;main.c: 52: {
+[; ;main.c: 67: void main(void)
+[; ;main.c: 68: {
 [e :U _main ]
 [f ]
-"53
+"69
 [v _ii `uc ~T0 @X0 1 a ]
-[; ;main.c: 53: unsigned char ii =0;
+[; ;main.c: 69: unsigned char ii =0;
 [e = _ii -> -> 0 `i `uc ]
-"54
+"70
 [v _count `uc ~T0 @X0 1 a ]
-[; ;main.c: 54: unsigned char count =0;
+[; ;main.c: 70: unsigned char count =0;
 [e = _count -> -> 0 `i `uc ]
-[; ;main.c: 56: ConfigureOscillator();
-"56
+[; ;main.c: 72: ConfigureOscillator();
+"72
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 57: InitApp();
-"57
+[; ;main.c: 73: InitApp();
+"73
 [e ( _InitApp ..  ]
-[; ;main.c: 58: InitUART();
-"58
+[; ;main.c: 74: InitUART();
+"74
 [e ( _InitUART ..  ]
-[; ;main.c: 59: EnableInternalADC(1);
-"59
+[; ;main.c: 75: EnableInternalADC(1);
+"75
 [e ( _EnableInternalADC (1 -> -> 1 `i `uc ]
-[; ;main.c: 60: PWM_init();
-"60
+[; ;main.c: 76: PWM_init();
+"76
 [e ( _PWM_init ..  ]
-[; ;main.c: 61: ContrastPWM_init();
-"61
+[; ;main.c: 77: ContrastPWM_init();
+"77
 [e ( _ContrastPWM_init ..  ]
-[; ;main.c: 62: init_LCD();
-"62
+[; ;main.c: 78: init_LCD();
+"78
 [e ( _init_LCD ..  ]
-[; ;main.c: 63: Init_I2C_Master();
-"63
+[; ;main.c: 79: Init_I2C_Master();
+"79
 [e ( _Init_I2C_Master ..  ]
-[; ;main.c: 64: RTC_INIT();
-"64
+[; ;main.c: 80: RTC_INIT();
+"80
 [e ( _RTC_INIT ..  ]
-[; ;main.c: 66: for(ii =0; ii <10;ii++)
-"66
+[; ;main.c: 82: for(ii =0; ii <10;ii++)
+"82
 {
 [e = _ii -> -> 0 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2163  ]
 [e $U 2164  ]
-"67
+"83
 [e :U 2163 ]
-[; ;main.c: 67: {
+[; ;main.c: 83: {
 {
-[; ;main.c: 68: LATD |= 0b00000010;
-"68
+[; ;main.c: 84: LATD |= 0b00000010;
+"84
 [e =| _LATD -> -> 2 `i `uc ]
-[; ;main.c: 69: LATD &= ~0b00000100;
-"69
+[; ;main.c: 85: LATD &= ~0b00000100;
+"85
 [e =& _LATD -> ~ -> 4 `i `uc ]
-[; ;main.c: 70: delayUS(50000);
-"70
+[; ;main.c: 86: delayUS(50000);
+"86
 [e ( _delayUS (1 -> 50000 `l ]
-[; ;main.c: 71: LATD |= 0b00000100;
-"71
+[; ;main.c: 87: LATD |= 0b00000100;
+"87
 [e =| _LATD -> -> 4 `i `uc ]
-[; ;main.c: 72: LATD &= ~0b00000010;
-"72
+[; ;main.c: 88: LATD &= ~0b00000010;
+"88
 [e =& _LATD -> ~ -> 2 `i `uc ]
-[; ;main.c: 73: delayUS(50000);
-"73
+[; ;main.c: 89: delayUS(50000);
+"89
 [e ( _delayUS (1 -> 50000 `l ]
-"74
+"90
 }
-"66
+"82
 [e ++ _ii -> -> 1 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2163  ]
 [e :U 2164 ]
-"74
-}
-[; ;main.c: 74: }
-[; ;main.c: 75: SetContrast(65);
-"75
-[e ( _SetContrast (1 -> -> 65 `i `uc ]
-[; ;main.c: 76: delayUS(20);
-"76
-[e ( _delayUS (1 -> -> 20 `i `l ]
-[; ;main.c: 77: SetLCDcursor(0, 0);
-"77
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 78: LCDPrintString("Starting");
-"78
-[e ( _LCDPrintString (1 -> :s 1C `*uc ]
-[; ;main.c: 79: delayUS(100000);
-"79
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 80: SetLCDcursor(0, 0);
-"80
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 81: LCDPrintString("Starting.");
-"81
-[e ( _LCDPrintString (1 -> :s 2C `*uc ]
-[; ;main.c: 82: delayUS(100000);
-"82
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 83: SetLCDcursor(0, 0);
-"83
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 84: LCDPrintString("Starting..");
-"84
-[e ( _LCDPrintString (1 -> :s 3C `*uc ]
-[; ;main.c: 85: delayUS(100000);
-"85
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 86: SetLCDcursor(0, 0);
-"86
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 87: LCDPrintString("Starting...");
-"87
-[e ( _LCDPrintString (1 -> :s 4C `*uc ]
-[; ;main.c: 88: delayUS(100000);
-"88
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 89: SetLCDcursor(0, 0);
-"89
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 90: LCDPrintString("Starting....");
 "90
-[e ( _LCDPrintString (1 -> :s 5C `*uc ]
-[; ;main.c: 91: delayUS(100000);
+}
+[; ;main.c: 90: }
+[; ;main.c: 91: SetContrast(65);
 "91
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 92: SetLCDcursor(0, 0);
+[e ( _SetContrast (1 -> -> 65 `i `uc ]
+[; ;main.c: 92: delayUS(20);
 "92
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 93: LCDPrintString("Starting.....");
+[e ( _delayUS (1 -> -> 20 `i `l ]
+[; ;main.c: 93: SetLCDcursor(0, 0);
 "93
-[e ( _LCDPrintString (1 -> :s 6C `*uc ]
-[; ;main.c: 94: delayUS(100000);
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 94: LCDPrintString("Starting");
 "94
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 95: SetLCDcursor(0, 0);
+[e ( _LCDPrintString (1 -> :s 1C `*uc ]
+[; ;main.c: 95: delayUS(100000);
 "95
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 96: LCDPrintString("Starting......");
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 96: SetLCDcursor(0, 0);
 "96
-[e ( _LCDPrintString (1 -> :s 7C `*uc ]
-[; ;main.c: 97: delayUS(100000);
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 97: LCDPrintString("Starting.");
 "97
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 98: SetLCDcursor(0, 0);
+[e ( _LCDPrintString (1 -> :s 2C `*uc ]
+[; ;main.c: 98: delayUS(100000);
 "98
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 99: LCDPrintString("Starting.......");
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 99: SetLCDcursor(0, 0);
 "99
-[e ( _LCDPrintString (1 -> :s 8C `*uc ]
-[; ;main.c: 100: delayUS(100000);
-"100
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 101: SetLCDcursor(0, 0);
-"101
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 102: LCDPrintString("Starting........");
+[; ;main.c: 100: LCDPrintString("Starting..");
+"100
+[e ( _LCDPrintString (1 -> :s 3C `*uc ]
+[; ;main.c: 101: delayUS(100000);
+"101
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 102: SetLCDcursor(0, 0);
 "102
-[e ( _LCDPrintString (1 -> :s 9C `*uc ]
-[; ;main.c: 103: delayUS(100000);
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 103: LCDPrintString("Starting...");
 "103
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 104: SetLCDcursor(1, 0);
+[e ( _LCDPrintString (1 -> :s 4C `*uc ]
+[; ;main.c: 104: delayUS(100000);
 "104
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 105: LCDPrintString("Enter '?'");
-"105
-[e ( _LCDPrintString (1 -> :s 10C `*uc ]
-[; ;main.c: 106: delayUS(100000);
-"106
 [e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 107: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+[; ;main.c: 105: SetLCDcursor(0, 0);
+"105
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 106: LCDPrintString("Starting....");
+"106
+[e ( _LCDPrintString (1 -> :s 5C `*uc ]
+[; ;main.c: 107: delayUS(100000);
 "107
-[e ( _UARTstring (1 :s 11C ]
-[; ;main.c: 109: for(count =100; count >0; count-=5)
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 108: SetLCDcursor(0, 0);
+"108
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 109: LCDPrintString("Starting.....");
 "109
+[e ( _LCDPrintString (1 -> :s 6C `*uc ]
+[; ;main.c: 110: delayUS(100000);
+"110
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 111: SetLCDcursor(0, 0);
+"111
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 112: LCDPrintString("Starting......");
+"112
+[e ( _LCDPrintString (1 -> :s 7C `*uc ]
+[; ;main.c: 113: delayUS(100000);
+"113
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 114: SetLCDcursor(0, 0);
+"114
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 115: LCDPrintString("Starting.......");
+"115
+[e ( _LCDPrintString (1 -> :s 8C `*uc ]
+[; ;main.c: 116: delayUS(100000);
+"116
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 117: SetLCDcursor(0, 0);
+"117
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 118: LCDPrintString("Starting........");
+"118
+[e ( _LCDPrintString (1 -> :s 9C `*uc ]
+[; ;main.c: 119: delayUS(100000);
+"119
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 120: SetLCDcursor(1, 0);
+"120
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 121: LCDPrintString("Enter '?'");
+"121
+[e ( _LCDPrintString (1 -> :s 10C `*uc ]
+[; ;main.c: 122: delayUS(100000);
+"122
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 123: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+"123
+[e ( _UARTstring (1 :s 11C ]
+[; ;main.c: 125: for(count =100; count >0; count-=5)
+"125
 {
 [e = _count -> -> 100 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2166  ]
 [e $U 2167  ]
-"110
+"126
 [e :U 2166 ]
-[; ;main.c: 110: {
+[; ;main.c: 126: {
 {
-[; ;main.c: 111: SetDuty(count);
-"111
+[; ;main.c: 127: SetDuty(count);
+"127
 [e ( _SetDuty (1 _count ]
-[; ;main.c: 112: delayUS(50000);
-"112
+[; ;main.c: 128: delayUS(50000);
+"128
 [e ( _delayUS (1 -> 50000 `l ]
-"113
+"129
 }
-"109
+"125
 [e =- _count -> -> 5 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2166  ]
 [e :U 2167 ]
-"113
-}
-[; ;main.c: 113: }
-[; ;main.c: 115: LATD &= ~(0b00000010+0b00000100);
-"115
-[e =& _LATD -> ~ + -> 2 `i -> 4 `i `uc ]
-[; ;main.c: 116: ReadUSART();
-"116
-[e ( _ReadUSART ..  ]
-[; ;main.c: 117: ReadUSART();
-"117
-[e ( _ReadUSART ..  ]
-[; ;main.c: 118: ReadUSART();
-"118
-[e ( _ReadUSART ..  ]
-[; ;main.c: 120: ClearLCD();
-"120
-[e ( _ClearLCD ..  ]
-[; ;main.c: 121: SetLCDcursor(0, 0);
-"121
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 122: LCDPrintChar('>');
-"122
-[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
-[; ;main.c: 124: while(1)
-"124
-[e :U 2170 ]
-[; ;main.c: 125: {
-"125
-{
-[; ;main.c: 127: LCDScreenUpdate();
-"127
-[e ( _LCDScreenUpdate ..  ]
-[; ;main.c: 128: if(Rxdata[0] != 0)
-"128
-[e $ ! != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `i -> 0 `i 2172  ]
-[; ;main.c: 129: {
 "129
-{
-[; ;main.c: 130: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
-"130
-[e $ ! && != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 13 `ui != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 10 `ui 2173  ]
-[; ;main.c: 131: {
+}
+[; ;main.c: 129: }
+[; ;main.c: 131: LATD &= ~(0b00000010+0b00000100);
 "131
-{
-[; ;main.c: 132: Command(Rxdata);
+[e =& _LATD -> ~ + -> 2 `i -> 4 `i `uc ]
+[; ;main.c: 132: ReadUSART();
 "132
-[e ( _Command (1 &U _Rxdata ]
+[e ( _ReadUSART ..  ]
+[; ;main.c: 133: ReadUSART();
 "133
+[e ( _ReadUSART ..  ]
+[; ;main.c: 134: ReadUSART();
+"134
+[e ( _ReadUSART ..  ]
+[; ;main.c: 136: ClearLCD();
+"136
+[e ( _ClearLCD ..  ]
+[; ;main.c: 137: SetLCDcursor(0, 0);
+"137
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 138: LCDPrintChar('>');
+"138
+[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
+[; ;main.c: 140: while(1)
+"140
+[e :U 2170 ]
+[; ;main.c: 141: {
+"141
+{
+[; ;main.c: 143: LCDScreenUpdate();
+"143
+[e ( _LCDScreenUpdate ..  ]
+[; ;main.c: 144: if(Rxdata[0] != 0)
+"144
+[e $ ! != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `i -> 0 `i 2172  ]
+[; ;main.c: 145: {
+"145
+{
+[; ;main.c: 146: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
+"146
+[e $ ! && != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 13 `ui != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 10 `ui 2173  ]
+[; ;main.c: 147: {
+"147
+{
+[; ;main.c: 148: Command(Rxdata);
+"148
+[e ( _Command (1 &U _Rxdata ]
+"149
 }
 [e :U 2173 ]
-[; ;main.c: 133: }
-[; ;main.c: 134: cleanBuffer(Rxdata, 100);
-"134
+[; ;main.c: 149: }
+[; ;main.c: 150: cleanBuffer(Rxdata, 100);
+"150
 [e ( _cleanBuffer (2 , &U _Rxdata -> 100 `i ]
-[; ;main.c: 135: UARTstring("\r\n>");
-"135
+[; ;main.c: 151: UARTstring("\r\n>");
+"151
 [e ( _UARTstring (1 :s 12C ]
-"136
+"152
 }
 [e :U 2172 ]
-"137
+"153
 }
 [e :U 2169 ]
-"124
+"140
 [e $U 2170  ]
 [e :U 2171 ]
-[; ;main.c: 136: }
-[; ;main.c: 137: }
-[; ;main.c: 138: }
-"138
+[; ;main.c: 152: }
+[; ;main.c: 153: }
+[; ;main.c: 154: }
+"154
 [e :UE 2162 ]
 }
 [a 1C 83 116 97 114 116 105 110 103 0 ]

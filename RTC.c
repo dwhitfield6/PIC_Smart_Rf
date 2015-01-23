@@ -1,4 +1,20 @@
 /******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/22/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Contains functions that control Real Time Clock.
+ *
+/******************************************************************************/
+
+/******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
 #define USE_OR_MASKS
@@ -12,9 +28,9 @@
 
 #if defined(__XC) || defined(HI_TECH_C)
 
-#include <stdint.h>      /* For uint8_t definition */
-#include <stdio.h>
-#include <stdbool.h>      /* For true/false definition */
+#include <stdint.h>        /* For uint8_t definition */
+#include <stdbool.h>       /* For true/false definition */
+#include <stdio.h>       /* For true/false definition */
 
 #endif
 
@@ -34,7 +50,7 @@ void RTC_INIT(void)
 void RTC_Clock_Enable(void)
 {
     int tempSeconds =0;
-    unsigned char Error=0;
+    char Error=0;
 
     tempSeconds = I2C_Read_At_Address(RTCaddress, RTCseconds);
     Error = I2C_Write_At_Address( RTCaddress, RTCseconds, (tempSeconds & 0x7F) );
@@ -72,7 +88,7 @@ void RTC_TIME_NONMilitary(void)
 void RTC_Clock_Disable(void)
 {
     int tempSeconds =0;
-    unsigned char Error=0;
+    char Error=0;
 
     tempSeconds = I2C_Read_At_Address(RTCaddress, RTCseconds);
     Error = I2C_Write_At_Address( RTCaddress, RTCseconds, (tempSeconds | 0x80) );

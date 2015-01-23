@@ -10,9 +10,9 @@ CND_CONF=xc8_pic18f4685
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/proj6_UART_RF_ADC_LCD_RTC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=proj6_UART_RF_ADC_LCD_RTC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=proj6uartrfadclcdrtc/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/Smart_Rf_PIC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=Smart_Rf_PIC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=smartrfpic/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/proj6uartrfadclcdrtc/bin
+makeDirectory ${TMPDIR}/smartrfpic/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/proj6uartrfadclcdrtc.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/smartrfpic.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/proj6uartrfadclcdrtc.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/smartrfpic.tar *
 checkReturnCode
 
 # Cleanup

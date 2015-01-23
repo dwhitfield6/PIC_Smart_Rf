@@ -15,6 +15,14 @@
 
 #include "system.h"
 
+#define SYS_FREQ_US 41
+
+//inverse relationship
+#define delayConst 31
+
+#define Even 2
+#define Odd 3
+
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -25,4 +33,4 @@ int GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
-unsigned char CheckSum_byte(unsigned int This);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
