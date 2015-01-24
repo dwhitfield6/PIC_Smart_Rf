@@ -19519,33 +19519,33 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 42 "ADC.h"
+# 59 "ADC.h"
 void EnableInternalADC(unsigned char channels);
 void DisableInternalADC(void);
 int InternalADC_Read(unsigned char channel);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 23 "UART.h"
-void InitUART(void);
+# 66 "UART.h"
+void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(const unsigned char *data);
-void UARTchar(unsigned char data);
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 
-# 49 "ADC.c"
+# 53 "ADC.c"
 void EnableInternalADC(unsigned char channels)
 {
 unsigned char config =0;
@@ -19598,7 +19598,7 @@ config |= 0b00000100;
 ADCON1 = config;
 }
 
-# 106
+# 110
 int InternalADC_Read(unsigned char channel)
 {
 ADCON0 =0;
@@ -19617,7 +19617,7 @@ while(ADCON0 & 0b00000010);
 return ((ADRESH << 8) + ADRESL);
 }
 
-# 129
+# 133
 void DisableInternalADC(void)
 {
 ADCON0 &= ~0b00000001;

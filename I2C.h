@@ -1,3 +1,18 @@
+/******************************************************************************/
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/21/15     1.0         Created log.
+/******************************************************************************/
+
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -15,6 +30,10 @@
 
 #define I2Cbaud	5
 
+/******************************************************************************/
+/* Defines                                                                    */
+/******************************************************************************/
+
 /* SSPCON1 REGISTER */
 #define   SSPENB    			0b00100000  	/* Enable serial port and configures SCK, SDO, SDI*/
 #define   SLAVE_7   			0b00000110     	/* I2C Slave mode, 7-bit address*/
@@ -23,12 +42,14 @@
 #define   MASTER_FIRMW			0b00001011		//I2C Firmware Controlled Master mode (slave Idle)
 #define   SLAVE_7_STSP_INT 		0b00001110		//I2C Slave mode, 7-bit address with Start and Stop bit interrupts enabled
 #define   SLAVE_10_STSP_INT             0b00001111		//I2C Slave mode, 10-bit address with Start and Stop bit interrupts enabled
-
 /* SSPSTAT REGISTER */
 #define   SLEW_OFF  			0b10000000  	/* Slew rate disabled for 100kHz mode */
 #define   SLEW_ON   			0b00000000  	/* Slew rate enabled for 400kHz mode  */
-
 #define StartI2C()  SSPCON2bits.SEN=1;while(SSPCON2bits.SEN)
+
+/******************************************************************************/
+/* Function prototypes                                                        */
+/******************************************************************************/
 
 void Init_I2C_Master(void);
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );

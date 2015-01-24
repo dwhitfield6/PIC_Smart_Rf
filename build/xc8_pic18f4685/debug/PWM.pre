@@ -19519,20 +19519,83 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 24 "PWM.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 23 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
+extern int errno;
+
+# 54
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 99 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+
+# 191
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 44 "PWM.h"
 void PWM_init();
 void SetDuty(unsigned char Duty);
 void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 24 "PWM.c"
+# 54 "PWM.c"
 void PWM_init()
 {
 
@@ -19554,6 +19617,8 @@ T2CON |= 0x10;
 T2CON |= 0b00000100;
 CCP1CON |= 0b00001100;
 }
+
+# 81
 void ContrastPWM_init()
 {
 
@@ -19561,6 +19626,8 @@ void ContrastPWM_init()
 SetDuty(0);
 ECCP1CON |= 0b00001100;
 }
+
+# 94
 void SetContrast(unsigned char Duty)
 {
 unsigned int temp=0;
@@ -19581,6 +19648,8 @@ ECCP1CON |= MSB << 4;
 ECCPR1L = LSB;
 __nop();
 }
+
+# 120
 void SetDuty(unsigned char Duty)
 {
 unsigned int temp=0;
@@ -19599,11 +19668,13 @@ CCPR1L = LSB;
 __nop();
 
 }
+
+# 144
 void SetFreq(unsigned int freq)
 {
 
 unsigned char temp =0;
-temp = (unsigned char)(((41000000L >> 2)/(freq*1000))-1);
+temp = (unsigned char)(((40960000L >> 2)/(freq*1000))-1);
 
 PR2 = temp;
 }

@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -38,6 +38,19 @@
 #include "RF.h"          /* User funct/params, such as InitApp */
 #include "MISC.h"          /* User funct/params, such as InitApp */
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Send_Config1
+ *
+ * The function sends a data array of configuration 1.
+/******************************************************************************/
 void Send_Config1( unsigned char pin,const unsigned char* data)
 {
     unsigned char i=0;
@@ -65,6 +78,11 @@ void Send_Config1( unsigned char pin,const unsigned char* data)
 
 }
 
+/******************************************************************************/
+/* Zero_Config1
+ *
+ * The function sends a configuration 1 Zero waveform over the RF pin.
+/******************************************************************************/
 void Zero_Config1(unsigned char pin)
 {
 	LATD |= pin;
@@ -77,6 +95,11 @@ void Zero_Config1(unsigned char pin)
 	delayUS(ZEROlongCONF1 );
 }
 
+/******************************************************************************/
+/* One_Config1
+ *
+ * The function sends a configuration 1 One waveform over the RF pin.
+/******************************************************************************/
 void One_Config1(unsigned char pin)
 {
 	LATD |= pin;
@@ -89,6 +112,11 @@ void One_Config1(unsigned char pin)
 	delayUS(ONEshortCONF1);
 }
 
+/******************************************************************************/
+/* f_Config1
+ *
+ * The function sends a configuration 1 float waveform over the RF pin.
+/******************************************************************************/
 void f_Config1(unsigned char pin)
 {
 	LATD |= pin;
@@ -101,6 +129,11 @@ void f_Config1(unsigned char pin)
 	delayUS(FshortCONF1);
 }
 
+/******************************************************************************/
+/* Send_Config2
+ *
+ * The function sends a data array of configuration 2.
+/******************************************************************************/
 void Send_Config2( unsigned char pin,const unsigned char* data)
 {
     unsigned char i=0;
@@ -122,6 +155,11 @@ void Send_Config2( unsigned char pin,const unsigned char* data)
 
 }
 
+/******************************************************************************/
+/* Zero_Config2
+ *
+ * The function sends a configuration 2 Zero waveform over the RF pin.
+/******************************************************************************/
 void Zero_Config2(unsigned char pin)
 {
 	LATD |= pin;
@@ -130,6 +168,11 @@ void Zero_Config2(unsigned char pin)
 	delayUS(ZEROlongCONF2);
 }
 
+/******************************************************************************/
+/* One_Config2
+ *
+ * The function sends a configuration 2 One waveform over the RF pin.
+/******************************************************************************/
 void One_Config2(unsigned char pin)
 {
 	LATD |= pin;

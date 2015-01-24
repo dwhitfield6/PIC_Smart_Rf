@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)

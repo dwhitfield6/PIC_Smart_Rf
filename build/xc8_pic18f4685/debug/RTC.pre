@@ -19516,6 +19516,9 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
+typedef unsigned char bool;
+
 # 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
 typedef void * va_list[1];
 
@@ -19579,10 +19582,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
-typedef unsigned char bool;
-
-# 33 "I2C.h"
+# 54 "I2C.h"
 void Init_I2C_Master(void);
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -19591,7 +19591,7 @@ void ResetI2C( void );
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
 unsigned char readI2C( void );
 
-# 33
+# 54
 void Init_I2C_Master(void);
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -19600,9 +19600,10 @@ void ResetI2C( void );
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
 unsigned char readI2C( void );
 
-# 35 "RTC.h"
+# 51 "RTC.h"
 extern struct TIME NowTime;
 
+# 57
 typedef struct TIME{
 unsigned char Seconds;
 unsigned char Minutes;
@@ -19615,6 +19616,7 @@ unsigned char Month;
 unsigned char Year;
 }TIME ;
 
+# 73
 unsigned char READ_RTC_TIME(void);
 void RTC_Clock_Disable(void);
 void RTC_Clock_Enable(void);
@@ -19624,42 +19626,47 @@ void RTC_INIT(void);
 unsigned char SET_RTC_TIME(TIME SetTime);
 unsigned char Parse_Time(unsigned char* This);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 61 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
 unsigned char StringMatch(unsigned char* This, const unsigned char* That);
 unsigned char StringContains(unsigned char* This, const unsigned char* That);
 unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-int GetEnteredNumber(unsigned char* This);
+long GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+unsigned char ISNUMBER(unsigned char ascii);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 42 "ADC.h"
+# 58 "ADC.h"
 void EnableInternalADC(unsigned char channels);
 void DisableInternalADC(void);
 int InternalADC_Read(unsigned char channel);
 
-# 26 "RTC.c"
+# 46 "RTC.c"
 TIME NowTime;
 
+# 57
 void RTC_INIT(void)
 {
 RTC_Clock_Enable();
 RTC_TIME_NONMilitary();
 InternalADC_Read(2);
 }
+
+# 70
 void RTC_Clock_Enable(void)
 {
 int tempSeconds =0;
-unsigned char Error=0;
+signed char Error=0;
 
 tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
 Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds & 0x7F) );
@@ -19670,6 +19677,7 @@ ResetI2C();
 }
 }
 
+# 89
 void RTC_TIME_NONMilitary(void)
 {
 int temphours = 0;
@@ -19694,10 +19702,11 @@ ResetI2C();
 }
 }
 
+# 119
 void RTC_Clock_Disable(void)
 {
 int tempSeconds =0;
-unsigned char Error=0;
+signed char Error=0;
 
 tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
 Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds | 0x80) );
@@ -19708,9 +19717,10 @@ ResetI2C();
 }
 }
 
+# 139
 unsigned char READ_RTC_TIME(void)
 {
-unsigned char Error =0;
+signed char Error =0;
 unsigned char temp[7];
 
 Error = I2C_Read_Sequential( 0b1101000, 0x00, temp, 7 );
@@ -19733,9 +19743,11 @@ ResetI2C();
 }
 return Error;
 }
+
+# 170
 unsigned char SET_RTC_TIME(TIME SetTime)
 {
-unsigned char Error =0;
+signed char Error =0;
 unsigned char temp[7];
 
 temp[0] = ((SetTime.Seconds /10) << 4) + (SetTime.Seconds % 10);
@@ -19789,6 +19801,8 @@ return 7;
 
 return 0;
 }
+
+# 233
 void READ_RTC_SECONDS(void)
 {
 int tempSeconds =0;
@@ -19805,6 +19819,7 @@ ResetI2C();
 }
 }
 
+# 254
 void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military)
 {
 if(!Military)
@@ -19824,6 +19839,7 @@ sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d", DisplayTime.Month, DisplayT
 }
 }
 
+# 279
 unsigned char Parse_Time(unsigned char* This)
 {
 TIME TempTime;

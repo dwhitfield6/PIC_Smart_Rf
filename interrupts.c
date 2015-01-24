@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -45,6 +45,7 @@
 extern char Txdata[100];
 extern char Rxdata[100];
 extern unsigned char bufferCount;
+extern unsigned char TX_OLD;
 
 /******************************************************************************/
 /* Interrupt Routines                                                         */
@@ -114,85 +115,92 @@ void low_isr(void)
     
     INTCONbits.PEIE = 0; //Disable pheripheral interrupt
       
-     //check if the interrupt is caused by RX pin
+    //check if the interrupt is caused by RX pin
     if(PIR1bits.RCIF == 1)
     {
-       PIE1bits.RCIE = 0; //Disable RX interrupt
-       RCSTAbits.CREN = 0;
-       rx = ReadUSART(); //read the byte from rx register
+        PIE1bits.RCIE = 0; //Disable RX interrupt
+        RCSTAbits.CREN = 0;
+        rx = ReadUSART(); //read the byte from rx register
 
-        if(rx != '\n' && rx != '\r')
+        if(TX_OLD == '>' && rx == '>' && bufferCount == 0)//repeat characters of >> in the very beginning
         {
-            if(rx == 0x07f) //backspace
-            {
-                if(bufferCount !=0)
-                {
-                    UARTstring("\r");
-                    for(i=0;i<=bufferCount;i++)
-                    {
-                        UARTstring(" ");
-                    }
-                    UARTstring("\r");
-                    UARTstring(">");
-                    bufferCount--;
-                    TEMP_Rxdata[bufferCount] = 0;
-                    UARTstring(TEMP_Rxdata);
-                    if(bufferCount <15)
-                    {
-                        for(j=0; j<15;j++)
-                        {
-                               LCD_TEMP[j] = TEMP_Rxdata[j];
-                        }
-                        ClearLCD();
-                        SetLCDcursor(0, 0);
-                        LCDPrintChar('>');
-                        SetLCDcursor(0, 1);
-                        LCDPrintString(LCD_TEMP);
-                    }
-                }
-            }
-            else
-            {
-                WriteUSART(rx); //echo the data
-                if(bufferCount < 15)
-                {
-                    LCDPrintChar(rx);
-                }
-                TEMP_Rxdata[bufferCount] = rx;
-                bufferCount++;
-            }
-            if(bufferCount>=99)
-            {
-                UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
-                cleanBuffer(TEMP_Rxdata, 100);
-                bufferCount=0;
-            }
-            
-        }
-        else if((rx == '\n' || rx == '\r') && bufferCount == 0)
-        {
-            TEMP_Rxdata[bufferCount] = rx;
-            BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
-            cleanBuffer(TEMP_Rxdata, 100);
+           NOP();//dont use this character
         }
         else
         {
-            if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
+            if(rx != '\n' && rx != '\r')
             {
-                BufferCopy(TEMP_Rxdata, Rxdata, 100,1);
+                if(rx == 0x7f || rx == 0x08) //delete
+                {
+                    if(bufferCount !=0)
+                    {
+                        UARTstring("\r");
+                        for(i=0;i<=bufferCount;i++)
+                        {
+                            UARTstring(" ");
+                        }
+                        UARTstring("\r");
+                        UARTstring(">");
+                        bufferCount--;
+                        TEMP_Rxdata[bufferCount] = 0;
+                        UARTstring(TEMP_Rxdata);
+                        if(bufferCount <15)
+                        {
+                            for(j=0; j<15;j++)
+                            {
+                                   LCD_TEMP[j] = TEMP_Rxdata[j];
+                            }
+                            ClearLCD();
+                            SetLCDcursor(0, 0);
+                            LCDPrintChar('>');
+                            SetLCDcursor(0, 1);
+                            LCDPrintString(LCD_TEMP);
+                        }
+                    }
+                }
+                else
+                {
+                    WriteUSART(rx); //echo the data
+                    if(bufferCount < 15)
+                    {
+                        LCDPrintChar(rx);
+                    }
+                    TEMP_Rxdata[bufferCount] = rx;
+                    bufferCount++;
+                }
+                if(bufferCount>=99)
+                {
+                    UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
+                    cleanBuffer(TEMP_Rxdata, 100);
+                    bufferCount=0;
+                }
+
+            }
+            else if((rx == '\n' || rx == '\r') && bufferCount == 0)
+            {
+                TEMP_Rxdata[bufferCount] = rx;
+                BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+                cleanBuffer(TEMP_Rxdata, 100);
             }
             else
             {
-                BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+                if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
+                {
+                    BufferCopy(TEMP_Rxdata, Rxdata, 100,1);
+                }
+                else
+                {
+                    BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+                }
+                ClearLCD();
+                SetLCDcursor(0, 0);
+                LCDPrintChar('>');
+                cleanBuffer(TEMP_Rxdata, 100);
+                bufferCount=0;
             }
-            ClearLCD();
-            SetLCDcursor(0, 0);
-            LCDPrintChar('>');
-            cleanBuffer(TEMP_Rxdata, 100);
-            bufferCount=0;
         }
-        PIE1bits.RCIE = 1; //Enable RX interrupt
-        RCSTAbits.CREN = 1;
     }
+    PIE1bits.RCIE = 1; //Enable RX interrupt
+    RCSTAbits.CREN = 1;
     INTCONbits.PEIE = 1; //Enable pheripheral interrupt
 }

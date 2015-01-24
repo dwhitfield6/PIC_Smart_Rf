@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -39,6 +39,10 @@
 
 /******************************************************************************/
 /* Global Variables                                                           */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Functions                                                                  */
 /******************************************************************************/
 
 /******************************************************************************/
@@ -193,10 +197,10 @@ unsigned char StartsWith(unsigned char* This,const unsigned char* That)
  *
  * This function returns the number that is contained in the string.
 /******************************************************************************/
-int GetEnteredNumber(unsigned char* This)
+long GetEnteredNumber(unsigned char* This)
 {
     unsigned char i =0;
-    int temp =0;
+    long temp =0;
     unsigned char negative =0;
     while(*This != '=' && *This != 0)
     {
@@ -205,8 +209,7 @@ int GetEnteredNumber(unsigned char* This)
     }
     if(*This == 0)
     {
-        return 32000; //return the largest unsigned int to show error
-                    // there is no equal
+        return NOEQUAL; // there is no equal
     }
     This++;
     if(*This == ' ')
@@ -216,7 +219,7 @@ int GetEnteredNumber(unsigned char* This)
     }
     else if (*This == '=')
     {
-         return 32002; //double equal
+         return DOUBLEEQUAL; //double equal
     }
     else if(*This == '-')
     {
@@ -226,26 +229,16 @@ int GetEnteredNumber(unsigned char* This)
     }
     else if(*This == 0)
     {
-        return 32001; //return the largest unsigned int to show error
-                    // there is no value after the equal
+        return NOVALUE; // there is no value after the equal
     }
-    while(*This != 0)
+    while(*This >=48 && *This <= 57)
     {
         temp = temp * 10;
-        if (*This >= 48 && *This <= 57)
+        temp += *This - 48;
+        i++;
+        if(i>32)
         {
-            temp+= *This - 48;
-            i++;
-        }
-        else
-        {
-            return 32003;
-            //letter mixed in with number
-        }
-        if(i>5)
-        {
-             return 32004;
-            //number too big
+            return TOOBIG;//number too big
         }
         This++;
     }
@@ -254,7 +247,6 @@ int GetEnteredNumber(unsigned char* This)
         temp = (temp * -1);
     }
     return temp;
-
 }
 
 /******************************************************************************/
@@ -376,6 +368,23 @@ unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
         {
             return 1;
         }
+        return 0;
+    }
+}
+
+/******************************************************************************/
+/* ISNUMBER
+ *
+ * The function returns TRUE if the ascii value is associated with a number.
+/******************************************************************************/
+unsigned char ISNUMBER(unsigned char ascii)
+{
+    if(ascii >= '0' && ascii <='9')
+    {
+        return 1;
+    }
+    else
+    {
         return 0;
     }
 }

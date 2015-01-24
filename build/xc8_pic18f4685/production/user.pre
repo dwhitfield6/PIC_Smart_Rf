@@ -19582,13 +19582,13 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 26 "MISC.h"
+# 55 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19601,7 +19601,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
-# 44 "user.c"
+# 53 "user.c"
 void InitApp(void)
 {
 TRISDbits.TRISD1 = 0;
@@ -19642,6 +19642,6 @@ RCONbits.IPEN = 1;
 INTCONbits.PEIE = 1;
 INTCONbits.GIE = 1;
 
-# 91
+# 100
 }
 

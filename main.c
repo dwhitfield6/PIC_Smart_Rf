@@ -7,6 +7,7 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/22/15     1.0         Created log.
+ * 01/22/15     1.0_DW0     Added version banner.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -17,7 +18,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -48,6 +49,11 @@
 #include "RTC.h"
 
 /******************************************************************************/
+/* Version                                                                    */
+/******************************************************************************/
+
+unsigned char Version[20] = "1.0_DW0";
+/******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
 
@@ -71,13 +77,17 @@ void main(void)
     
     ConfigureOscillator();
     InitApp();
-    InitUART();
+    InitUART(115200, 0);
     EnableInternalADC(1);
     PWM_init();
     ContrastPWM_init();
     init_LCD();
     Init_I2C_Master();
     RTC_INIT();
+
+    UARTstring("Firmware Version: ");
+    UARTstring(Version);
+    UARTstring("\r\n");
 
     for(ii =0; ii <10;ii++)
     {
@@ -92,6 +102,7 @@ void main(void)
     delayUS(20);
     SetLCDcursor(0, 0);
     LCDPrintString("Starting");
+    UARTstring("Starting...");
     delayUS(100000);
     SetLCDcursor(0, 0);
     LCDPrintString("Starting.");
@@ -145,10 +156,12 @@ void main(void)
         {
             if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
             {
-                Command(Rxdata);
+                if(Command(Rxdata))
+                {
+                    UARTstring("\r\n>");
+                }
             }
-            cleanBuffer(Rxdata, 100);
-            UARTstring("\r\n>");
+            cleanBuffer(Rxdata, 100);            
         }
     }
 }

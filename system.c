@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -36,13 +36,22 @@
 
 #include "system.h"
 
-/* Refer to the device datasheet for information about available
-oscillator configurations. */
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+
+/******************************************************************************/
+/* ConfigureOscillator
+ *
+ * The function waits here until the oscillator is ready.
+/******************************************************************************/
 void ConfigureOscillator(void)
 {
-    /* TODO Add clock switching code if appropriate.  */
-
-    /* Typical actions in this function are to tweak the oscillator tuning
-    register, select new clock sources, and to wait until new clock sources
-    are stable before resuming execution of the main project. */
+    //clock source is the crystal oscilator.
+    //PLL is enabled.
+    while(!(OSCCON & OSTS));//wait for oscillator to be running
 }

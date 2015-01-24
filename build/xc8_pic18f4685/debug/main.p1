@@ -1,50 +1,50 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"20 system.h
+"54 system.h
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
-"66 user.h
+"90 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
-"56 UART.h
-[v _InitUART `(v ~T0 @X0 0 ef ]
-"42 ADC.h
+"104 UART.h
+[v _InitUART `(v ~T0 @X0 0 ef2`ul`uc ]
+"58 ADC.h
 [v _EnableInternalADC `(v ~T0 @X0 0 ef1`uc ]
-"24 PWM.h
+"44 PWM.h
 [v _PWM_init `(v ~T0 @X0 0 ef ]
-"28
+"48
 [v _ContrastPWM_init `(v ~T0 @X0 0 ef ]
-"26 LCD.h
+"62 LCD.h
 [v _init_LCD `(v ~T0 @X0 0 ef ]
-"33 I2C.h
+"54 I2C.h
 [v _Init_I2C_Master `(v ~T0 @X0 0 ef ]
-"54 RTC.h
+"78 RTC.h
 [v _RTC_INIT `(v ~T0 @X0 0 ef ]
+"105 UART.h
+[v _UARTstring `(v ~T0 @X0 0 ef1`*uc ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"18 MISC.h
+"61 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
-"27 PWM.h
+"47 PWM.h
 [v _SetContrast `(v ~T0 @X0 0 ef1`uc ]
-"29 LCD.h
+"65 LCD.h
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"31
+"67
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*uc ]
-"57 UART.h
-[v _UARTstring `(v ~T0 @X0 0 ef1`*Cuc ]
-"25 PWM.h
+"45 PWM.h
 [v _SetDuty `(v ~T0 @X0 0 ef1`uc ]
 "596 C:\Program Files (x86)\Microchip\xc8\v1.33\include\plib\usart.h
 [v _ReadUSART `(uc ~T0 @X0 0 ef ]
-"30 LCD.h
+"66 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
-"32
+"68
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
-"33
+"69
 [v _LCDScreenUpdate `(v ~T0 @X0 0 ef ]
-"44 main.c
+"65 main.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
-"23 StringCommand.h
-[v _Command `(v ~T0 @X0 0 ef1`*uc ]
-"19 MISC.h
+"44 StringCommand.h
+[v _Command `(uc ~T0 @X0 0 ef1`*uc ]
+"62 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15374,6 +15374,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15404,57 +15405,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;UART.h: 56: void InitUART(void);
-[; ;UART.h: 57: void UARTstring(const unsigned char *data);
-[; ;UART.h: 58: void UARTchar(unsigned char data);
-[; ;UART.h: 59: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 60: char ReadUSART(void);
-[; ;UART.h: 61: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 62: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;UART.h: 56: void InitUART(void);
-[; ;UART.h: 57: void UARTstring(const unsigned char *data);
-[; ;UART.h: 58: void UARTchar(unsigned char data);
-[; ;UART.h: 59: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 60: char ReadUSART(void);
-[; ;UART.h: 61: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 62: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;user.h: 66: void InitApp(void);
-[; ;ADC.h: 42: void EnableInternalADC(unsigned char channels);
-[; ;ADC.h: 43: void DisableInternalADC(void);
-[; ;ADC.h: 44: int InternalADC_Read(unsigned char channel);
-[; ;StringCommand.h: 23: void Command(unsigned char* Input);
-"36 RF.h
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 61: void delayUS(long US);
+[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 69: void lowercase(unsigned char* Input);
+[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 105: void UARTstring(unsigned char *data);
+[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 109: char ReadUSART(void);
+[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 61: void delayUS(long US);
+[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 69: void lowercase(unsigned char* Input);
+[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 105: void UARTstring(unsigned char *data);
+[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 109: char ReadUSART(void);
+[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;user.h: 90: void InitApp(void);
+[; ;ADC.h: 58: void EnableInternalADC(unsigned char channels);
+[; ;ADC.h: 59: void DisableInternalADC(void);
+[; ;ADC.h: 60: int InternalADC_Read(unsigned char channel);
+[; ;StringCommand.h: 44: unsigned char Command(unsigned char* Input);
+"60 RF.h
 [v _TXdataE `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataE
 :U ..
@@ -15472,8 +15480,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 36: const unsigned char TXdataE[12] = {0,2,2,2,2,2,0,0,1,0,0,0};
-"37
+[; ;RF.h: 60: const unsigned char TXdataE[12] = {0,2,2,2,2,2,0,0,1,0,0,0};
+"61
 [v _TXdataD `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataD
 :U ..
@@ -15491,8 +15499,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 37: const unsigned char TXdataD[12] = {2,2,2,2,2,2,0,0,1,0,0,0};
-"38
+[; ;RF.h: 61: const unsigned char TXdataD[12] = {2,2,2,2,2,2,0,0,1,0,0,0};
+"62
 [v _TXdataF `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataF
 :U ..
@@ -15510,8 +15518,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 38: const unsigned char TXdataF[12] = {2,0,2,2,2,2,0,0,1,0,0,0};
-"39
+[; ;RF.h: 62: const unsigned char TXdataF[12] = {2,0,2,2,2,2,0,0,1,0,0,0};
+"63
 [v _TXToiletMyBathroom `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXToiletMyBathroom
 :U ..
@@ -15529,8 +15537,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 39: const unsigned char TXToiletMyBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,1};
-"40
+[; ;RF.h: 63: const unsigned char TXToiletMyBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,1};
+"64
 [v _TXToiletAlexBathroom `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXToiletAlexBathroom
 :U ..
@@ -15548,8 +15556,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 2 `i `uc
 ..
 ]
-[; ;RF.h: 40: const unsigned char TXToiletAlexBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,2};
-"53
+[; ;RF.h: 64: const unsigned char TXToiletAlexBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,2};
+"69
 [v _TXdataFrontOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataFrontOPENED
 :U ..
@@ -15567,8 +15575,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 53: const unsigned char TXdataFrontOPENED[12] = {0,0,0,0,0,0,0,0,0,0,1,0};
-"54
+[; ;RF.h: 69: const unsigned char TXdataFrontOPENED[12] = {0,0,0,0,0,0,0,0,0,0,1,0};
+"70
 [v _TXdataFrontCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataFrontCLOSED
 :U ..
@@ -15586,8 +15594,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 54: const unsigned char TXdataFrontCLOSED[12] = {0,0,0,0,0,0,0,0,0,0,2,0};
-"55
+[; ;RF.h: 70: const unsigned char TXdataFrontCLOSED[12] = {0,0,0,0,0,0,0,0,0,0,2,0};
+"71
 [v _TXdataBedroomOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataBedroomOPENED
 :U ..
@@ -15605,8 +15613,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 55: const unsigned char TXdataBedroomOPENED[12] = {0,0,0,0,0,0,0,0,0,2,0,0};
-"56
+[; ;RF.h: 71: const unsigned char TXdataBedroomOPENED[12] = {0,0,0,0,0,0,0,0,0,2,0,0};
+"72
 [v _TXdataBedroomCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataBedroomCLOSED
 :U ..
@@ -15624,8 +15632,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 56: const unsigned char TXdataBedroomCLOSED[12] = {0,0,0,0,0,0,0,0,0,1,0,0};
-"57
+[; ;RF.h: 72: const unsigned char TXdataBedroomCLOSED[12] = {0,0,0,0,0,0,0,0,0,1,0,0};
+"73
 [v _TXdataLabOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataLabOPENED
 :U ..
@@ -15643,8 +15651,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 57: const unsigned char TXdataLabOPENED[12] = {0,0,0,0,0,0,0,0,1,0,0,0};
-"58
+[; ;RF.h: 73: const unsigned char TXdataLabOPENED[12] = {0,0,0,0,0,0,0,0,1,0,0,0};
+"74
 [v _TXdataLabCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataLabCLOSED
 :U ..
@@ -15662,8 +15670,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 58: const unsigned char TXdataLabCLOSED[12] = {0,0,0,0,0,0,0,0,2,0,0,0};
-"66
+[; ;RF.h: 74: const unsigned char TXdataLabCLOSED[12] = {0,0,0,0,0,0,0,0,2,0,0,0};
+"89
 [v _fanON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fanON
 :U ..
@@ -15685,8 +15693,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 66: const unsigned char fanON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0};
-"67
+[; ;RF.h: 89: const unsigned char fanON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0};
+"90
 [v _fanOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fanOFF
 :U ..
@@ -15708,8 +15716,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 67: const unsigned char fanOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0};
-"68
+[; ;RF.h: 90: const unsigned char fanOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0};
+"91
 [v _BedON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _BedON
 :U ..
@@ -15731,8 +15739,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 68: const unsigned char BedON[] = {0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0};
-"69
+[; ;RF.h: 91: const unsigned char BedON[] = {0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0};
+"92
 [v _BedOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _BedOFF
 :U ..
@@ -15754,8 +15762,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 69: const unsigned char BedOFF[] = {0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0};
-"70
+[; ;RF.h: 92: const unsigned char BedOFF[] = {0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0};
+"93
 [v _AuxON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _AuxON
 :U ..
@@ -15777,8 +15785,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 70: const unsigned char AuxON[] = {0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0};
-"71
+[; ;RF.h: 93: const unsigned char AuxON[] = {0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0};
+"94
 [v _AuxOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _AuxOFF
 :U ..
@@ -15800,8 +15808,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 71: const unsigned char AuxOFF[] = {0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0};
-"74
+[; ;RF.h: 94: const unsigned char AuxOFF[] = {0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0};
+"97
 [v _Aux2ON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _Aux2ON
 :U ..
@@ -15823,8 +15831,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 74: const unsigned char Aux2ON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1};
-"75
+[; ;RF.h: 97: const unsigned char Aux2ON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1};
+"98
 [v _Aux2OFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _Aux2OFF
 :U ..
@@ -15846,8 +15854,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 75: const unsigned char Aux2OFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1};
-"78
+[; ;RF.h: 98: const unsigned char Aux2OFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1};
+"101
 [v _SubLightON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _SubLightON
 :U ..
@@ -15869,8 +15877,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 78: const unsigned char SubLightON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0};
-"79
+[; ;RF.h: 101: const unsigned char SubLightON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0};
+"102
 [v _SubLightOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _SubLightOFF
 :U ..
@@ -15892,377 +15900,414 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 79: const unsigned char SubLightOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0};
-[; ;RF.h: 81: void Send_Config1( unsigned char pin,const unsigned char* data);
-[; ;RF.h: 82: void Zero_Config1(unsigned char pin);
-[; ;RF.h: 83: void One_Config1(unsigned char pin);
-[; ;RF.h: 84: void f_Config1(unsigned char pin);
-[; ;RF.h: 85: void Send_Config2( unsigned char pin,const unsigned char* data);
-[; ;RF.h: 86: void Zero_Config2(unsigned char pin);
-[; ;RF.h: 87: void One_Config2(unsigned char pin);
-[; ;user.h: 66: void InitApp(void);
-[; ;ADC.h: 42: void EnableInternalADC(unsigned char channels);
-[; ;ADC.h: 43: void DisableInternalADC(void);
-[; ;ADC.h: 44: int InternalADC_Read(unsigned char channel);
-[; ;PWM.h: 24: void PWM_init();
-[; ;PWM.h: 25: void SetDuty(unsigned char Duty);
-[; ;PWM.h: 26: void SetFreq(unsigned int freq);
-[; ;PWM.h: 27: void SetContrast(unsigned char Duty);
-[; ;PWM.h: 28: void ContrastPWM_init();
-"23 LCD.h
+[; ;RF.h: 102: const unsigned char SubLightOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0};
+[; ;RF.h: 108: void Send_Config1( unsigned char pin,const unsigned char* data);
+[; ;RF.h: 109: void Zero_Config1(unsigned char pin);
+[; ;RF.h: 110: void One_Config1(unsigned char pin);
+[; ;RF.h: 111: void f_Config1(unsigned char pin);
+[; ;RF.h: 112: void Send_Config2( unsigned char pin,const unsigned char* data);
+[; ;RF.h: 113: void Zero_Config2(unsigned char pin);
+[; ;RF.h: 114: void One_Config2(unsigned char pin);
+[; ;user.h: 90: void InitApp(void);
+[; ;ADC.h: 58: void EnableInternalADC(unsigned char channels);
+[; ;ADC.h: 59: void DisableInternalADC(void);
+[; ;ADC.h: 60: int InternalADC_Read(unsigned char channel);
+[; ;PWM.h: 44: void PWM_init();
+[; ;PWM.h: 45: void SetDuty(unsigned char Duty);
+[; ;PWM.h: 46: void SetFreq(unsigned int freq);
+[; ;PWM.h: 47: void SetContrast(unsigned char Duty);
+[; ;PWM.h: 48: void ContrastPWM_init();
+"55 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
 -> -> -> 25000 `i `l `ul
 ]
-[; ;LCD.h: 23: unsigned long LCDclearCount=25000;
-"24
+[; ;LCD.h: 55: unsigned long LCDclearCount=25000;
+"56
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 24: unsigned char LCDwait=0;
-[; ;LCD.h: 26: void init_LCD();
-[; ;LCD.h: 27: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 28: void PulseEnablePin();
-[; ;LCD.h: 29: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 30: void ClearLCD();
-[; ;LCD.h: 31: void LCDPrintString(unsigned char *Text);
-[; ;LCD.h: 32: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 33: void LCDScreenUpdate();
-[; ;LCD.h: 34: void LCDdisplayFeedback(unsigned char *Text);
-[; ;LCD.h: 35: void LCD_Scroll(unsigned char* This);
-[; ;I2C.h: 33: void Init_I2C_Master(void);
-[; ;I2C.h: 34: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
-[; ;I2C.h: 35: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
-[; ;I2C.h: 36: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 37: void ResetI2C( void );
-[; ;I2C.h: 38: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 39: unsigned char readI2C( void );
-[; ;I2C.h: 33: void Init_I2C_Master(void);
-[; ;I2C.h: 34: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
-[; ;I2C.h: 35: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
-[; ;I2C.h: 36: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 37: void ResetI2C( void );
-[; ;I2C.h: 38: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 39: unsigned char readI2C( void );
-[; ;RTC.h: 35: extern struct TIME NowTime;
-[; ;RTC.h: 37: typedef struct TIME{
-[; ;RTC.h: 38: unsigned char Seconds;
-[; ;RTC.h: 39: unsigned char Minutes;
-[; ;RTC.h: 40: unsigned char Hours;
-[; ;RTC.h: 41: unsigned char HoursMilitary;
-[; ;RTC.h: 42: unsigned char HoursAM_PM;
-[; ;RTC.h: 43: unsigned char Day;
-[; ;RTC.h: 44: unsigned char Date;
-[; ;RTC.h: 45: unsigned char Month;
-[; ;RTC.h: 46: unsigned char Year;
-[; ;RTC.h: 47: }TIME ;
-[; ;RTC.h: 49: unsigned char READ_RTC_TIME(void);
-[; ;RTC.h: 50: void RTC_Clock_Disable(void);
-[; ;RTC.h: 51: void RTC_Clock_Enable(void);
-[; ;RTC.h: 52: void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military);
-[; ;RTC.h: 53: void RTC_TIME_NONMilitary(void);
-[; ;RTC.h: 54: void RTC_INIT(void);
-[; ;RTC.h: 55: unsigned char SET_RTC_TIME(TIME SetTime);
-[; ;RTC.h: 56: unsigned char Parse_Time(unsigned char* This);
-[; ;main.c: 38: extern unsigned char config;
-[; ;main.c: 39: extern unsigned int spbrg;
-[; ;main.c: 40: extern unsigned char baudconfig;
-[; ;main.c: 41: extern struct TIME NowTime;
-[; ;main.c: 43: extern char Txdata[100];
-[; ;main.c: 44: extern char Rxdata[100];
-"45 main.c
+[; ;LCD.h: 56: unsigned char LCDwait=0;
+[; ;LCD.h: 62: void init_LCD();
+[; ;LCD.h: 63: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 64: void PulseEnablePin();
+[; ;LCD.h: 65: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 66: void ClearLCD();
+[; ;LCD.h: 67: void LCDPrintString(unsigned char *Text);
+[; ;LCD.h: 68: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 69: void LCDScreenUpdate();
+[; ;LCD.h: 70: void LCDdisplayFeedback(unsigned char *Text);
+[; ;LCD.h: 71: void LCD_Scroll(unsigned char* This);
+[; ;I2C.h: 54: void Init_I2C_Master(void);
+[; ;I2C.h: 55: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
+[; ;I2C.h: 56: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
+[; ;I2C.h: 57: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 58: void ResetI2C( void );
+[; ;I2C.h: 59: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 60: unsigned char readI2C( void );
+[; ;I2C.h: 54: void Init_I2C_Master(void);
+[; ;I2C.h: 55: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
+[; ;I2C.h: 56: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
+[; ;I2C.h: 57: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 58: void ResetI2C( void );
+[; ;I2C.h: 59: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 60: unsigned char readI2C( void );
+[; ;RTC.h: 51: extern struct TIME NowTime;
+[; ;RTC.h: 57: typedef struct TIME{
+[; ;RTC.h: 58: unsigned char Seconds;
+[; ;RTC.h: 59: unsigned char Minutes;
+[; ;RTC.h: 60: unsigned char Hours;
+[; ;RTC.h: 61: unsigned char HoursMilitary;
+[; ;RTC.h: 62: unsigned char HoursAM_PM;
+[; ;RTC.h: 63: unsigned char Day;
+[; ;RTC.h: 64: unsigned char Date;
+[; ;RTC.h: 65: unsigned char Month;
+[; ;RTC.h: 66: unsigned char Year;
+[; ;RTC.h: 67: }TIME ;
+[; ;RTC.h: 73: unsigned char READ_RTC_TIME(void);
+[; ;RTC.h: 74: void RTC_Clock_Disable(void);
+[; ;RTC.h: 75: void RTC_Clock_Enable(void);
+[; ;RTC.h: 76: void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military);
+[; ;RTC.h: 77: void RTC_TIME_NONMilitary(void);
+[; ;RTC.h: 78: void RTC_INIT(void);
+[; ;RTC.h: 79: unsigned char SET_RTC_TIME(TIME SetTime);
+[; ;RTC.h: 80: unsigned char Parse_Time(unsigned char* This);
+"55 main.c
+[v _Version `uc ~T0 @X0 -> 20 `i e ]
+[i _Version
+:U ..
+-> 49 `c
+-> 46 `c
+-> 48 `c
+-> 95 `c
+-> 68 `c
+-> 87 `c
+-> 48 `c
+-> 0 `c
+..
+]
+[; ;main.c: 55: unsigned char Version[20] = "1.0_DW0";
+[; ;main.c: 60: extern unsigned char config;
+[; ;main.c: 61: extern unsigned int spbrg;
+[; ;main.c: 62: extern unsigned char baudconfig;
+[; ;main.c: 63: extern struct TIME NowTime;
+[; ;main.c: 64: extern char Txdata[100];
+[; ;main.c: 65: extern char Rxdata[100];
+"66
 [v _buf `uc ~T0 @X0 -> 100 `i e ]
-[; ;main.c: 45: unsigned char buf[100];
-"46
+[; ;main.c: 66: unsigned char buf[100];
+"67
 [v _bufferCount `uc ~T0 @X0 1 e ]
 [i _bufferCount
 -> -> 0 `i `uc
 ]
-[; ;main.c: 46: unsigned char bufferCount =0;
-"51
+[; ;main.c: 67: unsigned char bufferCount =0;
+"73
 [v _main `(v ~T0 @X0 1 ef ]
-"52
+"74
 {
-[; ;main.c: 51: void main(void)
-[; ;main.c: 52: {
+[; ;main.c: 73: void main(void)
+[; ;main.c: 74: {
 [e :U _main ]
 [f ]
-"53
+"75
 [v _ii `uc ~T0 @X0 1 a ]
-[; ;main.c: 53: unsigned char ii =0;
+[; ;main.c: 75: unsigned char ii =0;
 [e = _ii -> -> 0 `i `uc ]
-"54
+"76
 [v _count `uc ~T0 @X0 1 a ]
-[; ;main.c: 54: unsigned char count =0;
+[; ;main.c: 76: unsigned char count =0;
 [e = _count -> -> 0 `i `uc ]
-[; ;main.c: 56: ConfigureOscillator();
-"56
+[; ;main.c: 78: ConfigureOscillator();
+"78
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 57: InitApp();
-"57
+[; ;main.c: 79: InitApp();
+"79
 [e ( _InitApp ..  ]
-[; ;main.c: 58: InitUART();
-"58
-[e ( _InitUART ..  ]
-[; ;main.c: 59: EnableInternalADC(1);
-"59
+[; ;main.c: 80: InitUART(115200, 0);
+"80
+[e ( _InitUART (2 , -> -> 115200 `l `ul -> -> 0 `i `uc ]
+[; ;main.c: 81: EnableInternalADC(1);
+"81
 [e ( _EnableInternalADC (1 -> -> 1 `i `uc ]
-[; ;main.c: 60: PWM_init();
-"60
+[; ;main.c: 82: PWM_init();
+"82
 [e ( _PWM_init ..  ]
-[; ;main.c: 61: ContrastPWM_init();
-"61
+[; ;main.c: 83: ContrastPWM_init();
+"83
 [e ( _ContrastPWM_init ..  ]
-[; ;main.c: 62: init_LCD();
-"62
+[; ;main.c: 84: init_LCD();
+"84
 [e ( _init_LCD ..  ]
-[; ;main.c: 63: Init_I2C_Master();
-"63
+[; ;main.c: 85: Init_I2C_Master();
+"85
 [e ( _Init_I2C_Master ..  ]
-[; ;main.c: 64: RTC_INIT();
-"64
+[; ;main.c: 86: RTC_INIT();
+"86
 [e ( _RTC_INIT ..  ]
-[; ;main.c: 66: for(ii =0; ii <10;ii++)
-"66
+[; ;main.c: 88: UARTstring("Firmware Version: ");
+"88
+[e ( _UARTstring (1 -> :s 1C `*uc ]
+[; ;main.c: 89: UARTstring(Version);
+"89
+[e ( _UARTstring (1 &U _Version ]
+[; ;main.c: 90: UARTstring("\r\n");
+"90
+[e ( _UARTstring (1 -> :s 2C `*uc ]
+[; ;main.c: 92: for(ii =0; ii <10;ii++)
+"92
 {
 [e = _ii -> -> 0 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2163  ]
 [e $U 2164  ]
-"67
+"93
 [e :U 2163 ]
-[; ;main.c: 67: {
+[; ;main.c: 93: {
 {
-[; ;main.c: 68: LATD |= 0b00000010;
-"68
+[; ;main.c: 94: LATD |= 0b00000010;
+"94
 [e =| _LATD -> -> 2 `i `uc ]
-[; ;main.c: 69: LATD &= ~0b00000100;
-"69
+[; ;main.c: 95: LATD &= ~0b00000100;
+"95
 [e =& _LATD -> ~ -> 4 `i `uc ]
-[; ;main.c: 70: delayUS(50000);
-"70
+[; ;main.c: 96: delayUS(50000);
+"96
 [e ( _delayUS (1 -> 50000 `l ]
-[; ;main.c: 71: LATD |= 0b00000100;
-"71
+[; ;main.c: 97: LATD |= 0b00000100;
+"97
 [e =| _LATD -> -> 4 `i `uc ]
-[; ;main.c: 72: LATD &= ~0b00000010;
-"72
+[; ;main.c: 98: LATD &= ~0b00000010;
+"98
 [e =& _LATD -> ~ -> 2 `i `uc ]
-[; ;main.c: 73: delayUS(50000);
-"73
+[; ;main.c: 99: delayUS(50000);
+"99
 [e ( _delayUS (1 -> 50000 `l ]
-"74
+"100
 }
-"66
+"92
 [e ++ _ii -> -> 1 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2163  ]
 [e :U 2164 ]
-"74
-}
-[; ;main.c: 74: }
-[; ;main.c: 75: SetContrast(65);
-"75
-[e ( _SetContrast (1 -> -> 65 `i `uc ]
-[; ;main.c: 76: delayUS(20);
-"76
-[e ( _delayUS (1 -> -> 20 `i `l ]
-[; ;main.c: 77: SetLCDcursor(0, 0);
-"77
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 78: LCDPrintString("Starting");
-"78
-[e ( _LCDPrintString (1 -> :s 1C `*uc ]
-[; ;main.c: 79: delayUS(100000);
-"79
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 80: SetLCDcursor(0, 0);
-"80
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 81: LCDPrintString("Starting.");
-"81
-[e ( _LCDPrintString (1 -> :s 2C `*uc ]
-[; ;main.c: 82: delayUS(100000);
-"82
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 83: SetLCDcursor(0, 0);
-"83
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 84: LCDPrintString("Starting..");
-"84
-[e ( _LCDPrintString (1 -> :s 3C `*uc ]
-[; ;main.c: 85: delayUS(100000);
-"85
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 86: SetLCDcursor(0, 0);
-"86
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 87: LCDPrintString("Starting...");
-"87
-[e ( _LCDPrintString (1 -> :s 4C `*uc ]
-[; ;main.c: 88: delayUS(100000);
-"88
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 89: SetLCDcursor(0, 0);
-"89
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 90: LCDPrintString("Starting....");
-"90
-[e ( _LCDPrintString (1 -> :s 5C `*uc ]
-[; ;main.c: 91: delayUS(100000);
-"91
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 92: SetLCDcursor(0, 0);
-"92
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 93: LCDPrintString("Starting.....");
-"93
-[e ( _LCDPrintString (1 -> :s 6C `*uc ]
-[; ;main.c: 94: delayUS(100000);
-"94
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 95: SetLCDcursor(0, 0);
-"95
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 96: LCDPrintString("Starting......");
-"96
-[e ( _LCDPrintString (1 -> :s 7C `*uc ]
-[; ;main.c: 97: delayUS(100000);
-"97
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 98: SetLCDcursor(0, 0);
-"98
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 99: LCDPrintString("Starting.......");
-"99
-[e ( _LCDPrintString (1 -> :s 8C `*uc ]
-[; ;main.c: 100: delayUS(100000);
 "100
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 101: SetLCDcursor(0, 0);
+}
+[; ;main.c: 100: }
+[; ;main.c: 101: SetContrast(65);
 "101
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 102: LCDPrintString("Starting........");
+[e ( _SetContrast (1 -> -> 65 `i `uc ]
+[; ;main.c: 102: delayUS(20);
 "102
-[e ( _LCDPrintString (1 -> :s 9C `*uc ]
-[; ;main.c: 103: delayUS(100000);
+[e ( _delayUS (1 -> -> 20 `i `l ]
+[; ;main.c: 103: SetLCDcursor(0, 0);
 "103
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 104: SetLCDcursor(1, 0);
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 104: LCDPrintString("Starting");
 "104
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 105: LCDPrintString("Enter '?'");
+[e ( _LCDPrintString (1 -> :s 3C `*uc ]
+[; ;main.c: 105: UARTstring("Starting...");
 "105
-[e ( _LCDPrintString (1 -> :s 10C `*uc ]
+[e ( _UARTstring (1 -> :s 4C `*uc ]
 [; ;main.c: 106: delayUS(100000);
 "106
 [e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 107: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+[; ;main.c: 107: SetLCDcursor(0, 0);
 "107
-[e ( _UARTstring (1 :s 11C ]
-[; ;main.c: 109: for(count =100; count >0; count-=5)
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 108: LCDPrintString("Starting.");
+"108
+[e ( _LCDPrintString (1 -> :s 5C `*uc ]
+[; ;main.c: 109: delayUS(100000);
 "109
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 110: SetLCDcursor(0, 0);
+"110
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 111: LCDPrintString("Starting..");
+"111
+[e ( _LCDPrintString (1 -> :s 6C `*uc ]
+[; ;main.c: 112: delayUS(100000);
+"112
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 113: SetLCDcursor(0, 0);
+"113
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 114: LCDPrintString("Starting...");
+"114
+[e ( _LCDPrintString (1 -> :s 7C `*uc ]
+[; ;main.c: 115: delayUS(100000);
+"115
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 116: SetLCDcursor(0, 0);
+"116
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 117: LCDPrintString("Starting....");
+"117
+[e ( _LCDPrintString (1 -> :s 8C `*uc ]
+[; ;main.c: 118: delayUS(100000);
+"118
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 119: SetLCDcursor(0, 0);
+"119
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 120: LCDPrintString("Starting.....");
+"120
+[e ( _LCDPrintString (1 -> :s 9C `*uc ]
+[; ;main.c: 121: delayUS(100000);
+"121
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 122: SetLCDcursor(0, 0);
+"122
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 123: LCDPrintString("Starting......");
+"123
+[e ( _LCDPrintString (1 -> :s 10C `*uc ]
+[; ;main.c: 124: delayUS(100000);
+"124
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 125: SetLCDcursor(0, 0);
+"125
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 126: LCDPrintString("Starting.......");
+"126
+[e ( _LCDPrintString (1 -> :s 11C `*uc ]
+[; ;main.c: 127: delayUS(100000);
+"127
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 128: SetLCDcursor(0, 0);
+"128
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 129: LCDPrintString("Starting........");
+"129
+[e ( _LCDPrintString (1 -> :s 12C `*uc ]
+[; ;main.c: 130: delayUS(100000);
+"130
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 131: SetLCDcursor(1, 0);
+"131
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 132: LCDPrintString("Enter '?'");
+"132
+[e ( _LCDPrintString (1 -> :s 13C `*uc ]
+[; ;main.c: 133: delayUS(100000);
+"133
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 134: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+"134
+[e ( _UARTstring (1 -> :s 14C `*uc ]
+[; ;main.c: 136: for(count =100; count >0; count-=5)
+"136
 {
 [e = _count -> -> 100 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2166  ]
 [e $U 2167  ]
-"110
+"137
 [e :U 2166 ]
-[; ;main.c: 110: {
+[; ;main.c: 137: {
 {
-[; ;main.c: 111: SetDuty(count);
-"111
+[; ;main.c: 138: SetDuty(count);
+"138
 [e ( _SetDuty (1 _count ]
-[; ;main.c: 112: delayUS(50000);
-"112
+[; ;main.c: 139: delayUS(50000);
+"139
 [e ( _delayUS (1 -> 50000 `l ]
-"113
+"140
 }
-"109
+"136
 [e =- _count -> -> 5 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2166  ]
 [e :U 2167 ]
-"113
+"140
 }
-[; ;main.c: 113: }
-[; ;main.c: 115: LATD &= ~(0b00000010+0b00000100);
-"115
+[; ;main.c: 140: }
+[; ;main.c: 142: LATD &= ~(0b00000010+0b00000100);
+"142
 [e =& _LATD -> ~ + -> 2 `i -> 4 `i `uc ]
-[; ;main.c: 116: ReadUSART();
-"116
+[; ;main.c: 143: ReadUSART();
+"143
 [e ( _ReadUSART ..  ]
-[; ;main.c: 117: ReadUSART();
-"117
+[; ;main.c: 144: ReadUSART();
+"144
 [e ( _ReadUSART ..  ]
-[; ;main.c: 118: ReadUSART();
-"118
+[; ;main.c: 145: ReadUSART();
+"145
 [e ( _ReadUSART ..  ]
-[; ;main.c: 120: ClearLCD();
-"120
+[; ;main.c: 147: ClearLCD();
+"147
 [e ( _ClearLCD ..  ]
-[; ;main.c: 121: SetLCDcursor(0, 0);
-"121
+[; ;main.c: 148: SetLCDcursor(0, 0);
+"148
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 122: LCDPrintChar('>');
-"122
+[; ;main.c: 149: LCDPrintChar('>');
+"149
 [e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
-[; ;main.c: 124: while(1)
-"124
+[; ;main.c: 151: while(1)
+"151
 [e :U 2170 ]
-[; ;main.c: 125: {
-"125
+[; ;main.c: 152: {
+"152
 {
-[; ;main.c: 127: LCDScreenUpdate();
-"127
+[; ;main.c: 154: LCDScreenUpdate();
+"154
 [e ( _LCDScreenUpdate ..  ]
-[; ;main.c: 128: if(Rxdata[0] != 0)
-"128
+[; ;main.c: 155: if(Rxdata[0] != 0)
+"155
 [e $ ! != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `i -> 0 `i 2172  ]
-[; ;main.c: 129: {
-"129
+[; ;main.c: 156: {
+"156
 {
-[; ;main.c: 130: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
-"130
+[; ;main.c: 157: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
+"157
 [e $ ! && != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 13 `ui != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 10 `ui 2173  ]
-[; ;main.c: 131: {
-"131
+[; ;main.c: 158: {
+"158
 {
-[; ;main.c: 132: Command(Rxdata);
-"132
-[e ( _Command (1 &U _Rxdata ]
-"133
+[; ;main.c: 159: if(Command(Rxdata))
+"159
+[e $ ! != -> ( _Command (1 &U _Rxdata `i -> -> -> 0 `i `uc `i 2174  ]
+[; ;main.c: 160: {
+"160
+{
+[; ;main.c: 161: UARTstring("\r\n>");
+"161
+[e ( _UARTstring (1 -> :s 15C `*uc ]
+"162
+}
+[e :U 2174 ]
+"163
 }
 [e :U 2173 ]
-[; ;main.c: 133: }
-[; ;main.c: 134: cleanBuffer(Rxdata, 100);
-"134
+[; ;main.c: 162: }
+[; ;main.c: 163: }
+[; ;main.c: 164: cleanBuffer(Rxdata, 100);
+"164
 [e ( _cleanBuffer (2 , &U _Rxdata -> 100 `i ]
-[; ;main.c: 135: UARTstring("\r\n>");
-"135
-[e ( _UARTstring (1 :s 12C ]
-"136
+"165
 }
 [e :U 2172 ]
-"137
+"166
 }
 [e :U 2169 ]
-"124
+"151
 [e $U 2170  ]
 [e :U 2171 ]
-[; ;main.c: 136: }
-[; ;main.c: 137: }
-[; ;main.c: 138: }
-"138
+[; ;main.c: 165: }
+[; ;main.c: 166: }
+[; ;main.c: 167: }
+"167
 [e :UE 2162 ]
 }
-[a 1C 83 116 97 114 116 105 110 103 0 ]
-[a 11C 13 10 69 110 116 101 114 32 39 63 39 32 102 111 114 32 72 101 108 112 32 77 101 110 117 13 10 62 0 ]
-[a 12C 13 10 62 0 ]
-[a 2C 83 116 97 114 116 105 110 103 46 0 ]
-[a 3C 83 116 97 114 116 105 110 103 46 46 0 ]
+[a 3C 83 116 97 114 116 105 110 103 0 ]
+[a 14C 13 10 69 110 116 101 114 32 39 63 39 32 102 111 114 32 72 101 108 112 32 77 101 110 117 13 10 62 0 ]
+[a 15C 13 10 62 0 ]
+[a 5C 83 116 97 114 116 105 110 103 46 0 ]
+[a 6C 83 116 97 114 116 105 110 103 46 46 0 ]
 [a 4C 83 116 97 114 116 105 110 103 46 46 46 0 ]
-[a 5C 83 116 97 114 116 105 110 103 46 46 46 46 0 ]
-[a 6C 83 116 97 114 116 105 110 103 46 46 46 46 46 0 ]
-[a 7C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 0 ]
-[a 8C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 46 0 ]
-[a 9C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 46 46 0 ]
-[a 10C 69 110 116 101 114 32 39 63 39 0 ]
+[a 7C 83 116 97 114 116 105 110 103 46 46 46 0 ]
+[a 8C 83 116 97 114 116 105 110 103 46 46 46 46 0 ]
+[a 9C 83 116 97 114 116 105 110 103 46 46 46 46 46 0 ]
+[a 10C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 0 ]
+[a 11C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 46 0 ]
+[a 12C 83 116 97 114 116 105 110 103 46 46 46 46 46 46 46 46 0 ]
+[a 13C 69 110 116 101 114 32 39 63 39 0 ]
+[a 1C 70 105 114 109 119 97 114 101 32 86 101 114 115 105 111 110 58 32 0 ]
+[a 2C 13 10 0 ]

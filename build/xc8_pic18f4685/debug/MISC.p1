@@ -15331,926 +15331,1096 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-[; ;system.h: 20: void ConfigureOscillator(void);
-"30 MISC.c
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 23: extern int errno;
+[; ;stdio.h: 54: struct __prbuf
+[; ;stdio.h: 55: {
+[; ;stdio.h: 56: char * ptr;
+[; ;stdio.h: 57: void (* func)(char);
+[; ;stdio.h: 58: };
+[; ;conio.h: 17: extern int errno;
+[; ;conio.h: 20: extern void init_uart(void);
+[; ;conio.h: 22: extern char getch(void);
+[; ;conio.h: 23: extern char getche(void);
+[; ;conio.h: 24: extern void putch(char);
+[; ;conio.h: 25: extern void ungetch(char);
+[; ;conio.h: 27: extern __bit kbhit(void);
+[; ;conio.h: 31: extern char * cgets(char *);
+[; ;conio.h: 32: extern void cputs(const char *);
+[; ;stdio.h: 99: extern int cprintf(char *, ...);
+[; ;stdio.h: 104: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 194: extern char * gets(char *);
+[; ;stdio.h: 195: extern int puts(const char *);
+[; ;stdio.h: 196: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 197: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 198: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 199: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 200: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 206: extern int printf(const char *, ...);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 61: void delayUS(long US);
+[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 69: void lowercase(unsigned char* Input);
+[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;system.h: 54: void ConfigureOscillator(void);
+"55 MISC.c
 [v _delayUS `(v ~T0 @X0 1 ef1`l ]
-"31
+"56
 {
-[; ;MISC.c: 30: void delayUS(long US)
-[; ;MISC.c: 31: {
+[; ;MISC.c: 55: void delayUS(long US)
+[; ;MISC.c: 56: {
 [e :U _delayUS ]
-"30
+"55
 [v _US `l ~T0 @X0 1 r1 ]
-"31
+"56
 [f ]
-"32
+"57
 [v _i `l ~T0 @X0 1 a ]
-"33
+"58
 [v _j `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 32: long i;
-[; ;MISC.c: 33: unsigned char j;
-[; ;MISC.c: 34: for(i=0;i<US;i+=31)
-"34
+[; ;MISC.c: 57: long i;
+[; ;MISC.c: 58: unsigned char j;
+[; ;MISC.c: 59: for(i=0;i<US;i+=31)
+"59
 {
 [e = _i -> -> 0 `i `l ]
-[e $U 2164  ]
-"35
-[e :U 2161 ]
-[; ;MISC.c: 35: {
+[e $U 2165  ]
+"60
+[e :U 2162 ]
+[; ;MISC.c: 60: {
 {
-[; ;MISC.c: 36: for(j=0;j<41;j++)
-"36
+[; ;MISC.c: 61: for(j=0;j<41;j++)
+"61
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 41 `i 2165  ]
-[e $U 2166  ]
-"37
-[e :U 2165 ]
-[; ;MISC.c: 37: {
-{
-[; ;MISC.c: 38: __nop();
-"38
-[e ( ___nop ..  ]
-"39
-}
-"36
-[e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 41 `i 2165  ]
+[e $ < -> _j `i -> 41 `i 2166  ]
+[e $U 2167  ]
+"62
 [e :U 2166 ]
-"39
-}
-"40
-}
-"34
-[e =+ _i -> -> 31 `i `l ]
-[e :U 2164 ]
-[e $ < _i _US 2161  ]
-[e :U 2162 ]
-"40
-}
-[; ;MISC.c: 39: }
-[; ;MISC.c: 40: }
-[; ;MISC.c: 41: }
-"41
-[e :UE 2160 ]
-}
-"43
-[v _cleanBuffer `(v ~T0 @X0 1 ef2`*uc`i ]
-"44
+[; ;MISC.c: 62: {
 {
-[; ;MISC.c: 43: void cleanBuffer(unsigned char* data, int count)
-[; ;MISC.c: 44: {
+[; ;MISC.c: 63: __nop();
+"63
+[e ( ___nop ..  ]
+"64
+}
+"61
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 41 `i 2166  ]
+[e :U 2167 ]
+"64
+}
+"65
+}
+"59
+[e =+ _i -> -> 31 `i `l ]
+[e :U 2165 ]
+[e $ < _i _US 2162  ]
+[e :U 2163 ]
+"65
+}
+[; ;MISC.c: 64: }
+[; ;MISC.c: 65: }
+[; ;MISC.c: 66: }
+"66
+[e :UE 2161 ]
+}
+"73
+[v _cleanBuffer `(v ~T0 @X0 1 ef2`*uc`i ]
+"74
+{
+[; ;MISC.c: 73: void cleanBuffer(unsigned char* data, int count)
+[; ;MISC.c: 74: {
 [e :U _cleanBuffer ]
-"43
+"73
 [v _data `*uc ~T0 @X0 1 r1 ]
 [v _count `i ~T0 @X0 1 r2 ]
-"44
+"74
 [f ]
-"45
+"75
 [v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 45: unsigned char i=0;
+[; ;MISC.c: 75: unsigned char i=0;
 [e = _i -> -> 0 `i `uc ]
-[; ;MISC.c: 46: for(i=0; i<count;i++)
-"46
+[; ;MISC.c: 76: for(i=0; i<count;i++)
+"76
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 2172  ]
-"47
-[e :U 2169 ]
-[; ;MISC.c: 47: {
-{
-[; ;MISC.c: 48: data[i]= 0;
-"48
-[e = *U + _data * -> _i `ux -> -> # *U _data `ui `ux -> -> 0 `i `uc ]
-"49
-}
-"46
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 2172 ]
-[e $ < -> _i `i _count 2169  ]
+[e $U 2173  ]
+"77
 [e :U 2170 ]
-"49
-}
-[; ;MISC.c: 49: }
-[; ;MISC.c: 50: }
-"50
-[e :UE 2168 ]
-}
-"52
-[v _BufferCopy `(v ~T0 @X0 1 ef4`*uc`*uc`uc`uc ]
-"53
+[; ;MISC.c: 77: {
 {
-[; ;MISC.c: 52: void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsigned char shift)
-[; ;MISC.c: 53: {
+[; ;MISC.c: 78: data[i]= 0;
+"78
+[e = *U + _data * -> _i `ux -> -> # *U _data `ui `ux -> -> 0 `i `uc ]
+"79
+}
+"76
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 2173 ]
+[e $ < -> _i `i _count 2170  ]
+[e :U 2171 ]
+"79
+}
+[; ;MISC.c: 79: }
+[; ;MISC.c: 80: }
+"80
+[e :UE 2169 ]
+}
+"87
+[v _BufferCopy `(v ~T0 @X0 1 ef4`*uc`*uc`uc`uc ]
+"88
+{
+[; ;MISC.c: 87: void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsigned char shift)
+[; ;MISC.c: 88: {
 [e :U _BufferCopy ]
-"52
+"87
 [v _from `*uc ~T0 @X0 1 r1 ]
 [v _to `*uc ~T0 @X0 1 r2 ]
 [v _count `uc ~T0 @X0 1 r3 ]
 [v _shift `uc ~T0 @X0 1 r4 ]
-"53
+"88
 [f ]
-"54
+"89
 [v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 54: unsigned char i=0;
+[; ;MISC.c: 89: unsigned char i=0;
 [e = _i -> -> 0 `i `uc ]
-[; ;MISC.c: 55: cleanBuffer(to,count);
-"55
+[; ;MISC.c: 90: cleanBuffer(to,count);
+"90
 [e ( _cleanBuffer (2 , _to -> _count `i ]
-[; ;MISC.c: 56: for(i = shift; i>0;i--)
-"56
+[; ;MISC.c: 91: for(i = shift; i>0;i--)
+"91
 {
 [e = _i _shift ]
-[e $ > -> _i `i -> 0 `i 2174  ]
-[e $U 2175  ]
-"57
-[e :U 2174 ]
-[; ;MISC.c: 57: {
-{
-[; ;MISC.c: 58: *to = ' ';
-"58
-[e = *U _to -> -> 32 `ui `uc ]
-[; ;MISC.c: 59: to++;
-"59
-[e ++ _to * -> -> 1 `i `x -> -> # *U _to `i `x ]
-"60
-}
-"56
-[e -- _i -> -> 1 `i `uc ]
-[e $ > -> _i `i -> 0 `i 2174  ]
+[e $ > -> _i `i -> 0 `i 2175  ]
+[e $U 2176  ]
+"92
 [e :U 2175 ]
-"60
-}
-[; ;MISC.c: 60: }
-[; ;MISC.c: 61: while(*from != 0 && count >0)
-"61
-[e $U 2177  ]
-[e :U 2178 ]
-[; ;MISC.c: 62: {
-"62
-{
-[; ;MISC.c: 63: *to = *from;
-"63
-[e = *U _to *U _from ]
-[; ;MISC.c: 64: from++;
-"64
-[e ++ _from * -> -> 1 `i `x -> -> # *U _from `i `x ]
-[; ;MISC.c: 65: to++;
-"65
-[e ++ _to * -> -> 1 `i `x -> -> # *U _to `i `x ]
-[; ;MISC.c: 66: count--;
-"66
-[e -- _count -> -> 1 `i `uc ]
-"67
-}
-[e :U 2177 ]
-"61
-[e $ && != -> *U _from `i -> 0 `i > -> _count `i -> 0 `i 2178  ]
-[e :U 2179 ]
-[; ;MISC.c: 67: }
-[; ;MISC.c: 68: }
-"68
-[e :UE 2173 ]
-}
-"70
-[v _StringMatch `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
-"71
-{
-[; ;MISC.c: 70: unsigned char StringMatch(unsigned char* This,const unsigned char* That)
-[; ;MISC.c: 71: {
-[e :U _StringMatch ]
-"70
-[v _This `*uc ~T0 @X0 1 r1 ]
-[v _That `*Cuc ~T0 @X0 1 r2 ]
-"71
-[f ]
-[; ;MISC.c: 72: while(*This != 0)
-"72
-[e $U 2181  ]
-[e :U 2182 ]
-[; ;MISC.c: 73: {
-"73
-{
-[; ;MISC.c: 74: if(*This != *That || *That == 0)
-"74
-[e $ ! || != -> *U _This `i -> *U _That `i == -> *U _That `i -> 0 `i 2184  ]
-[; ;MISC.c: 75: {
-"75
-{
-[; ;MISC.c: 76: return 0;
-"76
-[e ) -> -> 0 `i `uc ]
-[e $UE 2180  ]
-"77
-}
-[e :U 2184 ]
-[; ;MISC.c: 77: }
-[; ;MISC.c: 78: This++;
-"78
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;MISC.c: 79: That++;
-"79
-[e ++ _That * -> -> 1 `i `x -> -> # *U _That `i `x ]
-"80
-}
-[e :U 2181 ]
-"72
-[e $ != -> *U _This `i -> 0 `i 2182  ]
-[e :U 2183 ]
-[; ;MISC.c: 80: }
-[; ;MISC.c: 81: if(*That == 0)
-"81
-[e $ ! == -> *U _That `i -> 0 `i 2185  ]
-[; ;MISC.c: 82: {
-"82
-{
-[; ;MISC.c: 83: return 1;
-"83
-[e ) -> -> 1 `i `uc ]
-[e $UE 2180  ]
-"84
-}
-[; ;MISC.c: 84: }
-[e $U 2186  ]
-"85
-[e :U 2185 ]
-[; ;MISC.c: 85: else
-[; ;MISC.c: 86: {
-"86
-{
-[; ;MISC.c: 87: return 0;
-"87
-[e ) -> -> 0 `i `uc ]
-[e $UE 2180  ]
-"88
-}
-[e :U 2186 ]
-[; ;MISC.c: 88: }
-[; ;MISC.c: 89: }
-"89
-[e :UE 2180 ]
-}
-"91
-[v _StringContains `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
-"92
-{
-[; ;MISC.c: 91: unsigned char StringContains(unsigned char* This, const unsigned char* That)
 [; ;MISC.c: 92: {
-[e :U _StringContains ]
-"91
-[v _This `*uc ~T0 @X0 1 r1 ]
-[v _That `*Cuc ~T0 @X0 1 r2 ]
-"92
-[f ]
-[; ;MISC.c: 93: while(*This != 0)
+{
+[; ;MISC.c: 93: *to = ' ';
 "93
-[e $U 2188  ]
-[e :U 2189 ]
-[; ;MISC.c: 94: {
+[e = *U _to -> -> 32 `ui `uc ]
+[; ;MISC.c: 94: to++;
 "94
-{
-[; ;MISC.c: 95: while(*This == *That)
+[e ++ _to * -> -> 1 `i `x -> -> # *U _to `i `x ]
 "95
-[e $U 2191  ]
-[e :U 2192 ]
-[; ;MISC.c: 96: {
+}
+"91
+[e -- _i -> -> 1 `i `uc ]
+[e $ > -> _i `i -> 0 `i 2175  ]
+[e :U 2176 ]
+"95
+}
+[; ;MISC.c: 95: }
+[; ;MISC.c: 96: while(*from != 0 && count >0)
 "96
-{
-[; ;MISC.c: 97: That++;
+[e $U 2178  ]
+[e :U 2179 ]
+[; ;MISC.c: 97: {
 "97
-[e ++ _That * -> -> 1 `i `x -> -> # *U _That `i `x ]
-[; ;MISC.c: 98: This++;
-"98
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;MISC.c: 99: if(*That == 0)
-"99
-[e $ ! == -> *U _That `i -> 0 `i 2194  ]
-[; ;MISC.c: 100: {
-"100
 {
-[; ;MISC.c: 101: return 1;
+[; ;MISC.c: 98: *to = *from;
+"98
+[e = *U _to *U _from ]
+[; ;MISC.c: 99: from++;
+"99
+[e ++ _from * -> -> 1 `i `x -> -> # *U _from `i `x ]
+[; ;MISC.c: 100: to++;
+"100
+[e ++ _to * -> -> 1 `i `x -> -> # *U _to `i `x ]
+[; ;MISC.c: 101: count--;
 "101
-[e ) -> -> 1 `i `uc ]
-[e $UE 2187  ]
+[e -- _count -> -> 1 `i `uc ]
 "102
 }
-[e :U 2194 ]
+[e :U 2178 ]
+"96
+[e $ && != -> *U _from `i -> 0 `i > -> _count `i -> 0 `i 2179  ]
+[e :U 2180 ]
 [; ;MISC.c: 102: }
-[; ;MISC.c: 103: if(*This == 0)
+[; ;MISC.c: 103: }
 "103
-[e $ ! == -> *U _This `i -> 0 `i 2195  ]
-[; ;MISC.c: 104: {
-"104
-{
-[; ;MISC.c: 105: return 0;
-"105
-[e ) -> -> 0 `i `uc ]
-[e $UE 2187  ]
-"106
+[e :UE 2174 ]
 }
-[e :U 2195 ]
-"107
-}
-[e :U 2191 ]
-"95
-[e $ == -> *U _This `i -> *U _That `i 2192  ]
-[e :U 2193 ]
-[; ;MISC.c: 106: }
-[; ;MISC.c: 107: }
-[; ;MISC.c: 108: This++;
-"108
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"109
-}
-[e :U 2188 ]
-"93
-[e $ != -> *U _This `i -> 0 `i 2189  ]
-[e :U 2190 ]
-[; ;MISC.c: 109: }
-[; ;MISC.c: 110: return 0;
 "110
-[e ) -> -> 0 `i `uc ]
-[e $UE 2187  ]
-[; ;MISC.c: 111: }
+[v _StringMatch `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
 "111
-[e :UE 2187 ]
-}
-"113
-[v _StartsWith `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
-"114
 {
-[; ;MISC.c: 113: unsigned char StartsWith(unsigned char* This,const unsigned char* That)
-[; ;MISC.c: 114: {
-[e :U _StartsWith ]
-"113
+[; ;MISC.c: 110: unsigned char StringMatch(unsigned char* This,const unsigned char* That)
+[; ;MISC.c: 111: {
+[e :U _StringMatch ]
+"110
 [v _This `*uc ~T0 @X0 1 r1 ]
 [v _That `*Cuc ~T0 @X0 1 r2 ]
+"111
+[f ]
+[; ;MISC.c: 112: while(*This != 0)
+"112
+[e $U 2182  ]
+[e :U 2183 ]
+[; ;MISC.c: 113: {
+"113
+{
+[; ;MISC.c: 114: if(*This != *That || *That == 0)
 "114
-[f ]
-[; ;MISC.c: 115: while(*This != 0)
+[e $ ! || != -> *U _This `i -> *U _That `i == -> *U _That `i -> 0 `i 2185  ]
+[; ;MISC.c: 115: {
 "115
-[e $U 2197  ]
-[e :U 2198 ]
-[; ;MISC.c: 116: {
+{
+[; ;MISC.c: 116: return 0;
 "116
-{
-[; ;MISC.c: 117: if(*This != *That)
+[e ) -> -> 0 `i `uc ]
+[e $UE 2181  ]
 "117
-[e $ ! != -> *U _This `i -> *U _That `i 2200  ]
-[; ;MISC.c: 118: {
+}
+[e :U 2185 ]
+[; ;MISC.c: 117: }
+[; ;MISC.c: 118: This++;
 "118
-{
-[; ;MISC.c: 119: if(*That != 0)
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[; ;MISC.c: 119: That++;
 "119
-[e $ ! != -> *U _That `i -> 0 `i 2201  ]
-[; ;MISC.c: 120: {
-"120
-{
-[; ;MISC.c: 121: return 0;
-"121
-[e ) -> -> 0 `i `uc ]
-[e $UE 2196  ]
-"122
-}
-[; ;MISC.c: 122: }
-[e $U 2202  ]
-"123
-[e :U 2201 ]
-[; ;MISC.c: 123: else
-[; ;MISC.c: 124: {
-"124
-{
-[; ;MISC.c: 125: return 1;
-"125
-[e ) -> -> 1 `i `uc ]
-[e $UE 2196  ]
-"126
-}
-[e :U 2202 ]
-"127
-}
-[e :U 2200 ]
-[; ;MISC.c: 126: }
-[; ;MISC.c: 127: }
-[; ;MISC.c: 128: This++;
-"128
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;MISC.c: 129: That++;
-"129
 [e ++ _That * -> -> 1 `i `x -> -> # *U _That `i `x ]
-"130
+"120
 }
-[e :U 2197 ]
-"115
-[e $ != -> *U _This `i -> 0 `i 2198  ]
-[e :U 2199 ]
-[; ;MISC.c: 130: }
-[; ;MISC.c: 131: if(*This == 0 && *That == 0)
-"131
-[e $ ! && == -> *U _This `i -> 0 `i == -> *U _That `i -> 0 `i 2203  ]
-[; ;MISC.c: 132: {
-"132
+[e :U 2182 ]
+"112
+[e $ != -> *U _This `i -> 0 `i 2183  ]
+[e :U 2184 ]
+[; ;MISC.c: 120: }
+[; ;MISC.c: 121: if(*That == 0)
+"121
+[e $ ! == -> *U _That `i -> 0 `i 2186  ]
+[; ;MISC.c: 122: {
+"122
 {
-[; ;MISC.c: 133: return 1;
-"133
+[; ;MISC.c: 123: return 1;
+"123
 [e ) -> -> 1 `i `uc ]
-[e $UE 2196  ]
-"134
+[e $UE 2181  ]
+"124
 }
-[; ;MISC.c: 134: }
-[e $U 2204  ]
-"135
-[e :U 2203 ]
-[; ;MISC.c: 135: else
-[; ;MISC.c: 136: {
-"136
+[; ;MISC.c: 124: }
+[e $U 2187  ]
+"125
+[e :U 2186 ]
+[; ;MISC.c: 125: else
+[; ;MISC.c: 126: {
+"126
 {
-[; ;MISC.c: 137: return 0;
-"137
+[; ;MISC.c: 127: return 0;
+"127
 [e ) -> -> 0 `i `uc ]
-[e $UE 2196  ]
+[e $UE 2181  ]
+"128
+}
+[e :U 2187 ]
+[; ;MISC.c: 128: }
+[; ;MISC.c: 129: }
+"129
+[e :UE 2181 ]
+}
+"137
+[v _StringContains `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
 "138
-}
-[e :U 2204 ]
-[; ;MISC.c: 138: }
-[; ;MISC.c: 139: }
-"139
-[e :UE 2196 ]
-}
-"141
-[v _GetEnteredNumber `(i ~T0 @X0 1 ef1`*uc ]
-"142
 {
-[; ;MISC.c: 141: int GetEnteredNumber(unsigned char* This)
-[; ;MISC.c: 142: {
-[e :U _GetEnteredNumber ]
-"141
+[; ;MISC.c: 137: unsigned char StringContains(unsigned char* This, const unsigned char* That)
+[; ;MISC.c: 138: {
+[e :U _StringContains ]
+"137
 [v _This `*uc ~T0 @X0 1 r1 ]
-"142
+[v _That `*Cuc ~T0 @X0 1 r2 ]
+"138
 [f ]
+[; ;MISC.c: 139: while(*This != 0)
+"139
+[e $U 2189  ]
+[e :U 2190 ]
+[; ;MISC.c: 140: {
+"140
+{
+[; ;MISC.c: 141: while(*This == *That)
+"141
+[e $U 2192  ]
+[e :U 2193 ]
+[; ;MISC.c: 142: {
+"142
+{
+[; ;MISC.c: 143: That++;
 "143
-[v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 143: unsigned char i =0;
-[e = _i -> -> 0 `i `uc ]
+[e ++ _That * -> -> 1 `i `x -> -> # *U _That `i `x ]
+[; ;MISC.c: 144: This++;
 "144
-[v _temp `i ~T0 @X0 1 a ]
-[; ;MISC.c: 144: int temp =0;
-[e = _temp -> 0 `i ]
-"145
-[v _negative `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 145: unsigned char negative =0;
-[e = _negative -> -> 0 `i `uc ]
-[; ;MISC.c: 146: while(*This != '=' && *This != 0)
-"146
-[e $U 2206  ]
-[e :U 2207 ]
-[; ;MISC.c: 147: {
-"147
-{
-[; ;MISC.c: 148: This++;
-"148
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"150
-}
-[e :U 2206 ]
+[; ;MISC.c: 145: if(*That == 0)
+"145
+[e $ ! == -> *U _That `i -> 0 `i 2195  ]
+[; ;MISC.c: 146: {
 "146
-[e $ && != -> *U _This `ui -> 61 `ui != -> *U _This `i -> 0 `i 2207  ]
-[e :U 2208 ]
-[; ;MISC.c: 150: }
-[; ;MISC.c: 151: if(*This == 0)
-"151
-[e $ ! == -> *U _This `i -> 0 `i 2209  ]
-[; ;MISC.c: 152: {
-"152
 {
-[; ;MISC.c: 153: return 32000;
+[; ;MISC.c: 147: return 1;
+"147
+[e ) -> -> 1 `i `uc ]
+[e $UE 2188  ]
+"148
+}
+[e :U 2195 ]
+[; ;MISC.c: 148: }
+[; ;MISC.c: 149: if(*This == 0)
+"149
+[e $ ! == -> *U _This `i -> 0 `i 2196  ]
+[; ;MISC.c: 150: {
+"150
+{
+[; ;MISC.c: 151: return 0;
+"151
+[e ) -> -> 0 `i `uc ]
+[e $UE 2188  ]
+"152
+}
+[e :U 2196 ]
 "153
-[e ) -> 32000 `i ]
-[e $UE 2205  ]
+}
+[e :U 2192 ]
+"141
+[e $ == -> *U _This `i -> *U _That `i 2193  ]
+[e :U 2194 ]
+[; ;MISC.c: 152: }
+[; ;MISC.c: 153: }
+[; ;MISC.c: 154: This++;
+"154
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "155
 }
-[e :U 2209 ]
+[e :U 2189 ]
+"139
+[e $ != -> *U _This `i -> 0 `i 2190  ]
+[e :U 2191 ]
 [; ;MISC.c: 155: }
-[; ;MISC.c: 156: This++;
+[; ;MISC.c: 156: return 0;
 "156
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-[; ;MISC.c: 157: if(*This == ' ')
+[e ) -> -> 0 `i `uc ]
+[e $UE 2188  ]
+[; ;MISC.c: 157: }
 "157
-[e $ ! == -> *U _This `ui -> 32 `ui 2210  ]
-[; ;MISC.c: 158: {
-"158
-{
-[; ;MISC.c: 159: This++;
-"159
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"161
+[e :UE 2188 ]
 }
-[; ;MISC.c: 161: }
-[e $U 2211  ]
-"162
-[e :U 2210 ]
-[; ;MISC.c: 162: else if (*This == '=')
-[e $ ! == -> *U _This `ui -> 61 `ui 2212  ]
-[; ;MISC.c: 163: {
-"163
-{
-[; ;MISC.c: 164: return 32002;
-"164
-[e ) -> 32002 `i ]
-[e $UE 2205  ]
 "165
-}
-[; ;MISC.c: 165: }
-[e $U 2213  ]
+[v _StartsWith `(uc ~T0 @X0 1 ef2`*uc`*Cuc ]
 "166
-[e :U 2212 ]
-[; ;MISC.c: 166: else if(*This == '-')
-[e $ ! == -> *U _This `ui -> 45 `ui 2214  ]
-[; ;MISC.c: 167: {
-"167
 {
-[; ;MISC.c: 168: negative = 1;
-"168
-[e = _negative -> -> 1 `i `uc ]
-[; ;MISC.c: 169: This++;
-"169
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"171
-}
-[; ;MISC.c: 171: }
-[e $U 2215  ]
-"172
-[e :U 2214 ]
-[; ;MISC.c: 172: else if(*This == 0)
-[e $ ! == -> *U _This `i -> 0 `i 2216  ]
-[; ;MISC.c: 173: {
-"173
-{
-[; ;MISC.c: 174: return 32001;
-"174
-[e ) -> 32001 `i ]
-[e $UE 2205  ]
-"176
-}
-[e :U 2216 ]
-"177
-[e :U 2215 ]
-[e :U 2213 ]
-[e :U 2211 ]
-[; ;MISC.c: 176: }
-[; ;MISC.c: 177: while(*This != 0)
-[e $U 2217  ]
-[e :U 2218 ]
-[; ;MISC.c: 178: {
-"178
-{
-[; ;MISC.c: 179: temp = temp * 10;
-"179
-[e = _temp * _temp -> 10 `i ]
-[; ;MISC.c: 180: if (*This >= 48 && *This <= 57)
-"180
-[e $ ! && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2220  ]
-[; ;MISC.c: 181: {
-"181
-{
-[; ;MISC.c: 182: temp+= *This - 48;
-"182
-[e =+ _temp - -> *U _This `i -> 48 `i ]
-[; ;MISC.c: 183: i++;
-"183
-[e ++ _i -> -> 1 `i `uc ]
-"184
-}
-[; ;MISC.c: 184: }
-[e $U 2221  ]
-"185
-[e :U 2220 ]
-[; ;MISC.c: 185: else
-[; ;MISC.c: 186: {
-"186
-{
-[; ;MISC.c: 187: return 32003;
-"187
-[e ) -> 32003 `i ]
-[e $UE 2205  ]
-"189
-}
-[e :U 2221 ]
-[; ;MISC.c: 189: }
-[; ;MISC.c: 190: if(i>5)
-"190
-[e $ ! > -> _i `i -> 5 `i 2222  ]
-[; ;MISC.c: 191: {
-"191
-{
-[; ;MISC.c: 192: return 32004;
-"192
-[e ) -> 32004 `i ]
-[e $UE 2205  ]
-"194
-}
-[e :U 2222 ]
-[; ;MISC.c: 194: }
-[; ;MISC.c: 195: This++;
-"195
-[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
-"196
-}
-[e :U 2217 ]
-"177
-[e $ != -> *U _This `i -> 0 `i 2218  ]
-[e :U 2219 ]
-[; ;MISC.c: 196: }
-[; ;MISC.c: 197: if(negative)
-"197
-[e $ ! != -> _negative `i -> -> -> 0 `i `uc `i 2223  ]
-[; ;MISC.c: 198: {
-"198
-{
-[; ;MISC.c: 199: temp = (temp * -1);
-"199
-[e = _temp * _temp -U -> 1 `i ]
-"200
-}
-[e :U 2223 ]
-[; ;MISC.c: 200: }
-[; ;MISC.c: 201: return temp;
-"201
-[e ) _temp ]
-[e $UE 2205  ]
-[; ;MISC.c: 203: }
-"203
-[e :UE 2205 ]
-}
-"204
-[v _RemoveSpaces `(v ~T0 @X0 1 ef1`*uc ]
-"205
-{
-[; ;MISC.c: 204: void RemoveSpaces(unsigned char* This)
-[; ;MISC.c: 205: {
-[e :U _RemoveSpaces ]
-"204
+[; ;MISC.c: 165: unsigned char StartsWith(unsigned char* This,const unsigned char* That)
+[; ;MISC.c: 166: {
+[e :U _StartsWith ]
+"165
 [v _This `*uc ~T0 @X0 1 r1 ]
-"205
+[v _That `*Cuc ~T0 @X0 1 r2 ]
+"166
 [f ]
-"207
-[v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 207: unsigned char i =0;
-[e = _i -> -> 0 `i `uc ]
-"208
-[v _address `*uc ~T0 @X0 1 a ]
-[; ;MISC.c: 208: unsigned char* address = This;
-[e = _address _This ]
-"209
-[v _That `uc ~T0 @X0 -> 100 `i a ]
-[; ;MISC.c: 209: unsigned char That[100];
-[; ;MISC.c: 210: cleanBuffer(That,100);
-"210
-[e ( _cleanBuffer (2 , &U _That -> 100 `i ]
-[; ;MISC.c: 211: while(*This != 0)
-"211
-[e $U 2225  ]
-[e :U 2226 ]
-[; ;MISC.c: 212: {
-"212
+[; ;MISC.c: 167: while(*This != 0)
+"167
+[e $U 2198  ]
+[e :U 2199 ]
+[; ;MISC.c: 168: {
+"168
 {
-[; ;MISC.c: 213: if(*This != ' ')
-"213
-[e $ ! != -> *U _This `ui -> 32 `ui 2228  ]
-[; ;MISC.c: 214: {
-"214
+[; ;MISC.c: 169: if(*This != *That)
+"169
+[e $ ! != -> *U _This `i -> *U _That `i 2201  ]
+[; ;MISC.c: 170: {
+"170
 {
-[; ;MISC.c: 215: That[i] = *This;
-"215
-[e = *U + &U _That * -> _i `ux -> -> # *U &U _That `ui `ux *U _This ]
-[; ;MISC.c: 216: i++;
-"216
-[e ++ _i -> -> 1 `i `uc ]
-"217
+[; ;MISC.c: 171: if(*That != 0)
+"171
+[e $ ! != -> *U _That `i -> 0 `i 2202  ]
+[; ;MISC.c: 172: {
+"172
+{
+[; ;MISC.c: 173: return 0;
+"173
+[e ) -> -> 0 `i `uc ]
+[e $UE 2197  ]
+"174
 }
-[e :U 2228 ]
-[; ;MISC.c: 217: }
-[; ;MISC.c: 218: This++;
-"218
+[; ;MISC.c: 174: }
+[e $U 2203  ]
+"175
+[e :U 2202 ]
+[; ;MISC.c: 175: else
+[; ;MISC.c: 176: {
+"176
+{
+[; ;MISC.c: 177: return 1;
+"177
+[e ) -> -> 1 `i `uc ]
+[e $UE 2197  ]
+"178
+}
+[e :U 2203 ]
+"179
+}
+[e :U 2201 ]
+[; ;MISC.c: 178: }
+[; ;MISC.c: 179: }
+[; ;MISC.c: 180: This++;
+"180
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[; ;MISC.c: 181: That++;
+"181
+[e ++ _That * -> -> 1 `i `x -> -> # *U _That `i `x ]
+"182
+}
+[e :U 2198 ]
+"167
+[e $ != -> *U _This `i -> 0 `i 2199  ]
+[e :U 2200 ]
+[; ;MISC.c: 182: }
+[; ;MISC.c: 183: if(*This == 0 && *That == 0)
+"183
+[e $ ! && == -> *U _This `i -> 0 `i == -> *U _That `i -> 0 `i 2204  ]
+[; ;MISC.c: 184: {
+"184
+{
+[; ;MISC.c: 186: return 1;
+"186
+[e ) -> -> 1 `i `uc ]
+[e $UE 2197  ]
+"187
+}
+[; ;MISC.c: 187: }
+[e $U 2205  ]
+"188
+[e :U 2204 ]
+[; ;MISC.c: 188: else
+[; ;MISC.c: 189: {
+"189
+{
+[; ;MISC.c: 191: return 0;
+"191
+[e ) -> -> 0 `i `uc ]
+[e $UE 2197  ]
+"192
+}
+[e :U 2205 ]
+[; ;MISC.c: 192: }
+[; ;MISC.c: 193: }
+"193
+[e :UE 2197 ]
+}
+"200
+[v _GetEnteredNumber `(l ~T0 @X0 1 ef1`*uc ]
+"201
+{
+[; ;MISC.c: 200: long GetEnteredNumber(unsigned char* This)
+[; ;MISC.c: 201: {
+[e :U _GetEnteredNumber ]
+"200
+[v _This `*uc ~T0 @X0 1 r1 ]
+"201
+[f ]
+"202
+[v _i `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 202: unsigned char i =0;
+[e = _i -> -> 0 `i `uc ]
+"203
+[v _temp `l ~T0 @X0 1 a ]
+[; ;MISC.c: 203: long temp =0;
+[e = _temp -> -> 0 `i `l ]
+"204
+[v _negative `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 204: unsigned char negative =0;
+[e = _negative -> -> 0 `i `uc ]
+[; ;MISC.c: 205: while(*This != '=' && *This != 0)
+"205
+[e $U 2207  ]
+[e :U 2208 ]
+[; ;MISC.c: 206: {
+"206
+{
+[; ;MISC.c: 207: This++;
+"207
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"209
+}
+[e :U 2207 ]
+"205
+[e $ && != -> *U _This `ui -> 61 `ui != -> *U _This `i -> 0 `i 2208  ]
+[e :U 2209 ]
+[; ;MISC.c: 209: }
+[; ;MISC.c: 210: if(*This == 0)
+"210
+[e $ ! == -> *U _This `i -> 0 `i 2210  ]
+[; ;MISC.c: 211: {
+"211
+{
+[; ;MISC.c: 212: return 2147483647L;
+"212
+[e ) -> 2147483647 `l ]
+[e $UE 2206  ]
+"213
+}
+[e :U 2210 ]
+[; ;MISC.c: 213: }
+[; ;MISC.c: 214: This++;
+"214
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+[; ;MISC.c: 215: if(*This == ' ')
+"215
+[e $ ! == -> *U _This `ui -> 32 `ui 2211  ]
+[; ;MISC.c: 216: {
+"216
+{
+[; ;MISC.c: 217: This++;
+"217
 [e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "219
 }
-[e :U 2225 ]
-"211
-[e $ != -> *U _This `i -> 0 `i 2226  ]
-[e :U 2227 ]
 [; ;MISC.c: 219: }
-[; ;MISC.c: 220: BufferCopy(That,address, 100, 0);
+[e $U 2212  ]
 "220
-[e ( _BufferCopy (4 , , , &U _That _address -> -> 100 `i `uc -> -> 0 `i `uc ]
-[; ;MISC.c: 221: }
+[e :U 2211 ]
+[; ;MISC.c: 220: else if (*This == '=')
+[e $ ! == -> *U _This `ui -> 61 `ui 2213  ]
+[; ;MISC.c: 221: {
 "221
-[e :UE 2224 ]
-}
-"222
-[v _lowercase `(v ~T0 @X0 1 ef1`*uc ]
-"223
 {
-[; ;MISC.c: 222: void lowercase(unsigned char* Input)
-[; ;MISC.c: 223: {
-[e :U _lowercase ]
+[; ;MISC.c: 222: return 2147483646L;
 "222
-[v _Input `*uc ~T0 @X0 1 r1 ]
+[e ) -> 2147483646 `l ]
+[e $UE 2206  ]
 "223
-[f ]
+}
+[; ;MISC.c: 223: }
+[e $U 2214  ]
 "224
-[v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 224: unsigned char i =0;
-[e = _i -> -> 0 `i `uc ]
-[; ;MISC.c: 225: while((Input[i]!= 0) && (i < 100))
+[e :U 2213 ]
+[; ;MISC.c: 224: else if(*This == '-')
+[e $ ! == -> *U _This `ui -> 45 `ui 2215  ]
+[; ;MISC.c: 225: {
 "225
-[e $U 2230  ]
-[e :U 2231 ]
-[; ;MISC.c: 226: {
+{
+[; ;MISC.c: 226: negative = 1;
 "226
-{
-[; ;MISC.c: 227: if((Input[i] >= 65) && (Input[i] <= 90 ))
+[e = _negative -> -> 1 `i `uc ]
+[; ;MISC.c: 227: This++;
 "227
-[e $ ! && >= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 65 `i <= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 90 `i 2233  ]
-[; ;MISC.c: 228: {
-"228
-{
-[; ;MISC.c: 229: Input[i] += 32;
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "229
-[e =+ *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux -> -> 32 `i `uc ]
+}
+[; ;MISC.c: 229: }
+[e $U 2216  ]
 "230
-}
-[e :U 2233 ]
-[; ;MISC.c: 230: }
-[; ;MISC.c: 231: i++;
+[e :U 2215 ]
+[; ;MISC.c: 230: else if(*This == 0)
+[e $ ! == -> *U _This `i -> 0 `i 2217  ]
+[; ;MISC.c: 231: {
 "231
-[e ++ _i -> -> 1 `i `uc ]
+{
+[; ;MISC.c: 232: return 2147483645L;
 "232
-}
-[e :U 2230 ]
-"225
-[e $ && != -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 0 `i < -> _i `i -> 100 `i 2231  ]
-[e :U 2232 ]
-[; ;MISC.c: 232: }
-[; ;MISC.c: 233: }
+[e ) -> 2147483645 `l ]
+[e $UE 2206  ]
 "233
-[e :UE 2229 ]
 }
+[e :U 2217 ]
 "234
-[v _StringAddEqual `(uc ~T0 @X0 1 ef1`*uc ]
-"235
-{
-[; ;MISC.c: 234: unsigned char StringAddEqual(unsigned char* Input)
+[e :U 2216 ]
+[e :U 2214 ]
+[e :U 2212 ]
+[; ;MISC.c: 233: }
+[; ;MISC.c: 234: while(*This >=48 && *This <= 57)
+[e $U 2218  ]
+[e :U 2219 ]
 [; ;MISC.c: 235: {
-[e :U _StringAddEqual ]
-"234
-[v _Input `*uc ~T0 @X0 1 r1 ]
 "235
-[f ]
+{
+[; ;MISC.c: 236: temp = temp * 10;
 "236
-[v _i `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 236: unsigned char i =0;
-[e = _i -> -> 0 `i `uc ]
+[e = _temp * _temp -> -> 10 `i `l ]
+[; ;MISC.c: 237: temp += *This - 48;
 "237
-[v _j `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 237: unsigned char j =0;
-[e = _j -> -> 0 `i `uc ]
+[e =+ _temp -> - -> *U _This `i -> 48 `i `l ]
+[; ;MISC.c: 238: i++;
 "238
-[v _firstnumber `uc ~T0 @X0 1 a ]
-[; ;MISC.c: 238: unsigned char firstnumber =200;
-[e = _firstnumber -> -> 200 `i `uc ]
+[e ++ _i -> -> 1 `i `uc ]
+[; ;MISC.c: 239: if(i>32)
 "239
-[v _temp `uc ~T0 @X0 -> 100 `i a ]
-[; ;MISC.c: 239: unsigned char temp[100];
-[; ;MISC.c: 240: cleanBuffer(temp,100);
+[e $ ! > -> _i `i -> 32 `i 2221  ]
+[; ;MISC.c: 240: {
 "240
-[e ( _cleanBuffer (2 , &U _temp -> 100 `i ]
-[; ;MISC.c: 241: while(Input[i] != 0)
+{
+[; ;MISC.c: 241: return 2147483644L;
 "241
-[e $U 2235  ]
-[e :U 2236 ]
-[; ;MISC.c: 242: {
+[e ) -> 2147483644 `l ]
+[e $UE 2206  ]
 "242
-{
-[; ;MISC.c: 243: if((Input[i] >= 48) && (Input[i] <= 57) || (Input[i] == '-'))
+}
+[e :U 2221 ]
+[; ;MISC.c: 242: }
+[; ;MISC.c: 243: This++;
 "243
-[e $ ! || && >= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 48 `i <= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 57 `i == -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `ui -> 45 `ui 2238  ]
-[; ;MISC.c: 244: {
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
 "244
-{
-[; ;MISC.c: 245: firstnumber=i;
+}
+[e :U 2218 ]
+"234
+[e $ && >= -> *U _This `i -> 48 `i <= -> *U _This `i -> 57 `i 2219  ]
+[e :U 2220 ]
+[; ;MISC.c: 244: }
+[; ;MISC.c: 245: if(negative)
 "245
-[e = _firstnumber _i ]
-[; ;MISC.c: 246: break;
+[e $ ! != -> _negative `i -> -> -> 0 `i `uc `i 2222  ]
+[; ;MISC.c: 246: {
 "246
-[e $U 2237  ]
+{
+[; ;MISC.c: 247: temp = (temp * -1);
 "247
+[e = _temp * _temp -> -U -> 1 `i `l ]
+"248
+}
+[e :U 2222 ]
+[; ;MISC.c: 248: }
+[; ;MISC.c: 249: return temp;
+"249
+[e ) _temp ]
+[e $UE 2206  ]
+[; ;MISC.c: 250: }
+"250
+[e :UE 2206 ]
+}
+"257
+[v _RemoveSpaces `(v ~T0 @X0 1 ef1`*uc ]
+"258
+{
+[; ;MISC.c: 257: void RemoveSpaces(unsigned char* This)
+[; ;MISC.c: 258: {
+[e :U _RemoveSpaces ]
+"257
+[v _This `*uc ~T0 @X0 1 r1 ]
+"258
+[f ]
+"260
+[v _i `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 260: unsigned char i =0;
+[e = _i -> -> 0 `i `uc ]
+"261
+[v _address `*uc ~T0 @X0 1 a ]
+[; ;MISC.c: 261: unsigned char* address = This;
+[e = _address _This ]
+"262
+[v _That `uc ~T0 @X0 -> 100 `i a ]
+[; ;MISC.c: 262: unsigned char That[100];
+[; ;MISC.c: 263: cleanBuffer(That,100);
+"263
+[e ( _cleanBuffer (2 , &U _That -> 100 `i ]
+[; ;MISC.c: 264: while(*This != 0)
+"264
+[e $U 2224  ]
+[e :U 2225 ]
+[; ;MISC.c: 265: {
+"265
+{
+[; ;MISC.c: 266: if(*This != ' ')
+"266
+[e $ ! != -> *U _This `ui -> 32 `ui 2227  ]
+[; ;MISC.c: 267: {
+"267
+{
+[; ;MISC.c: 268: That[i] = *This;
+"268
+[e = *U + &U _That * -> _i `ux -> -> # *U &U _That `ui `ux *U _This ]
+[; ;MISC.c: 269: i++;
+"269
+[e ++ _i -> -> 1 `i `uc ]
+"270
+}
+[e :U 2227 ]
+[; ;MISC.c: 270: }
+[; ;MISC.c: 271: This++;
+"271
+[e ++ _This * -> -> 1 `i `x -> -> # *U _This `i `x ]
+"272
+}
+[e :U 2224 ]
+"264
+[e $ != -> *U _This `i -> 0 `i 2225  ]
+[e :U 2226 ]
+[; ;MISC.c: 272: }
+[; ;MISC.c: 273: BufferCopy(That,address, 100, 0);
+"273
+[e ( _BufferCopy (4 , , , &U _That _address -> -> 100 `i `uc -> -> 0 `i `uc ]
+[; ;MISC.c: 274: }
+"274
+[e :UE 2223 ]
+}
+"281
+[v _lowercase `(v ~T0 @X0 1 ef1`*uc ]
+"282
+{
+[; ;MISC.c: 281: void lowercase(unsigned char* Input)
+[; ;MISC.c: 282: {
+[e :U _lowercase ]
+"281
+[v _Input `*uc ~T0 @X0 1 r1 ]
+"282
+[f ]
+"283
+[v _i `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 283: unsigned char i =0;
+[e = _i -> -> 0 `i `uc ]
+[; ;MISC.c: 284: while((Input[i]!= 0) && (i < 100))
+"284
+[e $U 2229  ]
+[e :U 2230 ]
+[; ;MISC.c: 285: {
+"285
+{
+[; ;MISC.c: 286: if((Input[i] >= 65) && (Input[i] <= 90 ))
+"286
+[e $ ! && >= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 65 `i <= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 90 `i 2232  ]
+[; ;MISC.c: 287: {
+"287
+{
+[; ;MISC.c: 288: Input[i] += 32;
+"288
+[e =+ *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux -> -> 32 `i `uc ]
+"289
+}
+[e :U 2232 ]
+[; ;MISC.c: 289: }
+[; ;MISC.c: 290: i++;
+"290
+[e ++ _i -> -> 1 `i `uc ]
+"291
+}
+[e :U 2229 ]
+"284
+[e $ && != -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 0 `i < -> _i `i -> 100 `i 2230  ]
+[e :U 2231 ]
+[; ;MISC.c: 291: }
+[; ;MISC.c: 292: }
+"292
+[e :UE 2228 ]
+}
+"299
+[v _StringAddEqual `(uc ~T0 @X0 1 ef1`*uc ]
+"300
+{
+[; ;MISC.c: 299: unsigned char StringAddEqual(unsigned char* Input)
+[; ;MISC.c: 300: {
+[e :U _StringAddEqual ]
+"299
+[v _Input `*uc ~T0 @X0 1 r1 ]
+"300
+[f ]
+"301
+[v _i `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 301: unsigned char i =0;
+[e = _i -> -> 0 `i `uc ]
+"302
+[v _j `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 302: unsigned char j =0;
+[e = _j -> -> 0 `i `uc ]
+"303
+[v _firstnumber `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 303: unsigned char firstnumber =200;
+[e = _firstnumber -> -> 200 `i `uc ]
+"304
+[v _temp `uc ~T0 @X0 -> 100 `i a ]
+[; ;MISC.c: 304: unsigned char temp[100];
+[; ;MISC.c: 305: cleanBuffer(temp,100);
+"305
+[e ( _cleanBuffer (2 , &U _temp -> 100 `i ]
+[; ;MISC.c: 306: while(Input[i] != 0)
+"306
+[e $U 2234  ]
+[e :U 2235 ]
+[; ;MISC.c: 307: {
+"307
+{
+[; ;MISC.c: 308: if((Input[i] >= 48) && (Input[i] <= 57) || (Input[i] == '-'))
+"308
+[e $ ! || && >= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 48 `i <= -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 57 `i == -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `ui -> 45 `ui 2237  ]
+[; ;MISC.c: 309: {
+"309
+{
+[; ;MISC.c: 310: firstnumber=i;
+"310
+[e = _firstnumber _i ]
+[; ;MISC.c: 311: break;
+"311
+[e $U 2236  ]
+"312
+}
+[e :U 2237 ]
+[; ;MISC.c: 312: }
+[; ;MISC.c: 313: i++;
+"313
+[e ++ _i -> -> 1 `i `uc ]
+"314
+}
+[e :U 2234 ]
+"306
+[e $ != -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 0 `i 2235  ]
+[e :U 2236 ]
+[; ;MISC.c: 314: }
+[; ;MISC.c: 315: if(firstnumber ==200)
+"315
+[e $ ! == -> _firstnumber `i -> 200 `i 2238  ]
+[; ;MISC.c: 316: {
+"316
+{
+[; ;MISC.c: 317: return 0;
+"317
+[e ) -> -> 0 `i `uc ]
+[e $UE 2233  ]
+"318
 }
 [e :U 2238 ]
-[; ;MISC.c: 247: }
-[; ;MISC.c: 248: i++;
-"248
-[e ++ _i -> -> 1 `i `uc ]
-"249
-}
-[e :U 2235 ]
-"241
-[e $ != -> *U + _Input * -> _i `ux -> -> # *U _Input `ui `ux `i -> 0 `i 2236  ]
-[e :U 2237 ]
-[; ;MISC.c: 249: }
-[; ;MISC.c: 250: if(firstnumber ==200)
-"250
-[e $ ! == -> _firstnumber `i -> 200 `i 2239  ]
-[; ;MISC.c: 251: {
-"251
-{
-[; ;MISC.c: 252: return 0;
-"252
-[e ) -> -> 0 `i `uc ]
-[e $UE 2234  ]
-"253
-}
-[e :U 2239 ]
-[; ;MISC.c: 253: }
-[; ;MISC.c: 254: for(j=0;j<firstnumber;j++)
-"254
+[; ;MISC.c: 318: }
+[; ;MISC.c: 319: for(j=0;j<firstnumber;j++)
+"319
 {
 [e = _j -> -> 0 `i `uc ]
-[e $U 2243  ]
-"255
-[e :U 2240 ]
-[; ;MISC.c: 255: {
+[e $U 2242  ]
+"320
+[e :U 2239 ]
+[; ;MISC.c: 320: {
 {
-[; ;MISC.c: 256: temp[j] = Input[j];
-"256
+[; ;MISC.c: 321: temp[j] = Input[j];
+"321
 [e = *U + &U _temp * -> _j `ux -> -> # *U &U _temp `ui `ux *U + _Input * -> _j `ux -> -> # *U _Input `ui `ux ]
-"257
+"322
 }
-"254
+"319
 [e ++ _j -> -> 1 `i `uc ]
-[e :U 2243 ]
-[e $ < -> _j `i -> _firstnumber `i 2240  ]
-[e :U 2241 ]
-"257
+[e :U 2242 ]
+[e $ < -> _j `i -> _firstnumber `i 2239  ]
+[e :U 2240 ]
+"322
 }
-[; ;MISC.c: 257: }
-[; ;MISC.c: 258: temp[firstnumber] = '=';
-"258
+[; ;MISC.c: 322: }
+[; ;MISC.c: 323: temp[firstnumber] = '=';
+"323
 [e = *U + &U _temp * -> _firstnumber `ux -> -> # *U &U _temp `ui `ux -> -> 61 `ui `uc ]
-[; ;MISC.c: 259: for(j = (firstnumber);j<99;j++)
-"259
+[; ;MISC.c: 324: for(j = (firstnumber);j<99;j++)
+"324
 {
 [e = _j _firstnumber ]
-[e $ < -> _j `i -> 99 `i 2244  ]
-[e $U 2245  ]
-"260
-[e :U 2244 ]
-[; ;MISC.c: 260: {
+[e $ < -> _j `i -> 99 `i 2243  ]
+[e $U 2244  ]
+"325
+[e :U 2243 ]
+[; ;MISC.c: 325: {
 {
-[; ;MISC.c: 261: temp[j+1] = Input[j];
-"261
+[; ;MISC.c: 326: temp[j+1] = Input[j];
+"326
 [e = *U + &U _temp * -> -> + -> _j `i -> 1 `i `ui `ux -> -> # *U &U _temp `ui `ux *U + _Input * -> _j `ux -> -> # *U _Input `ui `ux ]
-[; ;MISC.c: 262: if(Input[j] ==0)
-"262
-[e $ ! == -> *U + _Input * -> _j `ux -> -> # *U _Input `ui `ux `i -> 0 `i 2247  ]
-[; ;MISC.c: 263: {
-"263
+[; ;MISC.c: 327: if(Input[j] ==0)
+"327
+[e $ ! == -> *U + _Input * -> _j `ux -> -> # *U _Input `ui `ux `i -> 0 `i 2246  ]
+[; ;MISC.c: 328: {
+"328
 {
-[; ;MISC.c: 264: break;
-"264
-[e $U 2245  ]
-"265
+[; ;MISC.c: 329: break;
+"329
+[e $U 2244  ]
+"330
 }
-[e :U 2247 ]
-"266
+[e :U 2246 ]
+"331
 }
-"259
+"324
 [e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 99 `i 2244  ]
-[e :U 2245 ]
-"266
+[e $ < -> _j `i -> 99 `i 2243  ]
+[e :U 2244 ]
+"331
 }
-[; ;MISC.c: 265: }
-[; ;MISC.c: 266: }
-[; ;MISC.c: 267: BufferCopy(temp,Input,100, 0);
-"267
+[; ;MISC.c: 330: }
+[; ;MISC.c: 331: }
+[; ;MISC.c: 332: BufferCopy(temp,Input,100, 0);
+"332
 [e ( _BufferCopy (4 , , , &U _temp _Input -> -> 100 `i `uc -> -> 0 `i `uc ]
-[; ;MISC.c: 268: return 1;
-"268
+[; ;MISC.c: 333: return 1;
+"333
 [e ) -> -> 1 `i `uc ]
-[e $UE 2234  ]
-[; ;MISC.c: 269: }
-"269
-[e :UE 2234 ]
+[e $UE 2233  ]
+[; ;MISC.c: 334: }
+"334
+[e :UE 2233 ]
+}
+"343
+[v _CheckSum_byte `(uc ~T0 @X0 1 ef2`ui`uc ]
+"344
+{
+[; ;MISC.c: 343: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
+[; ;MISC.c: 344: {
+[e :U _CheckSum_byte ]
+"343
+[v _This `ui ~T0 @X0 1 r1 ]
+[v _Odd_Even `uc ~T0 @X0 1 r2 ]
+"344
+[f ]
+"345
+[v _i `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 345: char i = 0;
+[e = _i -> -> 0 `i `uc ]
+"346
+[v _Parity `uc ~T0 @X0 1 a ]
+[; ;MISC.c: 346: unsigned char Parity = 0;
+[e = _Parity -> -> 0 `i `uc ]
+"347
+[v _ThisTemp `ui ~T0 @X0 1 a ]
+[; ;MISC.c: 347: unsigned int ThisTemp = This;
+[e = _ThisTemp _This ]
+[; ;MISC.c: 349: for (i =0; i<8; i++)
+"349
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 2248  ]
+[e $U 2249  ]
+"350
+[e :U 2248 ]
+[; ;MISC.c: 350: {
+{
+[; ;MISC.c: 351: if((ThisTemp & 0x01) == 1)
+"351
+[e $ ! == & _ThisTemp -> -> 1 `i `ui -> -> 1 `i `ui 2251  ]
+[; ;MISC.c: 352: {
+"352
+{
+[; ;MISC.c: 353: Parity++;
+"353
+[e ++ _Parity -> -> 1 `i `uc ]
+"354
+}
+[e :U 2251 ]
+[; ;MISC.c: 354: }
+[; ;MISC.c: 355: ThisTemp >>= 1;
+"355
+[e =>> _ThisTemp -> 1 `i ]
+"356
+}
+"349
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 2248  ]
+[e :U 2249 ]
+"356
+}
+[; ;MISC.c: 356: }
+[; ;MISC.c: 357: if(Odd_Even == 3)
+"357
+[e $ ! == -> _Odd_Even `i -> 3 `i 2252  ]
+[; ;MISC.c: 358: {
+"358
+{
+[; ;MISC.c: 359: if(Parity % 2 == 0)
+"359
+[e $ ! == % -> _Parity `i -> 2 `i -> 0 `i 2253  ]
+[; ;MISC.c: 360: {
+"360
+{
+[; ;MISC.c: 361: return 1;
+"361
+[e ) -> -> 1 `i `uc ]
+[e $UE 2247  ]
+"362
+}
+[e :U 2253 ]
+[; ;MISC.c: 362: }
+[; ;MISC.c: 363: return 0;
+"363
+[e ) -> -> 0 `i `uc ]
+[e $UE 2247  ]
+"364
+}
+[; ;MISC.c: 364: }
+[e $U 2254  ]
+"365
+[e :U 2252 ]
+[; ;MISC.c: 365: else
+[; ;MISC.c: 366: {
+"366
+{
+[; ;MISC.c: 367: if(Parity % 2 == 1)
+"367
+[e $ ! == % -> _Parity `i -> 2 `i -> 1 `i 2255  ]
+[; ;MISC.c: 368: {
+"368
+{
+[; ;MISC.c: 369: return 1;
+"369
+[e ) -> -> 1 `i `uc ]
+[e $UE 2247  ]
+"370
+}
+[e :U 2255 ]
+[; ;MISC.c: 370: }
+[; ;MISC.c: 371: return 0;
+"371
+[e ) -> -> 0 `i `uc ]
+[e $UE 2247  ]
+"372
+}
+[e :U 2254 ]
+[; ;MISC.c: 372: }
+[; ;MISC.c: 373: }
+"373
+[e :UE 2247 ]
+}
+"380
+[v _ISNUMBER `(uc ~T0 @X0 1 ef1`uc ]
+"381
+{
+[; ;MISC.c: 380: unsigned char ISNUMBER(unsigned char ascii)
+[; ;MISC.c: 381: {
+[e :U _ISNUMBER ]
+"380
+[v _ascii `uc ~T0 @X0 1 r1 ]
+"381
+[f ]
+[; ;MISC.c: 382: if(ascii >= '0' && ascii <='9')
+"382
+[e $ ! && >= -> _ascii `ui -> 48 `ui <= -> _ascii `ui -> 57 `ui 2257  ]
+[; ;MISC.c: 383: {
+"383
+{
+[; ;MISC.c: 384: return 1;
+"384
+[e ) -> -> 1 `i `uc ]
+[e $UE 2256  ]
+"385
+}
+[; ;MISC.c: 385: }
+[e $U 2258  ]
+"386
+[e :U 2257 ]
+[; ;MISC.c: 386: else
+[; ;MISC.c: 387: {
+"387
+{
+[; ;MISC.c: 388: return 0;
+"388
+[e ) -> -> 0 `i `uc ]
+[e $UE 2256  ]
+"389
+}
+[e :U 2258 ]
+[; ;MISC.c: 389: }
+[; ;MISC.c: 390: }
+"390
+[e :UE 2256 ]
 }

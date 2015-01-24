@@ -22,7 +22,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISCbits `VS1870 ~T0 @X0 0 e@3988 ]
 "29294
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"18 MISC.h
+"61 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "33377 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [s S2033 :2 `uc 1 :1 `uc 1 ]
@@ -132,9 +132,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1907 . . . ]
 "31098
 [v _PIR2bits `VS1907 ~T0 @X0 0 e@4001 ]
-"38 I2C.h
+"59 I2C.h
 [v _Multiple_I2C_Read `(uc ~T0 @X0 0 ef2`*uc`uc ]
-"39
+"60
 [v _readI2C `(uc ~T0 @X0 0 ef ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15465,688 +15465,690 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;I2C.h: 33: void Init_I2C_Master(void);
-[; ;I2C.h: 34: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
-[; ;I2C.h: 35: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
-[; ;I2C.h: 36: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 37: void ResetI2C( void );
-[; ;I2C.h: 38: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
-[; ;I2C.h: 39: unsigned char readI2C( void );
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-"22 I2C.c
+[; ;I2C.h: 54: void Init_I2C_Master(void);
+[; ;I2C.h: 55: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
+[; ;I2C.h: 56: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
+[; ;I2C.h: 57: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 58: void ResetI2C( void );
+[; ;I2C.h: 59: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
+[; ;I2C.h: 60: unsigned char readI2C( void );
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 61: void delayUS(long US);
+[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 69: void lowercase(unsigned char* Input);
+[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+"55 I2C.c
 [v _Init_I2C_Master `(v ~T0 @X0 1 ef ]
-"23
+"56
 {
-[; ;I2C.c: 22: void Init_I2C_Master(void)
-[; ;I2C.c: 23: {
+[; ;I2C.c: 55: void Init_I2C_Master(void)
+[; ;I2C.c: 56: {
 [e :U _Init_I2C_Master ]
 [f ]
-"24
+"57
 [v _baud `ui ~T0 @X0 1 a ]
-[; ;I2C.c: 24: unsigned int baud = 0;
+[; ;I2C.c: 57: unsigned int baud = 0;
 [e = _baud -> -> 0 `i `ui ]
-[; ;I2C.c: 27: baud = (unsigned char)(41000000L/4 /((4* (long)5 * 1000L) - 1));
-"27
-[e = _baud -> -> / / -> 41000000 `l -> -> 4 `i `l - * * -> -> 4 `i `l -> -> 5 `i `l -> 1000 `l -> -> 1 `i `l `uc `ui ]
-[; ;I2C.c: 28: if(baud > 127 || baud == 0)
-"28
+[; ;I2C.c: 60: baud = (unsigned char)(40960000L/4 /((4* (long)5 * 1000L) - 1));
+"60
+[e = _baud -> -> / / -> 40960000 `l -> -> 4 `i `l - * * -> -> 4 `i `l -> -> 5 `i `l -> 1000 `l -> -> 1 `i `l `uc `ui ]
+[; ;I2C.c: 61: if(baud > 127 || baud == 0)
+"61
 [e $ ! || > _baud -> -> 127 `i `ui == _baud -> -> 0 `i `ui 2161  ]
-[; ;I2C.c: 29: {
-"29
+[; ;I2C.c: 62: {
+"62
 {
-[; ;I2C.c: 30: baud = 127;
-"30
+[; ;I2C.c: 63: baud = 127;
+"63
 [e = _baud -> -> 127 `i `ui ]
-"31
+"64
 }
 [e :U 2161 ]
-[; ;I2C.c: 31: }
-[; ;I2C.c: 32: SSPADD = baud;
-"32
+[; ;I2C.c: 64: }
+[; ;I2C.c: 65: SSPADD = baud;
+"65
 [e = _SSPADD -> _baud `uc ]
-[; ;I2C.c: 33: OpenI2C(0b00001000, 0b10000000);
-"33
-[e ( _OpenI2C (2 , -> -> 8 `i `uc -> -> 128 `i `uc ]
-[; ;I2C.c: 34: }
-"34
-[e :UE 2160 ]
-}
-"36
-[v _OpenI2C `(v ~T0 @X0 1 ef2`uc`uc ]
-"37
-{
-[; ;I2C.c: 36: void OpenI2C( unsigned char sync_mode, unsigned char slew )
-[; ;I2C.c: 37: {
-[e :U _OpenI2C ]
-"36
-[v _sync_mode `uc ~T0 @X0 1 r1 ]
-[v _slew `uc ~T0 @X0 1 r2 ]
-"37
-[f ]
-[; ;I2C.c: 38: SSPSTAT &= 0x3F;
-"38
-[e =& _SSPSTAT -> -> 63 `i `uc ]
-[; ;I2C.c: 39: SSPCON1 = 0x00;
-"39
-[e = _SSPCON1 -> -> 0 `i `uc ]
-[; ;I2C.c: 40: SSPCON2 = 0x00;
-"40
-[e = _SSPCON2 -> -> 0 `i `uc ]
-[; ;I2C.c: 41: SSPCON1 |= sync_mode;
-"41
-[e =| _SSPCON1 _sync_mode ]
-[; ;I2C.c: 42: SSPSTAT |= slew;
-"42
-[e =| _SSPSTAT _slew ]
-[; ;I2C.c: 44: TRISCbits.TRISC3 = 1;
-"44
-[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
-[; ;I2C.c: 45: TRISCbits.TRISC4 = 1;
-"45
-[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
-[; ;I2C.c: 46: SSPCON1 |= 0b00100000;
-"46
-[e =| _SSPCON1 -> -> 32 `i `uc ]
-[; ;I2C.c: 48: }
-"48
-[e :UE 2162 ]
-}
-"50
-[v _ResetI2C `(v ~T0 @X0 1 ef ]
-"51
-{
-[; ;I2C.c: 50: void ResetI2C( void )
-[; ;I2C.c: 51: {
-[e :U _ResetI2C ]
-[f ]
-[; ;I2C.c: 52: SSPCON1 &= 0xDF;
-"52
-[e =& _SSPCON1 -> -> 223 `i `uc ]
-[; ;I2C.c: 53: TRISCbits.TRISC3 = 0;
-"53
-[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-[; ;I2C.c: 54: LATC &= ~0b00001000;
-"54
-[e =& _LATC -> ~ -> 8 `i `uc ]
-[; ;I2C.c: 55: delayUS(200);
-"55
-[e ( _delayUS (1 -> -> 200 `i `l ]
-[; ;I2C.c: 56: TRISCbits.TRISC3 = 1;
-"56
-[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
-[; ;I2C.c: 57: Init_I2C_Master();
-"57
-[e ( _Init_I2C_Master ..  ]
-[; ;I2C.c: 58: }
-"58
-[e :UE 2163 ]
-}
-"63
-[v _IdleI2C `(v ~T0 @X0 1 ef ]
-"64
-{
-[; ;I2C.c: 63: void IdleI2C( void )
-[; ;I2C.c: 64: {
-[e :U _IdleI2C ]
-[f ]
-[; ;I2C.c: 65: while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
-"65
-[e $U 2165  ]
-[e :U 2166 ]
-[; ;I2C.c: 66: continue;
+[; ;I2C.c: 66: OpenI2C(0b00001000, 0b10000000);
 "66
-[e $U 2165  ]
-[e :U 2165 ]
-"65
-[e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i != -> . . _SSPSTATbits 5 1 `i -> -> -> 0 `i `Vuc `i 2166  ]
-[e :U 2167 ]
+[e ( _OpenI2C (2 , -> -> 8 `i `uc -> -> 128 `i `uc ]
 [; ;I2C.c: 67: }
 "67
+[e :UE 2160 ]
+}
+"74
+[v _OpenI2C `(v ~T0 @X0 1 ef2`uc`uc ]
+"75
+{
+[; ;I2C.c: 74: void OpenI2C( unsigned char sync_mode, unsigned char slew )
+[; ;I2C.c: 75: {
+[e :U _OpenI2C ]
+"74
+[v _sync_mode `uc ~T0 @X0 1 r1 ]
+[v _slew `uc ~T0 @X0 1 r2 ]
+"75
+[f ]
+[; ;I2C.c: 76: SSPSTAT &= 0x3F;
+"76
+[e =& _SSPSTAT -> -> 63 `i `uc ]
+[; ;I2C.c: 77: SSPCON1 = 0x00;
+"77
+[e = _SSPCON1 -> -> 0 `i `uc ]
+[; ;I2C.c: 78: SSPCON2 = 0x00;
+"78
+[e = _SSPCON2 -> -> 0 `i `uc ]
+[; ;I2C.c: 79: SSPCON1 |= sync_mode;
+"79
+[e =| _SSPCON1 _sync_mode ]
+[; ;I2C.c: 80: SSPSTAT |= slew;
+"80
+[e =| _SSPSTAT _slew ]
+[; ;I2C.c: 82: TRISCbits.TRISC3 = 1;
+"82
+[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
+[; ;I2C.c: 83: TRISCbits.TRISC4 = 1;
+"83
+[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
+[; ;I2C.c: 84: SSPCON1 |= 0b00100000;
+"84
+[e =| _SSPCON1 -> -> 32 `i `uc ]
+[; ;I2C.c: 86: }
+"86
+[e :UE 2162 ]
+}
+"93
+[v _ResetI2C `(v ~T0 @X0 1 ef ]
+"94
+{
+[; ;I2C.c: 93: void ResetI2C( void )
+[; ;I2C.c: 94: {
+[e :U _ResetI2C ]
+[f ]
+[; ;I2C.c: 95: SSPCON1 &= 0xDF;
+"95
+[e =& _SSPCON1 -> -> 223 `i `uc ]
+[; ;I2C.c: 96: TRISCbits.TRISC3 = 0;
+"96
+[e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
+[; ;I2C.c: 97: LATC &= ~0b00001000;
+"97
+[e =& _LATC -> ~ -> 8 `i `uc ]
+[; ;I2C.c: 98: delayUS(200);
+"98
+[e ( _delayUS (1 -> -> 200 `i `l ]
+[; ;I2C.c: 99: TRISCbits.TRISC3 = 1;
+"99
+[e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
+[; ;I2C.c: 100: Init_I2C_Master();
+"100
+[e ( _Init_I2C_Master ..  ]
+[; ;I2C.c: 101: }
+"101
+[e :UE 2163 ]
+}
+"108
+[v _IdleI2C `(v ~T0 @X0 1 ef ]
+"109
+{
+[; ;I2C.c: 108: void IdleI2C( void )
+[; ;I2C.c: 109: {
+[e :U _IdleI2C ]
+[f ]
+[; ;I2C.c: 110: while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
+"110
+[e $U 2165  ]
+[e :U 2166 ]
+[; ;I2C.c: 111: continue;
+"111
+[e $U 2165  ]
+[e :U 2165 ]
+"110
+[e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i != -> . . _SSPSTATbits 5 1 `i -> -> -> 0 `i `Vuc `i 2166  ]
+[e :U 2167 ]
+[; ;I2C.c: 112: }
+"112
 [e :UE 2164 ]
 }
-"69
+"119
 [v _WriteI2C `(c ~T0 @X0 1 ef1`uc ]
-"70
+"120
 {
-[; ;I2C.c: 69: signed char WriteI2C( unsigned char data_out )
-[; ;I2C.c: 70: {
+[; ;I2C.c: 119: signed char WriteI2C( unsigned char data_out )
+[; ;I2C.c: 120: {
 [e :U _WriteI2C ]
-"69
+"119
 [v _data_out `uc ~T0 @X0 1 r1 ]
-"70
+"120
 [f ]
-[; ;I2C.c: 71: SSPBUF = data_out;
-"71
+[; ;I2C.c: 121: SSPBUF = data_out;
+"121
 [e = _SSPBUF _data_out ]
-[; ;I2C.c: 72: if ( SSPCON1bits.WCOL )
-"72
+[; ;I2C.c: 122: if ( SSPCON1bits.WCOL )
+"122
 [e $ ! != -> . . _SSPCON1bits 0 4 `i -> -> -> 0 `i `Vuc `i 2169  ]
-[; ;I2C.c: 73: return ( -1 );
-"73
+[; ;I2C.c: 123: return ( -1 );
+"123
 [e ) -> -U -> 1 `i `c ]
 [e $UE 2168  ]
 [e $U 2170  ]
-"74
+"124
 [e :U 2169 ]
-[; ;I2C.c: 74: else
-[; ;I2C.c: 75: {
-"75
+[; ;I2C.c: 124: else
+[; ;I2C.c: 125: {
+"125
 {
-[; ;I2C.c: 76: if( ((SSPCON1&0x0F)!=0x08) && ((SSPCON1&0x0F)!=0x0B) )
-"76
+[; ;I2C.c: 126: if( ((SSPCON1&0x0F)!=0x08) && ((SSPCON1&0x0F)!=0x0B) )
+"126
 [e $ ! && != & -> _SSPCON1 `i -> 15 `i -> 8 `i != & -> _SSPCON1 `i -> 15 `i -> 11 `i 2171  ]
-[; ;I2C.c: 77: {
-"77
+[; ;I2C.c: 127: {
+"127
 {
-[; ;I2C.c: 78: SSPCON1bits.CKP = 1;
-"78
+[; ;I2C.c: 128: SSPCON1bits.CKP = 1;
+"128
 [e = . . _SSPCON1bits 0 1 -> -> 1 `i `uc ]
-[; ;I2C.c: 79: while ( !PIR1bits.SSPIF );
-"79
+[; ;I2C.c: 129: while ( !PIR1bits.SSPIF );
+"129
 [e $U 2172  ]
 [e :U 2173 ]
 [e :U 2172 ]
 [e $ ! != -> . . _PIR1bits 0 3 `i -> -> -> 0 `i `Vuc `i 2173  ]
 [e :U 2174 ]
-[; ;I2C.c: 81: if ( ( !SSPSTATbits.R_W ) && ( !SSPSTATbits.BF ) )
-"81
+[; ;I2C.c: 131: if ( ( !SSPSTATbits.R_W ) && ( !SSPSTATbits.BF ) )
+"131
 [e $ ! && ! != -> . . _SSPSTATbits 5 1 `i -> -> -> 0 `i `Vuc `i ! != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i 2175  ]
-[; ;I2C.c: 82: {
-"82
+[; ;I2C.c: 132: {
+"132
 {
-[; ;I2C.c: 83: return ( -2 );
-"83
+[; ;I2C.c: 133: return ( -2 );
+"133
 [e ) -> -U -> 2 `i `c ]
 [e $UE 2168  ]
-"84
+"134
 }
-[; ;I2C.c: 84: }
+[; ;I2C.c: 134: }
 [e $U 2176  ]
-"85
+"135
 [e :U 2175 ]
-[; ;I2C.c: 85: else
-[; ;I2C.c: 86: {
-"86
+[; ;I2C.c: 135: else
+[; ;I2C.c: 136: {
+"136
 {
-[; ;I2C.c: 87: return ( 0 );
-"87
+[; ;I2C.c: 137: return ( 0 );
+"137
 [e ) -> -> 0 `i `c ]
 [e $UE 2168  ]
-"88
+"138
 }
 [e :U 2176 ]
-"89
+"139
 }
-[; ;I2C.c: 88: }
-[; ;I2C.c: 89: }
+[; ;I2C.c: 138: }
+[; ;I2C.c: 139: }
 [e $U 2177  ]
-"90
+"140
 [e :U 2171 ]
-[; ;I2C.c: 90: else if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
+[; ;I2C.c: 140: else if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
 [e $ ! || == & -> _SSPCON1 `i -> 15 `i -> 8 `i == & -> _SSPCON1 `i -> 15 `i -> 11 `i 2178  ]
-[; ;I2C.c: 91: {
-"91
+[; ;I2C.c: 141: {
+"141
 {
-[; ;I2C.c: 92: while( SSPSTATbits.BF );
-"92
+[; ;I2C.c: 142: while( SSPSTATbits.BF );
+"142
 [e $U 2179  ]
 [e :U 2180 ]
 [e :U 2179 ]
 [e $ != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i 2180  ]
 [e :U 2181 ]
-[; ;I2C.c: 93: IdleI2C();
-"93
+[; ;I2C.c: 143: IdleI2C();
+"143
 [e ( _IdleI2C ..  ]
-[; ;I2C.c: 94: if ( SSPCON2bits.ACKSTAT )
-"94
+[; ;I2C.c: 144: if ( SSPCON2bits.ACKSTAT )
+"144
 [e $ ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2182  ]
-[; ;I2C.c: 95: return ( -2 );
-"95
+[; ;I2C.c: 145: return ( -2 );
+"145
 [e ) -> -U -> 2 `i `c ]
 [e $UE 2168  ]
 [e $U 2183  ]
-"96
+"146
 [e :U 2182 ]
-[; ;I2C.c: 96: else return ( 0 );
+[; ;I2C.c: 146: else return ( 0 );
 [e ) -> -> 0 `i `c ]
 [e $UE 2168  ]
 [e :U 2183 ]
-"97
+"147
 }
-[; ;I2C.c: 97: }
+[; ;I2C.c: 147: }
 [e $U 2184  ]
-"98
+"148
 [e :U 2178 ]
-[; ;I2C.c: 98: else
-[; ;I2C.c: 99: {
-"99
+[; ;I2C.c: 148: else
+[; ;I2C.c: 149: {
+"149
 {
-[; ;I2C.c: 100: return (-4);
-"100
+[; ;I2C.c: 150: return (-4);
+"150
 [e ) -> -U -> 4 `i `c ]
 [e $UE 2168  ]
-"101
+"151
 }
 [e :U 2184 ]
 [e :U 2177 ]
-"103
+"153
 }
 [e :U 2170 ]
-[; ;I2C.c: 101: }
-[; ;I2C.c: 103: }
-[; ;I2C.c: 104: }
-"104
+[; ;I2C.c: 151: }
+[; ;I2C.c: 153: }
+[; ;I2C.c: 154: }
+"154
 [e :UE 2168 ]
 }
-"106
+"161
 [v _I2C_Write_At_Address `(uc ~T0 @X0 1 ef3`uc`uc`uc ]
-"107
+"162
 {
-[; ;I2C.c: 106: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data )
-[; ;I2C.c: 107: {
+[; ;I2C.c: 161: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data )
+[; ;I2C.c: 162: {
 [e :U _I2C_Write_At_Address ]
-"106
+"161
 [v _I2Caddress `uc ~T0 @X0 1 r1 ]
 [v _Register `uc ~T0 @X0 1 r2 ]
 [v _data `uc ~T0 @X0 1 r3 ]
-"107
+"162
 [f ]
-[; ;I2C.c: 108: IdleI2C();
-"108
+[; ;I2C.c: 163: IdleI2C();
+"163
 [e ( _IdleI2C ..  ]
-[; ;I2C.c: 109: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
-"109
+[; ;I2C.c: 164: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
+"164
 [e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
 [e $U 2186  ]
 [e :U 2187 ]
 [e :U 2186 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2187  ]
 [e :U 2188 ]
-[; ;I2C.c: 110: while ( SSPCON2bits.SEN );
-"110
+[; ;I2C.c: 165: while ( SSPCON2bits.SEN );
+"165
 [e $U 2189  ]
 [e :U 2190 ]
 [e :U 2189 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2190  ]
 [e :U 2191 ]
-[; ;I2C.c: 111: if ( PIR2bits.BCLIF )
-"111
+[; ;I2C.c: 166: if ( PIR2bits.BCLIF )
+"166
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2192  ]
-[; ;I2C.c: 112: {
-"112
+[; ;I2C.c: 167: {
+"167
 {
-[; ;I2C.c: 113: return ( -1 );
-"113
+[; ;I2C.c: 168: return ( -1 );
+"168
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2185  ]
-"114
+"169
 }
-[; ;I2C.c: 114: }
+[; ;I2C.c: 169: }
 [e $U 2193  ]
-"115
+"170
 [e :U 2192 ]
-[; ;I2C.c: 115: else
-[; ;I2C.c: 116: {
-"116
+[; ;I2C.c: 170: else
+[; ;I2C.c: 171: {
+"171
 {
-[; ;I2C.c: 117: if ( WriteI2C( I2Caddress << 1) & 0xFE )
-"117
+[; ;I2C.c: 172: if ( WriteI2C( I2Caddress << 1) & 0xFE )
+"172
 [e $ ! != & -> ( _WriteI2C (1 -> << -> _I2Caddress `i -> 1 `i `uc `i -> 254 `i -> 0 `i 2194  ]
-[; ;I2C.c: 118: {
-"118
+[; ;I2C.c: 173: {
+"173
 {
-[; ;I2C.c: 119: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"119
+[; ;I2C.c: 174: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"174
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2195  ]
 [e :U 2196 ]
 [e :U 2195 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2196  ]
 [e :U 2197 ]
-[; ;I2C.c: 120: return ( -3 );
-"120
+[; ;I2C.c: 175: return ( -3 );
+"175
 [e ) -> -U -> 3 `i `uc ]
 [e $UE 2185  ]
-"121
+"176
 }
 [e :U 2194 ]
-[; ;I2C.c: 121: }
-[; ;I2C.c: 124: if ( !SSPCON2bits.ACKSTAT )
-"124
+[; ;I2C.c: 176: }
+[; ;I2C.c: 179: if ( !SSPCON2bits.ACKSTAT )
+"179
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2198  ]
-[; ;I2C.c: 125: {
-"125
+[; ;I2C.c: 180: {
+"180
 {
-[; ;I2C.c: 126: if ( WriteI2C( Register ) )
-"126
+[; ;I2C.c: 181: if ( WriteI2C( Register ) )
+"181
 [e $ ! != -> ( _WriteI2C (1 _Register `i -> -> -> 0 `i `c `i 2199  ]
-[; ;I2C.c: 127: {
-"127
+[; ;I2C.c: 182: {
+"182
 {
-[; ;I2C.c: 128: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"128
+[; ;I2C.c: 183: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"183
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2200  ]
 [e :U 2201 ]
 [e :U 2200 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2201  ]
 [e :U 2202 ]
-[; ;I2C.c: 129: return ( -3 );
-"129
+[; ;I2C.c: 184: return ( -3 );
+"184
 [e ) -> -U -> 3 `i `uc ]
 [e $UE 2185  ]
-"130
+"185
 }
 [e :U 2199 ]
-[; ;I2C.c: 130: }
-[; ;I2C.c: 133: if ( !SSPCON2bits.ACKSTAT )
-"133
+[; ;I2C.c: 185: }
+[; ;I2C.c: 188: if ( !SSPCON2bits.ACKSTAT )
+"188
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2203  ]
-[; ;I2C.c: 134: {
-"134
+[; ;I2C.c: 189: {
+"189
 {
-[; ;I2C.c: 135: if ( WriteI2C ( data ) )
-"135
+[; ;I2C.c: 190: if ( WriteI2C ( data ) )
+"190
 [e $ ! != -> ( _WriteI2C (1 _data `i -> -> -> 0 `i `c `i 2204  ]
-[; ;I2C.c: 136: {
-"136
+[; ;I2C.c: 191: {
+"191
 {
-[; ;I2C.c: 137: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"137
+[; ;I2C.c: 192: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"192
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2205  ]
 [e :U 2206 ]
 [e :U 2205 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2206  ]
 [e :U 2207 ]
-[; ;I2C.c: 138: return( -4 );
-"138
+[; ;I2C.c: 193: return( -4 );
+"193
 [e ) -> -U -> 4 `i `uc ]
 [e $UE 2185  ]
-"139
+"194
 }
 [e :U 2204 ]
-"140
+"195
 }
-[; ;I2C.c: 139: }
-[; ;I2C.c: 140: }
+[; ;I2C.c: 194: }
+[; ;I2C.c: 195: }
 [e $U 2208  ]
-"141
+"196
 [e :U 2203 ]
-[; ;I2C.c: 141: else
-[; ;I2C.c: 142: {
-"142
+[; ;I2C.c: 196: else
+[; ;I2C.c: 197: {
+"197
 {
-[; ;I2C.c: 143: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"143
+[; ;I2C.c: 198: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"198
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2209  ]
 [e :U 2210 ]
 [e :U 2209 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2210  ]
 [e :U 2211 ]
-[; ;I2C.c: 144: return ( -2 );
-"144
+[; ;I2C.c: 199: return ( -2 );
+"199
 [e ) -> -U -> 2 `i `uc ]
 [e $UE 2185  ]
-"145
+"200
 }
 [e :U 2208 ]
-"146
+"201
 }
-[; ;I2C.c: 145: }
-[; ;I2C.c: 146: }
+[; ;I2C.c: 200: }
+[; ;I2C.c: 201: }
 [e $U 2212  ]
-"147
+"202
 [e :U 2198 ]
-[; ;I2C.c: 147: else
-[; ;I2C.c: 148: {
-"148
+[; ;I2C.c: 202: else
+[; ;I2C.c: 203: {
+"203
 {
-[; ;I2C.c: 149: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"149
+[; ;I2C.c: 204: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"204
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2213  ]
 [e :U 2214 ]
 [e :U 2213 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2214  ]
 [e :U 2215 ]
-[; ;I2C.c: 150: return ( -2 );
-"150
+[; ;I2C.c: 205: return ( -2 );
+"205
 [e ) -> -U -> 2 `i `uc ]
 [e $UE 2185  ]
-"151
+"206
 }
 [e :U 2212 ]
-"152
+"207
 }
 [e :U 2193 ]
-[; ;I2C.c: 151: }
-[; ;I2C.c: 152: }
-[; ;I2C.c: 155: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"155
+[; ;I2C.c: 206: }
+[; ;I2C.c: 207: }
+[; ;I2C.c: 210: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"210
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2216  ]
 [e :U 2217 ]
 [e :U 2216 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2217  ]
 [e :U 2218 ]
-[; ;I2C.c: 156: while ( SSPCON2bits.PEN );
-"156
+[; ;I2C.c: 211: while ( SSPCON2bits.PEN );
+"211
 [e $U 2219  ]
 [e :U 2220 ]
 [e :U 2219 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2220  ]
 [e :U 2221 ]
-[; ;I2C.c: 157: if ( PIR2bits.BCLIF )
-"157
+[; ;I2C.c: 212: if ( PIR2bits.BCLIF )
+"212
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2222  ]
-[; ;I2C.c: 158: {
-"158
+[; ;I2C.c: 213: {
+"213
 {
-[; ;I2C.c: 159: return ( -1 );
-"159
+[; ;I2C.c: 214: return ( -1 );
+"214
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2185  ]
-"160
+"215
 }
 [e :U 2222 ]
-[; ;I2C.c: 160: }
-[; ;I2C.c: 161: return ( 0 );
-"161
+[; ;I2C.c: 215: }
+[; ;I2C.c: 216: return ( 0 );
+"216
 [e ) -> -> 0 `i `uc ]
 [e $UE 2185  ]
-[; ;I2C.c: 162: }
-"162
+[; ;I2C.c: 217: }
+"217
 [e :UE 2185 ]
 }
-"164
+"224
 [v _I2C_Read_At_Address `(i ~T0 @X0 1 ef2`uc`uc ]
-"165
+"225
 {
-[; ;I2C.c: 164: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register )
-[; ;I2C.c: 165: {
+[; ;I2C.c: 224: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register )
+[; ;I2C.c: 225: {
 [e :U _I2C_Read_At_Address ]
-"164
+"224
 [v _I2Caddress `uc ~T0 @X0 1 r1 ]
 [v _Register `uc ~T0 @X0 1 r2 ]
-"165
+"225
 [f ]
-[; ;I2C.c: 166: IdleI2C();
-"166
+[; ;I2C.c: 226: IdleI2C();
+"226
 [e ( _IdleI2C ..  ]
-[; ;I2C.c: 167: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
-"167
+[; ;I2C.c: 227: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
+"227
 [e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
 [e $U 2224  ]
 [e :U 2225 ]
 [e :U 2224 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2225  ]
 [e :U 2226 ]
-[; ;I2C.c: 168: while ( SSPCON2bits.SEN );
-"168
+[; ;I2C.c: 228: while ( SSPCON2bits.SEN );
+"228
 [e $U 2227  ]
 [e :U 2228 ]
 [e :U 2227 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2228  ]
 [e :U 2229 ]
-[; ;I2C.c: 169: if ( PIR2bits.BCLIF )
-"169
+[; ;I2C.c: 229: if ( PIR2bits.BCLIF )
+"229
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2230  ]
-[; ;I2C.c: 170: {
-"170
+[; ;I2C.c: 230: {
+"230
 {
-[; ;I2C.c: 171: return ( -1 );
-"171
+[; ;I2C.c: 231: return ( -1 );
+"231
 [e ) -U -> 1 `i ]
 [e $UE 2223  ]
-"172
+"232
 }
-[; ;I2C.c: 172: }
+[; ;I2C.c: 232: }
 [e $U 2231  ]
-"173
+"233
 [e :U 2230 ]
-[; ;I2C.c: 173: else
-[; ;I2C.c: 174: {
-"174
+[; ;I2C.c: 233: else
+[; ;I2C.c: 234: {
+"234
 {
-[; ;I2C.c: 175: if ( WriteI2C( (I2Caddress << 1 ) & 0xFE ) )
-"175
+[; ;I2C.c: 235: if ( WriteI2C( (I2Caddress << 1 ) & 0xFE ) )
+"235
 [e $ ! != -> ( _WriteI2C (1 -> & << -> _I2Caddress `i -> 1 `i -> 254 `i `uc `i -> -> -> 0 `i `c `i 2232  ]
-[; ;I2C.c: 176: {
-"176
+[; ;I2C.c: 236: {
+"236
 {
-[; ;I2C.c: 177: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"177
+[; ;I2C.c: 237: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"237
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2233  ]
 [e :U 2234 ]
 [e :U 2233 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2234  ]
 [e :U 2235 ]
-[; ;I2C.c: 178: return ( -3 );
-"178
+[; ;I2C.c: 238: return ( -3 );
+"238
 [e ) -U -> 3 `i ]
 [e $UE 2223  ]
-"179
+"239
 }
 [e :U 2232 ]
-[; ;I2C.c: 179: }
-[; ;I2C.c: 182: if ( !SSPCON2bits.ACKSTAT )
-"182
+[; ;I2C.c: 239: }
+[; ;I2C.c: 242: if ( !SSPCON2bits.ACKSTAT )
+"242
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2236  ]
-[; ;I2C.c: 183: {
-"183
+[; ;I2C.c: 243: {
+"243
 {
-[; ;I2C.c: 184: if ( WriteI2C( Register ) )
-"184
+[; ;I2C.c: 244: if ( WriteI2C( Register ) )
+"244
 [e $ ! != -> ( _WriteI2C (1 _Register `i -> -> -> 0 `i `c `i 2237  ]
-[; ;I2C.c: 185: {
-"185
+[; ;I2C.c: 245: {
+"245
 {
-[; ;I2C.c: 186: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"186
+[; ;I2C.c: 246: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"246
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2238  ]
 [e :U 2239 ]
 [e :U 2238 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2239  ]
 [e :U 2240 ]
-[; ;I2C.c: 187: return ( -3 );
-"187
+[; ;I2C.c: 247: return ( -3 );
+"247
 [e ) -U -> 3 `i ]
 [e $UE 2223  ]
-"188
+"248
 }
 [e :U 2237 ]
-[; ;I2C.c: 188: }
-[; ;I2C.c: 191: if ( !SSPCON2bits.ACKSTAT )
-"191
+[; ;I2C.c: 248: }
+[; ;I2C.c: 251: if ( !SSPCON2bits.ACKSTAT )
+"251
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2241  ]
-[; ;I2C.c: 192: {
-"192
+[; ;I2C.c: 252: {
+"252
 {
-[; ;I2C.c: 193: SSPCON2bits.RSEN=1;while(SSPCON2bits.RSEN);
-"193
+[; ;I2C.c: 253: SSPCON2bits.RSEN=1;while(SSPCON2bits.RSEN);
+"253
 [e = . . _SSPCON2bits 0 1 -> -> 1 `i `uc ]
 [e $U 2242  ]
 [e :U 2243 ]
 [e :U 2242 ]
 [e $ != -> . . _SSPCON2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2243  ]
 [e :U 2244 ]
-[; ;I2C.c: 194: while ( SSPCON2bits.RSEN );
-"194
+[; ;I2C.c: 254: while ( SSPCON2bits.RSEN );
+"254
 [e $U 2245  ]
 [e :U 2246 ]
 [e :U 2245 ]
 [e $ != -> . . _SSPCON2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2246  ]
 [e :U 2247 ]
-[; ;I2C.c: 195: if ( PIR2bits.BCLIF )
-"195
+[; ;I2C.c: 255: if ( PIR2bits.BCLIF )
+"255
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2248  ]
-[; ;I2C.c: 196: {
-"196
+[; ;I2C.c: 256: {
+"256
 {
-[; ;I2C.c: 197: return ( -1 );
-"197
+[; ;I2C.c: 257: return ( -1 );
+"257
 [e ) -U -> 1 `i ]
 [e $UE 2223  ]
-"198
+"258
 }
 [e :U 2248 ]
-[; ;I2C.c: 198: }
-[; ;I2C.c: 200: if ( WriteI2C( (I2Caddress << 1) + 1 ) )
-"200
+[; ;I2C.c: 258: }
+[; ;I2C.c: 260: if ( WriteI2C( (I2Caddress << 1) + 1 ) )
+"260
 [e $ ! != -> ( _WriteI2C (1 -> + << -> _I2Caddress `i -> 1 `i -> 1 `i `uc `i -> -> -> 0 `i `c `i 2249  ]
-[; ;I2C.c: 201: {
-"201
+[; ;I2C.c: 261: {
+"261
 {
-[; ;I2C.c: 202: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"202
+[; ;I2C.c: 262: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"262
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2250  ]
 [e :U 2251 ]
 [e :U 2250 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2251  ]
 [e :U 2252 ]
-[; ;I2C.c: 203: return ( -3 );
-"203
+[; ;I2C.c: 263: return ( -3 );
+"263
 [e ) -U -> 3 `i ]
 [e $UE 2223  ]
-"204
+"264
 }
 [e :U 2249 ]
-[; ;I2C.c: 204: }
-[; ;I2C.c: 207: if ( !SSPCON2bits.ACKSTAT )
-"207
+[; ;I2C.c: 264: }
+[; ;I2C.c: 267: if ( !SSPCON2bits.ACKSTAT )
+"267
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2253  ]
-[; ;I2C.c: 208: {
-"208
+[; ;I2C.c: 268: {
+"268
 {
-[; ;I2C.c: 209: SSPCON2bits.RCEN = 1;
-"209
+[; ;I2C.c: 269: SSPCON2bits.RCEN = 1;
+"269
 [e = . . _SSPCON2bits 0 3 -> -> 1 `i `uc ]
-[; ;I2C.c: 210: while ( SSPCON2bits.RCEN );
-"210
+[; ;I2C.c: 270: while ( SSPCON2bits.RCEN );
+"270
 [e $U 2254  ]
 [e :U 2255 ]
 [e :U 2254 ]
 [e $ != -> . . _SSPCON2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2255  ]
 [e :U 2256 ]
-[; ;I2C.c: 211: SSPCON2bits.ACKDT=1;SSPCON2bits.ACKEN=1;while(SSPCON2bits.ACKEN);
-"211
+[; ;I2C.c: 271: SSPCON2bits.ACKDT=1;SSPCON2bits.ACKEN=1;while(SSPCON2bits.ACKEN);
+"271
 [e = . . _SSPCON2bits 0 5 -> -> 1 `i `uc ]
 [e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
 [e $U 2257  ]
@@ -16154,299 +16156,299 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2257 ]
 [e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2258  ]
 [e :U 2259 ]
-[; ;I2C.c: 212: while ( SSPCON2bits.ACKEN );
-"212
+[; ;I2C.c: 272: while ( SSPCON2bits.ACKEN );
+"272
 [e $U 2260  ]
 [e :U 2261 ]
 [e :U 2260 ]
 [e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2261  ]
 [e :U 2262 ]
-[; ;I2C.c: 213: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"213
+[; ;I2C.c: 273: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"273
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2263  ]
 [e :U 2264 ]
 [e :U 2263 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2264  ]
 [e :U 2265 ]
-[; ;I2C.c: 214: while ( SSPCON2bits.PEN );
-"214
+[; ;I2C.c: 274: while ( SSPCON2bits.PEN );
+"274
 [e $U 2266  ]
 [e :U 2267 ]
 [e :U 2266 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2267  ]
 [e :U 2268 ]
-[; ;I2C.c: 215: if ( PIR2bits.BCLIF )
-"215
+[; ;I2C.c: 275: if ( PIR2bits.BCLIF )
+"275
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2269  ]
-[; ;I2C.c: 216: {
-"216
+[; ;I2C.c: 276: {
+"276
 {
-[; ;I2C.c: 217: return ( -1 );
-"217
+[; ;I2C.c: 277: return ( -1 );
+"277
 [e ) -U -> 1 `i ]
 [e $UE 2223  ]
-"218
+"278
 }
 [e :U 2269 ]
-"219
+"279
 }
-[; ;I2C.c: 218: }
-[; ;I2C.c: 219: }
+[; ;I2C.c: 278: }
+[; ;I2C.c: 279: }
 [e $U 2270  ]
-"220
+"280
 [e :U 2253 ]
-[; ;I2C.c: 220: else
-[; ;I2C.c: 221: {
-"221
+[; ;I2C.c: 280: else
+[; ;I2C.c: 281: {
+"281
 {
-[; ;I2C.c: 222: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"222
+[; ;I2C.c: 282: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"282
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2271  ]
 [e :U 2272 ]
 [e :U 2271 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2272  ]
 [e :U 2273 ]
-[; ;I2C.c: 223: return ( -2 );
-"223
+[; ;I2C.c: 283: return ( -2 );
+"283
 [e ) -U -> 2 `i ]
 [e $UE 2223  ]
-"224
+"284
 }
 [e :U 2270 ]
-"226
+"286
 }
-[; ;I2C.c: 224: }
-[; ;I2C.c: 226: }
+[; ;I2C.c: 284: }
+[; ;I2C.c: 286: }
 [e $U 2274  ]
-"227
+"287
 [e :U 2241 ]
-[; ;I2C.c: 227: else
-[; ;I2C.c: 228: {
-"228
+[; ;I2C.c: 287: else
+[; ;I2C.c: 288: {
+"288
 {
-[; ;I2C.c: 229: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"229
+[; ;I2C.c: 289: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"289
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2275  ]
 [e :U 2276 ]
 [e :U 2275 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2276  ]
 [e :U 2277 ]
-[; ;I2C.c: 230: return ( -2 );
-"230
+[; ;I2C.c: 290: return ( -2 );
+"290
 [e ) -U -> 2 `i ]
 [e $UE 2223  ]
-"231
+"291
 }
 [e :U 2274 ]
-"232
+"292
 }
-[; ;I2C.c: 231: }
-[; ;I2C.c: 232: }
+[; ;I2C.c: 291: }
+[; ;I2C.c: 292: }
 [e $U 2278  ]
-"233
+"293
 [e :U 2236 ]
-[; ;I2C.c: 233: else
-[; ;I2C.c: 234: {
-"234
+[; ;I2C.c: 293: else
+[; ;I2C.c: 294: {
+"294
 {
-[; ;I2C.c: 235: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"235
+[; ;I2C.c: 295: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"295
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2279  ]
 [e :U 2280 ]
 [e :U 2279 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2280  ]
 [e :U 2281 ]
-[; ;I2C.c: 236: return ( -2 );
-"236
+[; ;I2C.c: 296: return ( -2 );
+"296
 [e ) -U -> 2 `i ]
 [e $UE 2223  ]
-"237
+"297
 }
 [e :U 2278 ]
-"238
+"298
 }
 [e :U 2231 ]
-[; ;I2C.c: 237: }
-[; ;I2C.c: 238: }
-[; ;I2C.c: 239: return ( (unsigned int) SSPBUF );
-"239
+[; ;I2C.c: 297: }
+[; ;I2C.c: 298: }
+[; ;I2C.c: 299: return ( (unsigned int) SSPBUF );
+"299
 [e ) -> -> _SSPBUF `ui `i ]
 [e $UE 2223  ]
-[; ;I2C.c: 240: }
-"240
+[; ;I2C.c: 300: }
+"300
 [e :UE 2223 ]
 }
-"242
+"307
 [v _I2C_Read_Sequential `(uc ~T0 @X0 1 ef4`uc`uc`*uc`uc ]
-"243
+"308
 {
-[; ;I2C.c: 242: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length )
-[; ;I2C.c: 243: {
+[; ;I2C.c: 307: char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length )
+[; ;I2C.c: 308: {
 [e :U _I2C_Read_Sequential ]
-"242
+"307
 [v _I2Caddress `uc ~T0 @X0 1 r1 ]
 [v _Register `uc ~T0 @X0 1 r2 ]
 [v _rdptr `*uc ~T0 @X0 1 r3 ]
 [v _length `uc ~T0 @X0 1 r4 ]
-"243
+"308
 [f ]
-[; ;I2C.c: 244: IdleI2C();
-"244
+[; ;I2C.c: 309: IdleI2C();
+"309
 [e ( _IdleI2C ..  ]
-[; ;I2C.c: 245: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
-"245
+[; ;I2C.c: 310: SSPCON2bits.SEN=1;while(SSPCON2bits.SEN);
+"310
 [e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
 [e $U 2283  ]
 [e :U 2284 ]
 [e :U 2283 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2284  ]
 [e :U 2285 ]
-[; ;I2C.c: 246: while ( SSPCON2bits.SEN );
-"246
+[; ;I2C.c: 311: while ( SSPCON2bits.SEN );
+"311
 [e $U 2286  ]
 [e :U 2287 ]
 [e :U 2286 ]
 [e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 2287  ]
 [e :U 2288 ]
-[; ;I2C.c: 247: if ( PIR2bits.BCLIF )
-"247
+[; ;I2C.c: 312: if ( PIR2bits.BCLIF )
+"312
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2289  ]
-[; ;I2C.c: 248: {
-"248
+[; ;I2C.c: 313: {
+"313
 {
-[; ;I2C.c: 249: return ( -1 );
-"249
+[; ;I2C.c: 314: return ( -1 );
+"314
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2282  ]
-"250
+"315
 }
-[; ;I2C.c: 250: }
+[; ;I2C.c: 315: }
 [e $U 2290  ]
-"251
+"316
 [e :U 2289 ]
-[; ;I2C.c: 251: else
-[; ;I2C.c: 252: {
-"252
+[; ;I2C.c: 316: else
+[; ;I2C.c: 317: {
+"317
 {
-[; ;I2C.c: 253: if ( WriteI2C( (I2Caddress << 1) & 0xFE ) )
-"253
+[; ;I2C.c: 318: if ( WriteI2C( (I2Caddress << 1) & 0xFE ) )
+"318
 [e $ ! != -> ( _WriteI2C (1 -> & << -> _I2Caddress `i -> 1 `i -> 254 `i `uc `i -> -> -> 0 `i `c `i 2291  ]
-[; ;I2C.c: 254: {
-"254
+[; ;I2C.c: 319: {
+"319
 {
-[; ;I2C.c: 255: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"255
+[; ;I2C.c: 320: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"320
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2292  ]
 [e :U 2293 ]
 [e :U 2292 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2293  ]
 [e :U 2294 ]
-[; ;I2C.c: 256: return ( -3 );
-"256
+[; ;I2C.c: 321: return ( -3 );
+"321
 [e ) -> -U -> 3 `i `uc ]
 [e $UE 2282  ]
-"257
+"322
 }
 [e :U 2291 ]
-[; ;I2C.c: 257: }
-[; ;I2C.c: 260: if ( !SSPCON2bits.ACKSTAT )
-"260
+[; ;I2C.c: 322: }
+[; ;I2C.c: 325: if ( !SSPCON2bits.ACKSTAT )
+"325
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2295  ]
-[; ;I2C.c: 261: {
-"261
+[; ;I2C.c: 326: {
+"326
 {
-[; ;I2C.c: 262: if ( WriteI2C( Register ) )
-"262
+[; ;I2C.c: 327: if ( WriteI2C( Register ) )
+"327
 [e $ ! != -> ( _WriteI2C (1 _Register `i -> -> -> 0 `i `c `i 2296  ]
-[; ;I2C.c: 263: {
-"263
+[; ;I2C.c: 328: {
+"328
 {
-[; ;I2C.c: 264: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"264
+[; ;I2C.c: 329: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"329
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2297  ]
 [e :U 2298 ]
 [e :U 2297 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2298  ]
 [e :U 2299 ]
-[; ;I2C.c: 265: return ( -3 );
-"265
+[; ;I2C.c: 330: return ( -3 );
+"330
 [e ) -> -U -> 3 `i `uc ]
 [e $UE 2282  ]
-"266
+"331
 }
 [e :U 2296 ]
-[; ;I2C.c: 266: }
-[; ;I2C.c: 269: if ( !SSPCON2bits.ACKSTAT )
-"269
+[; ;I2C.c: 331: }
+[; ;I2C.c: 334: if ( !SSPCON2bits.ACKSTAT )
+"334
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2300  ]
-[; ;I2C.c: 270: {
-"270
+[; ;I2C.c: 335: {
+"335
 {
-[; ;I2C.c: 271: SSPCON2bits.RSEN=1;while(SSPCON2bits.RSEN);
-"271
+[; ;I2C.c: 336: SSPCON2bits.RSEN=1;while(SSPCON2bits.RSEN);
+"336
 [e = . . _SSPCON2bits 0 1 -> -> 1 `i `uc ]
 [e $U 2301  ]
 [e :U 2302 ]
 [e :U 2301 ]
 [e $ != -> . . _SSPCON2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2302  ]
 [e :U 2303 ]
-[; ;I2C.c: 272: while ( SSPCON2bits.RSEN );
-"272
+[; ;I2C.c: 337: while ( SSPCON2bits.RSEN );
+"337
 [e $U 2304  ]
 [e :U 2305 ]
 [e :U 2304 ]
 [e $ != -> . . _SSPCON2bits 0 1 `i -> -> -> 0 `i `Vuc `i 2305  ]
 [e :U 2306 ]
-[; ;I2C.c: 273: if ( WriteI2C( (I2Caddress << 1) +1 ) )
-"273
+[; ;I2C.c: 338: if ( WriteI2C( (I2Caddress << 1) +1 ) )
+"338
 [e $ ! != -> ( _WriteI2C (1 -> + << -> _I2Caddress `i -> 1 `i -> 1 `i `uc `i -> -> -> 0 `i `c `i 2307  ]
-[; ;I2C.c: 274: {
-"274
+[; ;I2C.c: 339: {
+"339
 {
-[; ;I2C.c: 275: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"275
+[; ;I2C.c: 340: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"340
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2308  ]
 [e :U 2309 ]
 [e :U 2308 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2309  ]
 [e :U 2310 ]
-[; ;I2C.c: 276: return ( -3 );
-"276
+[; ;I2C.c: 341: return ( -3 );
+"341
 [e ) -> -U -> 3 `i `uc ]
 [e $UE 2282  ]
-"277
+"342
 }
 [e :U 2307 ]
-[; ;I2C.c: 277: }
-[; ;I2C.c: 280: if ( !SSPCON2bits.ACKSTAT )
-"280
+[; ;I2C.c: 342: }
+[; ;I2C.c: 345: if ( !SSPCON2bits.ACKSTAT )
+"345
 [e $ ! ! != -> . . _SSPCON2bits 0 6 `i -> -> -> 0 `i `Vuc `i 2311  ]
-[; ;I2C.c: 281: {
-"281
+[; ;I2C.c: 346: {
+"346
 {
-[; ;I2C.c: 282: if ( Multiple_I2C_Read( rdptr, length ) )
-"282
+[; ;I2C.c: 347: if ( Multiple_I2C_Read( rdptr, length ) )
+"347
 [e $ ! != -> ( _Multiple_I2C_Read (2 , _rdptr _length `i -> -> -> 0 `i `uc `i 2312  ]
-[; ;I2C.c: 283: {
-"283
+[; ;I2C.c: 348: {
+"348
 {
-[; ;I2C.c: 284: return ( -1 );
-"284
+[; ;I2C.c: 349: return ( -1 );
+"349
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2282  ]
-"285
+"350
 }
 [e :U 2312 ]
-[; ;I2C.c: 285: }
-[; ;I2C.c: 287: SSPCON2bits.ACKDT=1;SSPCON2bits.ACKEN=1;while(SSPCON2bits.ACKEN);
-"287
+[; ;I2C.c: 350: }
+[; ;I2C.c: 352: SSPCON2bits.ACKDT=1;SSPCON2bits.ACKEN=1;while(SSPCON2bits.ACKEN);
+"352
 [e = . . _SSPCON2bits 0 5 -> -> 1 `i `uc ]
 [e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
 [e $U 2313  ]
@@ -16454,250 +16456,250 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2313 ]
 [e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2314  ]
 [e :U 2315 ]
-[; ;I2C.c: 288: while ( SSPCON2bits.ACKEN );
-"288
+[; ;I2C.c: 353: while ( SSPCON2bits.ACKEN );
+"353
 [e $U 2316  ]
 [e :U 2317 ]
 [e :U 2316 ]
 [e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2317  ]
 [e :U 2318 ]
-[; ;I2C.c: 289: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"289
+[; ;I2C.c: 354: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"354
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2319  ]
 [e :U 2320 ]
 [e :U 2319 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2320  ]
 [e :U 2321 ]
-[; ;I2C.c: 290: while ( SSPCON2bits.PEN );
-"290
+[; ;I2C.c: 355: while ( SSPCON2bits.PEN );
+"355
 [e $U 2322  ]
 [e :U 2323 ]
 [e :U 2322 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2323  ]
 [e :U 2324 ]
-[; ;I2C.c: 291: if ( PIR2bits.BCLIF )
-"291
+[; ;I2C.c: 356: if ( PIR2bits.BCLIF )
+"356
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2325  ]
-[; ;I2C.c: 292: {
-"292
+[; ;I2C.c: 357: {
+"357
 {
-[; ;I2C.c: 293: return ( -1 );
-"293
+[; ;I2C.c: 358: return ( -1 );
+"358
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2282  ]
-"294
+"359
 }
 [e :U 2325 ]
-"295
+"360
 }
-[; ;I2C.c: 294: }
-[; ;I2C.c: 295: }
+[; ;I2C.c: 359: }
+[; ;I2C.c: 360: }
 [e $U 2326  ]
-"296
+"361
 [e :U 2311 ]
-[; ;I2C.c: 296: else
-[; ;I2C.c: 297: {
-"297
+[; ;I2C.c: 361: else
+[; ;I2C.c: 362: {
+"362
 {
-[; ;I2C.c: 298: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"298
+[; ;I2C.c: 363: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"363
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2327  ]
 [e :U 2328 ]
 [e :U 2327 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2328  ]
 [e :U 2329 ]
-[; ;I2C.c: 299: return ( -2 );
-"299
+[; ;I2C.c: 364: return ( -2 );
+"364
 [e ) -> -U -> 2 `i `uc ]
 [e $UE 2282  ]
-"300
+"365
 }
 [e :U 2326 ]
-"301
+"366
 }
-[; ;I2C.c: 300: }
-[; ;I2C.c: 301: }
+[; ;I2C.c: 365: }
+[; ;I2C.c: 366: }
 [e $U 2330  ]
-"302
+"367
 [e :U 2300 ]
-[; ;I2C.c: 302: else
-[; ;I2C.c: 303: {
-"303
+[; ;I2C.c: 367: else
+[; ;I2C.c: 368: {
+"368
 {
-[; ;I2C.c: 304: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"304
+[; ;I2C.c: 369: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"369
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2331  ]
 [e :U 2332 ]
 [e :U 2331 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2332  ]
 [e :U 2333 ]
-[; ;I2C.c: 305: return ( -2 );
-"305
+[; ;I2C.c: 370: return ( -2 );
+"370
 [e ) -> -U -> 2 `i `uc ]
 [e $UE 2282  ]
-"306
+"371
 }
 [e :U 2330 ]
-"307
+"372
 }
-[; ;I2C.c: 306: }
-[; ;I2C.c: 307: }
+[; ;I2C.c: 371: }
+[; ;I2C.c: 372: }
 [e $U 2334  ]
-"308
+"373
 [e :U 2295 ]
-[; ;I2C.c: 308: else
-[; ;I2C.c: 309: {
-"309
+[; ;I2C.c: 373: else
+[; ;I2C.c: 374: {
+"374
 {
-[; ;I2C.c: 310: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
-"310
+[; ;I2C.c: 375: SSPCON2bits.PEN=1;while(SSPCON2bits.PEN);
+"375
 [e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
 [e $U 2335  ]
 [e :U 2336 ]
 [e :U 2335 ]
 [e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 2336  ]
 [e :U 2337 ]
-[; ;I2C.c: 311: return ( -2 );
-"311
+[; ;I2C.c: 376: return ( -2 );
+"376
 [e ) -> -U -> 2 `i `uc ]
 [e $UE 2282  ]
-"312
+"377
 }
 [e :U 2334 ]
-"313
+"378
 }
 [e :U 2290 ]
-[; ;I2C.c: 312: }
-[; ;I2C.c: 313: }
-[; ;I2C.c: 314: return ( 0 );
-"314
+[; ;I2C.c: 377: }
+[; ;I2C.c: 378: }
+[; ;I2C.c: 379: return ( 0 );
+"379
 [e ) -> -> 0 `i `uc ]
 [e $UE 2282  ]
-[; ;I2C.c: 315: }
-"315
+[; ;I2C.c: 380: }
+"380
 [e :UE 2282 ]
 }
-"317
+"387
 [v _Multiple_I2C_Read `(uc ~T0 @X0 1 ef2`*uc`uc ]
-"318
+"388
 {
-[; ;I2C.c: 317: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length )
-[; ;I2C.c: 318: {
+[; ;I2C.c: 387: char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length )
+[; ;I2C.c: 388: {
 [e :U _Multiple_I2C_Read ]
-"317
+"387
 [v _rdptr `*uc ~T0 @X0 1 r1 ]
 [v _length `uc ~T0 @X0 1 r2 ]
-"318
+"388
 [f ]
-[; ;I2C.c: 319: while ( length-- )
-"319
+[; ;I2C.c: 389: while ( length-- )
+"389
 [e $U 2339  ]
 [e :U 2340 ]
-[; ;I2C.c: 320: {
-"320
+[; ;I2C.c: 390: {
+"390
 {
-[; ;I2C.c: 321: *rdptr++ = readI2C();
-"321
+[; ;I2C.c: 391: *rdptr++ = readI2C();
+"391
 [e = *U ++ _rdptr * -> -> 1 `i `x -> -> # *U _rdptr `i `x ( _readI2C ..  ]
-[; ;I2C.c: 322: while ( SSPCON2bits.RCEN );
-"322
+[; ;I2C.c: 392: while ( SSPCON2bits.RCEN );
+"392
 [e $U 2342  ]
 [e :U 2343 ]
 [e :U 2342 ]
 [e $ != -> . . _SSPCON2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2343  ]
 [e :U 2344 ]
-[; ;I2C.c: 324: if ( PIR2bits.BCLIF )
-"324
+[; ;I2C.c: 394: if ( PIR2bits.BCLIF )
+"394
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 2345  ]
-[; ;I2C.c: 325: {
-"325
+[; ;I2C.c: 395: {
+"395
 {
-[; ;I2C.c: 326: return ( -1 );
-"326
+[; ;I2C.c: 396: return ( -1 );
+"396
 [e ) -> -U -> 1 `i `uc ]
 [e $UE 2338  ]
-"327
+"397
 }
 [e :U 2345 ]
-[; ;I2C.c: 327: }
-[; ;I2C.c: 329: if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
-"329
+[; ;I2C.c: 397: }
+[; ;I2C.c: 399: if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
+"399
 [e $ ! || == & -> _SSPCON1 `i -> 15 `i -> 8 `i == & -> _SSPCON1 `i -> 15 `i -> 11 `i 2346  ]
-[; ;I2C.c: 330: {
-"330
+[; ;I2C.c: 400: {
+"400
 {
-[; ;I2C.c: 331: if ( length )
-"331
+[; ;I2C.c: 401: if ( length )
+"401
 [e $ ! != -> _length `i -> -> -> 0 `i `uc `i 2347  ]
-[; ;I2C.c: 332: {
-"332
+[; ;I2C.c: 402: {
+"402
 {
-[; ;I2C.c: 333: SSPCON2bits.ACKDT = 0;
-"333
+[; ;I2C.c: 403: SSPCON2bits.ACKDT = 0;
+"403
 [e = . . _SSPCON2bits 0 5 -> -> 0 `i `uc ]
-[; ;I2C.c: 334: SSPCON2bits.ACKEN = 1;
-"334
+[; ;I2C.c: 404: SSPCON2bits.ACKEN = 1;
+"404
 [e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
-[; ;I2C.c: 335: while ( SSPCON2bits.ACKEN );
-"335
+[; ;I2C.c: 405: while ( SSPCON2bits.ACKEN );
+"405
 [e $U 2348  ]
 [e :U 2349 ]
 [e :U 2348 ]
 [e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 2349  ]
 [e :U 2350 ]
-"336
+"406
 }
 [e :U 2347 ]
-"337
+"407
 }
 [e :U 2346 ]
-"339
+"409
 }
 [e :U 2339 ]
-"319
+"389
 [e $ != -> -- _length -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 2340  ]
 [e :U 2341 ]
-[; ;I2C.c: 336: }
-[; ;I2C.c: 337: }
-[; ;I2C.c: 339: }
-[; ;I2C.c: 340: return ( 0 );
-"340
+[; ;I2C.c: 406: }
+[; ;I2C.c: 407: }
+[; ;I2C.c: 409: }
+[; ;I2C.c: 410: return ( 0 );
+"410
 [e ) -> -> 0 `i `uc ]
 [e $UE 2338  ]
-[; ;I2C.c: 341: }
-"341
+[; ;I2C.c: 411: }
+"411
 [e :UE 2338 ]
 }
-"343
+"418
 [v _readI2C `(uc ~T0 @X0 1 ef ]
-"344
+"419
 {
-[; ;I2C.c: 343: unsigned char readI2C( void )
-[; ;I2C.c: 344: {
+[; ;I2C.c: 418: unsigned char readI2C( void )
+[; ;I2C.c: 419: {
 [e :U _readI2C ]
 [f ]
-[; ;I2C.c: 345: if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
-"345
+[; ;I2C.c: 420: if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )
+"420
 [e $ ! || == & -> _SSPCON1 `i -> 15 `i -> 8 `i == & -> _SSPCON1 `i -> 15 `i -> 11 `i 2352  ]
-[; ;I2C.c: 346: SSPCON2bits.RCEN = 1;
-"346
+[; ;I2C.c: 421: SSPCON2bits.RCEN = 1;
+"421
 [e = . . _SSPCON2bits 0 3 -> -> 1 `i `uc ]
 [e :U 2352 ]
-[; ;I2C.c: 347: while ( !SSPSTATbits.BF );
-"347
+[; ;I2C.c: 422: while ( !SSPSTATbits.BF );
+"422
 [e $U 2353  ]
 [e :U 2354 ]
 [e :U 2353 ]
 [e $ ! != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i 2354  ]
 [e :U 2355 ]
-[; ;I2C.c: 348: return ( SSPBUF );
-"348
+[; ;I2C.c: 423: return ( SSPBUF );
+"423
 [e ) _SSPBUF ]
 [e $UE 2351  ]
-[; ;I2C.c: 349: }
-"349
+[; ;I2C.c: 424: }
+"424
 [e :UE 2351 ]
 }

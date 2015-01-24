@@ -19519,7 +19519,7 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 33 "I2C.h"
+# 54 "I2C.h"
 void Init_I2C_Master(void);
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -19528,16 +19528,16 @@ void ResetI2C( void );
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
 unsigned char readI2C( void );
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 26 "MISC.h"
+# 55 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19550,13 +19550,13 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
-# 47 "I2C.c"
+# 55 "I2C.c"
 void Init_I2C_Master(void)
 {
 unsigned int baud = 0;
 
 
-baud = (unsigned char)(41000000L/4 /((4* (long)5 * 1000L) - 1));
+baud = (unsigned char)(40960000L/4 /((4* (long)5 * 1000L) - 1));
 if(baud > 127 || baud == 0)
 {
 baud = 127;
@@ -19565,7 +19565,7 @@ SSPADD = baud;
 OpenI2C(0b00001000, 0b10000000);
 }
 
-# 66
+# 74
 void OpenI2C( unsigned char sync_mode, unsigned char slew )
 {
 SSPSTAT &= 0x3F;
@@ -19580,7 +19580,7 @@ SSPCON1 |= 0b00100000;
 
 }
 
-# 85
+# 93
 void ResetI2C( void )
 {
 SSPCON1 &= 0xDF;
@@ -19591,14 +19591,14 @@ TRISCbits.TRISC3 = 1;
 Init_I2C_Master();
 }
 
-# 100
+# 108
 void IdleI2C( void )
 {
 while ( ( SSPCON2 & 0x1F ) || ( SSPSTATbits.R_W ) )
 continue;
 }
 
-# 111
+# 119
 signed char WriteI2C( unsigned char data_out )
 {
 SSPBUF = data_out;
@@ -19636,7 +19636,7 @@ return (-4);
 }
 }
 
-# 153
+# 161
 char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data )
 {
 IdleI2C();
@@ -19695,7 +19695,7 @@ return ( -1 );
 return ( 0 );
 }
 
-# 216
+# 224
 int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register )
 {
 IdleI2C();
@@ -19774,7 +19774,7 @@ return ( -2 );
 return ( (unsigned int) SSPBUF );
 }
 
-# 299
+# 307
 char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length )
 {
 IdleI2C();
@@ -19850,7 +19850,7 @@ return ( -2 );
 return ( 0 );
 }
 
-# 379
+# 387
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length )
 {
 while ( length-- )
@@ -19877,7 +19877,7 @@ while ( SSPCON2bits.ACKEN );
 return ( 0 );
 }
 
-# 410
+# 418
 unsigned char readI2C( void )
 {
 if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )

@@ -1,15 +1,44 @@
 /******************************************************************************/
-/* User Level #define Macros                                                  */
+/* Change log                                                                 *
+ *
+ *
+ *
+ * Date         Revision    Comments
+ * MM/DD/YY
+ * --------     ---------   ----------------------------------------------------
+ * 01/21/15     1.0         Created log.
 /******************************************************************************/
 
-/* TODO Application specific user parameters used in user.c may go here */
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
+
+#if defined(__XC)
+    #include <xc.h>         /* XC8 General Include File */
+#elif defined(HI_TECH_C)
+    #include <htc.h>        /* HiTech General Include File */
+#elif defined(__18CXX)
+    #include <p18cxxx.h>    /* C18 General Include File */
+#endif
+
+#if defined(__XC) || defined(HI_TECH_C)
+
+#include <stdint.h>         /* For uint8_t definition */
+#include <stdbool.h>        /* For true/false definition */
+
+#endif
+
+/******************************************************************************/
+/* Defines                                                                    */
+/******************************************************************************/
+
 #define OUTPUT 0
 #define INPUT 1
 #define FALSE 0
 #define TRUE 1
 
 /******************************************************************************/
-/* User Function Prototypes                                                   */
+/* Pin definitions                                                            */
 /******************************************************************************/
 #define RFtx 0b00000001 //D0 315 MHz transmitter
 #define LED0 0b00000010 //D1 blue led
@@ -54,13 +83,8 @@
 #define TRISE TRISEbits
 #define TRISF TRISFbits
 
-
-
-
-
-
-
-
-/* TODO User level functions prototypes (i.e. InitApp) go here */
+/******************************************************************************/
+/* Function prototypes                                                        */
+/******************************************************************************/
 
 void InitApp(void);         /* I/O and Peripheral Initialization */

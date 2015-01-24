@@ -15299,81 +15299,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 147: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 149: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 151: extern __nonreentrant void _delay3(unsigned char);
-"31 configuration_bits.c
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+"39 configuration_bits.c
 [p x OSC=HSPLL ]
-"32
+"40
 [p x FCMEN=OFF ]
-"33
-[p x IESO=OFF ]
-"36
-[p x PWRT=ON ]
-"37
-[p x BOREN=BOHW ]
-"38
-[p x BORV=3 ]
 "41
-[p x WDT=OFF ]
-"42
-[p x WDTPS=32768 ]
+[p x IESO=OFF ]
+"44
+[p x PWRT=ON ]
 "45
-[p x PBADEN=ON ]
+[p x BOREN=BOHW ]
 "46
-[p x LPT1OSC=OFF ]
-"47
-[p x MCLRE=ON ]
+[p x BORV=3 ]
+"49
+[p x WDT=OFF ]
 "50
-[p x STVREN=ON ]
-"51
-[p x LVP=OFF ]
-"52
-[p x BBSIZ=1024 ]
+[p x WDTPS=32768 ]
 "53
-[p x XINST=OFF ]
-"56
-[p x CP0=OFF ]
-"57
-[p x CP1=OFF ]
+[p x PBADEN=ON ]
+"54
+[p x LPT1OSC=OFF ]
+"55
+[p x MCLRE=ON ]
 "58
-[p x CP2=OFF ]
+[p x STVREN=ON ]
 "59
-[p x CP3=OFF ]
+[p x LVP=OFF ]
 "60
-[p x CP4=OFF ]
+[p x BBSIZ=1024 ]
 "61
-[p x CP5=OFF ]
+[p x XINST=OFF ]
 "64
-[p x CPB=OFF ]
+[p x CP0=OFF ]
 "65
-[p x CPD=OFF ]
+[p x CP1=OFF ]
+"66
+[p x CP2=OFF ]
+"67
+[p x CP3=OFF ]
 "68
-[p x WRT0=OFF ]
+[p x CP4=OFF ]
 "69
-[p x WRT1=OFF ]
-"70
-[p x WRT2=OFF ]
-"71
-[p x WRT3=OFF ]
+[p x CP5=OFF ]
 "72
-[p x WRT4=OFF ]
+[p x CPB=OFF ]
 "73
-[p x WRT5=OFF ]
+[p x CPD=OFF ]
 "76
-[p x WRTC=OFF ]
+[p x WRT0=OFF ]
 "77
-[p x WRTB=OFF ]
+[p x WRT1=OFF ]
 "78
-[p x WRTD=OFF ]
+[p x WRT2=OFF ]
+"79
+[p x WRT3=OFF ]
+"80
+[p x WRT4=OFF ]
 "81
-[p x EBTR0=OFF ]
-"82
-[p x EBTR1=OFF ]
-"83
-[p x EBTR2=OFF ]
+[p x WRT5=OFF ]
 "84
-[p x EBTR3=OFF ]
+[p x WRTC=OFF ]
 "85
-[p x EBTR4=OFF ]
+[p x WRTB=OFF ]
 "86
-[p x EBTR5=OFF ]
+[p x WRTD=OFF ]
 "89
+[p x EBTR0=OFF ]
+"90
+[p x EBTR1=OFF ]
+"91
+[p x EBTR2=OFF ]
+"92
+[p x EBTR3=OFF ]
+"93
+[p x EBTR4=OFF ]
+"94
+[p x EBTR5=OFF ]
+"97
 [p x EBTRB=OFF ]

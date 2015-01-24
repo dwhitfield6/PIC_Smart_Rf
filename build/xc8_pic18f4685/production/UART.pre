@@ -19582,52 +19582,86 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 23 "UART.h"
-void InitUART(void);
+# 66 "UART.h"
+void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(const unsigned char *data);
-void UARTchar(unsigned char data);
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 
-# 45 "UART.c"
+# 54 "system.h"
+void ConfigureOscillator(void);
+
+# 55 "MISC.h"
+void delayUS(long US);
+void cleanBuffer(unsigned char* data, int count);
+void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+unsigned char StringContains(unsigned char* This, const unsigned char* That);
+unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+int GetEnteredNumber(unsigned char* This);
+void RemoveSpaces(unsigned char* This);
+void lowercase(unsigned char* Input);
+unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+
+# 53 "UART.c"
 unsigned char Txdata[100];
 unsigned char Rxdata[100];
+unsigned long BAUD = 9600;
+unsigned char PARITY = 0;
 
-
-void InitUART(void)
+# 68
+void InitUART(unsigned long Baud, unsigned char parity)
 {
-int temp;
+unsigned long temp;
 unsigned char config;
 unsigned int spbrg;
 unsigned char baudconfig;
+
+# 83
 RCSTA&=0b01001111,TXSTAbits.TXEN=0,PIE1&=0b11001111;
 config =0;
 baudconfig =0;
-
-config |= 0b00000000;
-config |= 0b01000000;
-config |= 0b00000000;
-config |= 0b00000000;
-config |= 0b00001000;
-config |= 0b00000000;
-spbrg = 66;
 BAUDCON =0;
 
 
+config |= 0b01111111;
+config |= 0b11111111;
+config |= 0b11111110;
+config |= 0b11111111;
+config |= 0b11111111;
+
+PARITY = parity;
+BAUD = Baud;
+if(parity)
+{
+config |= 0b11111111;
+}
+else
+{
+config &= ~0b11111111;
+}
+baudconfig |= 0b00001000;
+
+
+temp = (40960000L / Baud) - 1;
+temp = (temp >> 2) - 1;
+spbrg = (unsigned int)temp;
 
 OpenUSART(config, spbrg);
 baudUSART(baudconfig);
@@ -19642,11 +19676,14 @@ PIE1bits.RCIE = 1;
 PIR1bits.RCIF = 0;
 }
 
+# 130
 void baudUSART (unsigned char baudconfig)
 {
+BAUDCON =0;
 BAUDCON = baudconfig;
 }
 
+# 141
 void OpenUSART( unsigned char config, unsigned int spbrg)
 {
 TXSTA = 0;
@@ -19696,30 +19733,53 @@ TXSTAbits.TXEN = 1;
 RCSTAbits.SPEN = 1;
 }
 
-void UARTchar(unsigned char data)
+# 195
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data)
 {
 if(TXSTAbits.TX9)
 {
-TXSTAbits.TX9D = 0;
-if(USART_Status.TX_NINE)
-TXSTAbits.TX9D = 1;
-}
 
+if(!NinethBit_override)
+{
+
+switch (PARITY)
+{
+case 1:
+TXSTAbits.TX9D = CheckSum_byte((unsigned int) data, 3);
+break;
+case 2:
+TXSTAbits.TX9D = CheckSum_byte((unsigned int) data, 2);
+break;
+case 3:
+TXSTAbits.TX9D = 1;
+break;
+default:
+TXSTAbits.TX9D = 0;
+break;
+}
+}
+else
+{
+TXSTAbits.TX9D = (NinethBit_override_data & 0x01);
+}
+}
 TXREG = data;
 }
 
+# 232
 void UARTstring(const unsigned char *data)
 {
 do
 {
 if(*data != 0)
 {
-WriteUSART(*data);
+UARTchar(*data, 0, 0);
 while((!TXSTAbits.TRMT));
 }
 } while( *data++);
 }
 
+# 249
 char ReadUSART(void)
 {
 char data;
@@ -19742,4 +19802,25 @@ USART_Status.OVERRUN_ERROR = 1;
 data = RCREG;
 
 return (data);
+}
+
+# 279
+void UART_send_break(void)
+{
+TXSTAbits.SENDB =1;
+TXREG = 'd';
+}
+
+# 291
+void UARTstringWAIT(const unsigned char *data)
+{
+do
+{
+delayUS(5000);
+if(*data != 0)
+{
+UARTchar(*data, 0, 0);
+while((!TXSTAbits.TRMT));
+}
+} while( *data++);
 }

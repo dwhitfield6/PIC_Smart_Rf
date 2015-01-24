@@ -19582,12 +19582,13 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 41 "system.c"
+# 52 "system.c"
 void ConfigureOscillator(void)
 {
 
-# 48
+
+while(!(OSCCON & 0b00001000));
 }

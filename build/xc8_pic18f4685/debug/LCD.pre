@@ -19519,13 +19519,14 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 23 "LCD.h"
+# 55 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
+# 62
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19537,22 +19538,24 @@ void LCDScreenUpdate();
 void LCDdisplayFeedback(unsigned char *Text);
 void LCD_Scroll(unsigned char* This);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 61 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
 unsigned char StringMatch(unsigned char* This, const unsigned char* That);
 unsigned char StringContains(unsigned char* This, const unsigned char* That);
 unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-int GetEnteredNumber(unsigned char* This);
+long GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+unsigned char ISNUMBER(unsigned char ascii);
 
-# 24 "LCD.c"
+# 44 "LCD.c"
 unsigned char Scroll_1[16];
 unsigned char Scroll_2[16];
 unsigned char Scroll_3[16];
@@ -19563,10 +19566,10 @@ unsigned char Scroll_7[16];
 unsigned char Scroll_8[16];
 unsigned char Scroll_9[16];
 unsigned char Scroll_10[16];
-
 unsigned char ScrollDisplayPosition=0;
 unsigned char ScrollFIFOCount = 0;
 
+# 66
 void init_LCD()
 {
 LATD &= ~(0b01000000);
@@ -19602,6 +19605,7 @@ delayUS(50000);
 
 }
 
+# 106
 void SendLCDbyte(unsigned char data, unsigned char isCommand)
 {
 unsigned char MSB_nibble=0;
@@ -19667,6 +19671,7 @@ delayUS(20);
 }
 }
 
+# 177
 void PulseEnablePin()
 {
 
@@ -19677,6 +19682,7 @@ LATD &= ~(0b10000000);
 delayUS(2500);
 }
 
+# 192
 void SetLCDcursor(char Row, char Col)
 {
 char address;
@@ -19698,7 +19704,7 @@ SendLCDbyte(0x80 | address, 0);
 }
 }
 
-# 180
+# 219
 void ClearLCD()
 {
 
@@ -19708,6 +19714,7 @@ SendLCDbyte(0x01, 0);
 SendLCDbyte(0x02, 0);
 }
 
+# 233
 void LCDPrintString(unsigned char *Text)
 {
 unsigned char *c;
@@ -19721,6 +19728,7 @@ c++;
 }
 }
 
+# 252
 void LCDdisplayFeedback(unsigned char *Text)
 {
 ClearLCD();
@@ -19730,11 +19738,13 @@ LCDwait = 1;
 LCDclearCount =0;
 }
 
+# 266
 void LCDPrintChar(unsigned char character)
 {
 SendLCDbyte(character, 1);
 }
 
+# 277
 void LCDScreenUpdate(void)
 {
 
@@ -19862,6 +19872,7 @@ LCDclearCount = 15000;
 }
 }
 
+# 409
 void LCD_Scroll(unsigned char* This)
 {
 if(!LCDwait)

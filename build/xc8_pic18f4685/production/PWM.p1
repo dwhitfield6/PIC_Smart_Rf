@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"26 PWM.h
+"46 PWM.h
 [v _SetFreq `(v ~T0 @X0 0 ef1`ui ]
-"25
+"45
 [v _SetDuty `(v ~T0 @X0 0 ef1`uc ]
 "33649 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _T2CON `Vuc ~T0 @X0 0 e@4042 ]
@@ -15377,229 +15377,229 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;PWM.h: 24: void PWM_init();
-[; ;PWM.h: 25: void SetDuty(unsigned char Duty);
-[; ;PWM.h: 26: void SetFreq(unsigned int freq);
-[; ;PWM.h: 27: void SetContrast(unsigned char Duty);
-[; ;PWM.h: 28: void ContrastPWM_init();
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-"50 PWM.c
+[; ;PWM.h: 44: void PWM_init();
+[; ;PWM.h: 45: void SetDuty(unsigned char Duty);
+[; ;PWM.h: 46: void SetFreq(unsigned int freq);
+[; ;PWM.h: 47: void SetContrast(unsigned char Duty);
+[; ;PWM.h: 48: void ContrastPWM_init();
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+"54 PWM.c
 [v _PWM_init `(v ~T0 @X0 1 ef ]
-"51
+"55
 {
-[; ;PWM.c: 50: void PWM_init()
-[; ;PWM.c: 51: {
+[; ;PWM.c: 54: void PWM_init()
+[; ;PWM.c: 55: {
 [e :U _PWM_init ]
 [f ]
-[; ;PWM.c: 53: SetFreq(60);
-"53
-[e ( _SetFreq (1 -> -> 60 `i `ui ]
-[; ;PWM.c: 54: SetDuty(0);
-"54
-[e ( _SetDuty (1 -> -> 0 `i `uc ]
-[; ;PWM.c: 55: T2CON &= ~0x03;
-"55
-[e =& _T2CON -> ~ -> 3 `i `uc ]
-[; ;PWM.c: 56: if(16 == 1)
-"56
-[e $ ! == -> 16 `i -> 1 `i 2162  ]
-[; ;PWM.c: 57: {
+[; ;PWM.c: 57: SetFreq(60);
 "57
-{
-[; ;PWM.c: 58: __nop();
+[e ( _SetFreq (1 -> -> 60 `i `ui ]
+[; ;PWM.c: 58: SetDuty(0);
 "58
-[e ( ___nop ..  ]
+[e ( _SetDuty (1 -> -> 0 `i `uc ]
+[; ;PWM.c: 59: T2CON &= ~0x03;
 "59
-}
-[; ;PWM.c: 59: }
-[e $U 2163  ]
+[e =& _T2CON -> ~ -> 3 `i `uc ]
+[; ;PWM.c: 60: if(16 == 1)
 "60
-[e :U 2162 ]
-[; ;PWM.c: 60: else if (16 == 4)
-[e $ ! == -> 16 `i -> 4 `i 2164  ]
+[e $ ! == -> 16 `i -> 1 `i 2162  ]
 [; ;PWM.c: 61: {
 "61
 {
-[; ;PWM.c: 62: T2CON |= 0x01;
+[; ;PWM.c: 62: __nop();
 "62
-[e =| _T2CON -> -> 1 `i `uc ]
+[e ( ___nop ..  ]
 "63
 }
 [; ;PWM.c: 63: }
-[e $U 2165  ]
+[e $U 2163  ]
 "64
-[e :U 2164 ]
-[; ;PWM.c: 64: else
+[e :U 2162 ]
+[; ;PWM.c: 64: else if (16 == 4)
+[e $ ! == -> 16 `i -> 4 `i 2164  ]
 [; ;PWM.c: 65: {
 "65
 {
-[; ;PWM.c: 66: T2CON |= 0x10;
+[; ;PWM.c: 66: T2CON |= 0x01;
 "66
-[e =| _T2CON -> -> 16 `i `uc ]
+[e =| _T2CON -> -> 1 `i `uc ]
 "67
+}
+[; ;PWM.c: 67: }
+[e $U 2165  ]
+"68
+[e :U 2164 ]
+[; ;PWM.c: 68: else
+[; ;PWM.c: 69: {
+"69
+{
+[; ;PWM.c: 70: T2CON |= 0x10;
+"70
+[e =| _T2CON -> -> 16 `i `uc ]
+"71
 }
 [e :U 2165 ]
 [e :U 2163 ]
-[; ;PWM.c: 67: }
-[; ;PWM.c: 68: T2CON |= 0b00000100;
-"68
+[; ;PWM.c: 71: }
+[; ;PWM.c: 72: T2CON |= 0b00000100;
+"72
 [e =| _T2CON -> -> 4 `i `uc ]
-[; ;PWM.c: 69: CCP1CON |= 0b00001100;
-"69
+[; ;PWM.c: 73: CCP1CON |= 0b00001100;
+"73
 [e =| _CCP1CON -> -> 12 `i `uc ]
-[; ;PWM.c: 70: }
-"70
+[; ;PWM.c: 74: }
+"74
 [e :UE 2161 ]
 }
-"77
+"81
 [v _ContrastPWM_init `(v ~T0 @X0 1 ef ]
-"78
+"82
 {
-[; ;PWM.c: 77: void ContrastPWM_init()
-[; ;PWM.c: 78: {
+[; ;PWM.c: 81: void ContrastPWM_init()
+[; ;PWM.c: 82: {
 [e :U _ContrastPWM_init ]
 [f ]
-[; ;PWM.c: 81: SetDuty(0);
-"81
+[; ;PWM.c: 85: SetDuty(0);
+"85
 [e ( _SetDuty (1 -> -> 0 `i `uc ]
-[; ;PWM.c: 82: ECCP1CON |= 0b00001100;
-"82
+[; ;PWM.c: 86: ECCP1CON |= 0b00001100;
+"86
 [e =| _ECCP1CON -> -> 12 `i `uc ]
-[; ;PWM.c: 83: }
-"83
+[; ;PWM.c: 87: }
+"87
 [e :UE 2166 ]
 }
-"90
-[v _SetContrast `(v ~T0 @X0 1 ef1`uc ]
-"91
-{
-[; ;PWM.c: 90: void SetContrast(unsigned char Duty)
-[; ;PWM.c: 91: {
-[e :U _SetContrast ]
-"90
-[v _Duty `uc ~T0 @X0 1 r1 ]
-"91
-[f ]
-"92
-[v _temp `ui ~T0 @X0 1 a ]
-[; ;PWM.c: 92: unsigned int temp=0;
-[e = _temp -> -> 0 `i `ui ]
-"93
-[v _tempPR2 `f ~T0 @X0 1 a ]
-[; ;PWM.c: 93: float tempPR2=0;
-[e = _tempPR2 -> -> 0 `i `f ]
 "94
+[v _SetContrast `(v ~T0 @X0 1 ef1`uc ]
+"95
+{
+[; ;PWM.c: 94: void SetContrast(unsigned char Duty)
+[; ;PWM.c: 95: {
+[e :U _SetContrast ]
+"94
+[v _Duty `uc ~T0 @X0 1 r1 ]
+"95
+[f ]
+"96
+[v _temp `ui ~T0 @X0 1 a ]
+[; ;PWM.c: 96: unsigned int temp=0;
+[e = _temp -> -> 0 `i `ui ]
+"97
+[v _tempPR2 `f ~T0 @X0 1 a ]
+[; ;PWM.c: 97: float tempPR2=0;
+[e = _tempPR2 -> -> 0 `i `f ]
+"98
 [v _MSB `uc ~T0 @X0 1 a ]
 [v _LSB `uc ~T0 @X0 1 a ]
-[; ;PWM.c: 94: unsigned char MSB,LSB;
-[; ;PWM.c: 96: Duty = 100 - Duty;
-"96
+[; ;PWM.c: 98: unsigned char MSB,LSB;
+[; ;PWM.c: 100: Duty = 100 - Duty;
+"100
 [e = _Duty -> - -> 100 `i -> _Duty `i `uc ]
-[; ;PWM.c: 97: Duty = (Duty>>1);
-"97
-[e = _Duty -> >> -> _Duty `i -> 1 `i `uc ]
-[; ;PWM.c: 99: tempPR2 = (float) PR2;
-"99
-[e = _tempPR2 -> _PR2 `f ]
-[; ;PWM.c: 101: temp = (int)(tempPR2 * ((float)Duty/100));
+[; ;PWM.c: 101: Duty = (Duty>>1);
 "101
-[e = _temp -> -> * _tempPR2 / -> _Duty `f -> -> 100 `i `f `i `ui ]
-[; ;PWM.c: 102: MSB = (temp & 0x300)>>8;
-"102
-[e = _MSB -> >> & _temp -> -> 768 `i `ui -> 8 `i `uc ]
-[; ;PWM.c: 103: LSB = temp & 0xff;
+[e = _Duty -> >> -> _Duty `i -> 1 `i `uc ]
+[; ;PWM.c: 103: tempPR2 = (float) PR2;
 "103
-[e = _LSB -> & _temp -> -> 255 `i `ui `uc ]
-[; ;PWM.c: 105: ECCP1CON &= ~0b00110000;
+[e = _tempPR2 -> _PR2 `f ]
+[; ;PWM.c: 105: temp = (int)(tempPR2 * ((float)Duty/100));
 "105
-[e =& _ECCP1CON -> ~ -> 48 `i `uc ]
-[; ;PWM.c: 106: ECCP1CON |= MSB << 4;
+[e = _temp -> -> * _tempPR2 / -> _Duty `f -> -> 100 `i `f `i `ui ]
+[; ;PWM.c: 106: MSB = (temp & 0x300)>>8;
 "106
-[e =| _ECCP1CON -> << -> _MSB `i -> 4 `i `uc ]
-[; ;PWM.c: 107: ECCPR1L = LSB;
+[e = _MSB -> >> & _temp -> -> 768 `i `ui -> 8 `i `uc ]
+[; ;PWM.c: 107: LSB = temp & 0xff;
 "107
-[e = _ECCPR1L _LSB ]
-[; ;PWM.c: 108: __nop();
-"108
-[e ( ___nop ..  ]
-[; ;PWM.c: 109: }
+[e = _LSB -> & _temp -> -> 255 `i `ui `uc ]
+[; ;PWM.c: 109: ECCP1CON &= ~0b00110000;
 "109
+[e =& _ECCP1CON -> ~ -> 48 `i `uc ]
+[; ;PWM.c: 110: ECCP1CON |= MSB << 4;
+"110
+[e =| _ECCP1CON -> << -> _MSB `i -> 4 `i `uc ]
+[; ;PWM.c: 111: ECCPR1L = LSB;
+"111
+[e = _ECCPR1L _LSB ]
+[; ;PWM.c: 112: __nop();
+"112
+[e ( ___nop ..  ]
+[; ;PWM.c: 113: }
+"113
 [e :UE 2167 ]
 }
-"116
-[v _SetDuty `(v ~T0 @X0 1 ef1`uc ]
-"117
-{
-[; ;PWM.c: 116: void SetDuty(unsigned char Duty)
-[; ;PWM.c: 117: {
-[e :U _SetDuty ]
-"116
-[v _Duty `uc ~T0 @X0 1 r1 ]
-"117
-[f ]
-"118
-[v _temp `ui ~T0 @X0 1 a ]
-[; ;PWM.c: 118: unsigned int temp=0;
-[e = _temp -> -> 0 `i `ui ]
-"119
-[v _tempPR2 `f ~T0 @X0 1 a ]
-[; ;PWM.c: 119: float tempPR2=0;
-[e = _tempPR2 -> -> 0 `i `f ]
 "120
+[v _SetDuty `(v ~T0 @X0 1 ef1`uc ]
+"121
+{
+[; ;PWM.c: 120: void SetDuty(unsigned char Duty)
+[; ;PWM.c: 121: {
+[e :U _SetDuty ]
+"120
+[v _Duty `uc ~T0 @X0 1 r1 ]
+"121
+[f ]
+"122
+[v _temp `ui ~T0 @X0 1 a ]
+[; ;PWM.c: 122: unsigned int temp=0;
+[e = _temp -> -> 0 `i `ui ]
+"123
+[v _tempPR2 `f ~T0 @X0 1 a ]
+[; ;PWM.c: 123: float tempPR2=0;
+[e = _tempPR2 -> -> 0 `i `f ]
+"124
 [v _MSB `uc ~T0 @X0 1 a ]
 [v _LSB `uc ~T0 @X0 1 a ]
-[; ;PWM.c: 120: unsigned char MSB,LSB;
-[; ;PWM.c: 122: tempPR2 = (float) PR2;
-"122
-[e = _tempPR2 -> _PR2 `f ]
-[; ;PWM.c: 124: temp = (int)(tempPR2 * ((float)Duty/100));
-"124
-[e = _temp -> -> * _tempPR2 / -> _Duty `f -> -> 100 `i `f `i `ui ]
-[; ;PWM.c: 125: MSB = (temp & 0x300)>>8;
-"125
-[e = _MSB -> >> & _temp -> -> 768 `i `ui -> 8 `i `uc ]
-[; ;PWM.c: 126: LSB = temp & 0xff;
+[; ;PWM.c: 124: unsigned char MSB,LSB;
+[; ;PWM.c: 126: tempPR2 = (float) PR2;
 "126
-[e = _LSB -> & _temp -> -> 255 `i `ui `uc ]
-[; ;PWM.c: 128: CCP1CON &= ~(0b00110000);
+[e = _tempPR2 -> _PR2 `f ]
+[; ;PWM.c: 128: temp = (int)(tempPR2 * ((float)Duty/100));
 "128
-[e =& _CCP1CON -> ~ -> 48 `i `uc ]
-[; ;PWM.c: 129: CCP1CON |= MSB << 4;
+[e = _temp -> -> * _tempPR2 / -> _Duty `f -> -> 100 `i `f `i `ui ]
+[; ;PWM.c: 129: MSB = (temp & 0x300)>>8;
 "129
-[e =| _CCP1CON -> << -> _MSB `i -> 4 `i `uc ]
-[; ;PWM.c: 130: CCPR1L = LSB;
+[e = _MSB -> >> & _temp -> -> 768 `i `ui -> 8 `i `uc ]
+[; ;PWM.c: 130: LSB = temp & 0xff;
 "130
-[e = _CCPR1L _LSB ]
-[; ;PWM.c: 131: __nop();
-"131
-[e ( ___nop ..  ]
-[; ;PWM.c: 133: }
+[e = _LSB -> & _temp -> -> 255 `i `ui `uc ]
+[; ;PWM.c: 132: CCP1CON &= ~(0b00110000);
+"132
+[e =& _CCP1CON -> ~ -> 48 `i `uc ]
+[; ;PWM.c: 133: CCP1CON |= MSB << 4;
 "133
+[e =| _CCP1CON -> << -> _MSB `i -> 4 `i `uc ]
+[; ;PWM.c: 134: CCPR1L = LSB;
+"134
+[e = _CCPR1L _LSB ]
+[; ;PWM.c: 135: __nop();
+"135
+[e ( ___nop ..  ]
+[; ;PWM.c: 137: }
+"137
 [e :UE 2168 ]
 }
-"140
-[v _SetFreq `(v ~T0 @X0 1 ef1`ui ]
-"141
-{
-[; ;PWM.c: 140: void SetFreq(unsigned int freq)
-[; ;PWM.c: 141: {
-[e :U _SetFreq ]
-"140
-[v _freq `ui ~T0 @X0 1 r1 ]
-"141
-[f ]
-"143
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;PWM.c: 143: unsigned char temp =0;
-[e = _temp -> -> 0 `i `uc ]
-[; ;PWM.c: 144: temp = (unsigned char)(((41000000L >> 2)/(freq*1000))-1);
 "144
-[e = _temp -> - / >> -> 41000000 `l -> 2 `i -> * _freq -> -> 1000 `i `ui `l -> -> 1 `i `l `uc ]
-[; ;PWM.c: 146: PR2 = temp;
-"146
-[e = _PR2 _temp ]
-[; ;PWM.c: 147: }
+[v _SetFreq `(v ~T0 @X0 1 ef1`ui ]
+"145
+{
+[; ;PWM.c: 144: void SetFreq(unsigned int freq)
+[; ;PWM.c: 145: {
+[e :U _SetFreq ]
+"144
+[v _freq `ui ~T0 @X0 1 r1 ]
+"145
+[f ]
 "147
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;PWM.c: 147: unsigned char temp =0;
+[e = _temp -> -> 0 `i `uc ]
+[; ;PWM.c: 148: temp = (unsigned char)(((40960000L >> 2)/(freq*1000))-1);
+"148
+[e = _temp -> - / >> -> 40960000 `l -> 2 `i -> * _freq -> -> 1000 `i `ui `l -> -> 1 `i `l `uc ]
+[; ;PWM.c: 150: PR2 = temp;
+"150
+[e = _PR2 _temp ]
+[; ;PWM.c: 151: }
+"151
 [e :UE 2169 ]
 }

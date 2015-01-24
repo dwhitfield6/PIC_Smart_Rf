@@ -7,6 +7,8 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/22/15     1.0         Created log.
+ * 01/23/15     1.0_DW0     Added code to make the system compatible withe the
+ *                            keyboard module.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -17,7 +19,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -45,11 +47,24 @@
 #include "LCD.h"
 #include "RTC.h"
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
 extern TIME NowTime;
 extern unsigned char LCDwait;
 extern unsigned long LCDclearCount;
 
-void Command(char* Input)
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+
+/******************************************************************************/
+/* Command
+ *
+ * The function reads in the entered command and initiates the command.
+/******************************************************************************/
+unsigned char Command(char* Input)
 {
     int channel = 20; //invalid channel. This is set in the function
     unsigned int ADC_Value = 0;
@@ -57,15 +72,21 @@ void Command(char* Input)
     unsigned int RTC_Battery_Value_HIGH_decimal =0;
     unsigned int RTC_Battery_Value_LOW_decimal =0;
     int duty = 0;
+    long tempLONG;
     int contrast = 0;
     unsigned char buf[200];
+    unsigned long BAUDtemp = 0;
+    unsigned long PARITYtemp = 0;
 
     UARTstring("\r\n\n");
     lowercase(Input);
     RemoveSpaces(Input);
     //--------------------------------------------------------------------------
-    // LEDs
-    if (StartsWith(Input, "led"))
+    if(StringMatch(Input, ">"))
+    {
+        return 0;
+    }
+    else if (StartsWith(Input, "led"))//LEDS
     {
         if (!StringContains(Input, "?"))
         {
@@ -380,8 +401,12 @@ void Command(char* Input)
                 {
                     UARTstring("there is no question mark\r\n");
                 }
-                duty = GetEnteredNumber(Input);
-                if (duty == 32001)
+                tempLONG = GetEnteredNumber(Input);
+                if(tempLONG < 1000 && tempLONG >= 0 )
+                {
+                    duty = (int)tempLONG;
+                }
+                if (tempLONG == NOVALUE)
                 {
                     UARTstring("Error: No number entered\r\n");
                     LCDdisplayFeedback("ERR: no number");
@@ -430,8 +455,12 @@ void Command(char* Input)
             {
                 StringAddEqual(Input);
             }
-            contrast = GetEnteredNumber(Input);
-            if (contrast == 32001)
+            tempLONG = GetEnteredNumber(Input);
+            if(tempLONG < 1000 && tempLONG >= 0 )
+            {
+                contrast = (int)tempLONG;
+            }
+            if (tempLONG == NOVALUE)
             {
                 UARTstring("Error: No number entered\r\n");
                 LCDdisplayFeedback("ERR: No number");
@@ -474,8 +503,12 @@ void Command(char* Input)
             {
                 StringAddEqual(Input);
             }
-            channel = GetEnteredNumber(Input);
-            if (channel == 32002) {
+            tempLONG = GetEnteredNumber(Input);
+            if(tempLONG < 1000 && tempLONG >= 0 )
+            {
+                channel = (int)tempLONG;
+            }
+            if (tempLONG == NOVALUE) {
                 UARTstring("Error: only use one equal sign\r\n");
                 LCDdisplayFeedback("ERR: Use 1 =");
             }
@@ -729,14 +762,89 @@ void Command(char* Input)
             LCDPrintString("RTC isnt working");
         }
         LCDclearCount =0;
-    }        //--------------------------------------------------------------------------
-        // Invalid
+    }
+    else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") || StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
+    {
+        if (!StringContains(Input, "="))
+        {
+            StringAddEqual(Input);
+        }
+        BAUDtemp = (unsigned long)GetEnteredNumber(Input);
+        if(BAUDtemp >=2400 && BAUDtemp <= 115200)
+        {
+            if(StringContains(Input, "withnoparitybit"))
+            {
+                PARITYtemp =0;
+            }
+            else if(StringContains(Input, "withoddparitybit"))
+            {
+                PARITYtemp =ODD;
+            }
+            else if(StringContains(Input, "withevenparitybit"))
+            {
+                PARITYtemp =EVEN;
+            }
+            else if(StringContains(Input, "withmarkbit"))
+            {
+                PARITYtemp =MARK;
+            }
+            else if(StringContains(Input, "withspacebit"))
+            {
+                PARITYtemp =SPACE;
+            }
+            else
+            {
+                PARITYtemp = INVALID;
+            }
+            if(PARITYtemp != INVALID)
+            {
+                SetBaud(BAUDtemp, PARITYtemp);
+            }
+        }
+        else
+        {
+            UARTstring("Baud Out of range\r\n");
+        }
+    }
+    else if(StringContains(Input, "baudis"))
+    {
+        /*
+         * this is the response of the keyboard on a baud change
+         * and there is nothing to do on our side
+         */
+        NOP();
+    }
+    else if(StringContains(Input, "enterbaudrate"))
+    {
+        //Baud is being changed from keyboard module
+        NOP();
+    }
+    else if(ISNUMBER(Input[0]))
+    {
+        //Baud is being changed from keyboard module
+        if (!StringContains(Input, "="))
+        {
+            StringAddEqual(Input);
+        }
+        tempLONG = (unsigned long)GetEnteredNumber(Input);
+        {
+            if(tempLONG >=2400 && tempLONG <=115200)
+            {
+                NOP();
+            }
+            else
+            {
+                UARTstring("Invalid Command\r\n");
+                LCDdisplayFeedback("Invalid Command");
+            }
+        }
+    }
     else
     {
-        UARTstring("Invalid Command");
+        UARTstring("Invalid Command\r\n");
         LCDdisplayFeedback("Invalid Command");
     }
-
-    UARTstring("\r\n\r\n");
+    UARTstring("\r\n");
+    return 1;
 }
 

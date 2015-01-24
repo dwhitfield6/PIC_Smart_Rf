@@ -1,17 +1,17 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"82 RF.h
+"109 RF.h
 [v _Zero_Config1 `(v ~T0 @X0 0 ef1`uc ]
-"83
+"110
 [v _One_Config1 `(v ~T0 @X0 0 ef1`uc ]
-"84
+"111
 [v _f_Config1 `(v ~T0 @X0 0 ef1`uc ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"18 MISC.h
+"61 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
-"86 RF.h
+"113 RF.h
 [v _Zero_Config2 `(v ~T0 @X0 0 ef1`uc ]
-"87
+"114
 [v _One_Config2 `(v ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15342,8 +15342,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;user.h: 66: void InitApp(void);
-"36 RF.h
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 23: extern int errno;
+[; ;stdio.h: 54: struct __prbuf
+[; ;stdio.h: 55: {
+[; ;stdio.h: 56: char * ptr;
+[; ;stdio.h: 57: void (* func)(char);
+[; ;stdio.h: 58: };
+[; ;conio.h: 17: extern int errno;
+[; ;conio.h: 20: extern void init_uart(void);
+[; ;conio.h: 22: extern char getch(void);
+[; ;conio.h: 23: extern char getche(void);
+[; ;conio.h: 24: extern void putch(char);
+[; ;conio.h: 25: extern void ungetch(char);
+[; ;conio.h: 27: extern __bit kbhit(void);
+[; ;conio.h: 31: extern char * cgets(char *);
+[; ;conio.h: 32: extern void cputs(const char *);
+[; ;stdio.h: 99: extern int cprintf(char *, ...);
+[; ;stdio.h: 104: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 194: extern char * gets(char *);
+[; ;stdio.h: 195: extern int puts(const char *);
+[; ;stdio.h: 196: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 197: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 198: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 199: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 200: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 206: extern int printf(const char *, ...);
+[; ;user.h: 90: void InitApp(void);
+"60 RF.h
 [v _TXdataE `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataE
 :U ..
@@ -15361,8 +15391,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 36: const unsigned char TXdataE[12] = {0,2,2,2,2,2,0,0,1,0,0,0};
-"37
+[; ;RF.h: 60: const unsigned char TXdataE[12] = {0,2,2,2,2,2,0,0,1,0,0,0};
+"61
 [v _TXdataD `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataD
 :U ..
@@ -15380,8 +15410,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 37: const unsigned char TXdataD[12] = {2,2,2,2,2,2,0,0,1,0,0,0};
-"38
+[; ;RF.h: 61: const unsigned char TXdataD[12] = {2,2,2,2,2,2,0,0,1,0,0,0};
+"62
 [v _TXdataF `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataF
 :U ..
@@ -15399,8 +15429,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 38: const unsigned char TXdataF[12] = {2,0,2,2,2,2,0,0,1,0,0,0};
-"39
+[; ;RF.h: 62: const unsigned char TXdataF[12] = {2,0,2,2,2,2,0,0,1,0,0,0};
+"63
 [v _TXToiletMyBathroom `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXToiletMyBathroom
 :U ..
@@ -15418,8 +15448,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 39: const unsigned char TXToiletMyBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,1};
-"40
+[; ;RF.h: 63: const unsigned char TXToiletMyBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,1};
+"64
 [v _TXToiletAlexBathroom `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXToiletAlexBathroom
 :U ..
@@ -15437,8 +15467,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 2 `i `uc
 ..
 ]
-[; ;RF.h: 40: const unsigned char TXToiletAlexBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,2};
-"53
+[; ;RF.h: 64: const unsigned char TXToiletAlexBathroom[12] = {0,0,0,0,0,0,0,0,0,0,0,2};
+"69
 [v _TXdataFrontOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataFrontOPENED
 :U ..
@@ -15456,8 +15486,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 53: const unsigned char TXdataFrontOPENED[12] = {0,0,0,0,0,0,0,0,0,0,1,0};
-"54
+[; ;RF.h: 69: const unsigned char TXdataFrontOPENED[12] = {0,0,0,0,0,0,0,0,0,0,1,0};
+"70
 [v _TXdataFrontCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataFrontCLOSED
 :U ..
@@ -15475,8 +15505,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 54: const unsigned char TXdataFrontCLOSED[12] = {0,0,0,0,0,0,0,0,0,0,2,0};
-"55
+[; ;RF.h: 70: const unsigned char TXdataFrontCLOSED[12] = {0,0,0,0,0,0,0,0,0,0,2,0};
+"71
 [v _TXdataBedroomOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataBedroomOPENED
 :U ..
@@ -15494,8 +15524,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 55: const unsigned char TXdataBedroomOPENED[12] = {0,0,0,0,0,0,0,0,0,2,0,0};
-"56
+[; ;RF.h: 71: const unsigned char TXdataBedroomOPENED[12] = {0,0,0,0,0,0,0,0,0,2,0,0};
+"72
 [v _TXdataBedroomCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataBedroomCLOSED
 :U ..
@@ -15513,8 +15543,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 56: const unsigned char TXdataBedroomCLOSED[12] = {0,0,0,0,0,0,0,0,0,1,0,0};
-"57
+[; ;RF.h: 72: const unsigned char TXdataBedroomCLOSED[12] = {0,0,0,0,0,0,0,0,0,1,0,0};
+"73
 [v _TXdataLabOPENED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataLabOPENED
 :U ..
@@ -15532,8 +15562,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 57: const unsigned char TXdataLabOPENED[12] = {0,0,0,0,0,0,0,0,1,0,0,0};
-"58
+[; ;RF.h: 73: const unsigned char TXdataLabOPENED[12] = {0,0,0,0,0,0,0,0,1,0,0,0};
+"74
 [v _TXdataLabCLOSED `Cuc ~T0 @X0 -> 12 `i e ]
 [i _TXdataLabCLOSED
 :U ..
@@ -15551,8 +15581,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 58: const unsigned char TXdataLabCLOSED[12] = {0,0,0,0,0,0,0,0,2,0,0,0};
-"66
+[; ;RF.h: 74: const unsigned char TXdataLabCLOSED[12] = {0,0,0,0,0,0,0,0,2,0,0,0};
+"89
 [v _fanON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fanON
 :U ..
@@ -15574,8 +15604,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 66: const unsigned char fanON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0};
-"67
+[; ;RF.h: 89: const unsigned char fanON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0};
+"90
 [v _fanOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fanOFF
 :U ..
@@ -15597,8 +15627,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 67: const unsigned char fanOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0};
-"68
+[; ;RF.h: 90: const unsigned char fanOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0};
+"91
 [v _BedON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _BedON
 :U ..
@@ -15620,8 +15650,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 68: const unsigned char BedON[] = {0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0};
-"69
+[; ;RF.h: 91: const unsigned char BedON[] = {0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0};
+"92
 [v _BedOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _BedOFF
 :U ..
@@ -15643,8 +15673,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 69: const unsigned char BedOFF[] = {0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0};
-"70
+[; ;RF.h: 92: const unsigned char BedOFF[] = {0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0};
+"93
 [v _AuxON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _AuxON
 :U ..
@@ -15666,8 +15696,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 70: const unsigned char AuxON[] = {0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0};
-"71
+[; ;RF.h: 93: const unsigned char AuxON[] = {0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0};
+"94
 [v _AuxOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _AuxOFF
 :U ..
@@ -15689,8 +15719,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 71: const unsigned char AuxOFF[] = {0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0};
-"74
+[; ;RF.h: 94: const unsigned char AuxOFF[] = {0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0};
+"97
 [v _Aux2ON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _Aux2ON
 :U ..
@@ -15712,8 +15742,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 74: const unsigned char Aux2ON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1};
-"75
+[; ;RF.h: 97: const unsigned char Aux2ON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1};
+"98
 [v _Aux2OFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _Aux2OFF
 :U ..
@@ -15735,8 +15765,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 1 `i `uc
 ..
 ]
-[; ;RF.h: 75: const unsigned char Aux2OFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1};
-"78
+[; ;RF.h: 98: const unsigned char Aux2OFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1};
+"101
 [v _SubLightON `Cuc ~T0 @X0 -> 0 `x e ]
 [i _SubLightON
 :U ..
@@ -15758,8 +15788,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 78: const unsigned char SubLightON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0};
-"79
+[; ;RF.h: 101: const unsigned char SubLightON[] = {0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0};
+"102
 [v _SubLightOFF `Cuc ~T0 @X0 -> 0 `x e ]
 [i _SubLightOFF
 :U ..
@@ -15781,356 +15811,358 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;RF.h: 79: const unsigned char SubLightOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0};
-[; ;RF.h: 81: void Send_Config1( unsigned char pin,const unsigned char* data);
-[; ;RF.h: 82: void Zero_Config1(unsigned char pin);
-[; ;RF.h: 83: void One_Config1(unsigned char pin);
-[; ;RF.h: 84: void f_Config1(unsigned char pin);
-[; ;RF.h: 85: void Send_Config2( unsigned char pin,const unsigned char* data);
-[; ;RF.h: 86: void Zero_Config2(unsigned char pin);
-[; ;RF.h: 87: void One_Config2(unsigned char pin);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 18: void delayUS(long US);
-[; ;MISC.h: 19: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 20: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 21: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 22: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 23: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 24: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 25: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 26: void lowercase(unsigned char* Input);
-[; ;MISC.h: 27: unsigned char StringAddEqual(unsigned char* Input);
-"24 RF.c
+[; ;RF.h: 102: const unsigned char SubLightOFF[] = {0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0};
+[; ;RF.h: 108: void Send_Config1( unsigned char pin,const unsigned char* data);
+[; ;RF.h: 109: void Zero_Config1(unsigned char pin);
+[; ;RF.h: 110: void One_Config1(unsigned char pin);
+[; ;RF.h: 111: void f_Config1(unsigned char pin);
+[; ;RF.h: 112: void Send_Config2( unsigned char pin,const unsigned char* data);
+[; ;RF.h: 113: void Zero_Config2(unsigned char pin);
+[; ;RF.h: 114: void One_Config2(unsigned char pin);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 61: void delayUS(long US);
+[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 69: void lowercase(unsigned char* Input);
+[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+"54 RF.c
 [v _Send_Config1 `(v ~T0 @X0 1 ef2`uc`*Cuc ]
-"25
+"55
 {
-[; ;RF.c: 24: void Send_Config1( unsigned char pin,const unsigned char* data)
-[; ;RF.c: 25: {
+[; ;RF.c: 54: void Send_Config1( unsigned char pin,const unsigned char* data)
+[; ;RF.c: 55: {
 [e :U _Send_Config1 ]
-"24
+"54
 [v _pin `uc ~T0 @X0 1 r1 ]
 [v _data `*Cuc ~T0 @X0 1 r2 ]
-"25
-[f ]
-"26
-[v _i `uc ~T0 @X0 1 a ]
-[; ;RF.c: 26: unsigned char i=0;
-[e = _i -> -> 0 `i `uc ]
-[; ;RF.c: 28: for(i=0;i<12;i++)
-"28
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 12 `i 2161  ]
-[e $U 2162  ]
-"29
-[e :U 2161 ]
-[; ;RF.c: 29: {
-{
-[; ;RF.c: 30: if(data[i] == 0)
-"30
-[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 0 `i 2164  ]
-[; ;RF.c: 31: {
-"31
-{
-[; ;RF.c: 32: Zero_Config1(pin);
-"32
-[e ( _Zero_Config1 (1 _pin ]
-"33
-}
-[; ;RF.c: 33: }
-[e $U 2165  ]
-"34
-[e :U 2164 ]
-[; ;RF.c: 34: else if(data[i] ==1)
-[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 1 `i 2166  ]
-[; ;RF.c: 35: {
-"35
-{
-[; ;RF.c: 36: One_Config1(pin);
-"36
-[e ( _One_Config1 (1 _pin ]
-"37
-}
-[; ;RF.c: 37: }
-[e $U 2167  ]
-"38
-[e :U 2166 ]
-[; ;RF.c: 38: else
-[; ;RF.c: 39: {
-"39
-{
-[; ;RF.c: 40: f_Config1(pin);
-"40
-[e ( _f_Config1 (1 _pin ]
-"41
-}
-[e :U 2167 ]
-[e :U 2165 ]
-"42
-}
-"28
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 12 `i 2161  ]
-[e :U 2162 ]
-"42
-}
-[; ;RF.c: 41: }
-[; ;RF.c: 42: }
-[; ;RF.c: 44: LATD |= pin;
-"44
-[e =| _LATD _pin ]
-[; ;RF.c: 45: delayUS(222);
-"45
-[e ( _delayUS (1 -> -> 222 `i `l ]
-[; ;RF.c: 46: LATD &= ~pin;
-"46
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 47: delayUS(7330);
-"47
-[e ( _delayUS (1 -> -> 7330 `i `l ]
-[; ;RF.c: 49: }
-"49
-[e :UE 2160 ]
-}
-"51
-[v _Zero_Config1 `(v ~T0 @X0 1 ef1`uc ]
-"52
-{
-[; ;RF.c: 51: void Zero_Config1(unsigned char pin)
-[; ;RF.c: 52: {
-[e :U _Zero_Config1 ]
-"51
-[v _pin `uc ~T0 @X0 1 r1 ]
-"52
-[f ]
-[; ;RF.c: 53: LATD |= pin;
-"53
-[e =| _LATD _pin ]
-[; ;RF.c: 54: delayUS(216 );
-"54
-[e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 55: LATD &= ~pin;
 "55
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 56: delayUS(614 );
-"56
-[e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 57: LATD |= pin;
-"57
-[e =| _LATD _pin ]
-[; ;RF.c: 58: delayUS(216 );
-"58
-[e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 59: LATD &= ~pin;
-"59
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 60: delayUS(614 );
-"60
-[e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 61: }
-"61
-[e :UE 2168 ]
-}
-"63
-[v _One_Config1 `(v ~T0 @X0 1 ef1`uc ]
-"64
-{
-[; ;RF.c: 63: void One_Config1(unsigned char pin)
-[; ;RF.c: 64: {
-[e :U _One_Config1 ]
-"63
-[v _pin `uc ~T0 @X0 1 r1 ]
-"64
 [f ]
-[; ;RF.c: 65: LATD |= pin;
+"56
+[v _i `uc ~T0 @X0 1 a ]
+[; ;RF.c: 56: unsigned char i=0;
+[e = _i -> -> 0 `i `uc ]
+[; ;RF.c: 58: for(i=0;i<12;i++)
+"58
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 12 `i 2162  ]
+[e $U 2163  ]
+"59
+[e :U 2162 ]
+[; ;RF.c: 59: {
+{
+[; ;RF.c: 60: if(data[i] == 0)
+"60
+[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 0 `i 2165  ]
+[; ;RF.c: 61: {
+"61
+{
+[; ;RF.c: 62: Zero_Config1(pin);
+"62
+[e ( _Zero_Config1 (1 _pin ]
+"63
+}
+[; ;RF.c: 63: }
+[e $U 2166  ]
+"64
+[e :U 2165 ]
+[; ;RF.c: 64: else if(data[i] ==1)
+[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 1 `i 2167  ]
+[; ;RF.c: 65: {
 "65
-[e =| _LATD _pin ]
-[; ;RF.c: 66: delayUS(614);
+{
+[; ;RF.c: 66: One_Config1(pin);
 "66
-[e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 67: LATD &= ~pin;
+[e ( _One_Config1 (1 _pin ]
 "67
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 68: delayUS(216);
+}
+[; ;RF.c: 67: }
+[e $U 2168  ]
 "68
-[e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 69: LATD |= pin;
+[e :U 2167 ]
+[; ;RF.c: 68: else
+[; ;RF.c: 69: {
 "69
-[e =| _LATD _pin ]
-[; ;RF.c: 70: delayUS(614);
+{
+[; ;RF.c: 70: f_Config1(pin);
 "70
-[e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 71: LATD &= ~pin;
+[e ( _f_Config1 (1 _pin ]
 "71
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 72: delayUS(216);
+}
+[e :U 2168 ]
+[e :U 2166 ]
 "72
+}
+"58
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 12 `i 2162  ]
+[e :U 2163 ]
+"72
+}
+[; ;RF.c: 71: }
+[; ;RF.c: 72: }
+[; ;RF.c: 74: LATD |= pin;
+"74
+[e =| _LATD _pin ]
+[; ;RF.c: 75: delayUS(222);
+"75
+[e ( _delayUS (1 -> -> 222 `i `l ]
+[; ;RF.c: 76: LATD &= ~pin;
+"76
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 77: delayUS(7330);
+"77
+[e ( _delayUS (1 -> -> 7330 `i `l ]
+[; ;RF.c: 79: }
+"79
+[e :UE 2161 ]
+}
+"86
+[v _Zero_Config1 `(v ~T0 @X0 1 ef1`uc ]
+"87
+{
+[; ;RF.c: 86: void Zero_Config1(unsigned char pin)
+[; ;RF.c: 87: {
+[e :U _Zero_Config1 ]
+"86
+[v _pin `uc ~T0 @X0 1 r1 ]
+"87
+[f ]
+[; ;RF.c: 88: LATD |= pin;
+"88
+[e =| _LATD _pin ]
+[; ;RF.c: 89: delayUS(216 );
+"89
 [e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 73: }
-"73
+[; ;RF.c: 90: LATD &= ~pin;
+"90
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 91: delayUS(614 );
+"91
+[e ( _delayUS (1 -> -> 614 `i `l ]
+[; ;RF.c: 92: LATD |= pin;
+"92
+[e =| _LATD _pin ]
+[; ;RF.c: 93: delayUS(216 );
+"93
+[e ( _delayUS (1 -> -> 216 `i `l ]
+[; ;RF.c: 94: LATD &= ~pin;
+"94
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 95: delayUS(614 );
+"95
+[e ( _delayUS (1 -> -> 614 `i `l ]
+[; ;RF.c: 96: }
+"96
 [e :UE 2169 ]
 }
-"75
-[v _f_Config1 `(v ~T0 @X0 1 ef1`uc ]
-"76
+"103
+[v _One_Config1 `(v ~T0 @X0 1 ef1`uc ]
+"104
 {
-[; ;RF.c: 75: void f_Config1(unsigned char pin)
-[; ;RF.c: 76: {
-[e :U _f_Config1 ]
-"75
+[; ;RF.c: 103: void One_Config1(unsigned char pin)
+[; ;RF.c: 104: {
+[e :U _One_Config1 ]
+"103
 [v _pin `uc ~T0 @X0 1 r1 ]
-"76
+"104
 [f ]
-[; ;RF.c: 77: LATD |= pin;
-"77
+[; ;RF.c: 105: LATD |= pin;
+"105
 [e =| _LATD _pin ]
-[; ;RF.c: 78: delayUS(216);
-"78
-[e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 79: LATD &= ~pin;
-"79
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 80: delayUS(614);
-"80
+[; ;RF.c: 106: delayUS(614);
+"106
 [e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 81: LATD |= pin;
-"81
+[; ;RF.c: 107: LATD &= ~pin;
+"107
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 108: delayUS(216);
+"108
+[e ( _delayUS (1 -> -> 216 `i `l ]
+[; ;RF.c: 109: LATD |= pin;
+"109
 [e =| _LATD _pin ]
-[; ;RF.c: 82: delayUS(614);
-"82
+[; ;RF.c: 110: delayUS(614);
+"110
 [e ( _delayUS (1 -> -> 614 `i `l ]
-[; ;RF.c: 83: LATD &= ~pin;
-"83
+[; ;RF.c: 111: LATD &= ~pin;
+"111
 [e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 84: delayUS(216);
-"84
+[; ;RF.c: 112: delayUS(216);
+"112
 [e ( _delayUS (1 -> -> 216 `i `l ]
-[; ;RF.c: 85: }
-"85
+[; ;RF.c: 113: }
+"113
 [e :UE 2170 ]
 }
-"87
-[v _Send_Config2 `(v ~T0 @X0 1 ef2`uc`*Cuc ]
-"88
+"120
+[v _f_Config1 `(v ~T0 @X0 1 ef1`uc ]
+"121
 {
-[; ;RF.c: 87: void Send_Config2( unsigned char pin,const unsigned char* data)
-[; ;RF.c: 88: {
-[e :U _Send_Config2 ]
-"87
+[; ;RF.c: 120: void f_Config1(unsigned char pin)
+[; ;RF.c: 121: {
+[e :U _f_Config1 ]
+"120
 [v _pin `uc ~T0 @X0 1 r1 ]
-[v _data `*Cuc ~T0 @X0 1 r2 ]
-"88
+"121
 [f ]
-"89
-[v _i `uc ~T0 @X0 1 a ]
-[; ;RF.c: 89: unsigned char i=0;
-[e = _i -> -> 0 `i `uc ]
-[; ;RF.c: 91: for(i=0;i<16;i++)
-"91
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 16 `i 2172  ]
-[e $U 2173  ]
-"92
-[e :U 2172 ]
-[; ;RF.c: 92: {
-{
-[; ;RF.c: 93: if(data[i] == 0)
-"93
-[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 0 `i 2175  ]
-[; ;RF.c: 94: {
-"94
-{
-[; ;RF.c: 95: Zero_Config2(pin);
-"95
-[e ( _Zero_Config2 (1 _pin ]
-"96
-}
-[; ;RF.c: 96: }
-[e $U 2176  ]
-"97
-[e :U 2175 ]
-[; ;RF.c: 97: else
-[; ;RF.c: 98: {
-"98
-{
-[; ;RF.c: 99: One_Config2(pin);
-"99
-[e ( _One_Config2 (1 _pin ]
-"100
-}
-[e :U 2176 ]
-"101
-}
-"91
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 16 `i 2172  ]
-[e :U 2173 ]
-"101
-}
-[; ;RF.c: 100: }
-[; ;RF.c: 101: }
-[; ;RF.c: 103: LATD &= ~pin;
-"103
+[; ;RF.c: 122: LATD |= pin;
+"122
+[e =| _LATD _pin ]
+[; ;RF.c: 123: delayUS(216);
+"123
+[e ( _delayUS (1 -> -> 216 `i `l ]
+[; ;RF.c: 124: LATD &= ~pin;
+"124
 [e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 104: delayUS(11700);
-"104
-[e ( _delayUS (1 -> -> 11700 `i `l ]
-[; ;RF.c: 106: }
-"106
+[; ;RF.c: 125: delayUS(614);
+"125
+[e ( _delayUS (1 -> -> 614 `i `l ]
+[; ;RF.c: 126: LATD |= pin;
+"126
+[e =| _LATD _pin ]
+[; ;RF.c: 127: delayUS(614);
+"127
+[e ( _delayUS (1 -> -> 614 `i `l ]
+[; ;RF.c: 128: LATD &= ~pin;
+"128
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 129: delayUS(216);
+"129
+[e ( _delayUS (1 -> -> 216 `i `l ]
+[; ;RF.c: 130: }
+"130
 [e :UE 2171 ]
 }
-"108
-[v _Zero_Config2 `(v ~T0 @X0 1 ef1`uc ]
-"109
+"137
+[v _Send_Config2 `(v ~T0 @X0 1 ef2`uc`*Cuc ]
+"138
 {
-[; ;RF.c: 108: void Zero_Config2(unsigned char pin)
-[; ;RF.c: 109: {
-[e :U _Zero_Config2 ]
-"108
+[; ;RF.c: 137: void Send_Config2( unsigned char pin,const unsigned char* data)
+[; ;RF.c: 138: {
+[e :U _Send_Config2 ]
+"137
 [v _pin `uc ~T0 @X0 1 r1 ]
-"109
+[v _data `*Cuc ~T0 @X0 1 r2 ]
+"138
 [f ]
-[; ;RF.c: 110: LATD |= pin;
-"110
-[e =| _LATD _pin ]
-[; ;RF.c: 111: delayUS(705);
-"111
-[e ( _delayUS (1 -> -> 705 `i `l ]
-[; ;RF.c: 112: LATD &= ~pin;
-"112
-[e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 113: delayUS(1910);
-"113
-[e ( _delayUS (1 -> -> 1910 `i `l ]
-[; ;RF.c: 114: }
-"114
-[e :UE 2177 ]
+"139
+[v _i `uc ~T0 @X0 1 a ]
+[; ;RF.c: 139: unsigned char i=0;
+[e = _i -> -> 0 `i `uc ]
+[; ;RF.c: 141: for(i=0;i<16;i++)
+"141
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 16 `i 2173  ]
+[e $U 2174  ]
+"142
+[e :U 2173 ]
+[; ;RF.c: 142: {
+{
+[; ;RF.c: 143: if(data[i] == 0)
+"143
+[e $ ! == -> *U + _data * -> _i `ux -> -> # *U _data `ui `ux `i -> 0 `i 2176  ]
+[; ;RF.c: 144: {
+"144
+{
+[; ;RF.c: 145: Zero_Config2(pin);
+"145
+[e ( _Zero_Config2 (1 _pin ]
+"146
 }
-"116
-[v _One_Config2 `(v ~T0 @X0 1 ef1`uc ]
-"117
+[; ;RF.c: 146: }
+[e $U 2177  ]
+"147
+[e :U 2176 ]
+[; ;RF.c: 147: else
+[; ;RF.c: 148: {
+"148
 {
-[; ;RF.c: 116: void One_Config2(unsigned char pin)
-[; ;RF.c: 117: {
-[e :U _One_Config2 ]
-"116
-[v _pin `uc ~T0 @X0 1 r1 ]
-"117
-[f ]
-[; ;RF.c: 118: LATD |= pin;
-"118
-[e =| _LATD _pin ]
-[; ;RF.c: 119: delayUS(1955);
-"119
-[e ( _delayUS (1 -> -> 1955 `i `l ]
-[; ;RF.c: 120: LATD &= ~pin;
-"120
+[; ;RF.c: 149: One_Config2(pin);
+"149
+[e ( _One_Config2 (1 _pin ]
+"150
+}
+[e :U 2177 ]
+"151
+}
+"141
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 16 `i 2173  ]
+[e :U 2174 ]
+"151
+}
+[; ;RF.c: 150: }
+[; ;RF.c: 151: }
+[; ;RF.c: 153: LATD &= ~pin;
+"153
 [e =& _LATD -> ~ -> _pin `i `uc ]
-[; ;RF.c: 121: delayUS(705);
-"121
+[; ;RF.c: 154: delayUS(11700);
+"154
+[e ( _delayUS (1 -> -> 11700 `i `l ]
+[; ;RF.c: 156: }
+"156
+[e :UE 2172 ]
+}
+"163
+[v _Zero_Config2 `(v ~T0 @X0 1 ef1`uc ]
+"164
+{
+[; ;RF.c: 163: void Zero_Config2(unsigned char pin)
+[; ;RF.c: 164: {
+[e :U _Zero_Config2 ]
+"163
+[v _pin `uc ~T0 @X0 1 r1 ]
+"164
+[f ]
+[; ;RF.c: 165: LATD |= pin;
+"165
+[e =| _LATD _pin ]
+[; ;RF.c: 166: delayUS(705);
+"166
 [e ( _delayUS (1 -> -> 705 `i `l ]
-[; ;RF.c: 122: }
-"122
+[; ;RF.c: 167: LATD &= ~pin;
+"167
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 168: delayUS(1910);
+"168
+[e ( _delayUS (1 -> -> 1910 `i `l ]
+[; ;RF.c: 169: }
+"169
 [e :UE 2178 ]
+}
+"176
+[v _One_Config2 `(v ~T0 @X0 1 ef1`uc ]
+"177
+{
+[; ;RF.c: 176: void One_Config2(unsigned char pin)
+[; ;RF.c: 177: {
+[e :U _One_Config2 ]
+"176
+[v _pin `uc ~T0 @X0 1 r1 ]
+"177
+[f ]
+[; ;RF.c: 178: LATD |= pin;
+"178
+[e =| _LATD _pin ]
+[; ;RF.c: 179: delayUS(1955);
+"179
+[e ( _delayUS (1 -> -> 1955 `i `l ]
+[; ;RF.c: 180: LATD &= ~pin;
+"180
+[e =& _LATD -> ~ -> _pin `i `uc ]
+[; ;RF.c: 181: delayUS(705);
+"181
+[e ( _delayUS (1 -> -> 705 `i `l ]
+[; ;RF.c: 182: }
+"182
+[e :UE 2179 ]
 }

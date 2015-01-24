@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -39,28 +39,53 @@
 #include "MISC.h"
 #include "ADC.h"
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
+
 TIME NowTime;
 
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+
+/******************************************************************************/
+/* RTC_INIT
+ *
+ * The function initializes the RTC. This RTC is the DS1307.
+/******************************************************************************/
 void RTC_INIT(void)
 {
     RTC_Clock_Enable();
     RTC_TIME_NONMilitary();
     InternalADC_Read(2);
 }
+
+/******************************************************************************/
+/* RTC_Clock_Enable
+ *
+ * The function clears the CH bit of the 00h register. This bit halts the clock
+ *   when set to 1.
+/******************************************************************************/
 void RTC_Clock_Enable(void)
 {
     int tempSeconds =0;
-    char Error=0;
+    signed char Error=0;
 
     tempSeconds = I2C_Read_At_Address(RTCaddress, RTCseconds);
     Error = I2C_Write_At_Address( RTCaddress, RTCseconds, (tempSeconds & 0x7F) );
 
-  if(Error  < 0 )
-  {
+    if(Error  < 0 )
+    {
        ResetI2C(); //error
-  }
+    }
 }
 
+/******************************************************************************/
+/* RTC_TIME_NONMilitary
+ *
+ * The function sets the 12/24 bit. This bit puts the clock in 12 hour mode.
+/******************************************************************************/
 void RTC_TIME_NONMilitary(void)
 {
     int temphours = 0;
@@ -85,10 +110,16 @@ void RTC_TIME_NONMilitary(void)
   }
 }
 
+/******************************************************************************/
+/* RTC_Clock_Disable
+ *
+ * The function sets the CH bit of the 00h register. This bit halts the clock
+ *   when set to 1.
+/******************************************************************************/
 void RTC_Clock_Disable(void)
 {
     int tempSeconds =0;
-    char Error=0;
+    signed char Error=0;
 
     tempSeconds = I2C_Read_At_Address(RTCaddress, RTCseconds);
     Error = I2C_Write_At_Address( RTCaddress, RTCseconds, (tempSeconds | 0x80) );
@@ -99,9 +130,15 @@ void RTC_Clock_Disable(void)
   }
 }
 
+/******************************************************************************/
+/* READ_RTC_TIME
+ *
+ * The function Reads the time internally to the RTC. The time is stored in the
+ *  Time structure.
+/******************************************************************************/
 unsigned char READ_RTC_TIME(void)
 {
-    unsigned char Error =0;
+    signed char Error =0;
     unsigned char temp[7];
 
     Error = I2C_Read_Sequential( RTCaddress, RTCseconds, temp, 7 );
@@ -124,9 +161,15 @@ unsigned char READ_RTC_TIME(void)
   }
     return Error;
 }
+
+/******************************************************************************/
+/* SET_RTC_TIME
+ *
+ * The function sets the time internally to the RTC.
+/******************************************************************************/
 unsigned char SET_RTC_TIME(TIME SetTime)
 {
-    unsigned char Error =0;
+    signed char Error =0;
     unsigned char temp[7];
 
     temp[0] = ((SetTime.Seconds /10) << 4) + (SetTime.Seconds % 10);
@@ -180,6 +223,13 @@ unsigned char SET_RTC_TIME(TIME SetTime)
 
     return 0;
 }
+
+/******************************************************************************/
+/* READ_RTC_SECONDS
+ *
+ * The function reads RTC register 00h and sets the value to the Time struct
+ *   Seconds.
+/******************************************************************************/
 void READ_RTC_SECONDS(void)
 {
     int tempSeconds =0;
@@ -196,6 +246,11 @@ void READ_RTC_SECONDS(void)
   }
 }
 
+/******************************************************************************/
+/* SprintDate
+ *
+ * The function makes a string of the time to the pointer ReturnBuf.
+/******************************************************************************/
 void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military)
 {
     if(!Military)
@@ -215,6 +270,12 @@ void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Milita
     }
 }
 
+/******************************************************************************/
+/* Parse_Time
+ *
+ * The function reads in a string and parses the values. It sets Time Struct
+ *   to the time values.
+/******************************************************************************/
 unsigned char Parse_Time(unsigned char* This)
 {
     TIME TempTime;

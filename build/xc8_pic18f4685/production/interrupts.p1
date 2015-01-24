@@ -74,21 +74,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ReadUSART `(uc ~T0 @X0 0 ef ]
 "47 interrupts.c
 [v _bufferCount `uc ~T0 @X0 0 e ]
-"24 UART.h
+"67 UART.h
 [v _UARTstring `(v ~T0 @X0 0 ef1`*Cuc ]
-"30 LCD.h
+"66 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
-"29
+"65
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"32
+"68
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
-"31
+"67
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*uc ]
 "597 C:\Program Files (x86)\Microchip\xc8\v1.33\include\plib\usart.h
 [v _WriteUSART `(v ~T0 @X0 0 ef1`uc ]
-"27 MISC.h
+"56 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
-"28
+"57
 [v _BufferCopy `(v ~T0 @X0 0 ef4`*uc`*uc`uc`uc ]
 "46 interrupts.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
@@ -15421,49 +15421,49 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 26: void delayUS(long US);
-[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 34: void lowercase(unsigned char* Input);
-[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;UART.h: 23: void InitUART(void);
-[; ;UART.h: 24: void UARTstring(const unsigned char *data);
-[; ;UART.h: 25: void UARTchar(unsigned char data);
-[; ;UART.h: 26: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 27: char ReadUSART(void);
-[; ;UART.h: 28: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 29: void OpenUSART( unsigned char config, unsigned int spbrg);
-"23 LCD.h
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 55: void delayUS(long US);
+[; ;MISC.h: 56: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 57: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 58: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 59: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 60: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 61: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 62: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 63: void lowercase(unsigned char* Input);
+[; ;MISC.h: 64: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 65: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;UART.h: 66: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 67: void UARTstring(const unsigned char *data);
+[; ;UART.h: 68: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 69: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 70: char ReadUSART(void);
+[; ;UART.h: 71: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 72: void OpenUSART( unsigned char config, unsigned int spbrg);
+"55 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
 -> -> -> 25000 `i `l `ul
 ]
-[; ;LCD.h: 23: unsigned long LCDclearCount=25000;
-"24
+[; ;LCD.h: 55: unsigned long LCDclearCount=25000;
+"56
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 24: unsigned char LCDwait=0;
-[; ;LCD.h: 26: void init_LCD();
-[; ;LCD.h: 27: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 28: void PulseEnablePin();
-[; ;LCD.h: 29: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 30: void ClearLCD();
-[; ;LCD.h: 31: void LCDPrintString(unsigned char *Text);
-[; ;LCD.h: 32: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 33: void LCDScreenUpdate();
-[; ;LCD.h: 34: void LCDdisplayFeedback(unsigned char *Text);
-[; ;LCD.h: 35: void LCD_Scroll(unsigned char* This);
+[; ;LCD.h: 56: unsigned char LCDwait=0;
+[; ;LCD.h: 62: void init_LCD();
+[; ;LCD.h: 63: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 64: void PulseEnablePin();
+[; ;LCD.h: 65: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 66: void ClearLCD();
+[; ;LCD.h: 67: void LCDPrintString(unsigned char *Text);
+[; ;LCD.h: 68: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 69: void LCDScreenUpdate();
+[; ;LCD.h: 70: void LCDdisplayFeedback(unsigned char *Text);
+[; ;LCD.h: 71: void LCD_Scroll(unsigned char* This);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15494,40 +15494,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;MISC.h: 26: void delayUS(long US);
-[; ;MISC.h: 27: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 28: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 29: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 30: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 31: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 32: int GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 33: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 34: void lowercase(unsigned char* Input);
-[; ;MISC.h: 35: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 36: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;UART.h: 23: void InitUART(void);
-[; ;UART.h: 24: void UARTstring(const unsigned char *data);
-[; ;UART.h: 25: void UARTchar(unsigned char data);
-[; ;UART.h: 26: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 27: char ReadUSART(void);
-[; ;UART.h: 28: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 29: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;user.h: 66: void InitApp(void);
-[; ;ADC.h: 42: void EnableInternalADC(unsigned char channels);
-[; ;ADC.h: 43: void DisableInternalADC(void);
-[; ;ADC.h: 44: int InternalADC_Read(unsigned char channel);
-[; ;StringCommand.h: 23: void Command(unsigned char* Input);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;MISC.h: 55: void delayUS(long US);
+[; ;MISC.h: 56: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 57: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 58: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 59: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 60: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 61: int GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 62: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 63: void lowercase(unsigned char* Input);
+[; ;MISC.h: 64: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 65: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;UART.h: 66: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 67: void UARTstring(const unsigned char *data);
+[; ;UART.h: 68: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 69: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 70: char ReadUSART(void);
+[; ;UART.h: 71: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 72: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;user.h: 90: void InitApp(void);
+[; ;ADC.h: 59: void EnableInternalADC(unsigned char channels);
+[; ;ADC.h: 60: void DisableInternalADC(void);
+[; ;ADC.h: 61: int InternalADC_Read(unsigned char channel);
+[; ;StringCommand.h: 42: void Command(unsigned char* Input);
 [; ;interrupts.c: 45: extern char Txdata[100];
 [; ;interrupts.c: 46: extern char Rxdata[100];
 [; ;interrupts.c: 47: extern unsigned char bufferCount;
-[v F17122 `(v ~T0 @X0 1 tf ]
+[v F17128 `(v ~T0 @X0 1 tf ]
 "58 interrupts.c
-[v _high_isr `IF17122 ~T0 @X0 1 e ]
+[v _high_isr `IF17128 ~T0 @X0 1 e ]
 "67
 {
 [; ;interrupts.c: 58: void interrupt high_isr(void)
@@ -15538,9 +15538,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "94
 [e :UE 2161 ]
 }
-[v F17125 `(v ~T0 @X0 1 tf ]
+[v F17131 `(v ~T0 @X0 1 tf ]
 "100
-[v _low_isr `ILF17125 ~T0 @X0 1 e ]
+[v _low_isr `ILF17131 ~T0 @X0 1 e ]
 "108
 {
 [; ;interrupts.c: 100: void low_priority interrupt low_isr(void)

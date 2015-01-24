@@ -19582,10 +19582,10 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 26 "MISC.h"
+# 55 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19598,10 +19598,10 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 51 "MISC.c"
+# 55 "MISC.c"
 void delayUS(long US)
 {
 long i;
@@ -19615,7 +19615,7 @@ __nop();
 }
 }
 
-# 69
+# 73
 void cleanBuffer(unsigned char* data, int count)
 {
 unsigned char i=0;
@@ -19625,7 +19625,7 @@ data[i]= 0;
 }
 }
 
-# 83
+# 87
 void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsigned char shift)
 {
 unsigned char i=0;
@@ -19644,7 +19644,7 @@ count--;
 }
 }
 
-# 106
+# 110
 unsigned char StringMatch(unsigned char* This,const unsigned char* That)
 {
 while(*This != 0)
@@ -19666,7 +19666,7 @@ return 0;
 }
 }
 
-# 133
+# 137
 unsigned char StringContains(unsigned char* This, const unsigned char* That)
 {
 while(*This != 0)
@@ -19689,7 +19689,7 @@ This++;
 return 0;
 }
 
-# 161
+# 165
 unsigned char StartsWith(unsigned char* This,const unsigned char* That)
 {
 while(*This != 0)
@@ -19720,7 +19720,7 @@ return 0;
 }
 }
 
-# 196
+# 200
 int GetEnteredNumber(unsigned char* This)
 {
 unsigned char i =0;
@@ -19785,7 +19785,7 @@ return temp;
 
 }
 
-# 265
+# 269
 void RemoveSpaces(unsigned char* This)
 {
 
@@ -19805,7 +19805,7 @@ This++;
 BufferCopy(That,address, 100, 0);
 }
 
-# 289
+# 293
 void lowercase(unsigned char* Input)
 {
 unsigned char i =0;
@@ -19819,7 +19819,7 @@ i++;
 }
 }
 
-# 307
+# 311
 unsigned char StringAddEqual(unsigned char* Input)
 {
 unsigned char i =0;
@@ -19857,7 +19857,7 @@ BufferCopy(temp,Input,100, 0);
 return 1;
 }
 
-# 351
+# 355
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
 {
 char i = 0;

@@ -17,7 +17,7 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#define USE_OR_MASKS
+
 #if defined(__XC)
     #include <xc.h>        /* XC8 General Include File */
 #elif defined(HI_TECH_C)
@@ -36,6 +36,10 @@
 #include "ADC.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp */
 #include "UART.h"          /* User funct/params, such as InitApp */
+
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
 
 /******************************************************************************/
 /* Functions                                                                  */

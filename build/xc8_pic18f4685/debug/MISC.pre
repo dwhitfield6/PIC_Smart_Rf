@@ -19519,25 +19519,90 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 20 "system.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 23 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
+extern int errno;
+
+# 54
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 99 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+
+# 191
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 61 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
 unsigned char StringMatch(unsigned char* This, const unsigned char* That);
 unsigned char StringContains(unsigned char* This, const unsigned char* That);
 unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-int GetEnteredNumber(unsigned char* This);
+long GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+unsigned char ISNUMBER(unsigned char ascii);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 30 "MISC.c"
+# 55 "MISC.c"
 void delayUS(long US)
 {
 long i;
@@ -19551,6 +19616,7 @@ __nop();
 }
 }
 
+# 73
 void cleanBuffer(unsigned char* data, int count)
 {
 unsigned char i=0;
@@ -19560,6 +19626,7 @@ data[i]= 0;
 }
 }
 
+# 87
 void BufferCopy(unsigned char* from,unsigned char* to, unsigned char count, unsigned char shift)
 {
 unsigned char i=0;
@@ -19578,6 +19645,7 @@ count--;
 }
 }
 
+# 110
 unsigned char StringMatch(unsigned char* This,const unsigned char* That)
 {
 while(*This != 0)
@@ -19599,6 +19667,7 @@ return 0;
 }
 }
 
+# 137
 unsigned char StringContains(unsigned char* This, const unsigned char* That)
 {
 while(*This != 0)
@@ -19621,6 +19690,7 @@ This++;
 return 0;
 }
 
+# 165
 unsigned char StartsWith(unsigned char* This,const unsigned char* That)
 {
 while(*This != 0)
@@ -19641,18 +19711,21 @@ That++;
 }
 if(*This == 0 && *That == 0)
 {
+
 return 1;
 }
 else
 {
+
 return 0;
 }
 }
 
-int GetEnteredNumber(unsigned char* This)
+# 200
+long GetEnteredNumber(unsigned char* This)
 {
 unsigned char i =0;
-int temp =0;
+long temp =0;
 unsigned char negative =0;
 while(*This != '=' && *This != 0)
 {
@@ -19661,8 +19734,7 @@ This++;
 }
 if(*This == 0)
 {
-return 32000;
-
+return 2147483647L;
 }
 This++;
 if(*This == ' ')
@@ -19672,7 +19744,7 @@ This++;
 }
 else if (*This == '=')
 {
-return 32002;
+return 2147483646L;
 }
 else if(*This == '-')
 {
@@ -19682,26 +19754,16 @@ This++;
 }
 else if(*This == 0)
 {
-return 32001;
-
+return 2147483645L;
 }
-while(*This != 0)
+while(*This >=48 && *This <= 57)
 {
 temp = temp * 10;
-if (*This >= 48 && *This <= 57)
-{
-temp+= *This - 48;
+temp += *This - 48;
 i++;
-}
-else
+if(i>32)
 {
-return 32003;
-
-}
-if(i>5)
-{
-return 32004;
-
+return 2147483644L;
 }
 This++;
 }
@@ -19710,8 +19772,9 @@ if(negative)
 temp = (temp * -1);
 }
 return temp;
-
 }
+
+# 257
 void RemoveSpaces(unsigned char* This)
 {
 
@@ -19730,6 +19793,8 @@ This++;
 }
 BufferCopy(That,address, 100, 0);
 }
+
+# 281
 void lowercase(unsigned char* Input)
 {
 unsigned char i =0;
@@ -19742,6 +19807,8 @@ Input[i] += 32;
 i++;
 }
 }
+
+# 299
 unsigned char StringAddEqual(unsigned char* Input)
 {
 unsigned char i =0;
@@ -19777,4 +19844,50 @@ break;
 }
 BufferCopy(temp,Input,100, 0);
 return 1;
+}
+
+# 343
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
+{
+char i = 0;
+unsigned char Parity = 0;
+unsigned int ThisTemp = This;
+
+for (i =0; i<8; i++)
+{
+if((ThisTemp & 0x01) == 1)
+{
+Parity++;
+}
+ThisTemp >>= 1;
+}
+if(Odd_Even == 3)
+{
+if(Parity % 2 == 0)
+{
+return 1;
+}
+return 0;
+}
+else
+{
+if(Parity % 2 == 1)
+{
+return 1;
+}
+return 0;
+}
+}
+
+# 380
+unsigned char ISNUMBER(unsigned char ascii)
+{
+if(ascii >= '0' && ascii <='9')
+{
+return 1;
+}
+else
+{
+return 0;
+}
 }

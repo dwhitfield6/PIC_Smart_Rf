@@ -19582,20 +19582,20 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 24 "PWM.h"
+# 44 "PWM.h"
 void PWM_init();
 void SetDuty(unsigned char Duty);
 void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 50 "PWM.c"
+# 54 "PWM.c"
 void PWM_init()
 {
 
@@ -19618,7 +19618,7 @@ T2CON |= 0b00000100;
 CCP1CON |= 0b00001100;
 }
 
-# 77
+# 81
 void ContrastPWM_init()
 {
 
@@ -19627,7 +19627,7 @@ SetDuty(0);
 ECCP1CON |= 0b00001100;
 }
 
-# 90
+# 94
 void SetContrast(unsigned char Duty)
 {
 unsigned int temp=0;
@@ -19649,7 +19649,7 @@ ECCPR1L = LSB;
 __nop();
 }
 
-# 116
+# 120
 void SetDuty(unsigned char Duty)
 {
 unsigned int temp=0;
@@ -19669,12 +19669,12 @@ __nop();
 
 }
 
-# 140
+# 144
 void SetFreq(unsigned int freq)
 {
 
 unsigned char temp =0;
-temp = (unsigned char)(((41000000L >> 2)/(freq*1000))-1);
+temp = (unsigned char)(((40960000L >> 2)/(freq*1000))-1);
 
 PR2 = temp;
 }

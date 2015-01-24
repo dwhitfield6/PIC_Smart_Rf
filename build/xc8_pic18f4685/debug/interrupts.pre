@@ -19519,40 +19519,45 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 61 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
 unsigned char StringMatch(unsigned char* This, const unsigned char* That);
 unsigned char StringContains(unsigned char* This, const unsigned char* That);
 unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-int GetEnteredNumber(unsigned char* This);
+long GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+unsigned char ISNUMBER(unsigned char ascii);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 56 "UART.h"
-void InitUART(void);
-void UARTstring(const unsigned char *data);
-void UARTchar(unsigned char data);
+# 104 "UART.h"
+void InitUART(unsigned long Baud, unsigned char parity);
+void UARTstring(unsigned char *data);
+void UARTstringWAIT(unsigned char *data);
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
+void SetBaud(unsigned long Baud, unsigned char Parity);
 
-# 23 "LCD.h"
+# 55 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
+# 62
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19627,72 +19632,76 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 18 "MISC.h"
+# 61 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
 unsigned char StringMatch(unsigned char* This, const unsigned char* That);
 unsigned char StringContains(unsigned char* This, const unsigned char* That);
 unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-int GetEnteredNumber(unsigned char* This);
+long GetEnteredNumber(unsigned char* This);
 void RemoveSpaces(unsigned char* This);
 void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
+unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+unsigned char ISNUMBER(unsigned char ascii);
 
-# 20 "system.h"
+# 54 "system.h"
 void ConfigureOscillator(void);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 56 "UART.h"
-void InitUART(void);
-void UARTstring(const unsigned char *data);
-void UARTchar(unsigned char data);
+# 104 "UART.h"
+void InitUART(unsigned long Baud, unsigned char parity);
+void UARTstring(unsigned char *data);
+void UARTstringWAIT(unsigned char *data);
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
+void SetBaud(unsigned long Baud, unsigned char Parity);
 
-# 66 "user.h"
+# 90 "user.h"
 void InitApp(void);
 
-# 42 "ADC.h"
+# 58 "ADC.h"
 void EnableInternalADC(unsigned char channels);
 void DisableInternalADC(void);
 int InternalADC_Read(unsigned char channel);
 
-# 23 "StringCommand.h"
-void Command(unsigned char* Input);
+# 44 "StringCommand.h"
+unsigned char Command(unsigned char* Input);
 
-# 24 "interrupts.c"
+# 45 "interrupts.c"
 extern char Txdata[100];
 extern char Rxdata[100];
 extern unsigned char bufferCount;
+extern unsigned char TX_OLD;
 
-# 34
+# 59
 void interrupt high_isr(void)
 
-# 43
+# 68
 {
 
-# 70
+# 95
 }
 
-
-
+# 101
 void low_priority interrupt low_isr(void)
 
-# 82
+# 109
 {
 unsigned char rx;
 unsigned char TEMP_Rxdata[100];
@@ -19709,9 +19718,15 @@ PIE1bits.RCIE = 0;
 RCSTAbits.CREN = 0;
 rx = ReadUSART();
 
+if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
+{
+__nop();
+}
+else
+{
 if(rx != '\n' && rx != '\r')
 {
-if(rx == 0x07f)
+if(rx == 0x7f || rx == 0x08)
 {
 if(bufferCount !=0)
 {
@@ -19779,8 +19794,9 @@ LCDPrintChar('>');
 cleanBuffer(TEMP_Rxdata, 100);
 bufferCount=0;
 }
+}
+}
 PIE1bits.RCIE = 1;
 RCSTAbits.CREN = 1;
-}
 INTCONbits.PEIE = 1;
 }

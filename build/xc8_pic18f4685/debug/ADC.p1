@@ -3,8 +3,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
 "33101
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
-"57 UART.h
-[v _UARTstring `(v ~T0 @X0 0 ef1`*Cuc ]
+"105 UART.h
+[v _UARTstring `(v ~T0 @X0 0 ef1`*uc ]
 "32941 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
 "30772
@@ -15354,184 +15354,186 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;user.h: 66: void InitApp(void);
-[; ;ADC.h: 42: void EnableInternalADC(unsigned char channels);
-[; ;ADC.h: 43: void DisableInternalADC(void);
-[; ;ADC.h: 44: int InternalADC_Read(unsigned char channel);
-[; ;user.h: 66: void InitApp(void);
-[; ;system.h: 20: void ConfigureOscillator(void);
-[; ;user.h: 66: void InitApp(void);
-[; ;UART.h: 56: void InitUART(void);
-[; ;UART.h: 57: void UARTstring(const unsigned char *data);
-[; ;UART.h: 58: void UARTchar(unsigned char data);
-[; ;UART.h: 59: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 60: char ReadUSART(void);
-[; ;UART.h: 61: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 62: void OpenUSART( unsigned char config, unsigned int spbrg);
-"25 ADC.c
+[; ;user.h: 90: void InitApp(void);
+[; ;ADC.h: 58: void EnableInternalADC(unsigned char channels);
+[; ;ADC.h: 59: void DisableInternalADC(void);
+[; ;ADC.h: 60: int InternalADC_Read(unsigned char channel);
+[; ;user.h: 90: void InitApp(void);
+[; ;system.h: 54: void ConfigureOscillator(void);
+[; ;user.h: 90: void InitApp(void);
+[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 105: void UARTstring(unsigned char *data);
+[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 109: char ReadUSART(void);
+[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+"53 ADC.c
 [v _EnableInternalADC `(v ~T0 @X0 1 ef1`uc ]
-"26
-{
-[; ;ADC.c: 25: void EnableInternalADC(unsigned char channels)
-[; ;ADC.c: 26: {
-[e :U _EnableInternalADC ]
-"25
-[v _channels `uc ~T0 @X0 1 r1 ]
-"26
-[f ]
-"27
-[v _config `uc ~T0 @X0 1 a ]
-[; ;ADC.c: 27: unsigned char config =0;
-[e = _config -> -> 0 `i `uc ]
-[; ;ADC.c: 29: if(channels == 1)
-"29
-[e $ ! == -> _channels `i -> 1 `i 2161  ]
-[; ;ADC.c: 30: {
-"30
-{
-[; ;ADC.c: 31: config |= 0b00001110;
-"31
-[e =| _config -> -> 14 `i `uc ]
-"32
-}
-[; ;ADC.c: 32: }
-[e $U 2162  ]
-"33
-[e :U 2161 ]
-[; ;ADC.c: 33: else if(channels ==2)
-[e $ ! == -> _channels `i -> 2 `i 2163  ]
-[; ;ADC.c: 34: {
-"34
-{
-[; ;ADC.c: 35: config |= 0b00001101;
-"35
-[e =| _config -> -> 13 `i `uc ]
-"36
-}
-[; ;ADC.c: 36: }
-[e $U 2164  ]
-"37
-[e :U 2163 ]
-[; ;ADC.c: 37: else if(channels ==3)
-[e $ ! == -> _channels `i -> 3 `i 2165  ]
-[; ;ADC.c: 38: {
-"38
-{
-[; ;ADC.c: 39: config |= 0b00001100;
-"39
-[e =| _config -> -> 12 `i `uc ]
-"40
-}
-[; ;ADC.c: 40: }
-[e $U 2166  ]
-"41
-[e :U 2165 ]
-[; ;ADC.c: 41: else if(channels ==4)
-[e $ ! == -> _channels `i -> 4 `i 2167  ]
-[; ;ADC.c: 42: {
-"42
-{
-[; ;ADC.c: 43: config |= 0b00001011;
-"43
-[e =| _config -> -> 11 `i `uc ]
-"44
-}
-[; ;ADC.c: 44: }
-[e $U 2168  ]
-"45
-[e :U 2167 ]
-[; ;ADC.c: 45: else if(channels ==5)
-[e $ ! == -> _channels `i -> 5 `i 2169  ]
-[; ;ADC.c: 46: {
-"46
-{
-[; ;ADC.c: 47: config |= 0b00001010;
-"47
-[e =| _config -> -> 10 `i `uc ]
-"48
-}
-[; ;ADC.c: 48: }
-[e $U 2170  ]
-"49
-[e :U 2169 ]
-[; ;ADC.c: 49: else if(channels ==6)
-[e $ ! == -> _channels `i -> 6 `i 2171  ]
-[; ;ADC.c: 50: {
-"50
-{
-[; ;ADC.c: 51: config |= 0b00001001;
-"51
-[e =| _config -> -> 9 `i `uc ]
-"52
-}
-[; ;ADC.c: 52: }
-[e $U 2172  ]
-"53
-[e :U 2171 ]
-[; ;ADC.c: 53: else if(channels ==7)
-[e $ ! == -> _channels `i -> 7 `i 2173  ]
-[; ;ADC.c: 54: {
 "54
 {
-[; ;ADC.c: 55: config |= 0b00001000;
+[; ;ADC.c: 53: void EnableInternalADC(unsigned char channels)
+[; ;ADC.c: 54: {
+[e :U _EnableInternalADC ]
+"53
+[v _channels `uc ~T0 @X0 1 r1 ]
+"54
+[f ]
 "55
-[e =| _config -> -> 8 `i `uc ]
-"56
-}
-[; ;ADC.c: 56: }
-[e $U 2174  ]
+[v _config `uc ~T0 @X0 1 a ]
+[; ;ADC.c: 55: unsigned char config =0;
+[e = _config -> -> 0 `i `uc ]
+[; ;ADC.c: 57: if(channels == 1)
 "57
-[e :U 2173 ]
-[; ;ADC.c: 57: else if(channels ==8)
-[e $ ! == -> _channels `i -> 8 `i 2175  ]
+[e $ ! == -> _channels `i -> 1 `i 2161  ]
 [; ;ADC.c: 58: {
 "58
 {
-[; ;ADC.c: 59: config |= 0b00000111;
+[; ;ADC.c: 59: config |= 0b00001110;
 "59
-[e =| _config -> -> 7 `i `uc ]
+[e =| _config -> -> 14 `i `uc ]
 "60
 }
 [; ;ADC.c: 60: }
-[e $U 2176  ]
+[e $U 2162  ]
 "61
-[e :U 2175 ]
-[; ;ADC.c: 61: else if(channels ==9)
-[e $ ! == -> _channels `i -> 9 `i 2177  ]
+[e :U 2161 ]
+[; ;ADC.c: 61: else if(channels ==2)
+[e $ ! == -> _channels `i -> 2 `i 2163  ]
 [; ;ADC.c: 62: {
 "62
 {
-[; ;ADC.c: 63: config |= 0b00000110;
+[; ;ADC.c: 63: config |= 0b00001101;
 "63
-[e =| _config -> -> 6 `i `uc ]
+[e =| _config -> -> 13 `i `uc ]
 "64
 }
 [; ;ADC.c: 64: }
-[e $U 2178  ]
+[e $U 2164  ]
 "65
-[e :U 2177 ]
-[; ;ADC.c: 65: else if(channels ==10)
-[e $ ! == -> _channels `i -> 10 `i 2179  ]
+[e :U 2163 ]
+[; ;ADC.c: 65: else if(channels ==3)
+[e $ ! == -> _channels `i -> 3 `i 2165  ]
 [; ;ADC.c: 66: {
 "66
 {
-[; ;ADC.c: 67: config |= 0b00000101;
+[; ;ADC.c: 67: config |= 0b00001100;
 "67
-[e =| _config -> -> 5 `i `uc ]
+[e =| _config -> -> 12 `i `uc ]
 "68
 }
 [; ;ADC.c: 68: }
-[e $U 2180  ]
+[e $U 2166  ]
 "69
-[e :U 2179 ]
-[; ;ADC.c: 69: else
+[e :U 2165 ]
+[; ;ADC.c: 69: else if(channels ==4)
+[e $ ! == -> _channels `i -> 4 `i 2167  ]
 [; ;ADC.c: 70: {
 "70
 {
-[; ;ADC.c: 71: config |= 0b00000100;
+[; ;ADC.c: 71: config |= 0b00001011;
 "71
-[e =| _config -> -> 4 `i `uc ]
+[e =| _config -> -> 11 `i `uc ]
 "72
+}
+[; ;ADC.c: 72: }
+[e $U 2168  ]
+"73
+[e :U 2167 ]
+[; ;ADC.c: 73: else if(channels ==5)
+[e $ ! == -> _channels `i -> 5 `i 2169  ]
+[; ;ADC.c: 74: {
+"74
+{
+[; ;ADC.c: 75: config |= 0b00001010;
+"75
+[e =| _config -> -> 10 `i `uc ]
+"76
+}
+[; ;ADC.c: 76: }
+[e $U 2170  ]
+"77
+[e :U 2169 ]
+[; ;ADC.c: 77: else if(channels ==6)
+[e $ ! == -> _channels `i -> 6 `i 2171  ]
+[; ;ADC.c: 78: {
+"78
+{
+[; ;ADC.c: 79: config |= 0b00001001;
+"79
+[e =| _config -> -> 9 `i `uc ]
+"80
+}
+[; ;ADC.c: 80: }
+[e $U 2172  ]
+"81
+[e :U 2171 ]
+[; ;ADC.c: 81: else if(channels ==7)
+[e $ ! == -> _channels `i -> 7 `i 2173  ]
+[; ;ADC.c: 82: {
+"82
+{
+[; ;ADC.c: 83: config |= 0b00001000;
+"83
+[e =| _config -> -> 8 `i `uc ]
+"84
+}
+[; ;ADC.c: 84: }
+[e $U 2174  ]
+"85
+[e :U 2173 ]
+[; ;ADC.c: 85: else if(channels ==8)
+[e $ ! == -> _channels `i -> 8 `i 2175  ]
+[; ;ADC.c: 86: {
+"86
+{
+[; ;ADC.c: 87: config |= 0b00000111;
+"87
+[e =| _config -> -> 7 `i `uc ]
+"88
+}
+[; ;ADC.c: 88: }
+[e $U 2176  ]
+"89
+[e :U 2175 ]
+[; ;ADC.c: 89: else if(channels ==9)
+[e $ ! == -> _channels `i -> 9 `i 2177  ]
+[; ;ADC.c: 90: {
+"90
+{
+[; ;ADC.c: 91: config |= 0b00000110;
+"91
+[e =| _config -> -> 6 `i `uc ]
+"92
+}
+[; ;ADC.c: 92: }
+[e $U 2178  ]
+"93
+[e :U 2177 ]
+[; ;ADC.c: 93: else if(channels ==10)
+[e $ ! == -> _channels `i -> 10 `i 2179  ]
+[; ;ADC.c: 94: {
+"94
+{
+[; ;ADC.c: 95: config |= 0b00000101;
+"95
+[e =| _config -> -> 5 `i `uc ]
+"96
+}
+[; ;ADC.c: 96: }
+[e $U 2180  ]
+"97
+[e :U 2179 ]
+[; ;ADC.c: 97: else
+[; ;ADC.c: 98: {
+"98
+{
+[; ;ADC.c: 99: config |= 0b00000100;
+"99
+[e =| _config -> -> 4 `i `uc ]
+"100
 }
 [e :U 2180 ]
 [e :U 2178 ]
@@ -15543,94 +15545,94 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2166 ]
 [e :U 2164 ]
 [e :U 2162 ]
-[; ;ADC.c: 72: }
-[; ;ADC.c: 74: ADCON1 = config;
-"74
+[; ;ADC.c: 100: }
+[; ;ADC.c: 102: ADCON1 = config;
+"102
 [e = _ADCON1 _config ]
-[; ;ADC.c: 75: }
-"75
+[; ;ADC.c: 103: }
+"103
 [e :UE 2160 ]
 }
-"77
+"110
 [v _InternalADC_Read `(i ~T0 @X0 1 ef1`uc ]
-"78
+"111
 {
-[; ;ADC.c: 77: int InternalADC_Read(unsigned char channel)
-[; ;ADC.c: 78: {
+[; ;ADC.c: 110: int InternalADC_Read(unsigned char channel)
+[; ;ADC.c: 111: {
 [e :U _InternalADC_Read ]
-"77
+"110
 [v _channel `uc ~T0 @X0 1 r1 ]
-"78
+"111
 [f ]
-[; ;ADC.c: 79: ADCON0 =0;
-"79
+[; ;ADC.c: 112: ADCON0 =0;
+"112
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;ADC.c: 80: if(channel > 10)
-"80
+[; ;ADC.c: 113: if(channel > 10)
+"113
 [e $ ! > -> _channel `i -> 10 `i 2182  ]
-[; ;ADC.c: 81: {
-"81
+[; ;ADC.c: 114: {
+"114
 {
-[; ;ADC.c: 82: UARTstring("ADC Channel Out of Bounds");
-"82
-[e ( _UARTstring (1 :s 1C ]
-[; ;ADC.c: 83: return 0;
-"83
+[; ;ADC.c: 115: UARTstring("ADC Channel Out of Bounds");
+"115
+[e ( _UARTstring (1 -> :s 1C `*uc ]
+[; ;ADC.c: 116: return 0;
+"116
 [e ) -> 0 `i ]
 [e $UE 2181  ]
-"84
+"117
 }
 [e :U 2182 ]
-[; ;ADC.c: 84: }
-[; ;ADC.c: 85: ADCON0 |= (channel << 2);
-"85
+[; ;ADC.c: 117: }
+[; ;ADC.c: 118: ADCON0 |= (channel << 2);
+"118
 [e =| _ADCON0 -> << -> _channel `i -> 2 `i `uc ]
-[; ;ADC.c: 86: ADCON2 |= 0b10100000;
-"86
+[; ;ADC.c: 119: ADCON2 |= 0b10100000;
+"119
 [e =| _ADCON2 -> -> 160 `i `uc ]
-[; ;ADC.c: 87: ADCON2 |= 0b00000110;
-"87
+[; ;ADC.c: 120: ADCON2 |= 0b00000110;
+"120
 [e =| _ADCON2 -> -> 6 `i `uc ]
-[; ;ADC.c: 88: ADCON0 |= 0b00000001;
-"88
+[; ;ADC.c: 121: ADCON0 |= 0b00000001;
+"121
 [e =| _ADCON0 -> -> 1 `i `uc ]
-[; ;ADC.c: 89: (PIE1bits.ADIE=0);
-"89
+[; ;ADC.c: 122: (PIE1bits.ADIE=0);
+"122
 [e = . . _PIE1bits 0 6 -> -> 0 `i `uc ]
-[; ;ADC.c: 90: ADCON0 |= 0b00000010;
-"90
+[; ;ADC.c: 123: ADCON0 |= 0b00000010;
+"123
 [e =| _ADCON0 -> -> 2 `i `uc ]
-[; ;ADC.c: 91: while(ADCON0 & 0b00000010);
-"91
+[; ;ADC.c: 124: while(ADCON0 & 0b00000010);
+"124
 [e $U 2183  ]
 [e :U 2184 ]
 [e :U 2183 ]
 [e $ != & -> _ADCON0 `i -> 2 `i -> 0 `i 2184  ]
 [e :U 2185 ]
-[; ;ADC.c: 92: return ((ADRESH << 8) + ADRESL);
-"92
+[; ;ADC.c: 125: return ((ADRESH << 8) + ADRESL);
+"125
 [e ) + << -> _ADRESH `i -> 8 `i -> _ADRESL `i ]
 [e $UE 2181  ]
-[; ;ADC.c: 93: }
-"93
+[; ;ADC.c: 126: }
+"126
 [e :UE 2181 ]
 }
-"94
+"133
 [v _DisableInternalADC `(v ~T0 @X0 1 ef ]
-"95
+"134
 {
-[; ;ADC.c: 94: void DisableInternalADC(void)
-[; ;ADC.c: 95: {
+[; ;ADC.c: 133: void DisableInternalADC(void)
+[; ;ADC.c: 134: {
 [e :U _DisableInternalADC ]
 [f ]
-[; ;ADC.c: 96: ADCON0 &= ~0b00000001;
-"96
+[; ;ADC.c: 135: ADCON0 &= ~0b00000001;
+"135
 [e =& _ADCON0 -> ~ -> 1 `i `uc ]
-[; ;ADC.c: 97: ADCON1 = 0b00001111;
-"97
+[; ;ADC.c: 136: ADCON1 = 0b00001111;
+"136
 [e = _ADCON1 -> -> 15 `i `uc ]
-[; ;ADC.c: 98: }
-"98
+[; ;ADC.c: 137: }
+"137
 [e :UE 2186 ]
 }
 [a 1C 65 68 67 32 67 104 97 110 110 101 108 32 79 117 116 32 111 102 32 66 111 117 110 100 115 0 ]
