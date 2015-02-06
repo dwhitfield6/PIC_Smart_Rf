@@ -3,5 +3,6 @@
  UART.c  \
 UART.h  \
 MISC.h  \
+EEPROM.h  \
 user.h  \
 system.h 

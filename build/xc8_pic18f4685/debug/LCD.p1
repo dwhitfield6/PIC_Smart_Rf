@@ -1,21 +1,21 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"64 LCD.h
+"71 LCD.h
 [v _PulseEnablePin `(v ~T0 @X0 0 ef ]
-"63
+"70
 [v _SendLCDbyte `(v ~T0 @X0 0 ef2`uc`uc ]
-"61 MISC.h
+"65 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "29030 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"66 LCD.h
+"73 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
 "29558 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
-"62 MISC.h
+"66 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
-"63
+"67
 [v _BufferCopy `(v ~T0 @X0 0 ef4`*uc`*uc`uc`uc ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15347,41 +15347,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;user.h: 90: void InitApp(void);
-"55 LCD.h
+"62 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
 -> -> -> 25000 `i `l `ul
 ]
-[; ;LCD.h: 55: unsigned long LCDclearCount=25000;
-"56
+[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
+"63
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 56: unsigned char LCDwait=0;
-[; ;LCD.h: 62: void init_LCD();
-[; ;LCD.h: 63: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 64: void PulseEnablePin();
-[; ;LCD.h: 65: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 66: void ClearLCD();
-[; ;LCD.h: 67: void LCDPrintString(unsigned char *Text);
-[; ;LCD.h: 68: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 69: void LCDScreenUpdate();
-[; ;LCD.h: 70: void LCDdisplayFeedback(unsigned char *Text);
-[; ;LCD.h: 71: void LCD_Scroll(unsigned char* This);
+[; ;LCD.h: 63: unsigned char LCDwait=0;
+[; ;LCD.h: 69: void init_LCD();
+[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 71: void PulseEnablePin();
+[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 73: void ClearLCD();
+[; ;LCD.h: 74: void LCDPrintString(unsigned char *Text);
+[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 76: void LCDScreenUpdate();
+[; ;LCD.h: 77: void LCDdisplayFeedback(unsigned char *Text);
+[; ;LCD.h: 78: void LCD_Scroll(unsigned char* This);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 "44 LCD.c
 [v _Scroll_1 `uc ~T0 @X0 -> 16 `i e ]
 [; ;LCD.c: 44: unsigned char Scroll_1[16];

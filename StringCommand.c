@@ -724,7 +724,8 @@ unsigned char Command(char* Input)
         UARTstring("Christmas Tree\r\n");
         UARTstring("Contrast\r\n");
         UARTstring("ADC\r\n");
-        UARTstring("RTC\r\n\n");
+        UARTstring("RTC\r\n");
+        UARTstring("Baud\r\n\n");
         UARTstring("For Device help enter device followed by a '?' \r\n");
         UARTstring("i.e.  Livingroom?\r\n\r\n");
         UARTstring("Current Time\r\n");
@@ -746,14 +747,6 @@ unsigned char Command(char* Input)
             }
             SetLCDcursor(1, 0);
             LCDPrintString(buf);
-            LCD_Scroll("Device Menus:");
-            LCD_Scroll("Bedroom?");
-            LCD_Scroll("Livingroom?");
-            LCD_Scroll("Joes Room?");
-            LCD_Scroll("Christmas Tree?");
-            LCD_Scroll("Contrast?");
-            LCD_Scroll("ADC?");
-            LCD_Scroll("RTC?");
         }
         else
         {
@@ -761,10 +754,29 @@ unsigned char Command(char* Input)
             SetLCDcursor(1, 0);
             LCDPrintString("RTC isnt working");
         }
+        SetLCDcursor(1, 0);
+        LCD_Scroll("Device Menus:");
+        LCD_Scroll("Bedroom?");
+        LCD_Scroll("Livingroom?");
+        LCD_Scroll("Joes Room?");
+        LCD_Scroll("Christmas Tree?");
+        LCD_Scroll("Contrast?");
+        LCD_Scroll("ADC?");
+        LCD_Scroll("RTC?");
+        LCD_Scroll("Baud?");
         LCDclearCount =0;
     }
-    else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") || StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
+    else if(StringMatch(Input, "baud?"))
     {
+        // tell the user what the baud is
+        sprintf(buf,"BAUD = %d", GetBaud());
+        UARTstring(buf);
+        LCDdisplayFeedback(buf);
+    }
+    else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") ||
+            StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
+    {
+        // change baud
         if (!StringContains(Input, "="))
         {
             StringAddEqual(Input);

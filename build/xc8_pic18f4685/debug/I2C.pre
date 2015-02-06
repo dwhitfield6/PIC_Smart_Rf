@@ -19537,7 +19537,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19550,6 +19550,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 55 "I2C.c"
 void Init_I2C_Master(void)

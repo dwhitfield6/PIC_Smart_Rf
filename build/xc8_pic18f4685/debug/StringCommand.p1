@@ -1,21 +1,21 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"105 UART.h
+"115 UART.h
 [v _UARTstring `(v ~T0 @X0 0 ef1`*uc ]
-"69 MISC.h
+"73 MISC.h
 [v _lowercase `(v ~T0 @X0 0 ef1`*uc ]
-"68
+"72
 [v _RemoveSpaces `(v ~T0 @X0 0 ef1`*uc ]
-"64
+"68
 [v _StringMatch `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"66
+"70
 [v _StartsWith `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
-"65
+"69
 [v _StringContains `(uc ~T0 @X0 0 ef2`*uc`*Cuc ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"70 LCD.h
+"77 LCD.h
 [v _LCDdisplayFeedback `(v ~T0 @X0 0 ef1`*uc ]
-"71
+"78
 [v _LCD_Scroll `(v ~T0 @X0 0 ef1`*uc ]
 "34969 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [s S2115 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -41,19 +41,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Send_Config1 `(v ~T0 @X0 0 ef2`uc`*Cuc ]
 "112
 [v _Send_Config2 `(v ~T0 @X0 0 ef2`uc`*Cuc ]
-"67 MISC.h
+"71 MISC.h
 [v _GetEnteredNumber `(l ~T0 @X0 0 ef1`*uc ]
 "45 PWM.h
 [v _SetDuty `(v ~T0 @X0 0 ef1`uc ]
 "205 C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"70 MISC.h
+"74 MISC.h
 [v _StringAddEqual `(uc ~T0 @X0 0 ef1`*uc ]
 "47 PWM.h
 [v _SetContrast `(v ~T0 @X0 0 ef1`uc ]
 "29558 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
-"61 MISC.h
+"65 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "60 ADC.h
 [v _InternalADC_Read `(i ~T0 @X0 0 ef1`uc ]
@@ -66,22 +66,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SprintDate `(v ~T0 @X0 0 ef3`*uc`S2161`uc ]
 "51
 [v _NowTime `S2161 ~T0 @X0 0 e ]
-"65 LCD.h
+"72 LCD.h
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"67
+"74
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*uc ]
-"62 MISC.h
+"66 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
 "80 RTC.h
 [v _Parse_Time `(uc ~T0 @X0 0 ef1`*uc ]
 "79
 [v _SET_RTC_TIME `(uc ~T0 @X0 0 ef1`S2161 ]
-"112 UART.h
+"123 UART.h
+[v _GetBaud `(ul ~T0 @X0 0 ef ]
+"122
 [v _SetBaud `(v ~T0 @X0 0 ef2`ul`uc ]
 "42 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
-"72 MISC.h
+"76 MISC.h
 [v _ISNUMBER `(uc ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 24: extern void __builtin_software_breakpoint(void);
@@ -15445,55 +15447,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
-[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
-[; ;UART.h: 105: void UARTstring(unsigned char *data);
-[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
-[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
-[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 109: char ReadUSART(void);
-[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 114: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 115: void UARTstring(unsigned char *data);
+[; ;UART.h: 116: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 117: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 118: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 119: char ReadUSART(void);
+[; ;UART.h: 120: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 123: unsigned long GetBaud(void);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
-[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
-[; ;UART.h: 105: void UARTstring(unsigned char *data);
-[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
-[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
-[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 109: char ReadUSART(void);
-[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 114: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 115: void UARTstring(unsigned char *data);
+[; ;UART.h: 116: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 117: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 118: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 119: char ReadUSART(void);
+[; ;UART.h: 120: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 123: unsigned long GetBaud(void);
 [; ;user.h: 90: void InitApp(void);
 [; ;ADC.h: 58: void EnableInternalADC(unsigned char channels);
 [; ;ADC.h: 59: void DisableInternalADC(void);
@@ -15950,28 +15956,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;PWM.h: 46: void SetFreq(unsigned int freq);
 [; ;PWM.h: 47: void SetContrast(unsigned char Duty);
 [; ;PWM.h: 48: void ContrastPWM_init();
-"55 LCD.h
+"62 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
 -> -> -> 25000 `i `l `ul
 ]
-[; ;LCD.h: 55: unsigned long LCDclearCount=25000;
-"56
+[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
+"63
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 56: unsigned char LCDwait=0;
-[; ;LCD.h: 62: void init_LCD();
-[; ;LCD.h: 63: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 64: void PulseEnablePin();
-[; ;LCD.h: 65: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 66: void ClearLCD();
-[; ;LCD.h: 67: void LCDPrintString(unsigned char *Text);
-[; ;LCD.h: 68: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 69: void LCDScreenUpdate();
-[; ;LCD.h: 70: void LCDdisplayFeedback(unsigned char *Text);
-[; ;LCD.h: 71: void LCD_Scroll(unsigned char* This);
+[; ;LCD.h: 63: unsigned char LCDwait=0;
+[; ;LCD.h: 69: void init_LCD();
+[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 71: void PulseEnablePin();
+[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 73: void ClearLCD();
+[; ;LCD.h: 74: void LCDPrintString(unsigned char *Text);
+[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 76: void LCDScreenUpdate();
+[; ;LCD.h: 77: void LCDdisplayFeedback(unsigned char *Text);
+[; ;LCD.h: 78: void LCD_Scroll(unsigned char* This);
 [; ;I2C.h: 54: void Init_I2C_Master(void);
 [; ;I2C.h: 55: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 [; ;I2C.h: 56: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -18101,382 +18107,414 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;StringCommand.c: 726: UARTstring("ADC\r\n");
 "726
 [e ( _UARTstring (1 -> :s 243C `*uc ]
-[; ;StringCommand.c: 727: UARTstring("RTC\r\n\n");
+[; ;StringCommand.c: 727: UARTstring("RTC\r\n");
 "727
 [e ( _UARTstring (1 -> :s 244C `*uc ]
-[; ;StringCommand.c: 728: UARTstring("For Device help enter device followed by a '?' \r\n");
+[; ;StringCommand.c: 728: UARTstring("Baud\r\n\n");
 "728
 [e ( _UARTstring (1 -> :s 245C `*uc ]
-[; ;StringCommand.c: 729: UARTstring("i.e.  Livingroom?\r\n\r\n");
+[; ;StringCommand.c: 729: UARTstring("For Device help enter device followed by a '?' \r\n");
 "729
 [e ( _UARTstring (1 -> :s 246C `*uc ]
-[; ;StringCommand.c: 730: UARTstring("Current Time\r\n");
+[; ;StringCommand.c: 730: UARTstring("i.e.  Livingroom?\r\n\r\n");
 "730
 [e ( _UARTstring (1 -> :s 247C `*uc ]
-[; ;StringCommand.c: 731: SetLCDcursor(0, 0);
+[; ;StringCommand.c: 731: UARTstring("Current Time\r\n");
 "731
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 732: LCDPrintString("Help Menu");
+[e ( _UARTstring (1 -> :s 248C `*uc ]
+[; ;StringCommand.c: 732: SetLCDcursor(0, 0);
 "732
-[e ( _LCDPrintString (1 -> :s 248C `*uc ]
-[; ;StringCommand.c: 733: if(!READ_RTC_TIME())
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 733: LCDPrintString("Help Menu");
 "733
-[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2287  ]
-[; ;StringCommand.c: 734: {
+[e ( _LCDPrintString (1 -> :s 249C `*uc ]
+[; ;StringCommand.c: 734: if(!READ_RTC_TIME())
 "734
-{
-[; ;StringCommand.c: 735: SprintDate(buf, NowTime, 0);
+[e $ ! ! != -> ( _READ_RTC_TIME ..  `i -> -> -> 0 `i `uc `i 2287  ]
+[; ;StringCommand.c: 735: {
 "735
-[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
-[; ;StringCommand.c: 736: UARTstring(buf);
+{
+[; ;StringCommand.c: 736: SprintDate(buf, NowTime, 0);
 "736
-[e ( _UARTstring (1 &U _buf ]
-[; ;StringCommand.c: 737: UARTstring("\r\n");
+[e ( _SprintDate (3 , , &U _buf _NowTime -> -> 0 `i `uc ]
+[; ;StringCommand.c: 737: UARTstring(buf);
 "737
-[e ( _UARTstring (1 -> :s 249C `*uc ]
-[; ;StringCommand.c: 739: if(NowTime.HoursAM_PM)
-"739
-[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2288  ]
-[; ;StringCommand.c: 740: {
+[e ( _UARTstring (1 &U _buf ]
+[; ;StringCommand.c: 738: UARTstring("\r\n");
+"738
+[e ( _UARTstring (1 -> :s 250C `*uc ]
+[; ;StringCommand.c: 740: if(NowTime.HoursAM_PM)
 "740
-{
-[; ;StringCommand.c: 741: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+[e $ ! != -> . _NowTime 4 `i -> -> -> 0 `i `uc `i 2288  ]
+[; ;StringCommand.c: 741: {
 "741
-[e ( _sprintf (1 , , , , , (. , &U _buf :s 250C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
-"742
-}
-[; ;StringCommand.c: 742: }
-[e $U 2289  ]
-"743
-[e :U 2288 ]
-[; ;StringCommand.c: 743: else
-[; ;StringCommand.c: 744: {
-"744
 {
-[; ;StringCommand.c: 745: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
-"745
+[; ;StringCommand.c: 742: sprintf(buf,"%02d/%02d %02d:%02d PM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
+"742
 [e ( _sprintf (1 , , , , , (. , &U _buf :s 251C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"743
+}
+[; ;StringCommand.c: 743: }
+[e $U 2289  ]
+"744
+[e :U 2288 ]
+[; ;StringCommand.c: 744: else
+[; ;StringCommand.c: 745: {
+"745
+{
+[; ;StringCommand.c: 746: sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours, NowTime.Minutes, NowTime.Seconds);
 "746
+[e ( _sprintf (1 , , , , , (. , &U _buf :s 252C -> . _NowTime 7 `i -> . _NowTime 6 `i -> . _NowTime 2 `i -> . _NowTime 1 `i -> . _NowTime 0 `i ]
+"747
 }
 [e :U 2289 ]
-[; ;StringCommand.c: 746: }
-[; ;StringCommand.c: 747: SetLCDcursor(1, 0);
-"747
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 748: LCDPrintString(buf);
+[; ;StringCommand.c: 747: }
+[; ;StringCommand.c: 748: SetLCDcursor(1, 0);
 "748
-[e ( _LCDPrintString (1 &U _buf ]
-[; ;StringCommand.c: 749: LCD_Scroll("Device Menus:");
-"749
-[e ( _LCD_Scroll (1 -> :s 252C `*uc ]
-[; ;StringCommand.c: 750: LCD_Scroll("Bedroom?");
-"750
-[e ( _LCD_Scroll (1 -> :s 253C `*uc ]
-[; ;StringCommand.c: 751: LCD_Scroll("Livingroom?");
-"751
-[e ( _LCD_Scroll (1 -> :s 254C `*uc ]
-[; ;StringCommand.c: 752: LCD_Scroll("Joes Room?");
-"752
-[e ( _LCD_Scroll (1 -> :s 255C `*uc ]
-[; ;StringCommand.c: 753: LCD_Scroll("Christmas Tree?");
-"753
-[e ( _LCD_Scroll (1 -> :s 256C `*uc ]
-[; ;StringCommand.c: 754: LCD_Scroll("Contrast?");
-"754
-[e ( _LCD_Scroll (1 -> :s 257C `*uc ]
-[; ;StringCommand.c: 755: LCD_Scroll("ADC?");
-"755
-[e ( _LCD_Scroll (1 -> :s 258C `*uc ]
-[; ;StringCommand.c: 756: LCD_Scroll("RTC?");
-"756
-[e ( _LCD_Scroll (1 -> :s 259C `*uc ]
-"757
-}
-[; ;StringCommand.c: 757: }
-[e $U 2290  ]
-"758
-[e :U 2287 ]
-[; ;StringCommand.c: 758: else
-[; ;StringCommand.c: 759: {
-"759
-{
-[; ;StringCommand.c: 760: UARTstring("ERROR: Can't Read RTC\r\n");
-"760
-[e ( _UARTstring (1 -> :s 260C `*uc ]
-[; ;StringCommand.c: 761: SetLCDcursor(1, 0);
-"761
 [e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;StringCommand.c: 762: LCDPrintString("RTC isnt working");
-"762
-[e ( _LCDPrintString (1 -> :s 261C `*uc ]
-"763
+[; ;StringCommand.c: 749: LCDPrintString(buf);
+"749
+[e ( _LCDPrintString (1 &U _buf ]
+"750
+}
+[; ;StringCommand.c: 750: }
+[e $U 2290  ]
+"751
+[e :U 2287 ]
+[; ;StringCommand.c: 751: else
+[; ;StringCommand.c: 752: {
+"752
+{
+[; ;StringCommand.c: 753: UARTstring("ERROR: Can't Read RTC\r\n");
+"753
+[e ( _UARTstring (1 -> :s 253C `*uc ]
+[; ;StringCommand.c: 754: SetLCDcursor(1, 0);
+"754
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 755: LCDPrintString("RTC isnt working");
+"755
+[e ( _LCDPrintString (1 -> :s 254C `*uc ]
+"756
 }
 [e :U 2290 ]
-[; ;StringCommand.c: 763: }
-[; ;StringCommand.c: 764: LCDclearCount =0;
+[; ;StringCommand.c: 756: }
+[; ;StringCommand.c: 757: SetLCDcursor(1, 0);
+"757
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;StringCommand.c: 758: LCD_Scroll("Device Menus:");
+"758
+[e ( _LCD_Scroll (1 -> :s 255C `*uc ]
+[; ;StringCommand.c: 759: LCD_Scroll("Bedroom?");
+"759
+[e ( _LCD_Scroll (1 -> :s 256C `*uc ]
+[; ;StringCommand.c: 760: LCD_Scroll("Livingroom?");
+"760
+[e ( _LCD_Scroll (1 -> :s 257C `*uc ]
+[; ;StringCommand.c: 761: LCD_Scroll("Joes Room?");
+"761
+[e ( _LCD_Scroll (1 -> :s 258C `*uc ]
+[; ;StringCommand.c: 762: LCD_Scroll("Christmas Tree?");
+"762
+[e ( _LCD_Scroll (1 -> :s 259C `*uc ]
+[; ;StringCommand.c: 763: LCD_Scroll("Contrast?");
+"763
+[e ( _LCD_Scroll (1 -> :s 260C `*uc ]
+[; ;StringCommand.c: 764: LCD_Scroll("ADC?");
 "764
-[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
+[e ( _LCD_Scroll (1 -> :s 261C `*uc ]
+[; ;StringCommand.c: 765: LCD_Scroll("RTC?");
 "765
-}
-[; ;StringCommand.c: 765: }
-[e $U 2291  ]
+[e ( _LCD_Scroll (1 -> :s 262C `*uc ]
+[; ;StringCommand.c: 766: LCD_Scroll("Baud?");
 "766
-[e :U 2286 ]
-[; ;StringCommand.c: 766: else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") || StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
-[e $ ! || || || != -> ( _StringContains (2 , _Input :s 262C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 263C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 264C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 265C `i -> -> -> 0 `i `uc `i 2292  ]
-[; ;StringCommand.c: 767: {
+[e ( _LCD_Scroll (1 -> :s 263C `*uc ]
+[; ;StringCommand.c: 767: LCDclearCount =0;
 "767
-{
-[; ;StringCommand.c: 768: if (!StringContains(Input, "="))
+[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
 "768
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 266C `i -> -> -> 0 `i `uc `i 2293  ]
-[; ;StringCommand.c: 769: {
+}
+[; ;StringCommand.c: 768: }
+[e $U 2291  ]
 "769
-{
-[; ;StringCommand.c: 770: StringAddEqual(Input);
+[e :U 2286 ]
+[; ;StringCommand.c: 769: else if(StringMatch(Input, "baud?"))
+[e $ ! != -> ( _StringMatch (2 , _Input :s 264C `i -> -> -> 0 `i `uc `i 2292  ]
+[; ;StringCommand.c: 770: {
 "770
-[e ( _StringAddEqual (1 _Input ]
-"771
-}
-[e :U 2293 ]
-[; ;StringCommand.c: 771: }
-[; ;StringCommand.c: 772: BAUDtemp = (unsigned long)GetEnteredNumber(Input);
+{
+[; ;StringCommand.c: 772: sprintf(buf,"BAUD = %d", GetBaud());
 "772
-[e = _BAUDtemp -> ( _GetEnteredNumber (1 _Input `ul ]
-[; ;StringCommand.c: 773: if(BAUDtemp >=2400 && BAUDtemp <= 115200)
+[e ( _sprintf (1 , (. , &U _buf :s 265C ( _GetBaud ..  ]
+[; ;StringCommand.c: 773: UARTstring(buf);
 "773
-[e $ ! && >= _BAUDtemp -> -> -> 2400 `i `l `ul <= _BAUDtemp -> -> 115200 `l `ul 2294  ]
-[; ;StringCommand.c: 774: {
+[e ( _UARTstring (1 &U _buf ]
+[; ;StringCommand.c: 774: LCDdisplayFeedback(buf);
 "774
-{
-[; ;StringCommand.c: 775: if(StringContains(Input, "withnoparitybit"))
+[e ( _LCDdisplayFeedback (1 &U _buf ]
 "775
-[e $ ! != -> ( _StringContains (2 , _Input :s 267C `i -> -> -> 0 `i `uc `i 2295  ]
-[; ;StringCommand.c: 776: {
+}
+[; ;StringCommand.c: 775: }
+[e $U 2293  ]
 "776
-{
-[; ;StringCommand.c: 777: PARITYtemp =0;
+[e :U 2292 ]
+[; ;StringCommand.c: 776: else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") ||
+[; ;StringCommand.c: 777: StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
 "777
-[e = _PARITYtemp -> -> -> 0 `i `l `ul ]
+[e $ ! || || || != -> ( _StringContains (2 , _Input :s 266C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 267C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 268C `i -> -> -> 0 `i `uc `i != -> ( _StringContains (2 , _Input :s 269C `i -> -> -> 0 `i `uc `i 2294  ]
+[; ;StringCommand.c: 778: {
 "778
-}
-[; ;StringCommand.c: 778: }
-[e $U 2296  ]
-"779
-[e :U 2295 ]
-[; ;StringCommand.c: 779: else if(StringContains(Input, "withoddparitybit"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 268C `i -> -> -> 0 `i `uc `i 2297  ]
-[; ;StringCommand.c: 780: {
+{
+[; ;StringCommand.c: 780: if (!StringContains(Input, "="))
 "780
-{
-[; ;StringCommand.c: 781: PARITYtemp =1;
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 270C `i -> -> -> 0 `i `uc `i 2295  ]
+[; ;StringCommand.c: 781: {
 "781
-[e = _PARITYtemp -> -> -> 1 `i `l `ul ]
-"782
-}
-[; ;StringCommand.c: 782: }
-[e $U 2298  ]
-"783
-[e :U 2297 ]
-[; ;StringCommand.c: 783: else if(StringContains(Input, "withevenparitybit"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 269C `i -> -> -> 0 `i `uc `i 2299  ]
-[; ;StringCommand.c: 784: {
-"784
 {
-[; ;StringCommand.c: 785: PARITYtemp =2;
-"785
-[e = _PARITYtemp -> -> -> 2 `i `l `ul ]
-"786
+[; ;StringCommand.c: 782: StringAddEqual(Input);
+"782
+[e ( _StringAddEqual (1 _Input ]
+"783
 }
-[; ;StringCommand.c: 786: }
-[e $U 2300  ]
+[e :U 2295 ]
+[; ;StringCommand.c: 783: }
+[; ;StringCommand.c: 784: BAUDtemp = (unsigned long)GetEnteredNumber(Input);
+"784
+[e = _BAUDtemp -> ( _GetEnteredNumber (1 _Input `ul ]
+[; ;StringCommand.c: 785: if(BAUDtemp >=2400 && BAUDtemp <= 115200)
+"785
+[e $ ! && >= _BAUDtemp -> -> -> 2400 `i `l `ul <= _BAUDtemp -> -> 115200 `l `ul 2296  ]
+[; ;StringCommand.c: 786: {
+"786
+{
+[; ;StringCommand.c: 787: if(StringContains(Input, "withnoparitybit"))
 "787
-[e :U 2299 ]
-[; ;StringCommand.c: 787: else if(StringContains(Input, "withmarkbit"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 270C `i -> -> -> 0 `i `uc `i 2301  ]
+[e $ ! != -> ( _StringContains (2 , _Input :s 271C `i -> -> -> 0 `i `uc `i 2297  ]
 [; ;StringCommand.c: 788: {
 "788
 {
-[; ;StringCommand.c: 789: PARITYtemp =3;
+[; ;StringCommand.c: 789: PARITYtemp =0;
 "789
-[e = _PARITYtemp -> -> -> 3 `i `l `ul ]
+[e = _PARITYtemp -> -> -> 0 `i `l `ul ]
 "790
 }
 [; ;StringCommand.c: 790: }
-[e $U 2302  ]
+[e $U 2298  ]
 "791
-[e :U 2301 ]
-[; ;StringCommand.c: 791: else if(StringContains(Input, "withspacebit"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 271C `i -> -> -> 0 `i `uc `i 2303  ]
+[e :U 2297 ]
+[; ;StringCommand.c: 791: else if(StringContains(Input, "withoddparitybit"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 272C `i -> -> -> 0 `i `uc `i 2299  ]
 [; ;StringCommand.c: 792: {
 "792
 {
-[; ;StringCommand.c: 793: PARITYtemp =4;
+[; ;StringCommand.c: 793: PARITYtemp =1;
 "793
-[e = _PARITYtemp -> -> -> 4 `i `l `ul ]
+[e = _PARITYtemp -> -> -> 1 `i `l `ul ]
 "794
 }
 [; ;StringCommand.c: 794: }
-[e $U 2304  ]
+[e $U 2300  ]
 "795
-[e :U 2303 ]
-[; ;StringCommand.c: 795: else
+[e :U 2299 ]
+[; ;StringCommand.c: 795: else if(StringContains(Input, "withevenparitybit"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 273C `i -> -> -> 0 `i `uc `i 2301  ]
 [; ;StringCommand.c: 796: {
 "796
 {
-[; ;StringCommand.c: 797: PARITYtemp = 5;
+[; ;StringCommand.c: 797: PARITYtemp =2;
 "797
-[e = _PARITYtemp -> -> -> 5 `i `l `ul ]
+[e = _PARITYtemp -> -> -> 2 `i `l `ul ]
 "798
 }
+[; ;StringCommand.c: 798: }
+[e $U 2302  ]
+"799
+[e :U 2301 ]
+[; ;StringCommand.c: 799: else if(StringContains(Input, "withmarkbit"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 274C `i -> -> -> 0 `i `uc `i 2303  ]
+[; ;StringCommand.c: 800: {
+"800
+{
+[; ;StringCommand.c: 801: PARITYtemp =3;
+"801
+[e = _PARITYtemp -> -> -> 3 `i `l `ul ]
+"802
+}
+[; ;StringCommand.c: 802: }
+[e $U 2304  ]
+"803
+[e :U 2303 ]
+[; ;StringCommand.c: 803: else if(StringContains(Input, "withspacebit"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 275C `i -> -> -> 0 `i `uc `i 2305  ]
+[; ;StringCommand.c: 804: {
+"804
+{
+[; ;StringCommand.c: 805: PARITYtemp =4;
+"805
+[e = _PARITYtemp -> -> -> 4 `i `l `ul ]
+"806
+}
+[; ;StringCommand.c: 806: }
+[e $U 2306  ]
+"807
+[e :U 2305 ]
+[; ;StringCommand.c: 807: else
+[; ;StringCommand.c: 808: {
+"808
+{
+[; ;StringCommand.c: 809: PARITYtemp = 5;
+"809
+[e = _PARITYtemp -> -> -> 5 `i `l `ul ]
+"810
+}
+[e :U 2306 ]
 [e :U 2304 ]
 [e :U 2302 ]
 [e :U 2300 ]
 [e :U 2298 ]
-[e :U 2296 ]
-[; ;StringCommand.c: 798: }
-[; ;StringCommand.c: 799: if(PARITYtemp != 5)
-"799
-[e $ ! != _PARITYtemp -> -> -> 5 `i `l `ul 2305  ]
-[; ;StringCommand.c: 800: {
-"800
+[; ;StringCommand.c: 810: }
+[; ;StringCommand.c: 811: if(PARITYtemp != 5)
+"811
+[e $ ! != _PARITYtemp -> -> -> 5 `i `l `ul 2307  ]
+[; ;StringCommand.c: 812: {
+"812
 {
-[; ;StringCommand.c: 801: SetBaud(BAUDtemp, PARITYtemp);
-"801
+[; ;StringCommand.c: 813: SetBaud(BAUDtemp, PARITYtemp);
+"813
 [e ( _SetBaud (2 , _BAUDtemp -> _PARITYtemp `uc ]
-"802
+"814
 }
-[e :U 2305 ]
-"803
-}
-[; ;StringCommand.c: 802: }
-[; ;StringCommand.c: 803: }
-[e $U 2306  ]
-"804
-[e :U 2294 ]
-[; ;StringCommand.c: 804: else
-[; ;StringCommand.c: 805: {
-"805
-{
-[; ;StringCommand.c: 806: UARTstring("Baud Out of range\r\n");
-"806
-[e ( _UARTstring (1 -> :s 272C `*uc ]
-"807
-}
-[e :U 2306 ]
-"808
-}
-[; ;StringCommand.c: 807: }
-[; ;StringCommand.c: 808: }
-[e $U 2307  ]
-"809
-[e :U 2292 ]
-[; ;StringCommand.c: 809: else if(StringContains(Input, "baudis"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 273C `i -> -> -> 0 `i `uc `i 2308  ]
-[; ;StringCommand.c: 810: {
-"810
-{
-[; ;StringCommand.c: 815: __nop();
+[e :U 2307 ]
 "815
-[e ( ___nop ..  ]
+}
+[; ;StringCommand.c: 814: }
+[; ;StringCommand.c: 815: }
+[e $U 2308  ]
 "816
-}
-[; ;StringCommand.c: 816: }
-[e $U 2309  ]
+[e :U 2296 ]
+[; ;StringCommand.c: 816: else
+[; ;StringCommand.c: 817: {
 "817
-[e :U 2308 ]
-[; ;StringCommand.c: 817: else if(StringContains(Input, "enterbaudrate"))
-[e $ ! != -> ( _StringContains (2 , _Input :s 274C `i -> -> -> 0 `i `uc `i 2310  ]
-[; ;StringCommand.c: 818: {
+{
+[; ;StringCommand.c: 818: UARTstring("Baud Out of range\r\n");
 "818
-{
-[; ;StringCommand.c: 820: __nop();
-"820
-[e ( ___nop ..  ]
-"821
+[e ( _UARTstring (1 -> :s 276C `*uc ]
+"819
 }
-[; ;StringCommand.c: 821: }
-[e $U 2311  ]
+[e :U 2308 ]
+"820
+}
+[; ;StringCommand.c: 819: }
+[; ;StringCommand.c: 820: }
+[e $U 2309  ]
+"821
+[e :U 2294 ]
+[; ;StringCommand.c: 821: else if(StringContains(Input, "baudis"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 277C `i -> -> -> 0 `i `uc `i 2310  ]
+[; ;StringCommand.c: 822: {
 "822
-[e :U 2310 ]
-[; ;StringCommand.c: 822: else if(ISNUMBER(Input[0]))
-[e $ ! != -> ( _ISNUMBER (1 *U + _Input * -> -> 0 `i `x -> -> # *U _Input `i `x `i -> -> -> 0 `i `uc `i 2312  ]
-[; ;StringCommand.c: 823: {
-"823
 {
-[; ;StringCommand.c: 825: if (!StringContains(Input, "="))
-"825
-[e $ ! ! != -> ( _StringContains (2 , _Input :s 275C `i -> -> -> 0 `i `uc `i 2313  ]
-[; ;StringCommand.c: 826: {
-"826
-{
-[; ;StringCommand.c: 827: StringAddEqual(Input);
+[; ;StringCommand.c: 827: __nop();
 "827
-[e ( _StringAddEqual (1 _Input ]
+[e ( ___nop ..  ]
 "828
 }
-[e :U 2313 ]
 [; ;StringCommand.c: 828: }
-[; ;StringCommand.c: 829: tempLONG = (unsigned long)GetEnteredNumber(Input);
+[e $U 2311  ]
 "829
-[e = _tempLONG -> -> ( _GetEnteredNumber (1 _Input `ul `l ]
+[e :U 2310 ]
+[; ;StringCommand.c: 829: else if(StringContains(Input, "enterbaudrate"))
+[e $ ! != -> ( _StringContains (2 , _Input :s 278C `i -> -> -> 0 `i `uc `i 2312  ]
 [; ;StringCommand.c: 830: {
 "830
 {
-[; ;StringCommand.c: 831: if(tempLONG >=2400 && tempLONG <=115200)
-"831
-[e $ ! && >= _tempLONG -> -> 2400 `i `l <= _tempLONG -> 115200 `l 2314  ]
-[; ;StringCommand.c: 832: {
+[; ;StringCommand.c: 832: __nop();
 "832
-{
-[; ;StringCommand.c: 833: __nop();
-"833
 [e ( ___nop ..  ]
+"833
+}
+[; ;StringCommand.c: 833: }
+[e $U 2313  ]
 "834
-}
-[; ;StringCommand.c: 834: }
-[e $U 2315  ]
+[e :U 2312 ]
+[; ;StringCommand.c: 834: else if(ISNUMBER(Input[0]))
+[e $ ! != -> ( _ISNUMBER (1 *U + _Input * -> -> 0 `i `x -> -> # *U _Input `i `x `i -> -> -> 0 `i `uc `i 2314  ]
+[; ;StringCommand.c: 835: {
 "835
-[e :U 2314 ]
-[; ;StringCommand.c: 835: else
-[; ;StringCommand.c: 836: {
-"836
 {
-[; ;StringCommand.c: 837: UARTstring("Invalid Command\r\n");
+[; ;StringCommand.c: 837: if (!StringContains(Input, "="))
 "837
-[e ( _UARTstring (1 -> :s 276C `*uc ]
-[; ;StringCommand.c: 838: LCDdisplayFeedback("Invalid Command");
+[e $ ! ! != -> ( _StringContains (2 , _Input :s 279C `i -> -> -> 0 `i `uc `i 2315  ]
+[; ;StringCommand.c: 838: {
 "838
-[e ( _LCDdisplayFeedback (1 -> :s 277C `*uc ]
+{
+[; ;StringCommand.c: 839: StringAddEqual(Input);
 "839
-}
-[e :U 2315 ]
+[e ( _StringAddEqual (1 _Input ]
 "840
 }
-"841
-}
-[; ;StringCommand.c: 839: }
+[e :U 2315 ]
 [; ;StringCommand.c: 840: }
-[; ;StringCommand.c: 841: }
-[e $U 2316  ]
+[; ;StringCommand.c: 841: tempLONG = (unsigned long)GetEnteredNumber(Input);
+"841
+[e = _tempLONG -> -> ( _GetEnteredNumber (1 _Input `ul `l ]
+[; ;StringCommand.c: 842: {
 "842
-[e :U 2312 ]
-[; ;StringCommand.c: 842: else
-[; ;StringCommand.c: 843: {
-"843
 {
-[; ;StringCommand.c: 844: UARTstring("Invalid Command\r\n");
+[; ;StringCommand.c: 843: if(tempLONG >=2400 && tempLONG <=115200)
+"843
+[e $ ! && >= _tempLONG -> -> 2400 `i `l <= _tempLONG -> 115200 `l 2316  ]
+[; ;StringCommand.c: 844: {
 "844
-[e ( _UARTstring (1 -> :s 278C `*uc ]
-[; ;StringCommand.c: 845: LCDdisplayFeedback("Invalid Command");
+{
+[; ;StringCommand.c: 845: __nop();
 "845
-[e ( _LCDdisplayFeedback (1 -> :s 279C `*uc ]
+[e ( ___nop ..  ]
 "846
 }
+[; ;StringCommand.c: 846: }
+[e $U 2317  ]
+"847
 [e :U 2316 ]
+[; ;StringCommand.c: 847: else
+[; ;StringCommand.c: 848: {
+"848
+{
+[; ;StringCommand.c: 849: UARTstring("Invalid Command\r\n");
+"849
+[e ( _UARTstring (1 -> :s 280C `*uc ]
+[; ;StringCommand.c: 850: LCDdisplayFeedback("Invalid Command");
+"850
+[e ( _LCDdisplayFeedback (1 -> :s 281C `*uc ]
+"851
+}
+[e :U 2317 ]
+"852
+}
+"853
+}
+[; ;StringCommand.c: 851: }
+[; ;StringCommand.c: 852: }
+[; ;StringCommand.c: 853: }
+[e $U 2318  ]
+"854
+[e :U 2314 ]
+[; ;StringCommand.c: 854: else
+[; ;StringCommand.c: 855: {
+"855
+{
+[; ;StringCommand.c: 856: UARTstring("Invalid Command\r\n");
+"856
+[e ( _UARTstring (1 -> :s 282C `*uc ]
+[; ;StringCommand.c: 857: LCDdisplayFeedback("Invalid Command");
+"857
+[e ( _LCDdisplayFeedback (1 -> :s 283C `*uc ]
+"858
+}
+[e :U 2318 ]
+[e :U 2313 ]
 [e :U 2311 ]
 [e :U 2309 ]
-[e :U 2307 ]
+[e :U 2293 ]
 [e :U 2291 ]
 [e :U 2285 ]
 [e :U 2277 ]
@@ -18488,23 +18526,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2190 ]
 [e :U 2180 ]
 [e :U 2164 ]
-[; ;StringCommand.c: 846: }
-[; ;StringCommand.c: 847: UARTstring("\r\n");
-"847
-[e ( _UARTstring (1 -> :s 280C `*uc ]
-[; ;StringCommand.c: 848: return 1;
-"848
+[; ;StringCommand.c: 858: }
+[; ;StringCommand.c: 859: UARTstring("\r\n");
+"859
+[e ( _UARTstring (1 -> :s 284C `*uc ]
+[; ;StringCommand.c: 860: return 1;
+"860
 [e ) -> -> 1 `i `uc ]
 [e $UE 2162  ]
-[; ;StringCommand.c: 849: }
-"849
+[; ;StringCommand.c: 861: }
+"861
 [e :UE 2162 ]
 }
 [p f _sprintf 15435181 ]
 [a 185C 98 97 116 116 101 114 121 0 ]
 [a 215C 66 97 116 116 101 114 121 0 ]
 [a 201C 13 10 84 105 109 101 32 78 111 116 32 83 101 116 32 83 117 99 99 101 115 115 102 117 108 108 121 0 ]
-[a 248C 72 101 108 112 32 77 101 110 117 0 ]
+[a 249C 72 101 108 112 32 77 101 110 117 0 ]
 [a 90C 66 101 100 114 111 111 109 32 77 101 110 117 0 ]
 [a 56C 76 86 78 71 114 111 111 109 32 77 101 110 117 0 ]
 [a 233C 74 111 101 32 114 111 111 109 32 77 101 110 117 0 ]
@@ -18515,11 +18553,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 145C 99 111 110 116 114 97 115 116 0 ]
 [a 142C 82 101 100 32 76 69 68 32 67 111 110 116 114 97 115 116 0 ]
 [a 159C 76 67 68 32 67 111 110 116 114 97 115 116 0 ]
-[a 267C 119 105 116 104 110 111 112 97 114 105 116 121 98 105 116 0 ]
-[a 269C 119 105 116 104 101 118 101 110 112 97 114 105 116 121 98 105 116 0 ]
-[a 268C 119 105 116 104 111 100 100 112 97 114 105 116 121 98 105 116 0 ]
-[a 270C 119 105 116 104 109 97 114 107 98 105 116 0 ]
-[a 271C 119 105 116 104 115 112 97 99 101 98 105 116 0 ]
+[a 271C 119 105 116 104 110 111 112 97 114 105 116 121 98 105 116 0 ]
+[a 273C 119 105 116 104 101 118 101 110 112 97 114 105 116 121 98 105 116 0 ]
+[a 272C 119 105 116 104 111 100 100 112 97 114 105 116 121 98 105 116 0 ]
+[a 274C 119 105 116 104 109 97 114 107 98 105 116 0 ]
+[a 275C 119 105 116 104 115 112 97 99 101 98 105 116 0 ]
 [a 62C 108 105 103 104 116 0 ]
 [a 58C 76 105 103 104 116 0 ]
 [a 92C 76 105 103 104 116 0 ]
@@ -18527,7 +18565,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 195C 115 101 116 0 ]
 [a 217C 83 101 116 0 ]
 [a 126C 114 101 100 108 101 100 98 114 105 103 104 116 110 101 115 115 0 ]
-[a 273C 98 97 117 100 105 115 0 ]
+[a 277C 98 97 117 100 105 115 0 ]
 [a 97C 99 104 114 105 115 116 109 97 115 0 ]
 [a 95C 99 111 108 111 114 0 ]
 [a 99C 99 111 108 111 114 0 ]
@@ -18536,8 +18574,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 130C 69 82 82 58 32 110 111 32 110 117 109 98 101 114 0 ]
 [a 149C 69 82 82 58 32 78 111 32 110 117 109 98 101 114 0 ]
 [a 55C 76 86 78 71 32 82 109 32 76 116 32 104 101 108 112 0 ]
-[a 263C 114 101 115 101 116 116 111 0 ]
-[a 262C 98 97 117 100 119 105 108 108 98 101 115 101 116 116 111 0 ]
+[a 267C 114 101 115 101 116 116 111 0 ]
+[a 266C 98 97 117 100 119 105 108 108 98 101 115 101 116 116 111 0 ]
 [a 220C 106 111 101 115 114 111 111 109 108 105 103 104 116 61 111 110 0 ]
 [a 37C 108 105 118 105 110 103 114 111 111 109 108 105 103 104 116 61 111 110 0 ]
 [a 64C 98 101 100 114 111 111 109 108 105 103 104 116 61 111 110 0 ]
@@ -18568,7 +18606,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 60C 98 101 100 114 111 111 109 0 ]
 [a 168C 69 82 82 58 32 85 115 101 32 43 32 67 104 110 108 0 ]
 [a 194C 82 84 67 32 105 115 110 116 32 119 111 114 107 105 110 103 0 ]
-[a 261C 82 84 67 32 105 115 110 116 32 119 111 114 107 105 110 103 0 ]
+[a 254C 82 84 67 32 105 115 110 116 32 119 111 114 107 105 110 103 0 ]
 [a 223C 106 111 101 115 114 111 111 109 108 105 103 104 116 61 111 102 102 0 ]
 [a 38C 108 105 118 105 110 103 114 111 111 109 108 105 103 104 116 61 111 102 102 0 ]
 [a 65C 98 101 100 114 111 111 109 108 105 103 104 116 61 111 102 102 0 ]
@@ -18596,13 +18634,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 103C 119 104 105 116 101 0 ]
 [a 107C 119 104 105 116 101 0 ]
 [a 121C 119 104 105 116 101 0 ]
-[a 274C 101 110 116 101 114 98 97 117 100 114 97 116 101 0 ]
+[a 278C 101 110 116 101 114 98 97 117 100 114 97 116 101 0 ]
 [a 170C 69 82 82 58 32 67 97 110 116 32 112 97 114 115 101 0 ]
 [a 218C 106 111 101 0 ]
-[a 264C 115 101 116 98 97 117 100 0 ]
-[a 265C 99 104 97 110 103 101 98 97 117 100 0 ]
-[a 277C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 0 ]
-[a 279C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 0 ]
+[a 268C 115 101 116 98 97 117 100 0 ]
+[a 269C 99 104 97 110 103 101 98 97 117 100 0 ]
+[a 281C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 0 ]
+[a 283C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 0 ]
 [a 171C 67 104 97 110 110 101 108 32 37 100 32 105 115 32 110 111 116 32 99 111 110 102 105 103 117 114 101 100 0 ]
 [a 123C 114 101 100 0 ]
 [a 39C 76 105 118 105 110 103 114 111 111 109 32 76 105 103 104 116 32 84 111 103 103 108 101 100 0 ]
@@ -18622,22 +18660,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 155C 67 78 83 84 32 115 101 116 32 116 111 32 37 100 0 ]
 [a 174C 67 104 110 108 32 37 100 32 61 32 37 100 0 ]
 [a 173C 65 68 67 32 99 104 97 110 110 101 108 32 37 100 32 61 32 37 100 0 ]
+[a 265C 66 65 85 68 32 61 32 37 100 0 ]
 [a 183C 114 116 99 0 ]
 [a 162C 97 100 99 0 ]
 [a 191C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 80 77 0 ]
-[a 250C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 80 77 0 ]
+[a 251C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 80 77 0 ]
 [a 192C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 65 77 0 ]
-[a 251C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 65 77 0 ]
+[a 252C 37 48 50 100 47 37 48 50 100 32 37 48 50 100 58 37 48 50 100 32 65 77 0 ]
 [a 67C 66 101 100 114 111 111 109 32 76 116 32 84 71 76 68 0 ]
 [a 40C 76 86 78 71 32 82 109 32 76 116 32 84 71 76 68 0 ]
 [a 102C 88 77 65 83 32 67 111 108 111 114 32 84 71 76 68 0 ]
-[a 257C 67 111 110 116 114 97 115 116 63 0 ]
-[a 254C 76 105 118 105 110 103 114 111 111 109 63 0 ]
-[a 253C 66 101 100 114 111 111 109 63 0 ]
-[a 255C 74 111 101 115 32 82 111 111 109 63 0 ]
-[a 256C 67 104 114 105 115 116 109 97 115 32 84 114 101 101 63 0 ]
-[a 259C 82 84 67 63 0 ]
-[a 258C 65 68 67 63 0 ]
+[a 260C 67 111 110 116 114 97 115 116 63 0 ]
+[a 257C 76 105 118 105 110 103 114 111 111 109 63 0 ]
+[a 256C 66 101 100 114 111 111 109 63 0 ]
+[a 258C 74 111 101 115 32 82 111 111 109 63 0 ]
+[a 259C 67 104 114 105 115 116 109 97 115 32 84 114 101 101 63 0 ]
+[a 264C 98 97 117 100 63 0 ]
+[a 263C 66 97 117 100 63 0 ]
+[a 262C 82 84 67 63 0 ]
+[a 261C 65 68 67 63 0 ]
 [a 227C 74 111 101 32 114 111 111 109 32 119 104 97 116 63 63 0 ]
 [a 226C 74 111 101 39 115 32 114 111 111 109 32 119 104 97 116 63 63 63 0 ]
 [a 111C 67 104 114 105 115 116 109 97 115 32 87 104 97 116 63 63 63 0 ]
@@ -18668,9 +18709,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 127C 61 0 ]
 [a 147C 61 0 ]
 [a 164C 61 0 ]
-[a 266C 61 0 ]
-[a 275C 61 0 ]
-[a 252C 68 101 118 105 99 101 32 77 101 110 117 115 58 0 ]
+[a 270C 61 0 ]
+[a 279C 61 0 ]
+[a 255C 68 101 118 105 99 101 32 77 101 110 117 115 58 0 ]
 [a 32C 68 101 118 105 99 101 115 58 0 ]
 [a 57C 68 101 118 105 99 101 115 58 0 ]
 [a 91C 68 101 118 105 99 101 115 58 0 ]
@@ -18713,12 +18754,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 238C 66 101 100 114 111 111 109 13 10 0 ]
 [a 240C 74 111 101 115 32 114 111 111 109 13 10 0 ]
 [a 128C 116 104 101 114 101 32 105 115 32 110 111 32 113 117 101 115 116 105 111 110 32 109 97 114 107 13 10 0 ]
-[a 247C 67 117 114 114 101 110 116 32 84 105 109 101 13 10 0 ]
-[a 272C 66 97 117 100 32 79 117 116 32 111 102 32 114 97 110 103 101 13 10 0 ]
+[a 248C 67 117 114 114 101 110 116 32 84 105 109 101 13 10 0 ]
+[a 276C 66 97 117 100 32 79 117 116 32 111 102 32 114 97 110 103 101 13 10 0 ]
 [a 241C 67 104 114 105 115 116 109 97 115 32 84 114 101 101 13 10 0 ]
 [a 169C 69 114 114 111 114 58 32 105 110 32 112 97 114 115 105 110 103 32 99 111 109 109 97 110 100 13 10 0 ]
-[a 276C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 13 10 0 ]
-[a 278C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 13 10 0 ]
+[a 280C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 13 10 0 ]
+[a 282C 73 110 118 97 108 105 100 32 67 111 109 109 97 110 100 13 10 0 ]
 [a 129C 69 114 114 111 114 58 32 78 111 32 110 117 109 98 101 114 32 101 110 116 101 114 101 100 13 10 0 ]
 [a 148C 69 114 114 111 114 58 32 78 111 32 110 117 109 98 101 114 32 101 110 116 101 114 101 100 13 10 0 ]
 [a 202C 13 10 73 110 118 97 108 105 100 32 84 105 109 101 32 69 110 116 101 114 101 100 13 10 0 ]
@@ -18729,7 +18770,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 197C 69 110 116 101 114 32 84 105 109 101 32 77 77 47 68 68 47 89 89 32 72 72 58 77 77 58 83 83 32 80 77 13 10 0 ]
 [a 203C 70 111 114 109 97 116 32 105 115 32 77 77 47 68 68 47 89 89 32 72 72 58 77 77 58 83 83 32 65 77 13 10 0 ]
 [a 193C 69 82 82 79 82 58 32 67 97 110 39 116 32 82 101 97 100 32 82 84 67 13 10 0 ]
-[a 260C 69 82 82 79 82 58 32 67 97 110 39 116 32 82 101 97 100 32 82 84 67 13 10 0 ]
+[a 253C 69 82 82 79 82 58 32 67 97 110 39 116 32 82 101 97 100 32 82 84 67 13 10 0 ]
+[a 244C 82 84 67 13 10 0 ]
 [a 243C 65 68 67 13 10 0 ]
 [a 212C 105 46 101 46 32 82 84 67 32 83 101 116 32 84 105 109 101 63 13 10 0 ]
 [a 206C 65 99 116 105 111 110 115 58 13 10 0 ]
@@ -18755,12 +18797,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 157C 84 111 32 115 101 116 32 67 111 110 116 114 97 115 116 32 80 87 77 32 98 114 105 103 104 116 110 101 115 115 32 101 110 116 101 114 32 39 67 111 110 116 114 97 115 116 32 61 32 100 117 116 121 99 121 99 108 101 39 13 10 0 ]
 [a 140C 84 111 32 115 101 116 32 116 101 32 80 87 77 32 98 114 105 103 104 116 110 101 115 115 32 101 110 116 101 114 32 39 82 101 100 32 76 69 68 32 98 114 105 103 104 116 110 101 115 115 32 61 32 100 117 116 121 99 121 99 108 101 39 13 10 0 ]
 [a 178C 84 111 32 114 101 97 100 32 97 110 100 32 97 100 99 32 99 104 97 110 110 101 108 44 32 116 121 112 101 32 116 104 101 32 99 111 109 109 97 110 100 13 10 32 65 68 67 32 102 111 108 108 111 119 101 100 32 98 121 32 39 67 104 97 110 110 101 108 39 32 13 10 0 ]
-[a 245C 70 111 114 32 68 101 118 105 99 101 32 104 101 108 112 32 101 110 116 101 114 32 100 101 118 105 99 101 32 102 111 108 108 111 119 101 100 32 98 121 32 97 32 39 63 39 32 13 10 0 ]
-[a 246C 105 46 101 46 32 32 76 105 118 105 110 103 114 111 111 109 63 13 10 13 10 0 ]
+[a 246C 70 111 114 32 68 101 118 105 99 101 32 104 101 108 112 32 101 110 116 101 114 32 100 101 118 105 99 101 32 102 111 108 108 111 119 101 100 32 98 121 32 97 32 39 63 39 32 13 10 0 ]
+[a 247C 105 46 101 46 32 32 76 105 118 105 110 103 114 111 111 109 63 13 10 13 10 0 ]
 [a 189C 13 10 0 ]
 [a 200C 13 10 0 ]
-[a 249C 13 10 0 ]
-[a 280C 13 10 0 ]
+[a 250C 13 10 0 ]
+[a 284C 13 10 0 ]
 [a 49C 76 105 118 105 110 103 114 111 111 109 32 72 101 108 112 32 77 101 110 117 13 10 10 0 ]
 [a 82C 66 101 100 114 111 111 109 32 72 101 108 112 32 77 101 110 117 13 10 10 0 ]
 [a 228C 74 111 101 115 32 82 111 111 109 32 72 101 108 112 32 77 101 110 117 13 10 10 0 ]
@@ -18775,7 +18817,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 116C 99 111 108 111 114 101 100 32 108 105 103 104 116 115 13 10 10 0 ]
 [a 86C 115 104 97 107 101 114 13 10 10 0 ]
 [a 52C 102 97 110 13 10 10 0 ]
-[a 244C 82 84 67 13 10 10 0 ]
+[a 245C 66 97 117 100 13 10 10 0 ]
 [a 237C 68 101 118 105 99 101 115 58 13 10 10 0 ]
 [a 28C 76 69 68 49 13 10 10 0 ]
 [a 177C 48 13 10 10 0 ]

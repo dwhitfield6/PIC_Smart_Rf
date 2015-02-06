@@ -48,14 +48,24 @@
 #define Word_Spacing        10000
 
 /******************************************************************************/
+/* default Baud rate
+ *
+ * This is the baud rate at first start up after programming or after
+ *  catastrophic fault.
+/******************************************************************************/
+
+#define defaultBaud         9600
+
+/******************************************************************************/
 /* Defines                                                         */
 /******************************************************************************/
 
+#define NONE    0
 #define ODD     1
 #define EVEN    2
 #define MARK    3
 #define SPACE   4
-#define INVALID   5
+#define INVALID 5
 
 #define USART_BRG16     0b00001000
 #define YES                 1
@@ -110,3 +120,4 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);

@@ -19522,7 +19522,7 @@ typedef unsigned char bool;
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19535,6 +19535,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19542,7 +19543,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19552,12 +19553,13 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
-# 55 "LCD.h"
+# 62 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
-# 62
+# 69
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19641,7 +19643,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19654,6 +19656,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19661,7 +19664,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19671,6 +19674,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 90 "user.h"
 void InitApp(void);
@@ -19714,34 +19718,44 @@ INTCONbits.PEIE = 0;
 
 if(PIR1bits.RCIF == 1)
 {
+
 PIE1bits.RCIE = 0;
 RCSTAbits.CREN = 0;
 rx = ReadUSART();
 
 if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
 {
+
 __nop();
 }
 else
 {
+
 if(rx != '\n' && rx != '\r')
 {
+
 if(rx == 0x7f || rx == 0x08)
 {
+
 if(bufferCount !=0)
 {
+
 UARTstring("\r");
+
 for(i=0;i<=bufferCount;i++)
 {
+
 UARTstring(" ");
 }
+
 UARTstring("\r");
 UARTstring(">");
 bufferCount--;
 TEMP_Rxdata[bufferCount] = 0;
 UARTstring(TEMP_Rxdata);
-if(bufferCount <15)
+if(bufferCount < 15)
 {
+
 for(j=0; j<15;j++)
 {
 LCD_TEMP[j] = TEMP_Rxdata[j];
@@ -19756,30 +19770,40 @@ LCDPrintString(LCD_TEMP);
 }
 else
 {
-WriteUSART(rx);
+
+
+if(IsPrintableASCII(rx))
+{
+
+UARTchar(rx, 0, 0);
 if(bufferCount < 15)
 {
+
 LCDPrintChar(rx);
 }
 TEMP_Rxdata[bufferCount] = rx;
 bufferCount++;
-}
 if(bufferCount>=99)
 {
 UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
 cleanBuffer(TEMP_Rxdata, 100);
 bufferCount=0;
 }
+}
+else
+{
 
+}
+}
 }
 else if((rx == '\n' || rx == '\r') && bufferCount == 0)
 {
-TEMP_Rxdata[bufferCount] = rx;
-BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+
 cleanBuffer(TEMP_Rxdata, 100);
 }
 else
 {
+
 if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
 {
 BufferCopy(TEMP_Rxdata, Rxdata, 100,1);

@@ -118,34 +118,44 @@ void low_isr(void)
     //check if the interrupt is caused by RX pin
     if(PIR1bits.RCIF == 1)
     {
+        // UART rx interrupt
         PIE1bits.RCIE = 0; //Disable RX interrupt
         RCSTAbits.CREN = 0;
-        rx = ReadUSART(); //read the byte from rx register
+        rx = ReadUSART(); // read the byte from rx register
 
-        if(TX_OLD == '>' && rx == '>' && bufferCount == 0)//repeat characters of >> in the very beginning
+        if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
         {
-           NOP();//dont use this character
+           // there are repeat characters of ">>" in the very beginning
+           NOP();// dont use this character
         }
         else
         {
+            // this is a valid character
             if(rx != '\n' && rx != '\r')
             {
-                if(rx == 0x7f || rx == 0x08) //delete
+                //not a carriage return
+                if(rx == 0x7f || rx == 0x08)
                 {
+                    // the backspace or delete key has been hit.
                     if(bufferCount !=0)
                     {
+                        // There are characters in the buffer already
                         UARTstring("\r");
+                        // go back to beginning home point
                         for(i=0;i<=bufferCount;i++)
                         {
+                            //erase the screen on the serial port monitor
                             UARTstring(" ");
                         }
+                        // go back to beginning home point
                         UARTstring("\r");
                         UARTstring(">");
                         bufferCount--;
                         TEMP_Rxdata[bufferCount] = 0;
                         UARTstring(TEMP_Rxdata);
-                        if(bufferCount <15)
+                        if(bufferCount < LCD_CharacterWidth)
                         {
+                            //erase a charaacter on the LCD
                             for(j=0; j<15;j++)
                             {
                                    LCD_TEMP[j] = TEMP_Rxdata[j];
@@ -160,30 +170,40 @@ void low_isr(void)
                 }
                 else
                 {
-                    WriteUSART(rx); //echo the data
-                    if(bufferCount < 15)
+                    // this is a character that is not a backspace delete
+                    // key carriage return or line feed
+                    if(IsPrintableASCII(rx))
                     {
-                        LCDPrintChar(rx);
+                        // only use printable ascii
+                        UARTchar(rx, NO, 0); //echo the data
+                        if(bufferCount < LCD_CharacterWidth)
+                        {
+                            // there is enough room on the LCD screen
+                            LCDPrintChar(rx);
+                        }
+                        TEMP_Rxdata[bufferCount] = rx;
+                        bufferCount++;
+                        if(bufferCount>=99)
+                        {
+                            UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
+                            cleanBuffer(TEMP_Rxdata, 100);
+                            bufferCount=0;
+                        }
                     }
-                    TEMP_Rxdata[bufferCount] = rx;
-                    bufferCount++;
-                }
-                if(bufferCount>=99)
-                {
-                    UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
-                    cleanBuffer(TEMP_Rxdata, 100);
-                    bufferCount=0;
-                }
+                    else
+                    {
 
+                    }
+                }
             }
             else if((rx == '\n' || rx == '\r') && bufferCount == 0)
             {
-                TEMP_Rxdata[bufferCount] = rx;
-                BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+                // no data here but enter was hit
                 cleanBuffer(TEMP_Rxdata, 100);
             }
             else
             {
+                // carraige return or line feed and there is data in the buffer
                 if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
                 {
                     BufferCopy(TEMP_Rxdata, Rxdata, 100,1);

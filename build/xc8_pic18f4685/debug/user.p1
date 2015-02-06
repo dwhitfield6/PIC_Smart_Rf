@@ -45,7 +45,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISEbits `VS1882 ~T0 @X0 0 e@3990 ]
 "29294
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"61 MISC.h
+"65 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "29426 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
@@ -15460,18 +15460,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 206: extern int printf(const char *, ...);
 [; ;user.h: 90: void InitApp(void);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 "53 user.c
 [v _InitApp `(v ~T0 @X0 1 ef ]
 "54

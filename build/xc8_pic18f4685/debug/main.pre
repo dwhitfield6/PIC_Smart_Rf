@@ -19591,7 +19591,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19604,6 +19604,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19611,7 +19612,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19621,6 +19622,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19631,7 +19633,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19644,6 +19646,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19651,7 +19654,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19661,6 +19664,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 90 "user.h"
 void InitApp(void);
@@ -19730,11 +19734,11 @@ void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 55 "LCD.h"
+# 62 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
-# 62
+# 69
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19790,7 +19794,19 @@ void RTC_INIT(void);
 unsigned char SET_RTC_TIME(TIME SetTime);
 unsigned char Parse_Time(unsigned char* This);
 
-# 55 "main.c"
+# 90 "user.h"
+void InitApp(void);
+
+# 54 "EEPROM.h"
+unsigned int ReadEEPROM_1Byte(unsigned int address);
+void EEPROM_UNLOCK(void);
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
+unsigned long GetMemoryBaud(void);
+unsigned char SetMemoryBaud(unsigned long Baud);
+unsigned char GetMemoryParity(void);
+unsigned char SetMemoryParity(unsigned char Parity);
+
+# 56 "main.c"
 unsigned char Version[20] = "1.0_DW0";
 
 
@@ -19805,22 +19821,33 @@ extern char Rxdata[100];
 unsigned char buf[100];
 unsigned char bufferCount =0;
 
-# 73
+# 74
 void main(void)
 {
-unsigned char ii =0;
-unsigned char count =0;
+unsigned char ii = 0;
+unsigned char count = 0;
+unsigned long Baudtemp = 0;
+unsigned char MemoryBurnflag = 0;
 
 ConfigureOscillator();
 InitApp();
-InitUART(115200, 0);
 EnableInternalADC(1);
 PWM_init();
 ContrastPWM_init();
 init_LCD();
 Init_I2C_Master();
 RTC_INIT();
-
+Baudtemp = GetMemoryBaud();
+if(Baudtemp < 2400 || Baudtemp > 115200)
+{
+if(SetMemoryBaud(9600))
+{
+MemoryBurnflag = 1;
+}
+Baudtemp = 9600;
+SetMemoryParity(0);
+}
+InitUART(Baudtemp, GetMemoryParity());
 UARTstring("Firmware Version: ");
 UARTstring(Version);
 UARTstring("\r\n");
@@ -19837,6 +19864,13 @@ delayUS(50000);
 SetContrast(65);
 delayUS(20);
 SetLCDcursor(0, 0);
+if(MemoryBurnflag)
+{
+UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
+LCDPrintString("Err: Baud Mem");
+delayUS(100000);
+SetLCDcursor(0, 0);
+}
 LCDPrintString("Starting");
 UARTstring("Starting...");
 delayUS(100000);

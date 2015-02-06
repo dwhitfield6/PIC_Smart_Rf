@@ -19536,7 +19536,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19546,6 +19546,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 53 "ADC.c"
 void EnableInternalADC(unsigned char channels)

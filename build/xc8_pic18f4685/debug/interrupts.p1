@@ -79,21 +79,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "42 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
-"105 UART.h
+"115 UART.h
 [v _UARTstring `(v ~T0 @X0 0 ef1`*uc ]
-"66 LCD.h
+"73 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
-"65
+"72
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"68
+"75
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
-"67
+"74
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*uc ]
-"597 C:\Program Files (x86)\Microchip\xc8\v1.33\include\plib\usart.h
-[v _WriteUSART `(v ~T0 @X0 0 ef1`uc ]
-"62 MISC.h
+"77 MISC.h
+[v _IsPrintableASCII `(uc ~T0 @X0 0 ef1`uc ]
+"117 UART.h
+[v _UARTchar `(v ~T0 @X0 0 ef3`uc`uc`uc ]
+"66 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
-"63
+"67
 [v _BufferCopy `(v ~T0 @X0 0 ef4`*uc`*uc`uc`uc ]
 "46 interrupts.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
@@ -15427,51 +15429,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
-[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
-[; ;UART.h: 105: void UARTstring(unsigned char *data);
-[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
-[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
-[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 109: char ReadUSART(void);
-[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
-"55 LCD.h
+[; ;UART.h: 114: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 115: void UARTstring(unsigned char *data);
+[; ;UART.h: 116: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 117: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 118: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 119: char ReadUSART(void);
+[; ;UART.h: 120: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 123: unsigned long GetBaud(void);
+"62 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
 -> -> -> 25000 `i `l `ul
 ]
-[; ;LCD.h: 55: unsigned long LCDclearCount=25000;
-"56
+[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
+"63
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 56: unsigned char LCDwait=0;
-[; ;LCD.h: 62: void init_LCD();
-[; ;LCD.h: 63: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 64: void PulseEnablePin();
-[; ;LCD.h: 65: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 66: void ClearLCD();
-[; ;LCD.h: 67: void LCDPrintString(unsigned char *Text);
-[; ;LCD.h: 68: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 69: void LCDScreenUpdate();
-[; ;LCD.h: 70: void LCDdisplayFeedback(unsigned char *Text);
-[; ;LCD.h: 71: void LCD_Scroll(unsigned char* This);
+[; ;LCD.h: 63: unsigned char LCDwait=0;
+[; ;LCD.h: 69: void init_LCD();
+[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 71: void PulseEnablePin();
+[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 73: void ClearLCD();
+[; ;LCD.h: 74: void LCDPrintString(unsigned char *Text);
+[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 76: void LCDScreenUpdate();
+[; ;LCD.h: 77: void LCDdisplayFeedback(unsigned char *Text);
+[; ;LCD.h: 78: void LCD_Scroll(unsigned char* This);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15505,29 +15509,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;user.h: 90: void InitApp(void);
-[; ;UART.h: 104: void InitUART(unsigned long Baud, unsigned char parity);
-[; ;UART.h: 105: void UARTstring(unsigned char *data);
-[; ;UART.h: 106: void UARTstringWAIT(unsigned char *data);
-[; ;UART.h: 107: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
-[; ;UART.h: 108: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 109: char ReadUSART(void);
-[; ;UART.h: 110: void baudUSART (unsigned char baudconfig);
-[; ;UART.h: 111: void OpenUSART( unsigned char config, unsigned int spbrg);
-[; ;UART.h: 112: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 114: void InitUART(unsigned long Baud, unsigned char parity);
+[; ;UART.h: 115: void UARTstring(unsigned char *data);
+[; ;UART.h: 116: void UARTstringWAIT(unsigned char *data);
+[; ;UART.h: 117: void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+[; ;UART.h: 118: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 119: char ReadUSART(void);
+[; ;UART.h: 120: void baudUSART (unsigned char baudconfig);
+[; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
+[; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
+[; ;UART.h: 123: unsigned long GetBaud(void);
 [; ;user.h: 90: void InitApp(void);
 [; ;ADC.h: 58: void EnableInternalADC(unsigned char channels);
 [; ;ADC.h: 59: void DisableInternalADC(void);
@@ -15537,9 +15543,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 46: extern char Rxdata[100];
 [; ;interrupts.c: 47: extern unsigned char bufferCount;
 [; ;interrupts.c: 48: extern unsigned char TX_OLD;
-[v F17140 `(v ~T0 @X0 1 tf ]
+[v F17146 `(v ~T0 @X0 1 tf ]
 "59 interrupts.c
-[v _high_isr `IF17140 ~T0 @X0 1 e ]
+[v _high_isr `IF17146 ~T0 @X0 1 e ]
 "68
 {
 [; ;interrupts.c: 59: void interrupt high_isr(void)
@@ -15550,9 +15556,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "95
 [e :UE 2161 ]
 }
-[v F17143 `(v ~T0 @X0 1 tf ]
+[v F17149 `(v ~T0 @X0 1 tf ]
 "101
-[v _low_isr `ILF17143 ~T0 @X0 1 e ]
+[v _low_isr `ILF17149 ~T0 @X0 1 e ]
 "109
 {
 [; ;interrupts.c: 101: void low_priority interrupt low_isr(void)
@@ -15585,293 +15591,307 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 120: {
 "120
 {
-[; ;interrupts.c: 121: PIE1bits.RCIE = 0;
-"121
-[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-[; ;interrupts.c: 122: RCSTAbits.CREN = 0;
+[; ;interrupts.c: 122: PIE1bits.RCIE = 0;
 "122
-[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;interrupts.c: 123: rx = ReadUSART();
+[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 123: RCSTAbits.CREN = 0;
 "123
+[e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;interrupts.c: 124: rx = ReadUSART();
+"124
 [e = _rx ( _ReadUSART ..  ]
-[; ;interrupts.c: 125: if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
-"125
-[e $ ! && && == -> _TX_OLD `ui -> 62 `ui == -> _rx `ui -> 62 `ui == -> _bufferCount `i -> 0 `i 2164  ]
-[; ;interrupts.c: 126: {
+[; ;interrupts.c: 126: if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
 "126
-{
-[; ;interrupts.c: 127: __nop();
+[e $ ! && && == -> _TX_OLD `ui -> 62 `ui == -> _rx `ui -> 62 `ui == -> _bufferCount `i -> 0 `i 2164  ]
+[; ;interrupts.c: 127: {
 "127
-[e ( ___nop ..  ]
-"128
-}
-[; ;interrupts.c: 128: }
-[e $U 2165  ]
-"129
-[e :U 2164 ]
-[; ;interrupts.c: 129: else
-[; ;interrupts.c: 130: {
-"130
 {
-[; ;interrupts.c: 131: if(rx != '\n' && rx != '\r')
+[; ;interrupts.c: 129: __nop();
+"129
+[e ( ___nop ..  ]
+"130
+}
+[; ;interrupts.c: 130: }
+[e $U 2165  ]
 "131
-[e $ ! && != -> _rx `ui -> 10 `ui != -> _rx `ui -> 13 `ui 2166  ]
+[e :U 2164 ]
+[; ;interrupts.c: 131: else
 [; ;interrupts.c: 132: {
 "132
 {
-[; ;interrupts.c: 133: if(rx == 0x7f || rx == 0x08)
-"133
-[e $ ! || == -> _rx `i -> 127 `i == -> _rx `i -> 8 `i 2167  ]
-[; ;interrupts.c: 134: {
+[; ;interrupts.c: 134: if(rx != '\n' && rx != '\r')
 "134
-{
-[; ;interrupts.c: 135: if(bufferCount !=0)
+[e $ ! && != -> _rx `ui -> 10 `ui != -> _rx `ui -> 13 `ui 2166  ]
+[; ;interrupts.c: 135: {
 "135
-[e $ ! != -> _bufferCount `i -> 0 `i 2168  ]
-[; ;interrupts.c: 136: {
-"136
 {
-[; ;interrupts.c: 137: UARTstring("\r");
+[; ;interrupts.c: 137: if(rx == 0x7f || rx == 0x08)
 "137
-[e ( _UARTstring (1 -> :s 1C `*uc ]
-[; ;interrupts.c: 138: for(i=0;i<=bufferCount;i++)
+[e $ ! || == -> _rx `i -> 127 `i == -> _rx `i -> 8 `i 2167  ]
+[; ;interrupts.c: 138: {
 "138
+{
+[; ;interrupts.c: 140: if(bufferCount !=0)
+"140
+[e $ ! != -> _bufferCount `i -> 0 `i 2168  ]
+[; ;interrupts.c: 141: {
+"141
+{
+[; ;interrupts.c: 143: UARTstring("\r");
+"143
+[e ( _UARTstring (1 -> :s 1C `*uc ]
+[; ;interrupts.c: 145: for(i=0;i<=bufferCount;i++)
+"145
 {
 [e = _i -> 0 `i ]
 [e $U 2172  ]
-"139
+"146
 [e :U 2169 ]
-[; ;interrupts.c: 139: {
+[; ;interrupts.c: 146: {
 {
-[; ;interrupts.c: 140: UARTstring(" ");
-"140
+[; ;interrupts.c: 148: UARTstring(" ");
+"148
 [e ( _UARTstring (1 -> :s 2C `*uc ]
-"141
+"149
 }
-"138
+"145
 [e ++ _i -> 1 `i ]
 [e :U 2172 ]
 [e $ <= _i -> _bufferCount `i 2169  ]
 [e :U 2170 ]
-"141
-}
-[; ;interrupts.c: 141: }
-[; ;interrupts.c: 142: UARTstring("\r");
-"142
-[e ( _UARTstring (1 -> :s 3C `*uc ]
-[; ;interrupts.c: 143: UARTstring(">");
-"143
-[e ( _UARTstring (1 -> :s 4C `*uc ]
-[; ;interrupts.c: 144: bufferCount--;
-"144
-[e -- _bufferCount -> -> 1 `i `uc ]
-[; ;interrupts.c: 145: TEMP_Rxdata[bufferCount] = 0;
-"145
-[e = *U + &U _TEMP_Rxdata * -> _bufferCount `ux -> -> # *U &U _TEMP_Rxdata `ui `ux -> -> 0 `i `uc ]
-[; ;interrupts.c: 146: UARTstring(TEMP_Rxdata);
-"146
-[e ( _UARTstring (1 &U _TEMP_Rxdata ]
-[; ;interrupts.c: 147: if(bufferCount <15)
-"147
-[e $ ! < -> _bufferCount `i -> 15 `i 2173  ]
-[; ;interrupts.c: 148: {
-"148
-{
-[; ;interrupts.c: 149: for(j=0; j<15;j++)
 "149
+}
+[; ;interrupts.c: 149: }
+[; ;interrupts.c: 151: UARTstring("\r");
+"151
+[e ( _UARTstring (1 -> :s 3C `*uc ]
+[; ;interrupts.c: 152: UARTstring(">");
+"152
+[e ( _UARTstring (1 -> :s 4C `*uc ]
+[; ;interrupts.c: 153: bufferCount--;
+"153
+[e -- _bufferCount -> -> 1 `i `uc ]
+[; ;interrupts.c: 154: TEMP_Rxdata[bufferCount] = 0;
+"154
+[e = *U + &U _TEMP_Rxdata * -> _bufferCount `ux -> -> # *U &U _TEMP_Rxdata `ui `ux -> -> 0 `i `uc ]
+[; ;interrupts.c: 155: UARTstring(TEMP_Rxdata);
+"155
+[e ( _UARTstring (1 &U _TEMP_Rxdata ]
+[; ;interrupts.c: 156: if(bufferCount < 15)
+"156
+[e $ ! < -> _bufferCount `i -> 15 `i 2173  ]
+[; ;interrupts.c: 157: {
+"157
+{
+[; ;interrupts.c: 159: for(j=0; j<15;j++)
+"159
 {
 [e = _j -> -> 0 `i `uc ]
 [e $ < -> _j `i -> 15 `i 2174  ]
 [e $U 2175  ]
-"150
+"160
 [e :U 2174 ]
-[; ;interrupts.c: 150: {
+[; ;interrupts.c: 160: {
 {
-[; ;interrupts.c: 151: LCD_TEMP[j] = TEMP_Rxdata[j];
-"151
+[; ;interrupts.c: 161: LCD_TEMP[j] = TEMP_Rxdata[j];
+"161
 [e = *U + &U _LCD_TEMP * -> _j `ux -> -> # *U &U _LCD_TEMP `ui `ux *U + &U _TEMP_Rxdata * -> _j `ux -> -> # *U &U _TEMP_Rxdata `ui `ux ]
-"152
+"162
 }
-"149
+"159
 [e ++ _j -> -> 1 `i `uc ]
 [e $ < -> _j `i -> 15 `i 2174  ]
 [e :U 2175 ]
-"152
+"162
 }
-[; ;interrupts.c: 152: }
-[; ;interrupts.c: 153: ClearLCD();
-"153
+[; ;interrupts.c: 162: }
+[; ;interrupts.c: 163: ClearLCD();
+"163
 [e ( _ClearLCD ..  ]
-[; ;interrupts.c: 154: SetLCDcursor(0, 0);
-"154
+[; ;interrupts.c: 164: SetLCDcursor(0, 0);
+"164
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;interrupts.c: 155: LCDPrintChar('>');
-"155
+[; ;interrupts.c: 165: LCDPrintChar('>');
+"165
 [e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
-[; ;interrupts.c: 156: SetLCDcursor(0, 1);
-"156
+[; ;interrupts.c: 166: SetLCDcursor(0, 1);
+"166
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;interrupts.c: 157: LCDPrintString(LCD_TEMP);
-"157
+[; ;interrupts.c: 167: LCDPrintString(LCD_TEMP);
+"167
 [e ( _LCDPrintString (1 &U _LCD_TEMP ]
-"158
+"168
 }
 [e :U 2173 ]
-"159
+"169
 }
 [e :U 2168 ]
-"160
-}
-[; ;interrupts.c: 158: }
-[; ;interrupts.c: 159: }
-[; ;interrupts.c: 160: }
-[e $U 2177  ]
-"161
-[e :U 2167 ]
-[; ;interrupts.c: 161: else
-[; ;interrupts.c: 162: {
-"162
-{
-[; ;interrupts.c: 163: WriteUSART(rx);
-"163
-[e ( _WriteUSART (1 _rx ]
-[; ;interrupts.c: 164: if(bufferCount < 15)
-"164
-[e $ ! < -> _bufferCount `i -> 15 `i 2178  ]
-[; ;interrupts.c: 165: {
-"165
-{
-[; ;interrupts.c: 166: LCDPrintChar(rx);
-"166
-[e ( _LCDPrintChar (1 _rx ]
-"167
-}
-[e :U 2178 ]
-[; ;interrupts.c: 167: }
-[; ;interrupts.c: 168: TEMP_Rxdata[bufferCount] = rx;
-"168
-[e = *U + &U _TEMP_Rxdata * -> _bufferCount `ux -> -> # *U &U _TEMP_Rxdata `ui `ux _rx ]
-[; ;interrupts.c: 169: bufferCount++;
-"169
-[e ++ _bufferCount -> -> 1 `i `uc ]
 "170
 }
-[e :U 2177 ]
+[; ;interrupts.c: 168: }
+[; ;interrupts.c: 169: }
 [; ;interrupts.c: 170: }
-[; ;interrupts.c: 171: if(bufferCount>=99)
+[e $U 2177  ]
 "171
-[e $ ! >= -> _bufferCount `i -> 99 `i 2179  ]
+[e :U 2167 ]
+[; ;interrupts.c: 171: else
 [; ;interrupts.c: 172: {
 "172
 {
-[; ;interrupts.c: 173: UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
-"173
-[e ( _UARTstring (1 -> :s 5C `*uc ]
-[; ;interrupts.c: 174: cleanBuffer(TEMP_Rxdata, 100);
-"174
-[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
-[; ;interrupts.c: 175: bufferCount=0;
+[; ;interrupts.c: 175: if(IsPrintableASCII(rx))
 "175
-[e = _bufferCount -> -> 0 `i `uc ]
+[e $ ! != -> ( _IsPrintableASCII (1 _rx `i -> -> -> 0 `i `uc `i 2178  ]
+[; ;interrupts.c: 176: {
 "176
-}
-[e :U 2179 ]
+{
+[; ;interrupts.c: 178: UARTchar(rx, 0, 0);
 "178
-}
-[; ;interrupts.c: 176: }
-[; ;interrupts.c: 178: }
-[e $U 2180  ]
+[e ( _UARTchar (3 , , _rx -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;interrupts.c: 179: if(bufferCount < 15)
 "179
-[e :U 2166 ]
-[; ;interrupts.c: 179: else if((rx == '\n' || rx == '\r') && bufferCount == 0)
-[e $ ! && || == -> _rx `ui -> 10 `ui == -> _rx `ui -> 13 `ui == -> _bufferCount `i -> 0 `i 2181  ]
+[e $ ! < -> _bufferCount `i -> 15 `i 2179  ]
 [; ;interrupts.c: 180: {
 "180
 {
-[; ;interrupts.c: 181: TEMP_Rxdata[bufferCount] = rx;
-"181
-[e = *U + &U _TEMP_Rxdata * -> _bufferCount `ux -> -> # *U &U _TEMP_Rxdata `ui `ux _rx ]
-[; ;interrupts.c: 182: BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+[; ;interrupts.c: 182: LCDPrintChar(rx);
 "182
-[e ( _BufferCopy (4 , , , &U _TEMP_Rxdata &U _Rxdata -> -> 100 `i `uc -> -> 0 `i `uc ]
-[; ;interrupts.c: 183: cleanBuffer(TEMP_Rxdata, 100);
+[e ( _LCDPrintChar (1 _rx ]
 "183
-[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
+}
+[e :U 2179 ]
+[; ;interrupts.c: 183: }
+[; ;interrupts.c: 184: TEMP_Rxdata[bufferCount] = rx;
 "184
-}
-[; ;interrupts.c: 184: }
-[e $U 2182  ]
+[e = *U + &U _TEMP_Rxdata * -> _bufferCount `ux -> -> # *U &U _TEMP_Rxdata `ui `ux _rx ]
+[; ;interrupts.c: 185: bufferCount++;
 "185
-[e :U 2181 ]
-[; ;interrupts.c: 185: else
-[; ;interrupts.c: 186: {
+[e ++ _bufferCount -> -> 1 `i `uc ]
+[; ;interrupts.c: 186: if(bufferCount>=99)
 "186
-{
-[; ;interrupts.c: 187: if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
+[e $ ! >= -> _bufferCount `i -> 99 `i 2180  ]
+[; ;interrupts.c: 187: {
 "187
-[e $ ! && == -> *U + &U _TEMP_Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _TEMP_Rxdata `ui `ux `i -> 0 `i != -> *U + &U _TEMP_Rxdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _TEMP_Rxdata `ui `ux `i -> 0 `i 2183  ]
-[; ;interrupts.c: 188: {
+{
+[; ;interrupts.c: 188: UARTstring("\r\nBuffer overflow! Deleting Buffer \r\n");
 "188
-{
-[; ;interrupts.c: 189: BufferCopy(TEMP_Rxdata, Rxdata, 100,1);
+[e ( _UARTstring (1 -> :s 5C `*uc ]
+[; ;interrupts.c: 189: cleanBuffer(TEMP_Rxdata, 100);
 "189
-[e ( _BufferCopy (4 , , , &U _TEMP_Rxdata &U _Rxdata -> -> 100 `i `uc -> -> 1 `i `uc ]
+[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
+[; ;interrupts.c: 190: bufferCount=0;
 "190
-}
-[; ;interrupts.c: 190: }
-[e $U 2184  ]
+[e = _bufferCount -> -> 0 `i `uc ]
 "191
-[e :U 2183 ]
-[; ;interrupts.c: 191: else
-[; ;interrupts.c: 192: {
+}
+[e :U 2180 ]
 "192
-{
-[; ;interrupts.c: 193: BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+}
+[; ;interrupts.c: 191: }
+[; ;interrupts.c: 192: }
+[e $U 2181  ]
 "193
-[e ( _BufferCopy (4 , , , &U _TEMP_Rxdata &U _Rxdata -> -> 100 `i `uc -> -> 0 `i `uc ]
+[e :U 2178 ]
+[; ;interrupts.c: 193: else
+[; ;interrupts.c: 194: {
 "194
+{
+"196
+}
+[e :U 2181 ]
+"197
+}
+[e :U 2177 ]
+"198
+}
+[; ;interrupts.c: 196: }
+[; ;interrupts.c: 197: }
+[; ;interrupts.c: 198: }
+[e $U 2182  ]
+"199
+[e :U 2166 ]
+[; ;interrupts.c: 199: else if((rx == '\n' || rx == '\r') && bufferCount == 0)
+[e $ ! && || == -> _rx `ui -> 10 `ui == -> _rx `ui -> 13 `ui == -> _bufferCount `i -> 0 `i 2183  ]
+[; ;interrupts.c: 200: {
+"200
+{
+[; ;interrupts.c: 202: cleanBuffer(TEMP_Rxdata, 100);
+"202
+[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
+"203
+}
+[; ;interrupts.c: 203: }
+[e $U 2184  ]
+"204
+[e :U 2183 ]
+[; ;interrupts.c: 204: else
+[; ;interrupts.c: 205: {
+"205
+{
+[; ;interrupts.c: 207: if(TEMP_Rxdata[0] == 0 && TEMP_Rxdata[1] != 0)
+"207
+[e $ ! && == -> *U + &U _TEMP_Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _TEMP_Rxdata `ui `ux `i -> 0 `i != -> *U + &U _TEMP_Rxdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _TEMP_Rxdata `ui `ux `i -> 0 `i 2185  ]
+[; ;interrupts.c: 208: {
+"208
+{
+[; ;interrupts.c: 209: BufferCopy(TEMP_Rxdata, Rxdata, 100,1);
+"209
+[e ( _BufferCopy (4 , , , &U _TEMP_Rxdata &U _Rxdata -> -> 100 `i `uc -> -> 1 `i `uc ]
+"210
+}
+[; ;interrupts.c: 210: }
+[e $U 2186  ]
+"211
+[e :U 2185 ]
+[; ;interrupts.c: 211: else
+[; ;interrupts.c: 212: {
+"212
+{
+[; ;interrupts.c: 213: BufferCopy(TEMP_Rxdata, Rxdata, 100,0);
+"213
+[e ( _BufferCopy (4 , , , &U _TEMP_Rxdata &U _Rxdata -> -> 100 `i `uc -> -> 0 `i `uc ]
+"214
+}
+[e :U 2186 ]
+[; ;interrupts.c: 214: }
+[; ;interrupts.c: 215: ClearLCD();
+"215
+[e ( _ClearLCD ..  ]
+[; ;interrupts.c: 216: SetLCDcursor(0, 0);
+"216
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;interrupts.c: 217: LCDPrintChar('>');
+"217
+[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
+[; ;interrupts.c: 218: cleanBuffer(TEMP_Rxdata, 100);
+"218
+[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
+[; ;interrupts.c: 219: bufferCount=0;
+"219
+[e = _bufferCount -> -> 0 `i `uc ]
+"220
 }
 [e :U 2184 ]
-[; ;interrupts.c: 194: }
-[; ;interrupts.c: 195: ClearLCD();
-"195
-[e ( _ClearLCD ..  ]
-[; ;interrupts.c: 196: SetLCDcursor(0, 0);
-"196
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;interrupts.c: 197: LCDPrintChar('>');
-"197
-[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
-[; ;interrupts.c: 198: cleanBuffer(TEMP_Rxdata, 100);
-"198
-[e ( _cleanBuffer (2 , &U _TEMP_Rxdata -> 100 `i ]
-[; ;interrupts.c: 199: bufferCount=0;
-"199
-[e = _bufferCount -> -> 0 `i `uc ]
-"200
-}
 [e :U 2182 ]
-[e :U 2180 ]
-"201
+"221
 }
 [e :U 2165 ]
-"202
+"222
 }
 [e :U 2163 ]
-[; ;interrupts.c: 200: }
-[; ;interrupts.c: 201: }
-[; ;interrupts.c: 202: }
-[; ;interrupts.c: 203: PIE1bits.RCIE = 1;
-"203
+[; ;interrupts.c: 220: }
+[; ;interrupts.c: 221: }
+[; ;interrupts.c: 222: }
+[; ;interrupts.c: 223: PIE1bits.RCIE = 1;
+"223
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;interrupts.c: 204: RCSTAbits.CREN = 1;
-"204
+[; ;interrupts.c: 224: RCSTAbits.CREN = 1;
+"224
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;interrupts.c: 205: INTCONbits.PEIE = 1;
-"205
+[; ;interrupts.c: 225: INTCONbits.PEIE = 1;
+"225
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;interrupts.c: 206: }
-"206
+[; ;interrupts.c: 226: }
+"226
 [e :UE 2162 ]
 }
 [a 4C 62 0 ]

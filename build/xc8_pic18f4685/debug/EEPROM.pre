@@ -1,5 +1,5 @@
 
-# 1 "RTC.c"
+# 1 "EEPROM.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -19519,576 +19519,162 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdbool.h"
 typedef unsigned char bool;
 
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
-typedef void * va_list[1];
+# 90 "user.h"
+void InitApp(void);
 
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-
-# 23 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
-extern int errno;
-
-# 54
-struct __prbuf
-{
-char * ptr;
-void (* func)(char);
-};
-
-# 17 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\conio.h"
-extern int errno;
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-# 31
-extern char * cgets(char *);
-extern void cputs(const char *);
-
-# 99 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-
-
-# 191
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-
-# 54 "I2C.h"
-void Init_I2C_Master(void);
-int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
-char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
-char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
-void ResetI2C( void );
-char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
-unsigned char readI2C( void );
-
-# 54
-void Init_I2C_Master(void);
-int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
-char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
-char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsigned char *rdptr, unsigned char length );
-void ResetI2C( void );
-char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
-unsigned char readI2C( void );
-
-# 51 "RTC.h"
-extern struct TIME NowTime;
-
-# 57
-typedef struct TIME{
-unsigned char Seconds;
-unsigned char Minutes;
-unsigned char Hours;
-unsigned char HoursMilitary;
-unsigned char HoursAM_PM;
-unsigned char Day;
-unsigned char Date;
-unsigned char Month;
-unsigned char Year;
-}TIME ;
-
-# 73
-unsigned char READ_RTC_TIME(void);
-void RTC_Clock_Disable(void);
-void RTC_Clock_Enable(void);
-void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military);
-void RTC_TIME_NONMilitary(void);
-void RTC_INIT(void);
-unsigned char SET_RTC_TIME(TIME SetTime);
-unsigned char Parse_Time(unsigned char* This);
+# 54 "EEPROM.h"
+unsigned int ReadEEPROM_1Byte(unsigned int address);
+void EEPROM_UNLOCK(void);
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
+unsigned long GetMemoryBaud(void);
+unsigned char SetMemoryBaud(unsigned long Baud);
+unsigned char GetMemoryParity(void);
+unsigned char SetMemoryParity(unsigned char Parity);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 65 "MISC.h"
-void delayUS(long US);
-void cleanBuffer(unsigned char* data, int count);
-void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-unsigned char StringContains(unsigned char* This, const unsigned char* That);
-unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-long GetEnteredNumber(unsigned char* This);
-void RemoveSpaces(unsigned char* This);
-void lowercase(unsigned char* Input);
-unsigned char StringAddEqual(unsigned char* Input);
-unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-unsigned char ISNUMBER(unsigned char ascii);
-unsigned char IsPrintableASCII(unsigned char data);
-
 # 90 "user.h"
 void InitApp(void);
 
-# 58 "ADC.h"
-void EnableInternalADC(unsigned char channels);
-void DisableInternalADC(void);
-int InternalADC_Read(unsigned char channel);
+# 114 "UART.h"
+void InitUART(unsigned long Baud, unsigned char parity);
+void UARTstring(unsigned char *data);
+void UARTstringWAIT(unsigned char *data);
+void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
+void OpenUSART( unsigned char config, unsigned int spbrg);
+char ReadUSART(void);
+void baudUSART (unsigned char baudconfig);
+void OpenUSART( unsigned char config, unsigned int spbrg);
+void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
-# 46 "RTC.c"
-TIME NowTime;
-
-# 57
-void RTC_INIT(void)
+# 52 "EEPROM.c"
+unsigned int ReadEEPROM_1Byte(unsigned int address)
 {
-RTC_Clock_Enable();
-RTC_TIME_NONMilitary();
-InternalADC_Read(2);
+unsigned char GIEstatus = INTCONbits.GIE;
+EECON1bits.EEPGD = 0;
+EECON1bits.CFGS = 0;
+EEADRH = (unsigned char)((address & 0x300) >> 8);
+EEADR = (unsigned char)(address & 0xFF);
+INTCONbits.GIE =0;
+EECON1bits.RD = 1;
+while(EECON1bits.RD);
+__nop();
+__nop();
+if(GIEstatus)
+{
+INTCONbits.GIE =1;
+}
+return (EEDATA);
 }
 
-# 70
-void RTC_Clock_Enable(void)
+# 77
+void EEPROM_UNLOCK(void)
 {
-int tempSeconds =0;
-signed char Error=0;
-
-tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds & 0x7F) );
-
-if(Error < 0 )
-{
-ResetI2C();
-}
+EECON2 = 0x55;
+EECON2 = 0xAA;
+EECON1bits.WR =1;
+while(EECON1bits.WR);
+__nop();
+__nop();
 }
 
-# 89
-void RTC_TIME_NONMilitary(void)
+# 92
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data)
 {
-int temphours = 0;
-int Error = -1;
-
-temphours = I2C_Read_At_Address(0b1101000, 0x02);
-if(temphours >= 0)
+unsigned char GIEstatus = INTCONbits.GIE;
+EEADRH = (unsigned char)((address & 0x300) >> 8);
+EEADR = (unsigned char)(address & 0xFF);
+EEDATA = data;
+EECON1bits.EEPGD = 0;
+EECON1bits.CFGS = 0;
+EECON1bits.WREN =1;
+INTCONbits.GIE =0;
+EEPROM_UNLOCK();
+EECON1bits.WR =1;
+while(EECON1bits.WR);
+EECON1bits.WREN =0;
+if(GIEstatus)
 {
-if((temphours & 0x40) == 0)
-{
-temphours |= 0x40;
-Error = I2C_Write_At_Address( 0b1101000, 0x02, temphours );
-}
-}
-else
-{
-Error = -1;
-}
-if(Error < 0 )
-{
-ResetI2C();
-}
-}
-
-# 119
-void RTC_Clock_Disable(void)
-{
-int tempSeconds =0;
-signed char Error=0;
-
-tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-Error = I2C_Write_At_Address( 0b1101000, 0x00, (tempSeconds | 0x80) );
-
-if(Error < 0 )
-{
-ResetI2C();
+INTCONbits.GIE =1;
 }
 }
 
-# 139
-unsigned char READ_RTC_TIME(void)
+# 117
+unsigned long GetMemoryBaud(void)
 {
-signed char Error =0;
-unsigned char temp[7];
+unsigned char BaudTempH;
+unsigned char BaudTempMH;
+unsigned char BaudTempML;
+unsigned char BaudTempL;
+unsigned long baud =0;
 
-Error = I2C_Read_Sequential( 0b1101000, 0x00, temp, 7 );
+BaudTempH = ReadEEPROM_1Byte(0);
+BaudTempMH = ReadEEPROM_1Byte(1);
+BaudTempML = ReadEEPROM_1Byte(2);
+BaudTempL = ReadEEPROM_1Byte(3);
 
-if(Error == 0 )
-{
-NowTime.Seconds = (temp[0] & 0x0F) + (((temp[0] & 0x70)>> 4) * 10);
-NowTime.Minutes = (temp[1] & 0x0F) + (((temp[1] & 0x70) >> 4) * 10);
-NowTime.Hours = (temp[2] & 0x0F) + (((temp[2] & 0x10) >> 4) * 10);
-NowTime.HoursAM_PM = temp[2] & 0x20;
-NowTime.HoursMilitary = NowTime.Hours + 12 * NowTime.HoursAM_PM;
-NowTime.Day = temp[3] & 0x07;
-NowTime.Date = (temp[4] & 0x0F) + (((temp[4] & 0x30)>> 4) * 10);
-NowTime.Month = (temp[5] & 0x0F) + (((temp[5] & 0x10) >> 4) * 10);
-NowTime.Year = (temp[6] & 0x0F) + (((temp[6] & 0xF0) >> 4) * 10);
-}
-else
-{
-ResetI2C();
-}
-return Error;
+baud = (((unsigned long) BaudTempH << 24) + ((unsigned long)BaudTempMH << 16) + ((unsigned long)BaudTempML << 8) + (unsigned long)BaudTempL);
+__nop();
+return baud;
 }
 
-# 170
-unsigned char SET_RTC_TIME(TIME SetTime)
+# 140
+unsigned char SetMemoryBaud(unsigned long Baud)
 {
-signed char Error =0;
-unsigned char temp[7];
+unsigned char BaudTempH;
+unsigned char BaudTempMH;
+unsigned char BaudTempML;
+unsigned char BaudTempL;
+unsigned long Test;
 
-temp[0] = ((SetTime.Seconds /10) << 4) + (SetTime.Seconds % 10);
-Error = I2C_Write_At_Address( 0b1101000, 0x00, temp[0] );
-if(Error)
+BaudTempH = (unsigned char) ((Baud & 0XFF000000) >> 24);
+BaudTempMH = (unsigned char) ((Baud & 0X00FF0000) >> 16);
+BaudTempML = (unsigned char) ((Baud & 0X0000FF00) >> 8);
+BaudTempL = (unsigned char) (Baud & 0X000000FF);
+
+
+WriteEEPROM_1Byte(0, BaudTempH);
+WriteEEPROM_1Byte(1, BaudTempMH);
+WriteEEPROM_1Byte(2, BaudTempML);
+WriteEEPROM_1Byte(3, BaudTempL);
+
+
+Test = GetMemoryBaud();
+
+if(Test == Baud)
 {
 return 1;
 }
-
-temp[1] = ((SetTime.Minutes /10) << 4) + (SetTime.Minutes % 10);
-Error = I2C_Write_At_Address( 0b1101000, 0x01, temp[1] );
-if(Error)
-{
-return 2;
-}
-
-temp[2] = ((SetTime.Hours /10) << 4) + (SetTime.Hours % 10) + (SetTime.HoursAM_PM << 5);
-Error = I2C_Write_At_Address( 0b1101000, 0x02, temp[2] );
-if(Error)
-{
-return 3;
-}
-
-temp[3] = (SetTime.Day);
-Error = I2C_Write_At_Address( 0b1101000, 0x03, temp[3] );
-if(Error)
-{
-return 4;
-}
-
-temp[4] = ((SetTime.Date /10) << 4) + (SetTime.Date % 10);
-Error = I2C_Write_At_Address( 0b1101000, 0x04, temp[4] );
-if(Error)
-{
-return 5;
-}
-
-temp[5] = ((SetTime.Month /10) << 4) + (SetTime.Month % 10);
-Error = I2C_Write_At_Address( 0b1101000, 0x05, temp[5] );
-if(Error)
-{
-return 6;
-}
-
-temp[6] = ((SetTime.Year /10) << 4) + (SetTime.Year % 10);
-Error = I2C_Write_At_Address( 0b1101000, 0x06, temp[6] );
-if(Error)
-{
-return 7;
-}
-
 return 0;
-}
-
-# 233
-void READ_RTC_SECONDS(void)
-{
-int tempSeconds =0;
-
-tempSeconds = I2C_Read_At_Address(0b1101000, 0x00);
-
-if(tempSeconds >= 0 )
-{
-NowTime.Seconds = (unsigned char)tempSeconds;
-}
-else
-{
-ResetI2C();
-}
-}
-
-# 254
-void SprintDate(unsigned char* ReturnBuf, TIME DisplayTime, unsigned char Military)
-{
-if(!Military)
-{
-if(!DisplayTime.HoursAM_PM)
-{
-sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d AM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
-}
-else
-{
-sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d PM", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.Hours, DisplayTime.Minutes, DisplayTime.Seconds);
-}
-}
-else
-{
-sprintf(ReturnBuf,"%02d/%02d/20%02d %02d:%02d:%02d", DisplayTime.Month, DisplayTime.Date, DisplayTime.Year, DisplayTime.HoursMilitary, DisplayTime.Minutes, DisplayTime.Seconds);
-}
-}
-
-# 279
-unsigned char Parse_Time(unsigned char* This)
-{
-TIME TempTime;
-unsigned char temp = 0;
-
-if(*This != 0 && *This == ' ')
-{
-This++;
-}
-
-
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-
-if(*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else if(*This == '/')
-{
 
 }
-else
-{
-return 0;
-}
-TempTime.Month = temp;
 
-if(*This == '/')
+# 175
+unsigned char GetMemoryParity(void)
 {
-This++;
-}
-else
-{
-return 0;
+unsigned char Parity;
+
+Parity = ReadEEPROM_1Byte(4);
+
+return (Parity);
 }
 
+# 189
+unsigned char SetMemoryParity(unsigned char Parity)
+{
+unsigned char Test;
 
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-
-if(*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else if(*This == '/')
-{
-
-}
-else
-{
-return 0;
-}
-TempTime.Date = temp;
-
-if(*This == '/')
-{
-This++;
-}
-else
-{
-return 0;
-}
+WriteEEPROM_1Byte(4, Parity);
 
 
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-if (*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-TempTime.Year = temp;
+Test = GetMemoryParity();
 
-if(*This == ' ')
+if(Test == Parity)
 {
-This++;
-}
-
-
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-
-if(*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else if(*This == ':')
-{
-
-}
-else
-{
-return 0;
-}
-TempTime.Hours = temp;
-
-if(*This == ':')
-{
-This++;
-}
-else
-{
-return 0;
-}
-
-
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-
-if(*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else if(*This == ':')
-{
-
-}
-else
-{
-return 0;
-}
-TempTime.Minutes = temp;
-
-if(*This == ':')
-{
-This++;
-}
-else
-{
-return 0;
-}
-
-
-if (*This >= 48 && *This <= 57)
-{
-temp = *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-if (*This >= 48 && *This <= 57)
-{
-temp *= 10;
-temp += *This - 48;
-This++;
-}
-else
-{
-return 0;
-}
-TempTime.Seconds = temp;
-
-if(*This == ' ')
-{
-This++;
-}
-if(*This == 'a')
-{
-This++;
-if(*This == 'm')
-{
-TempTime.HoursAM_PM = 0;
-}
-else
-{
-return 0;
-}
-}
-else if(*This == 'p')
-{
-This++;
-if(*This == 'm')
-{
-TempTime.HoursAM_PM = 1;
-}
-else
-{
-return 0;
-}
-}
-else
-{
-return 0;
-}
-if(TempTime.Month > 12 || TempTime.Date > 31 || TempTime.Year > 99 || TempTime.Hours > 12 || TempTime.Minutes > 59 || TempTime.Seconds > 59)
-{
-return 0;
-}
-else
-{
-NowTime.Month = TempTime.Month;
-NowTime.Date = TempTime.Date;
-NowTime.Year= TempTime.Year;
-NowTime.Hours = TempTime.Hours;
-NowTime.Minutes = TempTime.Minutes;
-NowTime.Seconds= TempTime.Seconds;
-NowTime.HoursAM_PM = TempTime.HoursAM_PM;
 return 1;
 }
+return 0;
+
 }

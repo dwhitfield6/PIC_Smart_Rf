@@ -6,8 +6,7 @@
  * Date         Revision    Comments
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
- * 01/21/15     1.0         Created log.
- * 02/05/15     1.0_DW0     Added macro LCD_CharacterWidth.
+ * 02/05/15     1.0         Created log.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -29,50 +28,33 @@
 
 #endif
 
-/******************************************************************************/
-/* LCD delay. This controls the amount of time that the new command is held on
- *   the screen.
-/******************************************************************************/
-
-#define LCDdelay    25000
+#include "user.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
-/* SCROLLspeed. This controls the amount of time that a scrolled string waits
- *  until it is incremented and changed.
+/* EEPROM Data Addresses                                                      */
 /******************************************************************************/
 
-#define SCROLLspeed 15000
-
-/******************************************************************************/
-/* LCD_CharacterWidth. This is the maximum number of characters allowed on the
- *  screen. Counting starts at 0. For a 16 character screen enter 15.
-/******************************************************************************/
-
-#define LCD_CharacterWidth 15
+#define EE_BaudMSB          0
+#define EE_BaudMHSB         1
+#define EE_BaudMLSB         2
+#define EE_BaudLSB          3
+#define EE_Parity           4
+#define EE_ShutDown_Time    5
 
 /******************************************************************************/
 /* Defines                                                                    */
 /******************************************************************************/
 
-
-/******************************************************************************/
-/* Global Variables                                                           */
-/******************************************************************************/
-
-unsigned long LCDclearCount=LCDdelay;
-unsigned char LCDwait=FALSE;
-
+#define PASS 1
+#define FAIL 0
 /******************************************************************************/
 /* Function prototypes                                                        */
 /******************************************************************************/
 
-void init_LCD();
-void SendLCDbyte(unsigned char data, unsigned char isCommand);
-void PulseEnablePin();
-void SetLCDcursor(char Row, char Col);
-void ClearLCD();
-void LCDPrintString(unsigned char *Text);
-void LCDPrintChar(unsigned char character);
-void LCDScreenUpdate();
-void LCDdisplayFeedback(unsigned char *Text);
-void LCD_Scroll(unsigned char* This);
+unsigned int ReadEEPROM_1Byte(unsigned int address);
+void EEPROM_UNLOCK(void);
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
+unsigned long GetMemoryBaud(void);
+unsigned char SetMemoryBaud(unsigned long Baud);
+unsigned char GetMemoryParity(void);
+unsigned char SetMemoryParity(unsigned char Parity);

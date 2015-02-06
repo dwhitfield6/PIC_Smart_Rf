@@ -19594,7 +19594,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19604,11 +19604,12 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19621,15 +19622,28 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
-# 52 "UART.c"
+# 90 "user.h"
+void InitApp(void);
+
+# 54 "EEPROM.h"
+unsigned int ReadEEPROM_1Byte(unsigned int address);
+void EEPROM_UNLOCK(void);
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
+unsigned long GetMemoryBaud(void);
+unsigned char SetMemoryBaud(unsigned long Baud);
+unsigned char GetMemoryParity(void);
+unsigned char SetMemoryParity(unsigned char Parity);
+
+# 53 "UART.c"
 unsigned char Txdata[100];
 unsigned char Rxdata[100];
 unsigned long BAUD = 9600;
 unsigned char PARITY = 0;
 unsigned char TX_OLD =0;
 
-# 68
+# 69
 void InitUART(unsigned long Baud, unsigned char parity)
 {
 unsigned long temp;
@@ -19637,7 +19651,7 @@ unsigned char config;
 unsigned int spbrg;
 unsigned char baudconfig;
 
-# 83
+# 84
 RCSTA&=0b01001111,TXSTAbits.TXEN=0,PIE1&=0b11001111;
 config =0;
 baudconfig =0;
@@ -19678,14 +19692,14 @@ temp = ReadUSART();
 IPR1bits.RCIP = 0;
 }
 
-# 128
+# 129
 void baudUSART (unsigned char baudconfig)
 {
 BAUDCON =0;
 BAUDCON = baudconfig;
 }
 
-# 139
+# 140
 void OpenUSART( unsigned char config, unsigned int spbrg)
 {
 TXSTA = 0;
@@ -19739,7 +19753,7 @@ TXSTAbits.TXEN = 1;
 RCSTAbits.SPEN = 1;
 }
 
-# 197
+# 198
 void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data)
 {
 if(TXSTAbits.TX9)
@@ -19773,7 +19787,7 @@ TX_OLD = data;
 TXREG = data;
 }
 
-# 235
+# 236
 void UARTstring(unsigned char *data)
 {
 do
@@ -19786,7 +19800,7 @@ while((!TXSTAbits.TRMT));
 } while( *data++);
 }
 
-# 252
+# 253
 char ReadUSART(void)
 {
 char data;
@@ -19811,14 +19825,14 @@ data = RCREG;
 return (data);
 }
 
-# 282
+# 283
 void UART_send_break(void)
 {
 TXSTAbits.SENDB =1;
 TXREG = 'd';
 }
 
-# 294
+# 295
 void UARTstringWAIT(unsigned char *data)
 {
 do
@@ -19832,14 +19846,11 @@ while((!TXSTAbits.TRMT));
 } while( *data++);
 }
 
-# 314
+# 315
 void SetBaud(unsigned long Baud, unsigned char Parity)
 {
 unsigned char buf[50];
-unsigned long Baudtemp=0;
-unsigned long Paritytemp=0;
-unsigned long temp;
-unsigned char i =0;
+unsigned char status=0;
 
 if(Parity)
 {
@@ -19864,14 +19875,16 @@ else
 sprintf(buf,"System Baud will be set to %lu with no parity bit\r\n",Baud);
 }
 
+status = SetMemoryBaud(Baud);
+if(status)
+{
 
-Baudtemp = temp & 0x000FFFFF;
-Paritytemp = (unsigned char)((temp & 0x00F00000) >> 20);
-
+status = SetMemoryParity(Parity);
+}
 InitUART(Baud, Parity);
 UARTstring("\r\n");
 delayUS(10000);
-if((Baud != Baudtemp) || (Parity != Paritytemp))
+if(!status)
 {
 UARTstring("System Program Fail\r\n");
 delayUS(10000);
@@ -19902,4 +19915,10 @@ UARTstring(" with no parity bit\r\n");
 }
 
 delayUS(10000);
+}
+
+# 390
+unsigned long GetBaud(void)
+{
+return BAUD;
 }

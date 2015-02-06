@@ -38,6 +38,7 @@
 #include "user.h"          /* User funct/params, such as InitApp */
 #include "UART.h"          /* User funct/params, such as InitApp */
 #include "MISC.h"          /* User funct/params, such as InitApp */
+#include "EEPROM.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
 /* Defines                                                         */
@@ -314,10 +315,7 @@ void UARTstringWAIT(unsigned char *data)
 void SetBaud(unsigned long Baud, unsigned char Parity)
 {
     unsigned char buf[50];
-    unsigned long Baudtemp=0;
-    unsigned long Paritytemp=0;
-    unsigned long temp;
-    unsigned char i =0;
+    unsigned char status=0;
     //Program Baud to Flash
     if(Parity)
     {
@@ -341,15 +339,17 @@ void SetBaud(unsigned long Baud, unsigned char Parity)
     {
         sprintf(buf,"System Baud will be set to %lu with no parity bit\r\n",Baud);
     }
-    //WriteBaud(FLASH_ADDRESS_ROW, Baud, Parity);
-    //temp = ReadBaud(FLASH_ADDRESS_ROW, 0);
-    Baudtemp   = temp & 0x000FFFFF;
-    Paritytemp = (unsigned char)((temp & 0x00F00000) >> 20);
-    //Read Flash to make sure it was written correctly
+
+    status = SetMemoryBaud(Baud);
+    if(status)
+    {
+        //Baud write passed
+        status = SetMemoryParity(Parity);
+    }
     InitUART(Baud, Parity);
     UARTstring("\r\n");
     delayUS(Word_Spacing);
-    if((Baud != Baudtemp) || (Parity != Paritytemp))
+    if(!status)
     {
         UARTstring("System Program Fail\r\n");
         delayUS(Word_Spacing);
@@ -380,4 +380,14 @@ void SetBaud(unsigned long Baud, unsigned char Parity)
     }
     
     delayUS(Word_Spacing);
+}
+
+/******************************************************************************/
+/* GetBaud
+ *
+ * The function returns the Baud rate
+/******************************************************************************/
+unsigned long GetBaud(void)
+{
+    return BAUD;
 }

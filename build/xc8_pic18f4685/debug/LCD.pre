@@ -19522,11 +19522,11 @@ typedef unsigned char bool;
 # 90 "user.h"
 void InitApp(void);
 
-# 55 "LCD.h"
+# 62 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
-# 62
+# 69
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19541,7 +19541,7 @@ void LCD_Scroll(unsigned char* This);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19554,6 +19554,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 44 "LCD.c"
 unsigned char Scroll_1[16];

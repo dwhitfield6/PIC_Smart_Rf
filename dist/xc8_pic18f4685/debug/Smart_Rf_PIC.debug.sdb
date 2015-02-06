@@ -135,8 +135,20 @@
 [v ___asftsub __asftsub `(f  1 e 3 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\pic18\aslmul.c
 [v ___aslmul __aslmul `(ul  1 e 4 0 ]
-"13 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\pic18\plib\USART\uwrite.c
-[v _WriteUSART WriteUSART `(v  1 e 0 0 ]
+"52 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\EEPROM.c
+[v _ReadEEPROM_1Byte ReadEEPROM_1Byte `(ui  1 e 2 0 ]
+"77
+[v _EEPROM_UNLOCK EEPROM_UNLOCK `(v  1 e 0 0 ]
+"92
+[v _WriteEEPROM_1Byte WriteEEPROM_1Byte `(v  1 e 0 0 ]
+"117
+[v _GetMemoryBaud GetMemoryBaud `(ul  1 e 4 0 ]
+"140
+[v _SetMemoryBaud SetMemoryBaud `(uc  1 e 1 0 ]
+"175
+[v _GetMemoryParity GetMemoryParity `(uc  1 e 1 0 ]
+"189
+[v _SetMemoryParity SetMemoryParity `(uc  1 e 1 0 ]
 "55 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\I2C.c
 [v _Init_I2C_Master Init_I2C_Master `(v  1 e 0 0 ]
 "74
@@ -187,7 +199,7 @@
 [v _LCDScreenUpdate LCDScreenUpdate `(v  1 e 0 0 ]
 "409
 [v _LCD_Scroll LCD_Scroll `(v  1 e 0 0 ]
-"73 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
+"74 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
 [v _main main `(v  1 e 0 0 ]
 "55 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\MISC.c
 [v _delayUS delayUS `(v  1 e 0 0 ]
@@ -217,6 +229,8 @@
 [v i1_CheckSum_byte CheckSum_byte `(uc  1 e 1 0 ]
 "380
 [v _ISNUMBER ISNUMBER `(uc  1 e 1 0 ]
+"397
+[v _IsPrintableASCII IsPrintableASCII `(uc  1 e 1 0 ]
 "54 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\PWM.c
 [v _PWM_init PWM_init `(v  1 e 0 0 ]
 "81
@@ -263,27 +277,29 @@
 [v _Command Command `(uc  1 e 1 0 ]
 "52 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\system.c
 [v _ConfigureOscillator ConfigureOscillator `(v  1 e 0 0 ]
-"68 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"69 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _InitUART InitUART `(v  1 e 0 0 ]
-"128
+"129
 [v _baudUSART baudUSART `(v  1 e 0 0 ]
-"139
+"140
 [v _OpenUSART OpenUSART `(v  1 e 0 0 ]
-"197
+"198
 [v _UARTchar UARTchar `(v  1 e 0 0 ]
 [v i1_UARTchar UARTchar `(v  1 e 0 0 ]
-"235
+"236
 [v _UARTstring UARTstring `(v  1 e 0 0 ]
 [v i1_UARTstring UARTstring `(v  1 e 0 0 ]
-"252
+"253
 [v _ReadUSART ReadUSART `(uc  1 e 1 0 ]
 [v i1_ReadUSART ReadUSART `(uc  1 e 1 0 ]
-"282
+"283
 [v _UART_send_break UART_send_break `(v  1 e 0 0 ]
-"294
+"295
 [v _UARTstringWAIT UARTstringWAIT `(v  1 e 0 0 ]
-"314
+"315
 [v _SetBaud SetBaud `(v  1 e 0 0 ]
+"390
+[v _GetBaud GetBaud `(ul  1 e 4 0 ]
 "53 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\user.c
 [v _InitApp InitApp `(v  1 e 0 0 ]
 "29030 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic18f4685.h
@@ -294,7 +310,7 @@
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
 "29558
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
-[s S453 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S482 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -304,7 +320,7 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "29692
-[s S462 . 1 `uc 1 RD0 1 0 :1:0 
+[s S491 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -313,13 +329,13 @@
 `uc 1 RD6 1 0 :1:6 
 `uc 1 RD7 1 0 :1:7 
 ]
-[u S471 . 1 `S453 1 . 1 0 `S462 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES471  1 e 1 @3986 ]
+[u S500 . 1 `S482 1 . 1 0 `S491 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES500  1 e 1 @3986 ]
 "30134
-[v _TRISCbits TRISCbits `VES471  1 e 1 @3988 ]
+[v _TRISCbits TRISCbits `VES500  1 e 1 @3988 ]
 "30355
-[v _TRISDbits TRISDbits `VES471  1 e 1 @3989 ]
-[s S573 . 1 `uc 1 TRISE0 1 0 :1:0 
+[v _TRISDbits TRISDbits `VES500  1 e 1 @3989 ]
+[s S602 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -329,12 +345,12 @@
 `uc 1 IBF 1 0 :1:7 
 ]
 "30571
-[s S582 . 1 `uc 1 RE0 1 0 :1:0 
+[s S611 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 ]
-[u S586 . 1 `S573 1 . 1 0 `S582 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES586  1 e 1 @3990 ]
+[u S615 . 1 `S602 1 . 1 0 `S611 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES615  1 e 1 @3990 ]
 "30766
 [v _PIE1 PIE1 `VEuc  1 e 1 @3997 ]
 [s S108 . 1 `uc 1 TMR1IF 1 0 :1:0 
@@ -357,7 +373,7 @@
 [v _PIE1bits PIE1bits `VES123  1 e 1 @3997 ]
 "30870
 [v _PIR1bits PIR1bits `VES123  1 e 1 @3998 ]
-[s S916 . 1 `uc 1 TMR1IP 1 0 :1:0 
+[s S947 . 1 `uc 1 TMR1IP 1 0 :1:0 
 `uc 1 TMR2IP 1 0 :1:1 
 `uc 1 CCP1IP 1 0 :1:2 
 `uc 1 SSPIP 1 0 :1:3 
@@ -367,18 +383,18 @@
 `uc 1 PSPIP 1 0 :1:7 
 ]
 "30953
-[s S925 . 1 `uc 1 . 1 0 :4:0 
+[s S956 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TXBIP 1 0 :1:4 
 ]
-[s S928 . 1 `uc 1 . 1 0 :5:0 
+[s S959 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IP 1 0 :1:5 
 ]
-[s S931 . 1 `uc 1 . 1 0 :4:0 
+[s S962 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IP 1 0 :1:4 
 ]
-[u S934 . 1 `S916 1 . 1 0 `S925 1 . 1 0 `S928 1 . 1 0 `S931 1 . 1 0 ]
-[v _IPR1bits IPR1bits `VES934  1 e 1 @3999 ]
-[s S2155 . 1 `uc 1 ECCP1IF 1 0 :1:0 
+[u S965 . 1 `S947 1 . 1 0 `S956 1 . 1 0 `S959 1 . 1 0 `S962 1 . 1 0 ]
+[v _IPR1bits IPR1bits `VES965  1 e 1 @3999 ]
+[s S2191 . 1 `uc 1 ECCP1IF 1 0 :1:0 
 `uc 1 TMR3IF 1 0 :1:1 
 `uc 1 HLVDIF 1 0 :1:2 
 `uc 1 BCLIF 1 0 :1:3 
@@ -388,11 +404,34 @@
 `uc 1 OSCFIF 1 0 :1:7 
 ]
 "31098
-[s S2164 . 1 `uc 1 . 1 0 :2:0 
+[s S2200 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIF 1 0 :1:2 
 ]
-[u S2167 . 1 `S2155 1 . 1 0 `S2164 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES2167  1 e 1 @4001 ]
+[u S2203 . 1 `S2191 1 . 1 0 `S2200 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES2203  1 e 1 @4001 ]
+[s S2336 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+`uc 1 EEPGD 1 0 :1:7 
+]
+"31536
+[s S2345 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 EEFS 1 0 :1:6 
+]
+[u S2348 . 1 `S2336 1 . 1 0 `S2345 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES2348  1 e 1 @4006 ]
+"31580
+[v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
+"31586
+[v _EEDATA EEDATA `VEuc  1 e 1 @4008 ]
+"31592
+[v _EEADR EEADR `VEuc  1 e 1 @4009 ]
+"31598
+[v _EEADRH EEADRH `VEuc  1 e 1 @4010 ]
 "31604
 [v _RCSTA RCSTA `VEuc  1 e 1 @4011 ]
 [s S178 . 1 `uc 1 RX9D 1 0 :1:0 
@@ -423,7 +462,7 @@
 [v _RCSTAbits RCSTAbits `VES201  1 e 1 @4011 ]
 "31813
 [v _TXSTA TXSTA `VEuc  1 e 1 @4012 ]
-[s S815 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S846 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -433,36 +472,36 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "31873
-[s S824 . 1 `uc 1 . 1 0 :2:0 
+[s S855 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 BRGH1 1 0 :1:2 
 ]
-[s S827 . 1 `uc 1 . 1 0 :7:0 
+[s S858 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 CSRC1 1 0 :1:7 
 ]
-[s S830 . 1 `uc 1 . 1 0 :3:0 
+[s S861 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SENDB1 1 0 :1:3 
 ]
-[s S833 . 1 `uc 1 . 1 0 :4:0 
+[s S864 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 SYNC1 1 0 :1:4 
 ]
-[s S836 . 1 `uc 1 . 1 0 :1:0 
+[s S867 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 TRMT1 1 0 :1:1 
 ]
-[s S839 . 1 `uc 1 . 1 0 :6:0 
+[s S870 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX91 1 0 :1:6 
 ]
-[s S842 . 1 `uc 1 TX9D1 1 0 :1:0 
+[s S873 . 1 `uc 1 TX9D1 1 0 :1:0 
 ]
-[s S844 . 1 `uc 1 . 1 0 :5:0 
+[s S875 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 TXEN1 1 0 :1:5 
 ]
-[s S847 . 1 `uc 1 . 1 0 :6:0 
+[s S878 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[s S850 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S881 . 1 `uc 1 TXD8 1 0 :1:0 
 ]
-[u S852 . 1 `S815 1 . 1 0 `S824 1 . 1 0 `S827 1 . 1 0 `S830 1 . 1 0 `S833 1 . 1 0 `S836 1 . 1 0 `S839 1 . 1 0 `S842 1 . 1 0 `S844 1 . 1 0 `S847 1 . 1 0 `S850 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES852  1 e 1 @4012 ]
+[u S883 . 1 `S846 1 . 1 0 `S855 1 . 1 0 `S858 1 . 1 0 `S861 1 . 1 0 `S864 1 . 1 0 `S867 1 . 1 0 `S870 1 . 1 0 `S873 1 . 1 0 `S875 1 . 1 0 `S878 1 . 1 0 `S881 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES883  1 e 1 @4012 ]
 "32110
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
 "32121
@@ -493,7 +532,7 @@
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
 "33241
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
-[s S2134 . 1 `uc 1 SEN 1 0 :1:0 
+[s S2170 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -503,40 +542,40 @@
 `uc 1 GCEN 1 0 :1:7 
 ]
 "33258
-[u S2143 . 1 `S2134 1 . 1 0 ]
+[u S2179 . 1 `S2170 1 . 1 0 ]
 "33258
 "33258
-[v _SSPCON2bits SSPCON2bits `VES2143  1 e 1 @4037 ]
+[v _SSPCON2bits SSPCON2bits `VES2179  1 e 1 @4037 ]
 "33302
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
-[s S2088 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S2124 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "33322
-[s S2094 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S2130 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
 "33322
-[u S2099 . 1 `S2088 1 . 1 0 `S2094 1 . 1 0 ]
+[u S2135 . 1 `S2124 1 . 1 0 `S2130 1 . 1 0 ]
 "33322
 "33322
-[v _SSPCON1bits SSPCON1bits `VES2099  1 e 1 @4038 ]
+[v _SSPCON1bits SSPCON1bits `VES2135  1 e 1 @4038 ]
 "33371
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
-[s S1914 . 1 `uc 1 . 1 0 :2:0 
+[s S1950 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W 1 0 :1:2 
 ]
 "33473
-[s S1917 . 1 `uc 1 . 1 0 :5:0 
+[s S1953 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A 1 0 :1:5 
 ]
 "33473
-[s S1920 . 1 `uc 1 BF 1 0 :1:0 
+[s S1956 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -548,79 +587,79 @@
 "33473
 "33473
 "33473
-[s S1935 . 1 `uc 1 . 1 0 :2:0 
+[s S1971 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
 "33473
-[s S1940 . 1 `uc 1 . 1 0 :2:0 
+[s S1976 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DAT 1 0 :1:5 
 ]
 "33473
-[s S1946 . 1 `uc 1 . 1 0 :2:0 
+[s S1982 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
 "33473
-[s S1951 . 1 `uc 1 . 1 0 :2:0 
+[s S1987 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE 1 0 :1:2 
 ]
 "33473
-[s S1954 . 1 `uc 1 . 1 0 :5:0 
+[s S1990 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS 1 0 :1:5 
 ]
 "33473
-[s S1957 . 1 `uc 1 . 1 0 :2:0 
+[s S1993 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
 "33473
-[s S1962 . 1 `uc 1 . 1 0 :2:0 
+[s S1998 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
 "33473
-[s S1967 . 1 `uc 1 . 1 0 :2:0 
+[s S2003 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
 "33473
-[s S1972 . 1 `uc 1 . 1 0 :5:0 
+[s S2008 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 DA 1 0 :1:5 
 ]
 "33473
-[s S1975 . 1 `uc 1 . 1 0 :2:0 
+[s S2011 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW 1 0 :1:2 
 ]
 "33473
-[s S1978 . 1 `uc 1 . 1 0 :3:0 
+[s S2014 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 START 1 0 :1:3 
 ]
 "33473
-[s S1981 . 1 `uc 1 . 1 0 :4:0 
+[s S2017 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 STOP 1 0 :1:4 
 ]
 "33473
-[s S1984 . 1 `uc 1 . 1 0 :2:0 
+[s S2020 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W 1 0 :1:2 
 ]
 "33473
-[s S1987 . 1 `uc 1 . 1 0 :5:0 
+[s S2023 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A 1 0 :1:5 
 ]
 "33473
-[u S1990 . 1 `S1914 1 . 1 0 `S1917 1 . 1 0 `S1920 1 . 1 0 `S1914 1 . 1 0 `S1917 1 . 1 0 `S1935 1 . 1 0 `S1940 1 . 1 0 `S1946 1 . 1 0 `S1951 1 . 1 0 `S1954 1 . 1 0 `S1957 1 . 1 0 `S1962 1 . 1 0 `S1967 1 . 1 0 `S1972 1 . 1 0 `S1975 1 . 1 0 `S1978 1 . 1 0 `S1981 1 . 1 0 `S1984 1 . 1 0 `S1987 1 . 1 0 ]
+[u S2026 . 1 `S1950 1 . 1 0 `S1953 1 . 1 0 `S1956 1 . 1 0 `S1950 1 . 1 0 `S1953 1 . 1 0 `S1971 1 . 1 0 `S1976 1 . 1 0 `S1982 1 . 1 0 `S1987 1 . 1 0 `S1990 1 . 1 0 `S1993 1 . 1 0 `S1998 1 . 1 0 `S2003 1 . 1 0 `S2008 1 . 1 0 `S2011 1 . 1 0 `S2014 1 . 1 0 `S2017 1 . 1 0 `S2020 1 . 1 0 `S2023 1 . 1 0 ]
 "33473
 "33473
-[v _SSPSTATbits SSPSTATbits `VES1990  1 e 1 @4039 ]
+[v _SSPSTATbits SSPSTATbits `VES2026  1 e 1 @4039 ]
 "33637
 [v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
 "33643
@@ -629,26 +668,26 @@
 [v _T2CON T2CON `VEuc  1 e 1 @4042 ]
 "33719
 [v _PR2 PR2 `VEuc  1 e 1 @4043 ]
-[s S608 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+[s S637 . 1 `uc 1 NOT_BOR 1 0 :1:0 
 ]
 "34008
-[s S610 . 1 `uc 1 . 1 0 :1:0 
+[s S639 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_POR 1 0 :1:1 
 ]
 "34008
-[s S613 . 1 `uc 1 . 1 0 :2:0 
+[s S642 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_PD 1 0 :1:2 
 ]
 "34008
-[s S616 . 1 `uc 1 . 1 0 :3:0 
+[s S645 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_TO 1 0 :1:3 
 ]
 "34008
-[s S619 . 1 `uc 1 . 1 0 :4:0 
+[s S648 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 NOT_RI 1 0 :1:4 
 ]
 "34008
-[s S622 . 1 `uc 1 nBOR 1 0 :1:0 
+[s S651 . 1 `uc 1 nBOR 1 0 :1:0 
 `uc 1 nPOR 1 0 :1:1 
 `uc 1 nPD 1 0 :1:2 
 `uc 1 nTO 1 0 :1:3 
@@ -658,17 +697,17 @@
 `uc 1 IPEN 1 0 :1:7 
 ]
 "34008
-[s S631 . 1 `uc 1 BOR 1 0 :1:0 
+[s S660 . 1 `uc 1 BOR 1 0 :1:0 
 `uc 1 POR 1 0 :1:1 
 `uc 1 PD 1 0 :1:2 
 `uc 1 TO 1 0 :1:3 
 `uc 1 RI 1 0 :1:4 
 ]
 "34008
-[u S637 . 1 `S608 1 . 1 0 `S610 1 . 1 0 `S613 1 . 1 0 `S616 1 . 1 0 `S619 1 . 1 0 `S622 1 . 1 0 `S631 1 . 1 0 ]
+[u S666 . 1 `S637 1 . 1 0 `S639 1 . 1 0 `S642 1 . 1 0 `S645 1 . 1 0 `S648 1 . 1 0 `S651 1 . 1 0 `S660 1 . 1 0 ]
 "34008
 "34008
-[v _RCONbits RCONbits `VES637  1 e 1 @4048 ]
+[v _RCONbits RCONbits `VES666  1 e 1 @4048 ]
 "34393
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
 [s S21 . 1 `uc 1 RBIF 1 0 :1:0 
@@ -726,15 +765,15 @@
 [v _hexpowers hexpowers `C[8]ul  1 s 32 hexpowers ]
 "369
 [v _octpowers octpowers `C[12]ul  1 s 48 octpowers ]
-[s S1034 . 1 `uc 1 RX_NINE 1 0 :1:0 
+[s S1065 . 1 `uc 1 RX_NINE 1 0 :1:0 
 `uc 1 TX_NINE 1 0 :1:1 
 `uc 1 FRAME_ERROR 1 0 :1:2 
 `uc 1 OVERRUN_ERROR 1 0 :1:3 
 `uc 1 fill 1 0 :4:4 
 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\pic18\plib\USART\udefs.c
-[u S1040 USART 1 `uc 1 val 1 0 `S1034 1 . 1 0 ]
-[v _USART_Status USART_Status `S1040  1 e 1 0 ]
+[u S1071 USART 1 `uc 1 val 1 0 `S1065 1 . 1 0 ]
+[v _USART_Status USART_Status `S1071  1 e 1 0 ]
 "44 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\LCD.c
 [v _Scroll_1 Scroll_1 `[16]uc  1 e 16 0 ]
 "45
@@ -759,15 +798,15 @@
 [v _ScrollDisplayPosition ScrollDisplayPosition `uc  1 e 1 0 ]
 "55
 [v _ScrollFIFOCount ScrollFIFOCount `uc  1 e 1 0 ]
-"55 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\LCD.h
+"62 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\LCD.h
 [v _LCDclearCount LCDclearCount `ul  1 e 4 0 ]
-"56
+"63
 [v _LCDwait LCDwait `uc  1 e 1 0 ]
-"55 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
+"56 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
 [v _Version Version `[20]uc  1 e 20 0 ]
-"66
-[v _buf buf `[100]uc  1 e 100 0 ]
 "67
+[v _buf buf `[100]uc  1 e 100 0 ]
+"68
 [v _bufferCount bufferCount `uc  1 e 1 0 ]
 "60 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\RF.h
 [v _TXdataE TXdataE `C[12]uc  1 e 12 0 ]
@@ -811,27 +850,31 @@
 [v _SubLightON SubLightON `C[16]uc  1 e 16 0 ]
 "102
 [v _SubLightOFF SubLightOFF `C[16]uc  1 e 16 0 ]
-[s S1226 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
+[s S1256 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
 "46 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\RTC.c
-[v _NowTime NowTime `S1226  1 e 9 0 ]
-"52 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+[v _NowTime NowTime `S1256  1 e 9 0 ]
+"53 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _Txdata Txdata `[100]uc  1 e 100 0 ]
-"53
-[v _Rxdata Rxdata `[100]uc  1 e 100 0 ]
 "54
-[v _BAUD BAUD `ul  1 e 4 0 ]
+[v _Rxdata Rxdata `[100]uc  1 e 100 0 ]
 "55
-[v _PARITY PARITY `uc  1 e 1 0 ]
+[v _BAUD BAUD `ul  1 e 4 0 ]
 "56
+[v _PARITY PARITY `uc  1 e 1 0 ]
+"57
 [v _TX_OLD TX_OLD `uc  1 e 1 0 ]
-"73 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
+"74 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\main.c
 [v _main main `(v  1 e 0 0 ]
 {
+"78
+[v main@Baudtemp Baudtemp `ul  1 a 4 98 ]
+"77
+[v main@count count `uc  1 a 1 102 ]
 "76
-[v main@count count `uc  1 a 1 139 ]
-"75
-[v main@ii ii `uc  1 a 1 138 ]
-"167
+[v main@ii ii `uc  1 a 1 97 ]
+"79
+[v main@MemoryBurnflag MemoryBurnflag `uc  1 a 1 96 ]
+"186
 } 0
 "66 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\LCD.c
 [v _init_LCD init_LCD `(v  1 e 0 0 ]
@@ -965,8 +1008,8 @@
 "70
 [v Command@ADC_Value ADC_Value `ui  1 a 2 200 ]
 "67
-[v Command@Input Input `*.39uc  1 p 2 136 ]
-"849
+[v Command@Input Input `*.39uc  1 p 2 90 ]
+"861
 } 0
 "281 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\MISC.c
 [v _lowercase lowercase `(v  1 e 0 0 ]
@@ -1011,13 +1054,13 @@
 [v _StringAddEqual StringAddEqual `(uc  1 e 1 0 ]
 {
 "304
-[v StringAddEqual@temp temp `[100]uc  1 a 100 33 ]
+[v StringAddEqual@temp temp `[100]uc  1 a 100 0 ]
 "302
-[v StringAddEqual@j j `uc  1 a 1 135 ]
+[v StringAddEqual@j j `uc  1 a 1 102 ]
 "301
-[v StringAddEqual@i i `uc  1 a 1 134 ]
+[v StringAddEqual@i i `uc  1 a 1 101 ]
 "303
-[v StringAddEqual@firstnumber firstnumber `uc  1 a 1 133 ]
+[v StringAddEqual@firstnumber firstnumber `uc  1 a 1 100 ]
 "299
 [v StringAddEqual@Input Input `*.39uc  1 p 2 29 ]
 "334
@@ -1033,8 +1076,8 @@
 [v _SprintDate SprintDate `(v  1 e 0 0 ]
 {
 [v SprintDate@ReturnBuf ReturnBuf `*.39uc  1 p 2 78 ]
-[s S1226 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
-[v SprintDate@DisplayTime DisplayTime `S1226  1 p 9 80 ]
+[s S1256 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
+[v SprintDate@DisplayTime DisplayTime `S1256  1 p 9 80 ]
 [v SprintDate@Military Military `uc  1 p 1 89 ]
 "271
 } 0
@@ -1129,20 +1172,14 @@
 [v ___ftpack@sign sign `uc  1 p 1 18 ]
 "86
 } 0
-"314 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"315 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _SetBaud SetBaud `(v  1 e 0 0 ]
 {
-"316
-[v SetBaud@buf buf `[50]uc  1 a 50 0 ]
-"319
-[v SetBaud@temp temp `ul  1 a 4 59 ]
-"318
-[v SetBaud@Paritytemp Paritytemp `ul  1 a 4 55 ]
 "317
-[v SetBaud@Baudtemp Baudtemp `ul  1 a 4 51 ]
-"320
-[v SetBaud@i i `uc  1 a 1 50 ]
-"314
+[v SetBaud@buf buf `[50]uc  1 a 50 0 ]
+"318
+[v SetBaud@status status `uc  1 a 1 50 ]
+"315
 [v SetBaud@Baud Baud `ul  1 p 4 78 ]
 [v SetBaud@Parity Parity `uc  1 p 1 82 ]
 "383
@@ -1152,10 +1189,10 @@
 {
 "1509
 [v sprintf@idx idx `uc  1 a 1 58 ]
-[s S2278 . 4 `*.39Cuc 1 _cp 2 0 `ui 1 _len 2 2 ]
+[s S2431 . 4 `*.39Cuc 1 _cp 2 0 `ui 1 _len 2 2 ]
 "533
-[u S2281 . 4 `ul 1 _val 4 0 `S2278 1 _str 4 0 ]
-[v sprintf@_val _val `S2281  1 a 4 71 ]
+[u S2434 . 4 `ul 1 _val 4 0 `S2431 1 _str 4 0 ]
+[v sprintf@_val _val `S2434  1 a 4 71 ]
 "508
 [v sprintf@flag flag `us  1 a 2 76 ]
 "501
@@ -1200,36 +1237,111 @@
 [v ___llmod@divisor divisor `ul  1 p 4 31 ]
 "26
 } 0
-"294 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"295 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _UARTstringWAIT UARTstringWAIT `(v  1 e 0 0 ]
 {
 [v UARTstringWAIT@data data `*.32uc  1 p 2 25 ]
-"305
+"306
 } 0
-"68
+"189 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\EEPROM.c
+[v _SetMemoryParity SetMemoryParity `(uc  1 e 1 0 ]
+{
+[v SetMemoryParity@Parity Parity `uc  1 a 1 wreg ]
+"191
+[v SetMemoryParity@Test Test `uc  1 a 1 21 ]
+"189
+[v SetMemoryParity@Parity Parity `uc  1 a 1 wreg ]
+"193
+[v SetMemoryParity@Parity Parity `uc  1 a 1 22 ]
+"204
+} 0
+"175
+[v _GetMemoryParity GetMemoryParity `(uc  1 e 1 0 ]
+{
+"177
+[v GetMemoryParity@Parity Parity `uc  1 a 1 20 ]
+"182
+} 0
+"140
+[v _SetMemoryBaud SetMemoryBaud `(uc  1 e 1 0 ]
+{
+"146
+[v SetMemoryBaud@Test Test `ul  1 a 4 60 ]
+"145
+[v SetMemoryBaud@BaudTempL BaudTempL `uc  1 a 1 67 ]
+"144
+[v SetMemoryBaud@BaudTempML BaudTempML `uc  1 a 1 66 ]
+"143
+[v SetMemoryBaud@BaudTempMH BaudTempMH `uc  1 a 1 65 ]
+"142
+[v SetMemoryBaud@BaudTempH BaudTempH `uc  1 a 1 64 ]
+"140
+[v SetMemoryBaud@Baud Baud `ul  1 p 4 52 ]
+"168
+} 0
+"92
+[v _WriteEEPROM_1Byte WriteEEPROM_1Byte `(v  1 e 0 0 ]
+{
+"94
+[v WriteEEPROM_1Byte@GIEstatus GIEstatus `uc  1 a 1 20 ]
+"92
+[v WriteEEPROM_1Byte@address address `ui  1 p 2 14 ]
+[v WriteEEPROM_1Byte@data data `uc  1 p 1 16 ]
+"110
+} 0
+"77
+[v _EEPROM_UNLOCK EEPROM_UNLOCK `(v  1 e 0 0 ]
+{
+"85
+} 0
+"117
+[v _GetMemoryBaud GetMemoryBaud `(ul  1 e 4 0 ]
+{
+"123
+[v GetMemoryBaud@baud baud `ul  1 a 4 44 ]
+"122
+[v GetMemoryBaud@BaudTempL BaudTempL `uc  1 a 1 51 ]
+"121
+[v GetMemoryBaud@BaudTempML BaudTempML `uc  1 a 1 50 ]
+"120
+[v GetMemoryBaud@BaudTempMH BaudTempMH `uc  1 a 1 49 ]
+"119
+[v GetMemoryBaud@BaudTempH BaudTempH `uc  1 a 1 48 ]
+"133
+} 0
+"52
+[v _ReadEEPROM_1Byte ReadEEPROM_1Byte `(ui  1 e 2 0 ]
+{
+"54
+[v ReadEEPROM_1Byte@GIEstatus GIEstatus `uc  1 a 1 19 ]
+"52
+[v ReadEEPROM_1Byte@address address `ui  1 p 2 14 ]
+"69
+} 0
+"69 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _InitUART InitUART `(v  1 e 0 0 ]
 {
-"70
-[v InitUART@temp temp `ul  1 a 4 40 ]
-"72
-[v InitUART@spbrg spbrg `ui  1 a 2 36 ]
 "71
-[v InitUART@config config `uc  1 a 1 39 ]
+[v InitUART@temp temp `ul  1 a 4 40 ]
 "73
+[v InitUART@spbrg spbrg `ui  1 a 2 36 ]
+"72
+[v InitUART@config config `uc  1 a 1 39 ]
+"74
 [v InitUART@baudconfig baudconfig `uc  1 a 1 38 ]
-"68
+"69
 [v InitUART@Baud Baud `ul  1 p 4 27 ]
 [v InitUART@parity parity `uc  1 p 1 31 ]
-"121
+"122
 } 0
-"128
+"129
 [v _baudUSART baudUSART `(v  1 e 0 0 ]
 {
 [v baudUSART@baudconfig baudconfig `uc  1 a 1 wreg ]
 [v baudUSART@baudconfig baudconfig `uc  1 a 1 wreg ]
-"130
+"131
 [v baudUSART@baudconfig baudconfig `uc  1 a 1 14 ]
-"132
+"133
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
@@ -1243,22 +1355,22 @@
 [v ___lldiv@divisor divisor `ul  1 p 4 18 ]
 "31
 } 0
-"252 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"253 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _ReadUSART ReadUSART `(uc  1 e 1 0 ]
 {
-"254
+"255
 [v ReadUSART@data data `uc  1 a 1 14 ]
-"274
+"275
 } 0
-"139
+"140
 [v _OpenUSART OpenUSART `(v  1 e 0 0 ]
 {
 [v OpenUSART@config config `uc  1 a 1 wreg ]
 [v OpenUSART@config config `uc  1 a 1 wreg ]
 [v OpenUSART@spbrg spbrg `ui  1 p 2 14 ]
-"141
+"142
 [v OpenUSART@config config `uc  1 a 1 19 ]
-"190
+"191
 } 0
 "137 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\RF.c
 [v _Send_Config2 Send_Config2 `(v  1 e 0 0 ]
@@ -1338,9 +1450,9 @@
 [v SET_RTC_TIME@temp temp `[7]uc  1 a 7 35 ]
 "172
 [v SET_RTC_TIME@Error Error `c  1 a 1 42 ]
-[s S1226 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
+[s S1256 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
 "170
-[v SET_RTC_TIME@SetTime SetTime `S1226  1 p 9 22 ]
+[v SET_RTC_TIME@SetTime SetTime `S1256  1 p 9 22 ]
 "225
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\awmod.c
@@ -1382,11 +1494,11 @@
 [v _RemoveSpaces RemoveSpaces `(v  1 e 0 0 ]
 {
 "262
-[v RemoveSpaces@That That `[100]uc  1 a 100 31 ]
+[v RemoveSpaces@That That `[100]uc  1 a 100 0 ]
 "261
-[v RemoveSpaces@address address `*.39uc  1 a 2 131 ]
+[v RemoveSpaces@address address `*.39uc  1 a 2 100 ]
 "260
-[v RemoveSpaces@i i `uc  1 a 1 133 ]
+[v RemoveSpaces@i i `uc  1 a 1 102 ]
 "257
 [v RemoveSpaces@This This `*.39uc  1 p 2 29 ]
 "274
@@ -1463,9 +1575,9 @@
 "279 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\RTC.c
 [v _Parse_Time Parse_Time `(uc  1 e 1 0 ]
 {
-[s S1226 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
+[s S1256 TIME 9 `uc 1 Seconds 1 0 `uc 1 Minutes 1 1 `uc 1 Hours 1 2 `uc 1 HoursMilitary 1 3 `uc 1 HoursAM_PM 1 4 `uc 1 Day 1 5 `uc 1 Date 1 6 `uc 1 Month 1 7 `uc 1 Year 1 8 ]
 "281
-[v Parse_Time@TempTime TempTime `S1226  1 a 9 18 ]
+[v Parse_Time@TempTime TempTime `S1256  1 a 9 18 ]
 "282
 [v Parse_Time@temp temp `uc  1 a 1 17 ]
 "279
@@ -1573,22 +1685,22 @@
 [v InternalADC_Read@channel channel `uc  1 a 1 33 ]
 "126
 } 0
-"235 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"236 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v _UARTstring UARTstring `(v  1 e 0 0 ]
 {
 [v UARTstring@data data `*.34uc  1 p 2 25 ]
-"245
+"246
 } 0
-"197
+"198
 [v _UARTchar UARTchar `(v  1 e 0 0 ]
 {
 [v UARTchar@data data `uc  1 a 1 wreg ]
 [v UARTchar@data data `uc  1 a 1 wreg ]
 [v UARTchar@NinethBit_override NinethBit_override `uc  1 p 1 21 ]
 [v UARTchar@NinethBit_override_data NinethBit_override_data `uc  1 p 1 22 ]
-"199
+"200
 [v UARTchar@data data `uc  1 a 1 24 ]
-"228
+"229
 } 0
 "343 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\MISC.c
 [v _CheckSum_byte CheckSum_byte `(uc  1 e 1 0 ]
@@ -1636,6 +1748,11 @@
 [v ___lmul@multiplicand multiplicand `ul  1 p 4 18 ]
 "129
 } 0
+"390 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+[v _GetBaud GetBaud `(ul  1 e 4 0 ]
+{
+"393
+} 0
 "101 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\interrupts.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
@@ -1649,24 +1766,24 @@
 [v low_isr@rx rx `uc  1 a 1 119 ]
 "114
 [v low_isr@j j `uc  1 a 1 118 ]
-"206
+"226
 } 0
-"235 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"236 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v i1_UARTstring UARTstring `(v  1 e 0 0 ]
 {
 [v i1UARTstring@data data `*.34uc  1 p 2 11 ]
-"245
+"246
 } 0
-"197
+"198
 [v i1_UARTchar UARTchar `(v  1 e 0 0 ]
 {
 [v i1UARTchar@data data `uc  1 a 1 wreg ]
 [v i1UARTchar@data data `uc  1 a 1 wreg ]
 [v i1UARTchar@NinethBit_override NinethBit_override `uc  1 p 1 7 ]
 [v i1UARTchar@NinethBit_override_data NinethBit_override_data `uc  1 p 1 8 ]
-"199
+"200
 [v i1UARTchar@data data `uc  1 a 1 10 ]
-"228
+"229
 } 0
 "343 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\MISC.c
 [v i1_CheckSum_byte CheckSum_byte `(uc  1 e 1 0 ]
@@ -1689,11 +1806,11 @@
 [v i1SetLCDcursor@Row Row `uc  1 a 1 15 ]
 "211
 } 0
-"252 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
+"253 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\UART.c
 [v i1_ReadUSART ReadUSART `(uc  1 e 1 0 ]
 {
 [v i1ReadUSART@data ReadUSART `uc  1 a 1 0 ]
-"274
+"275
 } 0
 "233 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\LCD.c
 [v i1_LCDPrintString LCDPrintString `(v  1 e 0 0 ]
@@ -1759,14 +1876,14 @@
 [v i1cleanBuffer@count count `i  1 p 2 2 ]
 "80
 } 0
-"13 C:\Program Files (x86)\Microchip\xc8\v1.33\sources\pic18\plib\USART\uwrite.c
-[v _WriteUSART WriteUSART `(v  1 e 0 0 ]
+"397
+[v _IsPrintableASCII IsPrintableASCII `(uc  1 e 1 0 ]
 {
-[v WriteUSART@data data `uc  1 a 1 wreg ]
-[v WriteUSART@data data `uc  1 a 1 wreg ]
-"15
-[v WriteUSART@data data `uc  1 a 1 0 ]
-"23
+[v IsPrintableASCII@data data `uc  1 a 1 wreg ]
+[v IsPrintableASCII@data data `uc  1 a 1 wreg ]
+"399
+[v IsPrintableASCII@data data `uc  1 a 1 0 ]
+"404
 } 0
 "59 C:\Users\dwhitfield.TDY\Documents\GitHub\Smart_Rf_PIC\interrupts.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]

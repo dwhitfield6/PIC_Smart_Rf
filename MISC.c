@@ -113,18 +113,18 @@ unsigned char StringMatch(unsigned char* This,const unsigned char* That)
     {
        if(*This != *That || *That == 0)
        {
-           return 0;
+           return FALSE;
        }
        This++;
        That++;
     }
     if(*That == 0)
     {
-        return 1;
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -144,16 +144,16 @@ unsigned char StringContains(unsigned char* This, const unsigned char* That)
            This++;
            if(*That == 0)
            {
-               return 1;
+               return TRUE;
            }
            if(*This == 0)
            {
-               return 0;
+               return FALSE;
            }
        }
        This++;
     }
-    return 0;
+    return FALSE;
 }
 
 /******************************************************************************/
@@ -183,12 +183,12 @@ unsigned char StartsWith(unsigned char* This,const unsigned char* That)
     if(*This == 0 && *That == 0)
     {
         // the arrays are equal
-        return 1;
+        return TRUE;
     }
     else
     {
         // array 'That' is bigger than array 'This'
-        return 0;
+        return FALSE;
     }
 }
 
@@ -314,7 +314,7 @@ unsigned char StringAddEqual(unsigned char* Input)
     }
     if(firstnumber ==200)
     {
-        return 0;
+        return FALSE;
     }
     for(j=0;j<firstnumber;j++)
     {
@@ -330,7 +330,7 @@ unsigned char StringAddEqual(unsigned char* Input)
         }
     }
     BufferCopy(temp,Input,100, 0);
-    return 1;
+    return TRUE;
 }
 
 /******************************************************************************/
@@ -358,17 +358,17 @@ unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even)
     {
         if(Parity % 2 == 0) //even
         {
-            return 1;
+            return TRUE;
         }
-        return 0;
+        return FALSE;
     }
     else
     {
         if(Parity % 2 == 1) //odd
         {
-            return 1;
+            return TRUE;
         }
-        return 0;
+        return FALSE;
     }
 }
 
@@ -381,10 +381,24 @@ unsigned char ISNUMBER(unsigned char ascii)
 {
     if(ascii >= '0' && ascii <='9')
     {
-        return 1;
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
+}
+
+/******************************************************************************/
+/* IsPrintableASCII
+ *
+ * The function returns TRUE the input character is a printable ascii value.
+/******************************************************************************/
+unsigned char IsPrintableASCII(unsigned char data)
+{
+    if(data >= 0x20 && data < 0x7F)
+    {
+        return TRUE;
+    }
+    return FALSE;
 }

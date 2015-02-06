@@ -7,7 +7,9 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/21/15     1.0         Created log.
- * 01/23/15     1.0_DW0         Added funtcion ISNUMBER.
+ * 02/05/15     1.0_DW0     Added funtcion ISNUMBER.
+ *                          Added function IsPrintableASCII.
+ *                          Added macro for TRUE and FALSE.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -49,6 +51,8 @@
 #define Even 2
 #define Odd 3
 
+#define TRUE 1
+#define FALSE 0
 #define NOEQUAL 2147483647L
 #define DOUBLEEQUAL 2147483646L
 #define NOVALUE 2147483645L
@@ -70,3 +74,4 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);

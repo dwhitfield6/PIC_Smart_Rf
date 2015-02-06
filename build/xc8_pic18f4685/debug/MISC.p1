@@ -15362,18 +15362,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
 [; ;system.h: 54: void ConfigureOscillator(void);
-[; ;MISC.h: 61: void delayUS(long US);
-[; ;MISC.h: 62: void cleanBuffer(unsigned char* data, int count);
-[; ;MISC.h: 63: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
-[; ;MISC.h: 64: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 65: unsigned char StringContains(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 66: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
-[; ;MISC.h: 67: long GetEnteredNumber(unsigned char* This);
-[; ;MISC.h: 68: void RemoveSpaces(unsigned char* This);
-[; ;MISC.h: 69: void lowercase(unsigned char* Input);
-[; ;MISC.h: 70: unsigned char StringAddEqual(unsigned char* Input);
-[; ;MISC.h: 71: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
-[; ;MISC.h: 72: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 65: void delayUS(long US);
+[; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
+[; ;MISC.h: 67: void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
+[; ;MISC.h: 68: unsigned char StringMatch(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 69: unsigned char StringContains(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 70: unsigned char StartsWith(unsigned char* This, const unsigned char* That);
+[; ;MISC.h: 71: long GetEnteredNumber(unsigned char* This);
+[; ;MISC.h: 72: void RemoveSpaces(unsigned char* This);
+[; ;MISC.h: 73: void lowercase(unsigned char* Input);
+[; ;MISC.h: 74: unsigned char StringAddEqual(unsigned char* Input);
+[; ;MISC.h: 75: unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
+[; ;MISC.h: 76: unsigned char ISNUMBER(unsigned char ascii);
+[; ;MISC.h: 77: unsigned char IsPrintableASCII(unsigned char data);
 [; ;system.h: 54: void ConfigureOscillator(void);
 "55 MISC.c
 [v _delayUS `(v ~T0 @X0 1 ef1`l ]
@@ -16423,4 +16424,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MISC.c: 390: }
 "390
 [e :UE 2256 ]
+}
+"397
+[v _IsPrintableASCII `(uc ~T0 @X0 1 ef1`uc ]
+"398
+{
+[; ;MISC.c: 397: unsigned char IsPrintableASCII(unsigned char data)
+[; ;MISC.c: 398: {
+[e :U _IsPrintableASCII ]
+"397
+[v _data `uc ~T0 @X0 1 r1 ]
+"398
+[f ]
+[; ;MISC.c: 399: if(data >= 0x20 && data < 0x7F)
+"399
+[e $ ! && >= -> _data `i -> 32 `i < -> _data `i -> 127 `i 2260  ]
+[; ;MISC.c: 400: {
+"400
+{
+[; ;MISC.c: 401: return 1;
+"401
+[e ) -> -> 1 `i `uc ]
+[e $UE 2259  ]
+"402
+}
+[e :U 2260 ]
+[; ;MISC.c: 402: }
+[; ;MISC.c: 403: return 0;
+"403
+[e ) -> -> 0 `i `uc ]
+[e $UE 2259  ]
+[; ;MISC.c: 404: }
+"404
+[e :UE 2259 ]
 }

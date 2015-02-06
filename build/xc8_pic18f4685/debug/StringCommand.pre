@@ -19591,7 +19591,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19604,6 +19604,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19611,7 +19612,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19621,6 +19622,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19631,7 +19633,7 @@ void InitApp(void);
 # 54 "system.h"
 void ConfigureOscillator(void);
 
-# 61 "MISC.h"
+# 65 "MISC.h"
 void delayUS(long US);
 void cleanBuffer(unsigned char* data, int count);
 void BufferCopy(unsigned char* from, unsigned char* to, char count, char shift);
@@ -19644,6 +19646,7 @@ void lowercase(unsigned char* Input);
 unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
+unsigned char IsPrintableASCII(unsigned char data);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19651,7 +19654,7 @@ void ConfigureOscillator(void);
 # 90 "user.h"
 void InitApp(void);
 
-# 104 "UART.h"
+# 114 "UART.h"
 void InitUART(unsigned long Baud, unsigned char parity);
 void UARTstring(unsigned char *data);
 void UARTstringWAIT(unsigned char *data);
@@ -19661,6 +19664,7 @@ char ReadUSART(void);
 void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
+unsigned long GetBaud(void);
 
 # 90 "user.h"
 void InitApp(void);
@@ -19722,11 +19726,11 @@ void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 55 "LCD.h"
+# 62 "LCD.h"
 unsigned long LCDclearCount=25000;
 unsigned char LCDwait=0;
 
-# 62
+# 69
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -20439,7 +20443,8 @@ UARTstring("Joes room\r\n");
 UARTstring("Christmas Tree\r\n");
 UARTstring("Contrast\r\n");
 UARTstring("ADC\r\n");
-UARTstring("RTC\r\n\n");
+UARTstring("RTC\r\n");
+UARTstring("Baud\r\n\n");
 UARTstring("For Device help enter device followed by a '?' \r\n");
 UARTstring("i.e.  Livingroom?\r\n\r\n");
 UARTstring("Current Time\r\n");
@@ -20461,6 +20466,14 @@ sprintf(buf,"%02d/%02d %02d:%02d AM", NowTime.Month, NowTime.Date, NowTime.Hours
 }
 SetLCDcursor(1, 0);
 LCDPrintString(buf);
+}
+else
+{
+UARTstring("ERROR: Can't Read RTC\r\n");
+SetLCDcursor(1, 0);
+LCDPrintString("RTC isnt working");
+}
+SetLCDcursor(1, 0);
 LCD_Scroll("Device Menus:");
 LCD_Scroll("Bedroom?");
 LCD_Scroll("Livingroom?");
@@ -20469,17 +20482,20 @@ LCD_Scroll("Christmas Tree?");
 LCD_Scroll("Contrast?");
 LCD_Scroll("ADC?");
 LCD_Scroll("RTC?");
-}
-else
-{
-UARTstring("ERROR: Can't Read RTC\r\n");
-SetLCDcursor(1, 0);
-LCDPrintString("RTC isnt working");
-}
+LCD_Scroll("Baud?");
 LCDclearCount =0;
 }
-else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") || StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
+else if(StringMatch(Input, "baud?"))
 {
+
+sprintf(buf,"BAUD = %d", GetBaud());
+UARTstring(buf);
+LCDdisplayFeedback(buf);
+}
+else if(StringContains(Input, "baudwillbesetto") || StringContains(Input, "resetto") ||
+StringContains(Input, "setbaud") || StringContains(Input, "changebaud"))
+{
+
 if (!StringContains(Input, "="))
 {
 StringAddEqual(Input);
@@ -20524,7 +20540,7 @@ UARTstring("Baud Out of range\r\n");
 else if(StringContains(Input, "baudis"))
 {
 
-# 815
+# 827
 __nop();
 }
 else if(StringContains(Input, "enterbaudrate"))

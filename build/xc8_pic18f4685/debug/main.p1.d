@@ -7,6 +7,7 @@ UART.h  \
 PWM.h  \
 RTC.h  \
 MISC.h  \
+EEPROM.h  \
 user.h  \
 LCD.h  \
 system.h  \

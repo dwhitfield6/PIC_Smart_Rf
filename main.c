@@ -7,7 +7,9 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/22/15     1.0         Created log.
- * 01/22/15     1.0_DW0     Added version banner.
+ * 02/05/15     1.0_DW0     Added version banner.
+ *                          Added EEPROM functionaity.
+ *                          Added code to save the Baud rate in EEPROM
 /******************************************************************************/
 
 /******************************************************************************/
@@ -47,6 +49,7 @@
 #include "LCD.h"
 #include "I2C.h"
 #include "RTC.h"
+#include "EEPROM.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
 /* Version                                                                    */
@@ -72,23 +75,34 @@ unsigned char bufferCount =0;
 
 void main(void)
 {
-    unsigned char ii =0;
-    unsigned char count =0;
+    unsigned char ii = 0;
+    unsigned char count = 0;
+    unsigned long Baudtemp = 0;
+    unsigned char MemoryBurnflag = 0;
     
     ConfigureOscillator();
     InitApp();
-    InitUART(115200, 0);
     EnableInternalADC(1);
     PWM_init();
     ContrastPWM_init();
     init_LCD();
     Init_I2C_Master();
     RTC_INIT();
-
+    Baudtemp = GetMemoryBaud();
+    if(Baudtemp < 2400 || Baudtemp > 115200)
+    {
+        if(SetMemoryBaud(defaultBaud))
+        {
+            MemoryBurnflag = 1;
+        }
+        Baudtemp = defaultBaud;
+        SetMemoryParity(NONE);
+    }
+    InitUART(Baudtemp, GetMemoryParity());
     UARTstring("Firmware Version: ");
     UARTstring(Version);
     UARTstring("\r\n");
-
+    
     for(ii =0; ii <10;ii++)
     {
         LATD |= LED0;
@@ -101,6 +115,13 @@ void main(void)
     SetContrast(65);
     delayUS(20);
     SetLCDcursor(0, 0);
+    if(MemoryBurnflag)
+    {
+         UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
+         LCDPrintString("Err: Baud Mem");
+         delayUS(100000);
+         SetLCDcursor(0, 0);
+    }
     LCDPrintString("Starting");
     UARTstring("Starting...");
     delayUS(100000);
