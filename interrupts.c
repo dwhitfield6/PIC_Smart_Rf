@@ -37,11 +37,14 @@
 #include "UART.h"
 #include "LCD.h"
 #include "StringCommand.h"
+#include "IR.h"          /* User funct/params, such as InitApp */
+#include "Timer.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-
+unsigned char IRpinOLD;
+extern unsigned char IRfault;
 extern char Txdata[100];
 extern char Rxdata[100];
 extern unsigned char bufferCount;
@@ -66,32 +69,7 @@ void high_isr(void)
 #endif
 
 {
-
-      /* This code stub shows general interrupt handling.  Note that these
-      conditional statements are not handled within 3 seperate if blocks.
-      Do not use a seperate if block for each interrupt flag to avoid run
-      time errors. */
-
-#if 0
     
-      /* TODO Add High Priority interrupt routine code here. */
-
-      /* Determine which flag generated the interrupt */
-      if(<Interrupt Flag 1>)
-      {
-          <Interrupt Flag 1=0>; /* Clear Interrupt Flag 1 */
-      }
-      else if (<Interrupt Flag 2>)
-      {
-          <Interrupt Flag 2=0>; /* Clear Interrupt Flag 2 */
-      }
-      else
-      {
-          /* Unhandled interrupts */
-      }
-
-#endif
-
 }
 
 /******************************************************************************/
@@ -110,17 +88,19 @@ void low_isr(void)
     unsigned char rx;
     unsigned char TEMP_Rxdata[100];
     unsigned char LCD_TEMP [16];
-    int i=0;
-    unsigned char j=0;
+    int i;
+    unsigned char j;
+    unsigned char IRpin;
     
     INTCONbits.PEIE = 0; //Disable pheripheral interrupt
-      
-    //check if the interrupt is caused by RX pin
-    if(PIR1bits.RCIF == 1)
+
+    if(PIR1bits.RCIF)
     {
         // UART rx interrupt
         PIE1bits.RCIE = 0; //Disable RX interrupt
         RCSTAbits.CREN = 0;
+        i=0;
+        j=0;
         rx = ReadUSART(); // read the byte from rx register
 
         if(TX_OLD == '>' && rx == '>' && bufferCount == 0)
@@ -219,8 +199,80 @@ void low_isr(void)
                 bufferCount=0;
             }
         }
+        PIR1bits.RCIF = 0;
+        PIE1bits.RCIE = 1; //Enable RX interrupt
+        RCSTAbits.CREN = 1;
     }
-    PIE1bits.RCIE = 1; //Enable RX interrupt
-    RCSTAbits.CREN = 1;
+    else if(INTCONbits.RBIF)
+    {
+        /* Pin change interrupt */
+        /* Disable RB port change on interrupt */
+        INTCONbits.RBIE = 0;
+        NOP();
+        NOP();
+        IRpin = ReadIRpin();
+        IRrawCount = 0;
+        if(IRpin != IRpinOLD)
+        {
+            IRrawCount += TMR0L;
+            IRrawCount += ((unsigned int)TMR0H << 8);            
+            if(IRrawCodeNum < MaxScanEdgeChange)
+            {
+                /* Turn on Timer Interrupt for Timeout */
+                INTCONbits.TMR0IF = 0;
+                INTCONbits.TMR0IE = 1;
+                Reset_Timer0();
+                if(IRrawCodeNum != 0)
+                {
+                    IRRawCode[IRrawCodeNum - 1] = IRrawCount;
+                }
+                if(IRrawCount >= Repeatlower && IRrawCount <= Repeatupper )
+                {
+                    /* Repeat Code */
+                    IR_New_Code = 2;
+                    if(IR_NEC)
+                    {
+                        UseIRCode(&IR_New_Code,IR_NEC);
+                    }
+                    IRRawCode[0] = IRrawCount;
+                }
+                IRrawCodeNum++;
+            }
+            if(IRrawCodeNum == MaxScanEdgeChange)
+            {
+                INTCONbits.TMR0IF = 0;
+                INTCONbits.TMR0IE = 0;
+                IR_New_Code = IRrawToNEC(IRRawCode, &IR_NEC, YES);
+                if(IR_New_Code)
+                {
+                    UseIRCode(&IR_New_Code,IR_NEC);
+                }
+                IRrawCodeNum = 0;
+            }
+        }
+        IRpinOLD = IRpin;
+        /* Clear flag */
+        INTCONbits.RBIF = 0;
+        /* Enable RB port change on interrupt */
+        INTCONbits.RBIE = 1;
+    }
+    else if (INTCONbits.TMR0IF)
+    {
+        cleanBuffer16bit(IRRawCode, IRrawCodeNum);
+        IRrawCodeNum = 0;
+        INTCONbits.TMR0IF = 0;
+        INTCONbits.TMR0IE = 0;
+    }
+    else if(INTCONbits.INT0IF)
+    {
+        /* Push Button was pressed */
+        INTCONbits.INT0IE = 0;
+        INTCONbits.INT0IF = 0;
+    }
+    else
+    {
+        /* we should never get here */
+        NOP();
+    }
     INTCONbits.PEIE = 1; //Enable pheripheral interrupt
 }

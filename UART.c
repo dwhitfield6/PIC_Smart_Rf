@@ -88,22 +88,22 @@ void InitUART(unsigned long Baud, unsigned char parity)
 
      //-----configure USART -----
 
-    config |= USART_RX_INT_ON;
-    config |= USART_CONT_RX;
-    config |= USART_ASYNCH_MODE;
-    config |= USART_BRGH_HIGH;
+    config |= _USART_RX_INT_ON;
+    config |= _USART_CONT_RX;
+    config |= _USART_ASYNCH_MODE;
+    config |= _USART_BRGH_HIGH;
 
     PARITY = parity;
     BAUD = Baud;
     if(parity)
     {
-        config |= USART_NINE_BIT;
+        config |= _USART_NINE_BIT;
     }
     else
     {
-        config &= ~USART_NINE_BIT;
+        config &= ~_USART_NINE_BIT;
     }
-    baudconfig |= USART_BRG16;
+    baudconfig |= _USART_BRG16;
 
     //calculate the spbrg from the baud rate.
     temp = (SYS_FREQ / Baud) - 1;
@@ -226,6 +226,7 @@ void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned cha
     }
     TX_OLD = data; //previous rx
     TXREG = data;      // Write the data byte to the USART
+    while(!TXSTAbits.TRMT);
 }
 
 /******************************************************************************/
@@ -233,13 +234,13 @@ void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned cha
  *
  * The function sends a group of characters over the UART.
 /******************************************************************************/
-void UARTstring(unsigned char *data)
+void UARTstring(const unsigned char *data)
 {
     do
     {  // Transmit a byte
         if(*data != 0)
         {
-            UARTchar(*data, NO, 0);
+            UARTchar((unsigned char) *data, NO, 0);
             while(BusyUSART());
         }
     } while( *data++);
@@ -292,14 +293,14 @@ void UART_send_break(void)
  * The function sends a group of characters over the UART. There is a wait of
  *   the character_spacing value between character sends.
 /******************************************************************************/
-void UARTstringWAIT(unsigned char *data)
+void UARTstringWAIT(const unsigned char *data)
 {
   do
   {  // Transmit a byte
       delayUS(Character_Spacing);
       if(*data != 0)
       {
-    UARTchar(*data, NO, 0);
+    UARTchar((unsigned char) *data, NO, 0);
     while(BusyUSART());
       }
   } while( *data++);

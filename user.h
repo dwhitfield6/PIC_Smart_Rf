@@ -76,6 +76,12 @@
 #define I2C_SDA	TRISCbits.TRISC4
 #define I2Cclock 0b00001000 //RC3
 
+#define IR_INPUT_TRIS TRISBbits.TRISB4
+#define IR_INPUT 0b00010000 //RB4 used as KBI0
+
+#define Button1_TRIS TRISBbits.TRISB0
+#define Button1 0b00000001 //RB0 used as INT0
+
 #define TRISA TRISAbits
 #define TRISB TRISBbits
 #define TRISC TRISCbits

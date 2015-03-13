@@ -70,6 +70,7 @@ void init_LCD()
     LATD &= ~(Enable + RS);//clear command bits
     PulseEnablePin();
 
+    delayUS(50000);
     SendLCDbyte(0x00, TRUE);//clear buffer
     delayUS(50000);
     SendLCDbyte(0x00, FALSE);//clear buffer
@@ -230,11 +231,11 @@ void ClearLCD()
  *
  * The function prints a string of characters on the LCD.
 /******************************************************************************/
-void LCDPrintString(unsigned char *Text)
+void LCDPrintString(const unsigned char *Text)
 {
     unsigned char *c;
 
-    c = Text;
+    c = (unsigned char*)Text;
 
     while ((c != 0) && (*c != 0))
     {
@@ -249,7 +250,7 @@ void LCDPrintString(unsigned char *Text)
  * The function prints a string of characters on the second line of the lcd
  *   after a command is sent aka the enter key is hit.
 /******************************************************************************/
-void LCDdisplayFeedback(unsigned char *Text)
+void LCDdisplayFeedback(const unsigned char *Text)
 {
     ClearLCD();
     SetLCDcursor(1, 0);
@@ -406,7 +407,7 @@ void LCDScreenUpdate(void)
  *
  * The function is called when lines are qued up on the buffer.
 /******************************************************************************/
-void LCD_Scroll(unsigned char* This)
+void LCD_Scroll(const unsigned char* This)
 {
     if(!LCDwait)
     {
@@ -414,43 +415,43 @@ void LCD_Scroll(unsigned char* This)
         ScrollFIFOCount++;
         if(ScrollFIFOCount == 1)
         {
-           BufferCopy(This,Scroll_1, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_1, 16, 0);
         }
         else if(ScrollFIFOCount == 2)
         {
-           BufferCopy(This,Scroll_2, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_2, 16, 0);
         }
         else if(ScrollFIFOCount == 3)
         {
-           BufferCopy(This,Scroll_3, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_3, 16, 0);
         }
         else if(ScrollFIFOCount == 4)
         {
-           BufferCopy(This,Scroll_4, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_4, 16, 0);
         }
         else if(ScrollFIFOCount == 5)
         {
-           BufferCopy(This,Scroll_5, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_5, 16, 0);
         }
         else if(ScrollFIFOCount == 6)
         {
-           BufferCopy(This,Scroll_6, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_6, 16, 0);
         }
         else if(ScrollFIFOCount == 7)
         {
-           BufferCopy(This,Scroll_7, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_7, 16, 0);
         }
         else if(ScrollFIFOCount == 8)
         {
-           BufferCopy(This,Scroll_8, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_8, 16, 0);
         }
         else if(ScrollFIFOCount == 9)
         {
-           BufferCopy(This,Scroll_9, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_9, 16, 0);
         }
         else if(ScrollFIFOCount == 10)
         {
-           BufferCopy(This,Scroll_10, 16, 0);
+           BufferCopy((unsigned char*) This,Scroll_10, 16, 0);
         }
     }
 }

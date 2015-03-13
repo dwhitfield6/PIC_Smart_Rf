@@ -75,3 +75,7 @@ unsigned char StringAddEqual(unsigned char* Input);
 unsigned char CheckSum_byte(unsigned int This, unsigned char Odd_Even);
 unsigned char ISNUMBER(unsigned char ascii);
 unsigned char IsPrintableASCII(unsigned char data);
+void cleanBuffer16bit(unsigned int* data, int count);
+unsigned char Reverse_Byte(unsigned char This);
+unsigned int Reverse_2Byte(unsigned int This);
+unsigned long Reverse_4Byte(unsigned long This);

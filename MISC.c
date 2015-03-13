@@ -6,7 +6,9 @@
  * Date         Revision    Comments
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
- * 01/22/15     1.0         Created log.
+ * 03/11/15     1.0         Created log.
+ *                          Added functions to reverse bits in char, int,
+ *                            and long.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -71,6 +73,20 @@ void delayUS(long US)
  * This function sets an amount of data in the array as 0.
 /******************************************************************************/
 void cleanBuffer(unsigned char* data, int count)
+{
+    unsigned char i=0;
+    for(i=0; i<count;i++)
+    {
+        data[i]= 0;
+    }
+}
+
+/******************************************************************************/
+/* cleanBuffer16bit
+ *
+ * This function sets an amount of data in the array as 0.
+/******************************************************************************/
+void cleanBuffer16bit(unsigned int* data, int count)
 {
     unsigned char i=0;
     for(i=0; i<count;i++)
@@ -402,3 +418,102 @@ unsigned char IsPrintableASCII(unsigned char data)
     }
     return FALSE;
 }
+
+
+/******************************************************************************/
+/* Reverse_Byte
+ *
+ * The function reads the value of 'This' and returns the reverse of the data.
+/******************************************************************************/
+unsigned char Reverse_Byte(unsigned char This)
+{
+    unsigned char temp=0;
+
+    temp += (This & 0x01) << 7;
+    temp += (This & 0x02) << 5;
+    temp += (This & 0x04) << 3;
+    temp += (This & 0x08) << 1;
+    temp += (This & 0x10) >> 1;
+    temp += (This & 0x20) >> 3;
+    temp += (This & 0x40) >> 5;
+    temp += (This & 0x80) >> 7;
+
+    return temp;
+}
+
+/******************************************************************************/
+/* Reverse_2Byte
+ *
+ * The function reads the value of 'This' and returns the reverse of the data.
+/******************************************************************************/
+unsigned int Reverse_2Byte(unsigned int This)
+{
+    unsigned int temp=0;
+
+    temp += (This & 0x0001) << 15;
+    temp += (This & 0x0002) << 13;
+    temp += (This & 0x0004) << 11;
+    temp += (This & 0x0008) << 9;
+    temp += (This & 0x0010) << 7;
+    temp += (This & 0x0020) << 5;
+    temp += (This & 0x0040) << 3;
+    temp += (This & 0x0080) << 1;
+    temp += (This & 0x0100) >> 1;
+    temp += (This & 0x0200) >> 3;
+    temp += (This & 0x0400) >> 5;
+    temp += (This & 0x0800) >> 7;
+    temp += (This & 0x1000) >> 9;
+    temp += (This & 0x2000) >> 11;
+    temp += (This & 0x4000) >> 13;
+    temp += (This & 0x8000) >> 15;
+
+    return temp;
+}
+
+/******************************************************************************/
+/* Reverse_4Byte
+ *
+ * The function reads the value of 'This' and returns the reverse of the data.
+/******************************************************************************/
+unsigned long Reverse_4Byte(unsigned long This)
+{
+    unsigned long temp=0;
+
+    temp += (This & 0x00000001) << 31;
+    temp += (This & 0x00000002) << 29;
+    temp += (This & 0x00000004) << 27;
+    temp += (This & 0x00000008) << 25;
+    temp += (This & 0x00000010) << 23;
+    temp += (This & 0x00000020) << 21;
+    temp += (This & 0x00000040) << 19;
+    temp += (This & 0x00000080) << 17;
+    temp += (This & 0x00000100) >> 15;
+    temp += (This & 0x00000200) >> 13;
+    temp += (This & 0x00000400) >> 11;
+    temp += (This & 0x00000800) >> 9;
+    temp += (This & 0x00001000) >> 7;
+    temp += (This & 0x00002000) >> 5;
+    temp += (This & 0x00004000) >> 3;
+    temp += (This & 0x00008000) >> 1;
+    temp += (This & 0x00010000) << 1;
+    temp += (This & 0x00020000) << 3;
+    temp += (This & 0x00040000) << 5;
+    temp += (This & 0x00080000) << 7;
+    temp += (This & 0x00100000) << 9;
+    temp += (This & 0x00200000) << 11;
+    temp += (This & 0x00400000) << 13;
+    temp += (This & 0x00800000) << 15;
+    temp += (This & 0x01000000) >> 17;
+    temp += (This & 0x02000000) >> 19;
+    temp += (This & 0x04000000) >> 21;
+    temp += (This & 0x08000000) >> 23;
+    temp += (This & 0x10000000) >> 25;
+    temp += (This & 0x20000000) >> 27;
+    temp += (This & 0x40000000) >> 29;
+    temp += (This & 0x80000000) >> 31;
+
+    return temp;
+}
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

@@ -67,41 +67,41 @@
 #define SPACE   4
 #define INVALID 5
 
-#define USART_BRG16     0b00001000
+#define _USART_BRG16     0b00001000
 #define YES                 1
 #define NO                  0
 
-#define USART_TX_INT_ON   		0b10000000  // Transmit interrupt on
-#define USART_TX_INT_OFF  		0b00000000  // Transmit interrupt off
-#define USART_TX_INT_MASK		(~USART_TX_INT_ON)	//Mask Trnasmit Interrupt select bit
+#define _USART_TX_INT_ON   		0b10000000  // Transmit interrupt on
+#define _USART_TX_INT_OFF  		0b00000000  // Transmit interrupt off
+#define _USART_TX_INT_MASK		(~_USART_TX_INT_ON)	//Mask Trnasmit Interrupt select bit
 
-#define USART_RX_INT_ON   		0b01000000  // Receive interrupt on
-#define USART_RX_INT_OFF  		0b00000000  // Receive interrupt off
-#define USART_RX_INT_MASK		(~USART_RX_INT_ON)	//Mask Receive Interrupt select bit
+#define _USART_RX_INT_ON   		0b01000000  // Receive interrupt on
+#define _USART_RX_INT_OFF  		0b00000000  // Receive interrupt off
+#define _USART_RX_INT_MASK		(~_USART_RX_INT_ON)	//Mask Receive Interrupt select bit
 
-#define USART_ADDEN_ON    		0b00100000  // Enables address detection
-#define USART_ADDEN_OFF   		0b00000000  // Disables address detection
-#define USART_ADDEN_MASK		(~USART_ADDEN_ON)	//Mask address detection select bit
+#define _USART_ADDEN_ON    		0b00100000  // Enables address detection
+#define _USART_ADDEN_OFF   		0b00000000  // Disables address detection
+#define _USART_ADDEN_MASK		(~_USART_ADDEN_ON)	//Mask address detection select bit
 
-#define USART_BRGH_HIGH   		0b00010000  // High baud rate
-#define USART_BRGH_LOW    		0b00000000  // Low baud rate
-#define USART_BRGH_MASK			(~USART_BRGH_HIGH)	//Mask baud rate select bit
+#define _USART_BRGH_HIGH   		0b00010000  // High baud rate
+#define _USART_BRGH_LOW    		0b00000000  // Low baud rate
+#define _USART_BRGH_MASK			(~_USART_BRGH_HIGH)	//Mask baud rate select bit
 
-#define USART_CONT_RX     		0b00001000  // Continuous reception
-#define USART_SINGLE_RX   		0b00000000  // Single reception
-#define USART_CONT_RX_MASK		(~USART_CONT_RX) 	//Mask Continuous Reception select bit
+#define _USART_CONT_RX     		0b00001000  // Continuous reception
+#define _USART_SINGLE_RX   		0b00000000  // Single reception
+#define _USART_CONT_RX_MASK		(~_USART_CONT_RX) 	//Mask Continuous Reception select bit
 
-#define USART_SYNC_MASTER 		0b00000100  // Synchrounous master mode
-#define USART_SYNC_SLAVE  		0b00000000  // Synchrounous slave mode
-#define USART_SYNC_MASK			(~USART_SYNC_MASTER)	//Mask usart mode select bit
+#define _USART_SYNC_MASTER 		0b00000100  // Synchrounous master mode
+#define _USART_SYNC_SLAVE  		0b00000000  // Synchrounous slave mode
+#define _USART_SYNC_MASK			(~_USART_SYNC_MASTER)	//Mask usart mode select bit
 
-#define USART_NINE_BIT    		0b00000010  // 9-bit data
-#define USART_EIGHT_BIT   		0b00000000  // 8-bit data
-#define USART_BIT_MASK 			(~USART_NINE_BIT)		//Mask 9 bit transmit  select bit
+#define _USART_NINE_BIT    		0b00000010  // 9-bit data
+#define _USART_EIGHT_BIT   		0b00000000  // 8-bit data
+#define _USART_BIT_MASK 			(~_USART_NINE_BIT)		//Mask 9 bit transmit  select bit
 
-#define USART_SYNCH_MODE  		0b00000001  // Synchronous mode
-#define USART_ASYNCH_MODE 		0b00000000  // Asynchronous mode
-#define USART_MODE_MASK			(~USART_SYNCH_MODE) 	//Mask sync/async mode select bit
+#define _USART_SYNCH_MODE  		0b00000001  // Synchronous mode
+#define _USART_ASYNCH_MODE 		0b00000000  // Asynchronous mode
+#define _USART_MODE_MASK			(~_USART_SYNCH_MODE) 	//Mask sync/async mode select bit
 
 /******************************************************************************/
 /* Global Variables                                                           */
@@ -112,8 +112,8 @@
 /******************************************************************************/
 
 void InitUART(unsigned long Baud, unsigned char parity);
-void UARTstring(unsigned char *data);
-void UARTstringWAIT(unsigned char *data);
+void UARTstring(const unsigned char *data);
+void UARTstringWAIT(const unsigned char *data);
 void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned char NinethBit_override_data);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 char ReadUSART(void);

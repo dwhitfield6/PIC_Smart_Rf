@@ -7,9 +7,11 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/22/15     1.0         Created log.
- * 02/05/15     1.0_DW0     Added version banner.
+ * 03/12/15     1.0_DW0     Added version banner.
  *                          Added EEPROM functionaity.
- *                          Added code to save the Baud rate in EEPROM
+ *                          Added code to save the Baud rate in EEPROM.
+ *                          Added IR functionality.
+ *                          Added pushbotton functionality.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -50,6 +52,7 @@
 #include "I2C.h"
 #include "RTC.h"
 #include "EEPROM.h"          /* User funct/params, such as InitApp */
+#include "IR.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
 /* Version                                                                    */
@@ -85,9 +88,11 @@ void main(void)
     EnableInternalADC(1);
     PWM_init();
     ContrastPWM_init();
-    init_LCD();
     Init_I2C_Master();
     RTC_INIT();
+    init_IR();
+    init_LCD();
+
     Baudtemp = GetMemoryBaud();
     if(Baudtemp < 2400 || Baudtemp > 115200)
     {
@@ -112,15 +117,17 @@ void main(void)
         LATD &= ~LED0;
         delayUS(50000);
     }
+    LATD &= ~LED1;
     SetContrast(65);
     delayUS(20);
     SetLCDcursor(0, 0);
     if(MemoryBurnflag)
     {
-         UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
-         LCDPrintString("Err: Baud Mem");
-         delayUS(100000);
-         SetLCDcursor(0, 0);
+        UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
+        LCDPrintString("Err: Baud Mem");
+        delayUS(100000);
+        ClearLCD();
+        SetLCDcursor(0, 0);
     }
     LCDPrintString("Starting");
     UARTstring("Starting...");
@@ -173,6 +180,15 @@ void main(void)
    {
         //sprintf(Txdata,"%u \n",count);
         LCDScreenUpdate();
+        if(BlueLEDcount < IR_LED_TIMEOUT)
+        {
+            BlueLEDcount++;
+        }
+        else
+        {
+            LATD &= ~LED0;
+            LATD &= ~LED1;
+        }
         if(Rxdata[0] != 0)
         {
             if (Rxdata[0] != '\r' && Rxdata[0] != '\n')

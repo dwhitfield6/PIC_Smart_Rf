@@ -7,8 +7,10 @@ UART.h  \
 PWM.h  \
 RTC.h  \
 MISC.h  \
+EEPROM.h  \
 user.h  \
 LCD.h  \
+IR.h  \
 system.h  \
 RF.h  \
 ADC.h 

@@ -86,16 +86,15 @@ void InitApp(void)
     LATD &= ~(Enable + RS + RW);
     LATE &= ~D4;
 
+    //IR
+    IR_INPUT_TRIS = INPUT;
+
+    //PushBotton
+    Button1_TRIS = INPUT;
+
     RCONbits.IPEN = 1; //enable priority interrupts
     INTCONbits.PEIE = 1; //Enable pheripheral interrupt
     INTCONbits.GIE = 1; //global interrupts enabled
    
-    /* Setup analog functionality and port direction */
-
-    /* Initialize peripherals */
-
-    /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
-
-    /* Enable interrupts */
 }
 
