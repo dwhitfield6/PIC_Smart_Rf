@@ -55,3 +55,6 @@ void ConfigureOscillator(void)
     //PLL is enabled.
     while(!(OSCCON & OSTS));//wait for oscillator to be running
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

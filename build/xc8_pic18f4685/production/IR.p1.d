@@ -4,6 +4,7 @@
 Button.h  \
 UART.h  \
 MISC.h  \
+EEPROM.h  \
 user.h  \
 LCD.h  \
 IR.h  \

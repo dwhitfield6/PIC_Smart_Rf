@@ -34,14 +34,18 @@
  *   the screen.
 /******************************************************************************/
 
-#define LCDdelay    25000
+#define LCDdelay    17
 
 /******************************************************************************/
 /* SCROLLspeed. This controls the amount of time that a scrolled string waits
  *  until it is incremented and changed.
+ *
+ * This is imlemented as the offset between 0 and LCDdelay. For instance, a
+ *  value of 0 menas that it scrolls every LCDdelay counts. A value of 1 means
+ *  it waits LCDdelay-1 count.
 /******************************************************************************/
 
-#define SCROLLspeed 15000
+#define SCROLLspeed 0
 
 /******************************************************************************/
 /* LCD_CharacterWidth. This is the maximum number of characters allowed on the
@@ -76,3 +80,6 @@ void LCDPrintChar(unsigned char character);
 void LCDScreenUpdate();
 void LCDdisplayFeedback(const unsigned char *Text);
 void LCD_Scroll(const unsigned char* This);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

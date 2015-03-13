@@ -19697,7 +19697,7 @@ int InternalADC_Read(unsigned char channel);
 # 44 "StringCommand.h"
 unsigned char Command(unsigned char* Input);
 
-# 87 "IR.h"
+# 100 "IR.h"
 extern unsigned int BlueLEDcount;
 extern unsigned int IRRawCode[72];
 extern unsigned long IR_NEC;
@@ -19705,18 +19705,22 @@ extern unsigned int IRrawCount;
 extern unsigned char IRrawCodeNum;
 extern unsigned char IR_New_Code;
 
+# 111
 void init_IR(void);
 unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
 
-# 31 "Timer.h"
+# 35 "Timer.h"
 void init_Timers(void);
 void init_Timer0(void);
 void Stop_Timer0(void);
 void Start_Timer0(void);
 void Reset_Timer0(void);
 void init_Timer1(void);
+void Stop_Timer1(void);
+void Start_Timer1(void);
+void Reset_Timer1(void);
 
 # 46 "interrupts.c"
 unsigned char IRpinOLD;
@@ -19861,6 +19865,7 @@ else if(INTCONbits.RBIF)
 {
 
 
+
 INTCONbits.RBIE = 0;
 __nop();
 __nop();
@@ -19912,6 +19917,7 @@ INTCONbits.RBIE = 1;
 }
 else if (INTCONbits.TMR0IF)
 {
+
 cleanBuffer16bit(IRRawCode, IRrawCodeNum);
 IRrawCodeNum = 0;
 INTCONbits.TMR0IF = 0;
@@ -19920,8 +19926,16 @@ INTCONbits.TMR0IE = 0;
 else if(INTCONbits.INT0IF)
 {
 
-INTCONbits.INT0IE = 0;
 INTCONbits.INT0IF = 0;
+INTCONbits.INT0IE = 0;
+
+}
+else if(PIR1bits.TMR1IF)
+{
+
+LCDScreenUpdate();
+PIR1bits.TMR1IF = 0;
+PIE1bits.TMR1IE = 1;
 }
 else
 {
@@ -19930,3 +19944,4 @@ __nop();
 }
 INTCONbits.PEIE = 1;
 }
+

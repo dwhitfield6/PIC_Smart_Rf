@@ -1,7 +1,9 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"32 Timer.h
+"36 Timer.h
 [v _init_Timer0 `(v ~T0 @X0 0 ef ]
-"33
+"40
+[v _init_Timer1 `(v ~T0 @X0 0 ef ]
+"37
 [v _Stop_Timer0 `(v ~T0 @X0 0 ef ]
 "34895 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [s S2111 :7 `uc 1 :1 `uc 1 ]
@@ -32,9 +34,80 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
 "34552
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"42 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
+"33842
+[s S2068 :2 `uc 1 :1 `uc 1 ]
+[n S2068 . . NOT_T1SYNC ]
+"33846
+[s S2069 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2069 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS T1RUN RD16 ]
+"33855
+[s S2070 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2070 . . T1SYNC . T1CKPS0 T1CKPS1 ]
+"33862
+[s S2071 :2 `uc 1 :1 `uc 1 ]
+[n S2071 . . T1INSYNC ]
+"33866
+[s S2072 :3 `uc 1 :1 `uc 1 ]
+[n S2072 . . SOSCEN ]
+"33870
+[s S2073 :7 `uc 1 :1 `uc 1 ]
+[n S2073 . . T1RD16 ]
+"33841
+[u S2067 `S2068 1 `S2069 1 `S2070 1 `S2071 1 `S2072 1 `S2073 1 ]
+[n S2067 . . . . . . . ]
+"33875
+[v _T1CONbits `VS2067 ~T0 @X0 0 e@4045 ]
+"30932
+[s S1900 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1900 . TMR1IP TMR2IP CCP1IP SSPIP TXIP RCIP ADIP PSPIP ]
+"30942
+[s S1901 :4 `uc 1 :1 `uc 1 ]
+[n S1901 . . TXBIP ]
+"30946
+[s S1902 :5 `uc 1 :1 `uc 1 ]
+[n S1902 . . RC1IP ]
+"30950
+[s S1903 :4 `uc 1 :1 `uc 1 ]
+[n S1903 . . TX1IP ]
+"30931
+[u S1899 `S1900 1 `S1901 1 `S1902 1 `S1903 1 ]
+[n S1899 . . . . . ]
+"30955
+[v _IPR1bits `VS1899 ~T0 @X0 0 e@3999 ]
+"42 Timer.h
+[v _Start_Timer1 `(v ~T0 @X0 0 ef ]
+"30853 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
+[s S1896 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1896 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
+"30863
+[s S1897 :5 `uc 1 :1 `uc 1 ]
+[n S1897 . . RC1IF ]
+"30867
+[s S1898 :4 `uc 1 :1 `uc 1 ]
+[n S1898 . . TX1IF ]
+"30852
+[u S1895 `S1896 1 `S1897 1 `S1898 1 ]
+[n S1895 . . . . ]
+"30872
+[v _PIR1bits `VS1895 ~T0 @X0 0 e@3998 ]
+"30774
+[s S1892 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1892 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+"30784
+[s S1893 :5 `uc 1 :1 `uc 1 ]
+[n S1893 . . RC1IE ]
+"30788
+[s S1894 :4 `uc 1 :1 `uc 1 ]
+[n S1894 . . TX1IE ]
+"30773
+[u S1891 `S1892 1 `S1893 1 `S1894 1 ]
+[n S1891 . . . . ]
+"30793
+[v _PIE1bits `VS1891 ~T0 @X0 0 e@3997 ]
+"33961
+[v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
+"33955
+[v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4685.h: 49: extern volatile unsigned char RXF6SIDH @ 0xD60;
@@ -15365,22 +15438,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;user.h: 96: void InitApp(void);
-[; ;IR.h: 87: extern unsigned int BlueLEDcount;
-[; ;IR.h: 88: extern unsigned int IRRawCode[72];
-[; ;IR.h: 89: extern unsigned long IR_NEC;
-[; ;IR.h: 90: extern unsigned int IRrawCount;
-[; ;IR.h: 91: extern unsigned char IRrawCodeNum;
-[; ;IR.h: 92: extern unsigned char IR_New_Code;
-[; ;IR.h: 94: void init_IR(void);
-[; ;IR.h: 95: unsigned char ReadIRpin(void);
-[; ;IR.h: 96: unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
-[; ;IR.h: 97: void UseIRCode(unsigned char* Code, unsigned long NEC);
-[; ;Timer.h: 31: void init_Timers(void);
-[; ;Timer.h: 32: void init_Timer0(void);
-[; ;Timer.h: 33: void Stop_Timer0(void);
-[; ;Timer.h: 34: void Start_Timer0(void);
-[; ;Timer.h: 35: void Reset_Timer0(void);
-[; ;Timer.h: 36: void init_Timer1(void);
+[; ;IR.h: 100: extern unsigned int BlueLEDcount;
+[; ;IR.h: 101: extern unsigned int IRRawCode[72];
+[; ;IR.h: 102: extern unsigned long IR_NEC;
+[; ;IR.h: 103: extern unsigned int IRrawCount;
+[; ;IR.h: 104: extern unsigned char IRrawCodeNum;
+[; ;IR.h: 105: extern unsigned char IR_New_Code;
+[; ;IR.h: 111: void init_IR(void);
+[; ;IR.h: 112: unsigned char ReadIRpin(void);
+[; ;IR.h: 113: unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
+[; ;IR.h: 114: void UseIRCode(unsigned char* Code, unsigned long NEC);
+[; ;Timer.h: 35: void init_Timers(void);
+[; ;Timer.h: 36: void init_Timer0(void);
+[; ;Timer.h: 37: void Stop_Timer0(void);
+[; ;Timer.h: 38: void Start_Timer0(void);
+[; ;Timer.h: 39: void Reset_Timer0(void);
+[; ;Timer.h: 40: void init_Timer1(void);
+[; ;Timer.h: 41: void Stop_Timer1(void);
+[; ;Timer.h: 42: void Start_Timer1(void);
+[; ;Timer.h: 43: void Reset_Timer1(void);
 "47 Timer.c
 [v _init_Timers `(v ~T0 @X0 1 ef ]
 "48
@@ -15392,100 +15468,175 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Timer.c: 50: init_Timer0();
 "50
 [e ( _init_Timer0 ..  ]
-[; ;Timer.c: 51: }
-"51
+[; ;Timer.c: 52: init_Timer1();
+"52
+[e ( _init_Timer1 ..  ]
+[; ;Timer.c: 53: }
+"53
 [e :UE 2160 ]
 }
-"58
+"60
 [v _init_Timer0 `(v ~T0 @X0 1 ef ]
-"59
+"61
 {
-[; ;Timer.c: 58: void init_Timer0(void)
-[; ;Timer.c: 59: {
+[; ;Timer.c: 60: void init_Timer0(void)
+[; ;Timer.c: 61: {
 [e :U _init_Timer0 ]
 [f ]
-[; ;Timer.c: 60: Stop_Timer0();
-"60
-[e ( _Stop_Timer0 ..  ]
-[; ;Timer.c: 62: INTCON2bits.T0IP = 0;
+[; ;Timer.c: 62: Stop_Timer0();
 "62
-[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
-[; ;Timer.c: 64: T0CONbits.T08BIT = 0;
+[e ( _Stop_Timer0 ..  ]
+[; ;Timer.c: 64: INTCON2bits.T0IP = 0;
 "64
-[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-[; ;Timer.c: 66: T0CONbits.T0CS = 0;
+[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
+[; ;Timer.c: 66: T0CONbits.T08BIT = 0;
 "66
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;Timer.c: 68: T0CONbits.PSA = 0;
+[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
+[; ;Timer.c: 68: T0CONbits.T0CS = 0;
 "68
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;Timer.c: 70: T0CONbits.T0PS = 0x4;
+[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
+[; ;Timer.c: 70: T0CONbits.PSA = 0;
 "70
-[e = . . _T0CONbits 0 0 -> -> 4 `i `uc ]
-[; ;Timer.c: 72: }
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;Timer.c: 72: T0CONbits.T0PS = 0x4;
 "72
+[e = . . _T0CONbits 0 0 -> -> 4 `i `uc ]
+[; ;Timer.c: 74: }
+"74
 [e :UE 2161 ]
 }
-"79
+"81
 [v _Stop_Timer0 `(v ~T0 @X0 1 ef ]
-"80
+"82
 {
-[; ;Timer.c: 79: void Stop_Timer0(void)
-[; ;Timer.c: 80: {
+[; ;Timer.c: 81: void Stop_Timer0(void)
+[; ;Timer.c: 82: {
 [e :U _Stop_Timer0 ]
 [f ]
-[; ;Timer.c: 82: T0CONbits.TMR0ON =0;
-"82
+[; ;Timer.c: 84: T0CONbits.TMR0ON =0;
+"84
 [e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-[; ;Timer.c: 83: }
-"83
+[; ;Timer.c: 85: }
+"85
 [e :UE 2162 ]
 }
-"90
+"92
 [v _Start_Timer0 `(v ~T0 @X0 1 ef ]
-"91
+"93
 {
-[; ;Timer.c: 90: void Start_Timer0(void)
-[; ;Timer.c: 91: {
+[; ;Timer.c: 92: void Start_Timer0(void)
+[; ;Timer.c: 93: {
 [e :U _Start_Timer0 ]
 [f ]
-[; ;Timer.c: 93: T0CONbits.TMR0ON =1;
-"93
+[; ;Timer.c: 95: T0CONbits.TMR0ON =1;
+"95
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;Timer.c: 94: }
-"94
+[; ;Timer.c: 96: }
+"96
 [e :UE 2163 ]
 }
-"101
+"103
 [v _Reset_Timer0 `(v ~T0 @X0 1 ef ]
-"102
+"104
 {
-[; ;Timer.c: 101: void Reset_Timer0(void)
-[; ;Timer.c: 102: {
+[; ;Timer.c: 103: void Reset_Timer0(void)
+[; ;Timer.c: 104: {
 [e :U _Reset_Timer0 ]
 [f ]
-[; ;Timer.c: 107: TMR0H = 0;
-"107
-[e = _TMR0H -> -> 0 `i `uc ]
-[; ;Timer.c: 108: TMR0L = 2;
-"108
-[e = _TMR0L -> -> 2 `i `uc ]
-[; ;Timer.c: 109: }
+[; ;Timer.c: 109: TMR0H = 0;
 "109
+[e = _TMR0H -> -> 0 `i `uc ]
+[; ;Timer.c: 110: TMR0L = 2;
+"110
+[e = _TMR0L -> -> 2 `i `uc ]
+[; ;Timer.c: 111: }
+"111
 [e :UE 2164 ]
 }
-"117
+"119
 [v _init_Timer1 `(v ~T0 @X0 1 ef ]
-"118
+"120
 {
-[; ;Timer.c: 117: void init_Timer1(void)
-[; ;Timer.c: 118: {
+[; ;Timer.c: 119: void init_Timer1(void)
+[; ;Timer.c: 120: {
 [e :U _init_Timer1 ]
 [f ]
-[; ;Timer.c: 119: __nop();
-"119
-[e ( ___nop ..  ]
-[; ;Timer.c: 120: }
-"120
+[; ;Timer.c: 122: T1CONbits.RD16 = 1;
+"122
+[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
+[; ;Timer.c: 124: T1CONbits.TMR1CS = 0;
+"124
+[e = . . _T1CONbits 1 1 -> -> 0 `i `uc ]
+[; ;Timer.c: 126: T1CONbits.T1CKPS = 0x3;
+"126
+[e = . . _T1CONbits 1 4 -> -> 3 `i `uc ]
+[; ;Timer.c: 128: IPR1bits.TMR1IP = 0;
+"128
+[e = . . _IPR1bits 0 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 129: Start_Timer1();
+"129
+[e ( _Start_Timer1 ..  ]
+[; ;Timer.c: 130: }
+"130
 [e :UE 2165 ]
+}
+"137
+[v _Stop_Timer1 `(v ~T0 @X0 1 ef ]
+"138
+{
+[; ;Timer.c: 137: void Stop_Timer1(void)
+[; ;Timer.c: 138: {
+[e :U _Stop_Timer1 ]
+[f ]
+[; ;Timer.c: 140: T1CONbits.TMR1ON =0;
+"140
+[e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 142: PIR1bits.TMR1IF = 0;
+"142
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 143: PIE1bits.TMR1IE = 0;
+"143
+[e = . . _PIE1bits 0 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 144: }
+"144
+[e :UE 2166 ]
+}
+"151
+[v _Start_Timer1 `(v ~T0 @X0 1 ef ]
+"152
+{
+[; ;Timer.c: 151: void Start_Timer1(void)
+[; ;Timer.c: 152: {
+[e :U _Start_Timer1 ]
+[f ]
+[; ;Timer.c: 154: T1CONbits.TMR1ON =1;
+"154
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+[; ;Timer.c: 156: PIR1bits.TMR1IF = 0;
+"156
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 157: PIE1bits.TMR1IE = 1;
+"157
+[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
+[; ;Timer.c: 158: }
+"158
+[e :UE 2167 ]
+}
+"165
+[v _Reset_Timer1 `(v ~T0 @X0 1 ef ]
+"166
+{
+[; ;Timer.c: 165: void Reset_Timer1(void)
+[; ;Timer.c: 166: {
+[e :U _Reset_Timer1 ]
+[f ]
+[; ;Timer.c: 171: TMR1H = 0;
+"171
+[e = _TMR1H -> -> 0 `i `uc ]
+[; ;Timer.c: 172: TMR1L = 2;
+"172
+[e = _TMR1L -> -> 2 `i `uc ]
+[; ;Timer.c: 173: }
+"173
+[e :UE 2168 ]
 }

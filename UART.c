@@ -52,8 +52,6 @@
 
 unsigned char Txdata[100];
 unsigned char Rxdata[100];
-unsigned long BAUD = 9600;
-unsigned char PARITY = 0;
 unsigned char TX_OLD =0;
 
 /******************************************************************************/
@@ -93,8 +91,6 @@ void InitUART(unsigned long Baud, unsigned char parity)
     config |= _USART_ASYNCH_MODE;
     config |= _USART_BRGH_HIGH;
 
-    PARITY = parity;
-    BAUD = Baud;
     if(parity)
     {
         config |= _USART_NINE_BIT;
@@ -203,7 +199,7 @@ void UARTchar(unsigned char data, unsigned char NinethBit_override, unsigned cha
         if(!NinethBit_override)
         {
             //no override 9th bit so we will calculate it
-            switch (PARITY)
+            switch (Global.Parity)
             {
                 case 1:
                     TXSTAbits.TX9D = CheckSum_byte((unsigned int) data, Odd);//Odd parity
@@ -390,5 +386,8 @@ void SetBaud(unsigned long Baud, unsigned char Parity)
 /******************************************************************************/
 unsigned long GetBaud(void)
 {
-    return BAUD;
+    return Global.Baud;
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

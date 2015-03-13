@@ -48,6 +48,8 @@ void init_Timers(void)
 {
     /* Initialize timer 0 */
     init_Timer0();
+    /* Initialize timer 1 */
+    init_Timer1();
 }
 
 /******************************************************************************/
@@ -116,5 +118,61 @@ void Reset_Timer0(void)
 /******************************************************************************/
 void init_Timer1(void)
 {
-    NOP();
+    /* 16 bits */
+    T1CONbits.RD16 = 1;
+    /* Source is FOSC/4 */
+    T1CONbits.TMR1CS = 0;
+    /* Prescaler is 8 */
+    T1CONbits.T1CKPS = 0x3;
+    /* Low priority Interrupt */
+    IPR1bits.TMR1IP = 0;
+    Stop_Timer1();
 }
+
+/******************************************************************************/
+/* Stop_Timer1
+ *
+ * The function starts timer 1.
+/******************************************************************************/
+void Stop_Timer1(void)
+{
+    /*turn off timer 1*/
+    T1CONbits.TMR1ON =0;
+    /* Interrupt Off */
+    PIR1bits.TMR1IF = 0;
+    PIE1bits.TMR1IE = 0;
+}
+
+/******************************************************************************/
+/* Start_Timer1
+ *
+ * The function starts timer 1.
+/******************************************************************************/
+void Start_Timer1(void)
+{
+    /*turn on timer 1*/
+    T1CONbits.TMR1ON =1;
+    /* Reset Timer */
+    Reset_Timer1();
+    /* Interrupt On */
+    PIR1bits.TMR1IF = 0;
+    PIE1bits.TMR1IE = 1;
+}
+
+/******************************************************************************/
+/* Reset_Timer1
+ *
+ * The function resets the counter on Timer 1.
+/******************************************************************************/
+void Reset_Timer1(void)
+{
+    /*
+     * Reset count to 2 because when the TMR0 register is written to,
+     * the increment is inhibited for the following two instruction cycles
+     */
+    TMR1H = 0;
+    TMR1L = 2;
+}
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

@@ -78,3 +78,6 @@ void RTC_TIME_NONMilitary(void);
 void RTC_INIT(void);
 unsigned char SET_RTC_TIME(TIME SetTime);
 unsigned char Parse_Time(unsigned char* This);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

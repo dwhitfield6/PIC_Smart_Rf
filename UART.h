@@ -121,3 +121,6 @@ void baudUSART (unsigned char baudconfig);
 void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
 unsigned long GetBaud(void);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

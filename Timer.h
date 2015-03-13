@@ -28,9 +28,19 @@
 
 #endif
 
+/******************************************************************************/
+/* Function prototypes                                                        */
+/******************************************************************************/
+
 void init_Timers(void);
 void init_Timer0(void);
 void Stop_Timer0(void);
 void Start_Timer0(void);
 void Reset_Timer0(void);
 void init_Timer1(void);
+void Stop_Timer1(void);
+void Start_Timer1(void);
+void Reset_Timer1(void);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

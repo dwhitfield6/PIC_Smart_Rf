@@ -36,6 +36,7 @@
 #include "user.h"          /* User funct/params, such as InitApp */
 #include "LCD.h"          /* User funct/params, such as InitApp */
 #include "MISC.h"          /* User funct/params, such as InitApp */
+#include "Timer.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
 /* Global Variables                                                           */
@@ -97,6 +98,7 @@ void init_LCD()
     ClearLCD();
     delayUS(50000);
 
+    init_Timer1();
 }
 
 /******************************************************************************/
@@ -256,6 +258,8 @@ void LCDdisplayFeedback(const unsigned char *Text)
     SetLCDcursor(1, 0);
     LCDPrintString(Text);
     LCDwait = 1;
+    Reset_Timer1();
+    Start_Timer1();
     LCDclearCount =0;
 }
 
@@ -278,7 +282,6 @@ void LCDPrintChar(unsigned char character)
 void LCDScreenUpdate(void)
 {
     //Timer for clearing screen
-    delayUS(10);
     if(LCDclearCount<(LCDdelay-1))
     {
         LCDclearCount++;
@@ -290,6 +293,7 @@ void LCDScreenUpdate(void)
         LCDwait = 0;
         if(ScrollFIFOCount == 0)
         {
+            Stop_Timer1();
             ScrollDisplayPosition = 0;
             ClearLCD();
             SetLCDcursor(0, 0);
@@ -409,6 +413,7 @@ void LCDScreenUpdate(void)
 /******************************************************************************/
 void LCD_Scroll(const unsigned char* This)
 {
+    Start_Timer1();
     if(!LCDwait)
     {
         LCDclearCount = SCROLLspeed;
@@ -455,3 +460,6 @@ void LCD_Scroll(const unsigned char* This)
         }
     }
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

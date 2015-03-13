@@ -7,11 +7,16 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 01/22/15     1.0         Created log.
- * 03/12/15     1.0_DW0     Added version banner.
+ * 03/12/15     1.0_DW0a    Added version banner.
  *                          Added EEPROM functionaity.
  *                          Added code to save the Baud rate in EEPROM.
  *                          Added IR functionality.
  *                          Added pushbotton functionality.
+ *                          Added new implementation of gloabls and EEPROM
+ *                            data.
+ *                          Added new EEPROM functions.
+ *                          LCD screen loop is called from interrupt instead
+ *                            of main loop.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -58,7 +63,7 @@
 /* Version                                                                    */
 /******************************************************************************/
 
-unsigned char Version[20] = "1.0_DW0";
+unsigned char Version[20] = "1.0_DW0a";
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
@@ -80,7 +85,6 @@ void main(void)
 {
     unsigned char ii = 0;
     unsigned char count = 0;
-    unsigned long Baudtemp = 0;
     unsigned char MemoryBurnflag = 0;
     
     ConfigureOscillator();
@@ -90,24 +94,28 @@ void main(void)
     ContrastPWM_init();
     Init_I2C_Master();
     RTC_INIT();
-    init_IR();
     init_LCD();
 
-    Baudtemp = GetMemoryBaud();
-    if(Baudtemp < 2400 || Baudtemp > 115200)
+    SyncEEPROMandGLOBAL();
+
+    if(Global.Baud < 2400 || Global.Baud > 115200)
     {
-        if(SetMemoryBaud(defaultBaud))
+        /* EEPROM Baud and is not in range */
+        Global.Baud = defaultBaud;
+        Global.Parity = NONE;
+        /* Burn Baud and Parity */
+        if(!SetEEPROM(Global,0x3))
         {
+            /* Burned Baud and Parity */
             MemoryBurnflag = 1;
         }
-        Baudtemp = defaultBaud;
-        SetMemoryParity(NONE);
     }
-    InitUART(Baudtemp, GetMemoryParity());
+    SyncEEPROMandGLOBAL();
+    InitUART(Global.Baud, Global.Parity);
     UARTstring("Firmware Version: ");
     UARTstring(Version);
     UARTstring("\r\n");
-    
+
     for(ii =0; ii <10;ii++)
     {
         LATD |= LED0;
@@ -175,11 +183,11 @@ void main(void)
    ClearLCD();
    SetLCDcursor(0, 0);
    LCDPrintChar('>');
+
+   init_IR();
    
    while(1)
    {
-        //sprintf(Txdata,"%u \n",count);
-        LCDScreenUpdate();
         if(BlueLEDcount < IR_LED_TIMEOUT)
         {
             BlueLEDcount++;
@@ -202,4 +210,6 @@ void main(void)
         }
     }
 }
-
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

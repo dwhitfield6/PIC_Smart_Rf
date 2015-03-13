@@ -58,3 +58,6 @@ char I2C_Read_Sequential( unsigned char I2Caddress, unsigned char Register, unsi
 void ResetI2C( void );
 char Multiple_I2C_Read( unsigned char *rdptr, unsigned char length );
 unsigned char readI2C( void );
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

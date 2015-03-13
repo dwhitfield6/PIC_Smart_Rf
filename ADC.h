@@ -58,3 +58,6 @@
 void EnableInternalADC(unsigned char channels);
 void DisableInternalADC(void);
 int InternalADC_Read(unsigned char channel);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

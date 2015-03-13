@@ -99,30 +99,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _BufferCopy `(v ~T0 @X0 0 ef4`*uc`*uc`uc`uc ]
 "49 interrupts.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
-"95 IR.h
+"112 IR.h
 [v _ReadIRpin `(uc ~T0 @X0 0 ef ]
-"90
+"103
 [v _IRrawCount `ui ~T0 @X0 0 e ]
 "34552 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
 "34558
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
-"91 IR.h
+"104 IR.h
 [v _IRrawCodeNum `uc ~T0 @X0 0 e ]
-"35 Timer.h
+"39 Timer.h
 [v _Reset_Timer0 `(v ~T0 @X0 0 ef ]
-"88 IR.h
+"101 IR.h
 [v _IRRawCode `ui ~T0 @X0 -> 0 `x e ]
-"92
+"105
 [v _IR_New_Code `uc ~T0 @X0 0 e ]
-"89
+"102
 [v _IR_NEC `ul ~T0 @X0 0 e ]
-"97
+"114
 [v _UseIRCode `(v ~T0 @X0 0 ef2`*uc`ul ]
-"96
+"113
 [v _IRrawToNEC `(uc ~T0 @X0 0 ef3`*ui`*ul`uc ]
 "78 MISC.h
 [v _cleanBuffer16bit `(v ~T0 @X0 0 ef2`*ui`i ]
+"76 LCD.h
+[v _LCDScreenUpdate `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4685.h: 49: extern volatile unsigned char RXF6SIDH @ 0xD60;
@@ -15571,22 +15573,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ADC.h: 59: void DisableInternalADC(void);
 [; ;ADC.h: 60: int InternalADC_Read(unsigned char channel);
 [; ;StringCommand.h: 44: unsigned char Command(unsigned char* Input);
-[; ;IR.h: 87: extern unsigned int BlueLEDcount;
-[; ;IR.h: 88: extern unsigned int IRRawCode[72];
-[; ;IR.h: 89: extern unsigned long IR_NEC;
-[; ;IR.h: 90: extern unsigned int IRrawCount;
-[; ;IR.h: 91: extern unsigned char IRrawCodeNum;
-[; ;IR.h: 92: extern unsigned char IR_New_Code;
-[; ;IR.h: 94: void init_IR(void);
-[; ;IR.h: 95: unsigned char ReadIRpin(void);
-[; ;IR.h: 96: unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
-[; ;IR.h: 97: void UseIRCode(unsigned char* Code, unsigned long NEC);
-[; ;Timer.h: 31: void init_Timers(void);
-[; ;Timer.h: 32: void init_Timer0(void);
-[; ;Timer.h: 33: void Stop_Timer0(void);
-[; ;Timer.h: 34: void Start_Timer0(void);
-[; ;Timer.h: 35: void Reset_Timer0(void);
-[; ;Timer.h: 36: void init_Timer1(void);
+[; ;IR.h: 100: extern unsigned int BlueLEDcount;
+[; ;IR.h: 101: extern unsigned int IRRawCode[72];
+[; ;IR.h: 102: extern unsigned long IR_NEC;
+[; ;IR.h: 103: extern unsigned int IRrawCount;
+[; ;IR.h: 104: extern unsigned char IRrawCodeNum;
+[; ;IR.h: 105: extern unsigned char IR_New_Code;
+[; ;IR.h: 111: void init_IR(void);
+[; ;IR.h: 112: unsigned char ReadIRpin(void);
+[; ;IR.h: 113: unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
+[; ;IR.h: 114: void UseIRCode(unsigned char* Code, unsigned long NEC);
+[; ;Timer.h: 35: void init_Timers(void);
+[; ;Timer.h: 36: void init_Timer0(void);
+[; ;Timer.h: 37: void Stop_Timer0(void);
+[; ;Timer.h: 38: void Start_Timer0(void);
+[; ;Timer.h: 39: void Reset_Timer0(void);
+[; ;Timer.h: 40: void init_Timer1(void);
+[; ;Timer.h: 41: void Stop_Timer1(void);
+[; ;Timer.h: 42: void Start_Timer1(void);
+[; ;Timer.h: 43: void Reset_Timer1(void);
 "46 interrupts.c
 [v _IRpinOLD `uc ~T0 @X0 1 e ]
 [; ;interrupts.c: 46: unsigned char IRpinOLD;
@@ -15595,9 +15600,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 49: extern char Rxdata[100];
 [; ;interrupts.c: 50: extern unsigned char bufferCount;
 [; ;interrupts.c: 51: extern unsigned char TX_OLD;
-[v F17191 `(v ~T0 @X0 1 tf ]
+[v F17197 `(v ~T0 @X0 1 tf ]
 "62
-[v _high_isr `IF17191 ~T0 @X0 1 e ]
+[v _high_isr `IF17197 ~T0 @X0 1 e ]
 "71
 {
 [; ;interrupts.c: 62: void interrupt high_isr(void)
@@ -15608,9 +15613,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "73
 [e :UE 2161 ]
 }
-[v F17194 `(v ~T0 @X0 1 tf ]
+[v F17200 `(v ~T0 @X0 1 tf ]
 "79
-[v _low_isr `ILF17194 ~T0 @X0 1 e ]
+[v _low_isr `ILF17200 ~T0 @X0 1 e ]
 "87
 {
 [; ;interrupts.c: 79: void low_priority interrupt low_isr(void)
@@ -15956,210 +15961,231 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 207: {
 "207
 {
-[; ;interrupts.c: 210: INTCONbits.RBIE = 0;
-"210
-[e = . . _INTCONbits 0 3 -> -> 0 `i `uc ]
-[; ;interrupts.c: 211: __nop();
+[; ;interrupts.c: 211: INTCONbits.RBIE = 0;
 "211
-[e ( ___nop ..  ]
+[e = . . _INTCONbits 0 3 -> -> 0 `i `uc ]
 [; ;interrupts.c: 212: __nop();
 "212
 [e ( ___nop ..  ]
-[; ;interrupts.c: 213: IRpin = ReadIRpin();
+[; ;interrupts.c: 213: __nop();
 "213
-[e = _IRpin ( _ReadIRpin ..  ]
-[; ;interrupts.c: 214: IRrawCount = 0;
+[e ( ___nop ..  ]
+[; ;interrupts.c: 214: IRpin = ReadIRpin();
 "214
-[e = _IRrawCount -> -> 0 `i `ui ]
-[; ;interrupts.c: 215: if(IRpin != IRpinOLD)
+[e = _IRpin ( _ReadIRpin ..  ]
+[; ;interrupts.c: 215: IRrawCount = 0;
 "215
-[e $ ! != -> _IRpin `i -> _IRpinOLD `i 2189  ]
-[; ;interrupts.c: 216: {
+[e = _IRrawCount -> -> 0 `i `ui ]
+[; ;interrupts.c: 216: if(IRpin != IRpinOLD)
 "216
-{
-[; ;interrupts.c: 217: IRrawCount += TMR0L;
+[e $ ! != -> _IRpin `i -> _IRpinOLD `i 2189  ]
+[; ;interrupts.c: 217: {
 "217
-[e =+ _IRrawCount -> _TMR0L `ui ]
-[; ;interrupts.c: 218: IRrawCount += ((unsigned int)TMR0H << 8);
+{
+[; ;interrupts.c: 218: IRrawCount += TMR0L;
 "218
-[e =+ _IRrawCount << -> _TMR0H `ui -> 8 `i ]
-[; ;interrupts.c: 219: if(IRrawCodeNum < 72)
+[e =+ _IRrawCount -> _TMR0L `ui ]
+[; ;interrupts.c: 219: IRrawCount += ((unsigned int)TMR0H << 8);
 "219
-[e $ ! < -> _IRrawCodeNum `i -> 72 `i 2190  ]
-[; ;interrupts.c: 220: {
+[e =+ _IRrawCount << -> _TMR0H `ui -> 8 `i ]
+[; ;interrupts.c: 220: if(IRrawCodeNum < 72)
 "220
+[e $ ! < -> _IRrawCodeNum `i -> 72 `i 2190  ]
+[; ;interrupts.c: 221: {
+"221
 {
-[; ;interrupts.c: 222: INTCONbits.TMR0IF = 0;
-"222
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 223: INTCONbits.TMR0IE = 1;
+[; ;interrupts.c: 223: INTCONbits.TMR0IF = 0;
 "223
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;interrupts.c: 224: Reset_Timer0();
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 224: INTCONbits.TMR0IE = 1;
 "224
-[e ( _Reset_Timer0 ..  ]
-[; ;interrupts.c: 225: if(IRrawCodeNum != 0)
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;interrupts.c: 225: Reset_Timer0();
 "225
-[e $ ! != -> _IRrawCodeNum `i -> 0 `i 2191  ]
-[; ;interrupts.c: 226: {
+[e ( _Reset_Timer0 ..  ]
+[; ;interrupts.c: 226: if(IRrawCodeNum != 0)
 "226
-{
-[; ;interrupts.c: 227: IRRawCode[IRrawCodeNum - 1] = IRrawCount;
+[e $ ! != -> _IRrawCodeNum `i -> 0 `i 2191  ]
+[; ;interrupts.c: 227: {
 "227
-[e = *U + &U _IRRawCode * -> -> - -> _IRrawCodeNum `i -> 1 `i `ui `ux -> -> # *U &U _IRRawCode `ui `ux _IRrawCount ]
+{
+[; ;interrupts.c: 228: IRRawCode[IRrawCodeNum - 1] = IRrawCount;
 "228
+[e = *U + &U _IRRawCode * -> -> - -> _IRrawCodeNum `i -> 1 `i `ui `ux -> -> # *U &U _IRRawCode `ui `ux _IRrawCount ]
+"229
 }
 [e :U 2191 ]
-[; ;interrupts.c: 228: }
-[; ;interrupts.c: 229: if(IRrawCount >= 28800L && IRrawCount <= 32000L )
-"229
-[e $ ! && >= -> _IRrawCount `l -> 28800 `l <= -> _IRrawCount `l -> 32000 `l 2192  ]
-[; ;interrupts.c: 230: {
+[; ;interrupts.c: 229: }
+[; ;interrupts.c: 230: if(IRrawCount >= 28800L && IRrawCount <= 32000L )
 "230
+[e $ ! && >= -> _IRrawCount `l -> 28800 `l <= -> _IRrawCount `l -> 32000 `l 2192  ]
+[; ;interrupts.c: 231: {
+"231
 {
-[; ;interrupts.c: 232: IR_New_Code = 2;
-"232
-[e = _IR_New_Code -> -> 2 `i `uc ]
-[; ;interrupts.c: 233: if(IR_NEC)
+[; ;interrupts.c: 233: IR_New_Code = 2;
 "233
-[e $ ! != _IR_NEC -> -> 0 `i `ul 2193  ]
-[; ;interrupts.c: 234: {
+[e = _IR_New_Code -> -> 2 `i `uc ]
+[; ;interrupts.c: 234: if(IR_NEC)
 "234
-{
-[; ;interrupts.c: 235: UseIRCode(&IR_New_Code,IR_NEC);
+[e $ ! != _IR_NEC -> -> 0 `i `ul 2193  ]
+[; ;interrupts.c: 235: {
 "235
-[e ( _UseIRCode (2 , &U _IR_New_Code _IR_NEC ]
+{
+[; ;interrupts.c: 236: UseIRCode(&IR_New_Code,IR_NEC);
 "236
+[e ( _UseIRCode (2 , &U _IR_New_Code _IR_NEC ]
+"237
 }
 [e :U 2193 ]
-[; ;interrupts.c: 236: }
-[; ;interrupts.c: 237: IRRawCode[0] = IRrawCount;
-"237
-[e = *U + &U _IRRawCode * -> -> -> 0 `i `ui `ux -> -> # *U &U _IRRawCode `ui `ux _IRrawCount ]
+[; ;interrupts.c: 237: }
+[; ;interrupts.c: 238: IRRawCode[0] = IRrawCount;
 "238
+[e = *U + &U _IRRawCode * -> -> -> 0 `i `ui `ux -> -> # *U &U _IRRawCode `ui `ux _IRrawCount ]
+"239
 }
 [e :U 2192 ]
-[; ;interrupts.c: 238: }
-[; ;interrupts.c: 239: IRrawCodeNum++;
-"239
-[e ++ _IRrawCodeNum -> -> 1 `i `uc ]
+[; ;interrupts.c: 239: }
+[; ;interrupts.c: 240: IRrawCodeNum++;
 "240
+[e ++ _IRrawCodeNum -> -> 1 `i `uc ]
+"241
 }
 [e :U 2190 ]
-[; ;interrupts.c: 240: }
-[; ;interrupts.c: 241: if(IRrawCodeNum == 72)
-"241
-[e $ ! == -> _IRrawCodeNum `i -> 72 `i 2194  ]
-[; ;interrupts.c: 242: {
+[; ;interrupts.c: 241: }
+[; ;interrupts.c: 242: if(IRrawCodeNum == 72)
 "242
-{
-[; ;interrupts.c: 243: INTCONbits.TMR0IF = 0;
+[e $ ! == -> _IRrawCodeNum `i -> 72 `i 2194  ]
+[; ;interrupts.c: 243: {
 "243
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 244: INTCONbits.TMR0IE = 0;
-"244
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-[; ;interrupts.c: 245: IR_New_Code = IRrawToNEC(IRRawCode, &IR_NEC, 1);
-"245
-[e = _IR_New_Code ( _IRrawToNEC (3 , , &U _IRRawCode &U _IR_NEC -> -> 1 `i `uc ]
-[; ;interrupts.c: 246: if(IR_New_Code)
-"246
-[e $ ! != -> _IR_New_Code `i -> -> -> 0 `i `uc `i 2195  ]
-[; ;interrupts.c: 247: {
-"247
 {
-[; ;interrupts.c: 248: UseIRCode(&IR_New_Code,IR_NEC);
+[; ;interrupts.c: 244: INTCONbits.TMR0IF = 0;
+"244
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 245: INTCONbits.TMR0IE = 0;
+"245
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[; ;interrupts.c: 246: IR_New_Code = IRrawToNEC(IRRawCode, &IR_NEC, 1);
+"246
+[e = _IR_New_Code ( _IRrawToNEC (3 , , &U _IRRawCode &U _IR_NEC -> -> 1 `i `uc ]
+[; ;interrupts.c: 247: if(IR_New_Code)
+"247
+[e $ ! != -> _IR_New_Code `i -> -> -> 0 `i `uc `i 2195  ]
+[; ;interrupts.c: 248: {
 "248
-[e ( _UseIRCode (2 , &U _IR_New_Code _IR_NEC ]
+{
+[; ;interrupts.c: 249: UseIRCode(&IR_New_Code,IR_NEC);
 "249
+[e ( _UseIRCode (2 , &U _IR_New_Code _IR_NEC ]
+"250
 }
 [e :U 2195 ]
-[; ;interrupts.c: 249: }
-[; ;interrupts.c: 250: IRrawCodeNum = 0;
-"250
-[e = _IRrawCodeNum -> -> 0 `i `uc ]
+[; ;interrupts.c: 250: }
+[; ;interrupts.c: 251: IRrawCodeNum = 0;
 "251
-}
-[e :U 2194 ]
+[e = _IRrawCodeNum -> -> 0 `i `uc ]
 "252
 }
-[e :U 2189 ]
-[; ;interrupts.c: 251: }
-[; ;interrupts.c: 252: }
-[; ;interrupts.c: 253: IRpinOLD = IRpin;
+[e :U 2194 ]
 "253
+}
+[e :U 2189 ]
+[; ;interrupts.c: 252: }
+[; ;interrupts.c: 253: }
+[; ;interrupts.c: 254: IRpinOLD = IRpin;
+"254
 [e = _IRpinOLD _IRpin ]
-[; ;interrupts.c: 255: INTCONbits.RBIF = 0;
-"255
+[; ;interrupts.c: 256: INTCONbits.RBIF = 0;
+"256
 [e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 257: INTCONbits.RBIE = 1;
-"257
-[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
+[; ;interrupts.c: 258: INTCONbits.RBIE = 1;
 "258
-}
-[; ;interrupts.c: 258: }
-[e $U 2196  ]
+[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
 "259
-[e :U 2188 ]
-[; ;interrupts.c: 259: else if (INTCONbits.TMR0IF)
-[e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 2197  ]
-[; ;interrupts.c: 260: {
+}
+[; ;interrupts.c: 259: }
+[e $U 2196  ]
 "260
-{
-[; ;interrupts.c: 261: cleanBuffer16bit(IRRawCode, IRrawCodeNum);
+[e :U 2188 ]
+[; ;interrupts.c: 260: else if (INTCONbits.TMR0IF)
+[e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 2197  ]
+[; ;interrupts.c: 261: {
 "261
-[e ( _cleanBuffer16bit (2 , &U _IRRawCode -> _IRrawCodeNum `i ]
-[; ;interrupts.c: 262: IRrawCodeNum = 0;
-"262
-[e = _IRrawCodeNum -> -> 0 `i `uc ]
-[; ;interrupts.c: 263: INTCONbits.TMR0IF = 0;
+{
+[; ;interrupts.c: 263: cleanBuffer16bit(IRRawCode, IRrawCodeNum);
 "263
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interrupts.c: 264: INTCONbits.TMR0IE = 0;
+[e ( _cleanBuffer16bit (2 , &U _IRRawCode -> _IRrawCodeNum `i ]
+[; ;interrupts.c: 264: IRrawCodeNum = 0;
 "264
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[e = _IRrawCodeNum -> -> 0 `i `uc ]
+[; ;interrupts.c: 265: INTCONbits.TMR0IF = 0;
 "265
-}
-[; ;interrupts.c: 265: }
-[e $U 2198  ]
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 266: INTCONbits.TMR0IE = 0;
 "266
-[e :U 2197 ]
-[; ;interrupts.c: 266: else if(INTCONbits.INT0IF)
-[e $ ! != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i 2199  ]
-[; ;interrupts.c: 267: {
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
 "267
-{
-[; ;interrupts.c: 269: INTCONbits.INT0IE = 0;
+}
+[; ;interrupts.c: 267: }
+[e $U 2198  ]
+"268
+[e :U 2197 ]
+[; ;interrupts.c: 268: else if(INTCONbits.INT0IF)
+[e $ ! != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i 2199  ]
+[; ;interrupts.c: 269: {
 "269
-[e = . . _INTCONbits 0 4 -> -> 0 `i `uc ]
-[; ;interrupts.c: 270: INTCONbits.INT0IF = 0;
-"270
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"271
-}
-[; ;interrupts.c: 271: }
-[e $U 2200  ]
-"272
-[e :U 2199 ]
-[; ;interrupts.c: 272: else
-[; ;interrupts.c: 273: {
-"273
 {
-[; ;interrupts.c: 275: __nop();
-"275
-[e ( ___nop ..  ]
-"276
+[; ;interrupts.c: 271: INTCONbits.INT0IF = 0;
+"271
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;interrupts.c: 272: INTCONbits.INT0IE = 0;
+"272
+[e = . . _INTCONbits 0 4 -> -> 0 `i `uc ]
+"274
 }
+[; ;interrupts.c: 274: }
+[e $U 2200  ]
+"275
+[e :U 2199 ]
+[; ;interrupts.c: 275: else if(PIR1bits.TMR1IF)
+[e $ ! != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i 2201  ]
+[; ;interrupts.c: 276: {
+"276
+{
+[; ;interrupts.c: 278: LCDScreenUpdate();
+"278
+[e ( _LCDScreenUpdate ..  ]
+[; ;interrupts.c: 279: PIR1bits.TMR1IF = 0;
+"279
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;interrupts.c: 280: PIE1bits.TMR1IE = 1;
+"280
+[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
+"281
+}
+[; ;interrupts.c: 281: }
+[e $U 2202  ]
+"282
+[e :U 2201 ]
+[; ;interrupts.c: 282: else
+[; ;interrupts.c: 283: {
+"283
+{
+[; ;interrupts.c: 285: __nop();
+"285
+[e ( ___nop ..  ]
+"286
+}
+[e :U 2202 ]
 [e :U 2200 ]
 [e :U 2198 ]
 [e :U 2196 ]
 [e :U 2187 ]
-[; ;interrupts.c: 276: }
-[; ;interrupts.c: 277: INTCONbits.PEIE = 1;
-"277
+[; ;interrupts.c: 286: }
+[; ;interrupts.c: 287: INTCONbits.PEIE = 1;
+"287
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;interrupts.c: 278: }
-"278
+[; ;interrupts.c: 288: }
+"288
 [e :UE 2162 ]
 }
 [a 4C 62 0 ]

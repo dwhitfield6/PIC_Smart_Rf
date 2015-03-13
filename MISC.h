@@ -79,3 +79,6 @@ void cleanBuffer16bit(unsigned int* data, int count);
 unsigned char Reverse_Byte(unsigned char This);
 unsigned int Reverse_2Byte(unsigned int This);
 unsigned long Reverse_4Byte(unsigned long This);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

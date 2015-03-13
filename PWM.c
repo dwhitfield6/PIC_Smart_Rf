@@ -146,6 +146,8 @@ void SetFreq(unsigned int freq)
     //lowest number is 39.25 kHz
     unsigned char temp =0;
     temp = (unsigned char)(((TOSC >> 2)/(freq*1000))-1);
-    //temp = (unsigned char)((float)period /(4*(float)TOSC*(float)TMR2_Prescale))-1;
     PR2 = temp;
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

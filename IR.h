@@ -28,14 +28,24 @@
 
 #endif
 
-#define IR_LED_TIMEOUT 25
+/******************************************************************************/
+/* Defines                                                                    */
+/******************************************************************************/
+
+#define IR_LED_TIMEOUT 2500
 #define IR_SIZE MaxScanEdgeChange
 
+/******************************************************************************/
+/* MaxScanEdgeChange
+ *
+ * Max number to bit flip flops.
+/******************************************************************************/
 /* this is equal to (number of bits + header) *2*/
 #define MaxScanEdgeChange 72
 
-/* Timing for 40.96 MHz */
-
+/******************************************************************************/
+/* NEC bit Timing for 40.96 MHz                                               */
+/******************************************************************************/
 /* Starting bit High */
 /* Nominal 9mS*/
 /* High Tolerance is 10mS */
@@ -83,6 +93,9 @@
 /* Low Tolerance is 100mS */
 #define Repeatlower 28800L
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
 
 extern unsigned int BlueLEDcount;
 extern unsigned int IRRawCode[IR_SIZE];
@@ -91,7 +104,14 @@ extern unsigned int IRrawCount;
 extern unsigned char IRrawCodeNum;
 extern unsigned char IR_New_Code;
 
+/******************************************************************************/
+/* Function prototypes                                                        */
+/******************************************************************************/
+
 void init_IR(void);
 unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

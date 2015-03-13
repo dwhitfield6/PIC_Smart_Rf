@@ -7,6 +7,8 @@
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
  * 02/05/15     1.0         Created log.
+ * 03/12/15     1.0_DW0a    Added New functons to burn a 1, 2, and 4 byte data
+ *                            type.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -127,8 +129,8 @@ unsigned long GetMemoryBaud(void)
     BaudTempML = ReadEEPROM_1Byte(EE_BaudMLSB);
     BaudTempL = ReadEEPROM_1Byte(EE_BaudLSB);
 
-    baud = (((unsigned long) BaudTempH << 24) + ((unsigned long)BaudTempMH << 16) + ((unsigned long)BaudTempML << 8) + (unsigned long)BaudTempL);
-    NOP();
+    baud = (((unsigned long) BaudTempH << 24) + ((unsigned long)BaudTempMH << 16)
+            + ((unsigned long)BaudTempML << 8) + (unsigned long)BaudTempL);
     return baud;
 }
 
@@ -164,7 +166,6 @@ unsigned char SetMemoryBaud(unsigned long Baud)
         return PASS;
     }
     return FAIL;
-
 }
 
 /******************************************************************************/
@@ -200,5 +201,211 @@ unsigned char SetMemoryParity(unsigned char Parity)
         return PASS;
     }
     return FAIL;
+}
+
+/******************************************************************************/
+/* GetEEPROM
+ *
+ * The function gets the EEdata struct from memory.
+/******************************************************************************/
+GBLdata GetEEPROM(void)
+{
+    GBLdata Temp;
+    Temp.Baud = GetMemoryBaud();
+    Temp.Parity = GetMemoryChar(EE_Parity);
+    Temp.NEC1 = GetMemoryLong(EE_NEC1_byte1);
+    return Temp;
+}
+
+/******************************************************************************/
+/* SetEEPROM
+ *
+ * The function burns the EEdata struct to memory.
+/******************************************************************************/
+unsigned long SetEEPROM(GBLdata Temp,unsigned long burn)
+{
+    unsigned long fail = 0;
+    if(burn & 0x00000001)
+    {
+        if(!SetMemoryBaud(Temp.Baud))
+        {
+            /* Failed to burn Baud */
+            fail += 0x00000001;
+        }
+    }
+    if(burn & 0x00000002)
+    {
+        if(!SetMemoryParity(Temp.Parity))
+        {
+            /* Failed to burn Parity */
+            fail += 0x00000002;
+        }
+    }
+    if(burn & 0x00000004)
+    {
+        if(!SetMemoryLong(Temp.NEC1,EE_NEC1_byte1))
+        {
+            /* Failed to burn Parity */
+            fail += 0x00000004;
+        }
+    }
+    return fail;
+}
+
+/******************************************************************************/
+/* SyncEEPROMandGLOBAL
+ *
+ * The function syncs the EEPROM and the global data.
+/******************************************************************************/
+void SyncEEPROMandGLOBAL(void)
+{
+    GBLdata Temp;
+
+    Temp = GetEEPROM();
+
+    Global.Baud = Temp.Baud;
+    Global.Parity = Temp.Parity;
+    Global.NEC1 = Temp.NEC1;
 
 }
+
+/******************************************************************************/
+/* GetMemoryLong
+ *
+ * The function returns the data saved in EEPROM.
+/******************************************************************************/
+unsigned long GetMemoryLong(unsigned char AddressFirst)
+{
+    unsigned char H;
+    unsigned char MH;
+    unsigned char ML;
+    unsigned char L;
+    unsigned long temp =0;
+
+    H = ReadEEPROM_1Byte(AddressFirst);
+    MH = ReadEEPROM_1Byte(AddressFirst + 1);
+    ML = ReadEEPROM_1Byte(AddressFirst + 2);
+    L = ReadEEPROM_1Byte(AddressFirst + 3);
+
+    temp = (((unsigned long) H << 24) + ((unsigned long)MH << 16)
+            + ((unsigned long)ML << 8) + (unsigned long)L);
+    return temp;
+}
+
+/******************************************************************************/
+/* SetMemoryLong
+ *
+ * The function burns the data to the EEPROM.
+/******************************************************************************/
+unsigned char SetMemoryLong(unsigned long Data, unsigned char AddressFirst)
+{
+    unsigned char H;
+    unsigned char MH;
+    unsigned char ML;
+    unsigned char L;
+    unsigned long Test;
+
+    H = (unsigned char)  ((Data & 0XFF000000) >> 24);
+    MH = (unsigned char) ((Data & 0X00FF0000) >> 16);
+    ML = (unsigned char) ((Data & 0X0000FF00) >> 8);
+    L = (unsigned char)  (Data & 0X000000FF);
+
+
+    WriteEEPROM_1Byte(AddressFirst, H);
+    WriteEEPROM_1Byte((AddressFirst + 1), MH);
+    WriteEEPROM_1Byte((AddressFirst + 2), ML);
+    WriteEEPROM_1Byte((AddressFirst + 3), L);
+
+    // Test to see if the contents in memory are the same as we intended
+    Test = GetMemoryLong(AddressFirst);
+
+    if(Test == Data)
+    {
+        return PASS;
+    }
+    return FAIL;
+}
+
+/******************************************************************************/
+/* GetMemoryInt
+ *
+ * The function returns the data saved in EEPROM.
+/******************************************************************************/
+unsigned long GetMemoryInt(unsigned char AddressFirst)
+{
+    unsigned char H;
+    unsigned char L;
+    unsigned int temp =0;
+
+    H = ReadEEPROM_1Byte(AddressFirst);
+    L = ReadEEPROM_1Byte(AddressFirst + 1);
+
+    temp = (((unsigned int) H << 8) + (unsigned int)L);
+    return temp;
+}
+
+/******************************************************************************/
+/* SetMemoryInt
+ *
+ * The function burns the data to the EEPROM.
+/******************************************************************************/
+unsigned char SetMemoryInt(unsigned int Data, unsigned char AddressFirst)
+{
+    unsigned char H;
+    unsigned char L;
+    unsigned long Test;
+
+    H = (unsigned char)  ((Data & 0xFF00) >> 8);
+    L = (unsigned char)  (Data & 0x00FF);
+
+
+    WriteEEPROM_1Byte(AddressFirst, H);
+    WriteEEPROM_1Byte((AddressFirst + 1), L);
+
+    // Test to see if the contents in memory are the same as we intended
+    Test = GetMemoryInt(AddressFirst);
+
+    if(Test == Data)
+    {
+        return PASS;
+    }
+    return FAIL;
+}
+
+/******************************************************************************/
+/* GetMemoryChar
+ *
+ * The function returns the data saved in EEPROM.
+/******************************************************************************/
+unsigned long GetMemoryChar(unsigned char AddressFirst)
+{
+    unsigned char H;
+
+    H = ReadEEPROM_1Byte(AddressFirst);
+
+    return H;
+}
+
+/******************************************************************************/
+/* SetMemoryChar
+ *
+ * The function burns the data to the EEPROM.
+/******************************************************************************/
+unsigned char SetMemoryChar(unsigned char Data, unsigned char AddressFirst)
+{
+    unsigned char Test;
+
+    WriteEEPROM_1Byte(AddressFirst, Data);
+
+    // Test to see if the contents in memory are the same as we intended
+    Test = GetMemoryChar(AddressFirst);
+
+    if(Test == Data)
+    {
+        return PASS;
+    }
+    return FAIL;
+}
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

@@ -19807,7 +19807,18 @@ unsigned char Parse_Time(unsigned char* This);
 # 96 "user.h"
 void InitApp(void);
 
-# 54 "EEPROM.h"
+# 37 "EEPROM.h"
+typedef struct EEdata
+{
+unsigned long Baud;
+unsigned char Parity;
+unsigned long NEC1;
+}GBLdata;
+
+# 48
+GBLdata Global =0;
+
+# 79
 unsigned int ReadEEPROM_1Byte(unsigned int address);
 void EEPROM_UNLOCK(void);
 void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
@@ -19815,8 +19826,17 @@ unsigned long GetMemoryBaud(void);
 unsigned char SetMemoryBaud(unsigned long Baud);
 unsigned char GetMemoryParity(void);
 unsigned char SetMemoryParity(unsigned char Parity);
+GBLdata GetEEPROM(void);
+unsigned long SetEEPROM(GBLdata Temp,unsigned long burn);
+unsigned long GetMemoryLong(unsigned char AddressFirst);
+unsigned char SetMemoryLong(unsigned long Data, unsigned char AddressFirst);
+unsigned long GetMemoryInt(unsigned char AddressFirst);
+unsigned char SetMemoryInt(unsigned int Data, unsigned char AddressFirst);
+unsigned long GetMemoryChar(unsigned char AddressFirst);
+unsigned char SetMemoryChar(unsigned char Data, unsigned char AddressFirst);
+void SyncEEPROMandGLOBAL(void);
 
-# 87 "IR.h"
+# 100 "IR.h"
 extern unsigned int BlueLEDcount;
 extern unsigned int IRRawCode[72];
 extern unsigned long IR_NEC;
@@ -19824,13 +19844,14 @@ extern unsigned int IRrawCount;
 extern unsigned char IRrawCodeNum;
 extern unsigned char IR_New_Code;
 
+# 111
 void init_IR(void);
 unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
 
-# 61 "main.c"
-unsigned char Version[20] = "1.0_DW0";
+# 64 "main.c"
+unsigned char Version[20] = "1.0_DW0a";
 
 
 
@@ -19844,12 +19865,11 @@ extern char Rxdata[100];
 unsigned char buf[100];
 unsigned char bufferCount =0;
 
-# 79
+# 82
 void main(void)
 {
 unsigned char ii = 0;
 unsigned char count = 0;
-unsigned long Baudtemp = 0;
 unsigned char MemoryBurnflag = 0;
 
 ConfigureOscillator();
@@ -19859,20 +19879,24 @@ PWM_init();
 ContrastPWM_init();
 Init_I2C_Master();
 RTC_INIT();
-init_IR();
 init_LCD();
 
-Baudtemp = GetMemoryBaud();
-if(Baudtemp < 2400 || Baudtemp > 115200)
+SyncEEPROMandGLOBAL();
+
+if(Global.Baud < 2400 || Global.Baud > 115200)
 {
-if(SetMemoryBaud(9600))
+
+Global.Baud = 9600;
+Global.Parity = 0;
+
+if(!SetEEPROM(Global,0x3))
 {
+
 MemoryBurnflag = 1;
 }
-Baudtemp = 9600;
-SetMemoryParity(0);
 }
-InitUART(Baudtemp, GetMemoryParity());
+SyncEEPROMandGLOBAL();
+InitUART(Global.Baud, Global.Parity);
 UARTstring("Firmware Version: ");
 UARTstring(Version);
 UARTstring("\r\n");
@@ -19944,6 +19968,8 @@ ReadUSART();
 ClearLCD();
 SetLCDcursor(0, 0);
 LCDPrintChar('>');
+
+init_IR();
 
 while(1)
 {

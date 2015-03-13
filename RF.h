@@ -112,3 +112,6 @@ void f_Config1(unsigned char pin);
 void Send_Config2( unsigned char pin,const unsigned char* data);
 void Zero_Config2(unsigned char pin);
 void One_Config2(unsigned char pin);
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

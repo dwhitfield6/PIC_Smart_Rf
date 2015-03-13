@@ -41,7 +41,11 @@
 #include "UART.h"          /* User funct/params, such as InitApp */
 #include "LCD.h"          /* User funct/params, such as InitApp */
 #include "Button.h"          /* User funct/params, such as InitApp */
+#include "EEPROM.h"          /* User funct/params, such as InitApp */
 
+/******************************************************************************/
+/* Global Variables                                                           */
+/******************************************************************************/
 
 unsigned int BlueLEDcount = IR_LED_TIMEOUT;
 unsigned char IRfault = 0;
@@ -52,7 +56,10 @@ unsigned int IRrawCount = 0;
 unsigned char IRrawCodeNum = 0;
 unsigned char IR_New_Code  = 0;
 
-unsigned long NEC_Stored1 = 0;
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+
 /******************************************************************************/
 /* init_IR
  *
@@ -268,7 +275,7 @@ void UseIRCode(unsigned char* Code, unsigned long NEC)
 
     if(ReadButton1())
     {
-        if(NEC == NEC_Stored1) // Up channel
+        if(NEC == Global.NEC1) // Up channel
         {
             if(*Code == 1)
             {
@@ -284,7 +291,12 @@ void UseIRCode(unsigned char* Code, unsigned long NEC)
     {
         if(*Code == 1)
         {
-            NEC_Stored1 = NEC;
+            Global.NEC1 = NEC;
+            if(SetEEPROM(Global, 0x04))
+            {
+                /* Failed to burn NEC code to EEPROM*/
+                UARTstring("Error: Could not burn IR Code into Memory\r\n");
+            }
             for(i =0; i <10;i++)
             {
                 LATD |= LED0;
@@ -301,3 +313,6 @@ void UseIRCode(unsigned char* Code, unsigned long NEC)
     *Code = 0;
     BlueLEDcount = 0;
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

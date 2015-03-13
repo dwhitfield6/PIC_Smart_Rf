@@ -206,6 +206,7 @@ void low_isr(void)
     else if(INTCONbits.RBIF)
     {
         /* Pin change interrupt */
+        /* Used for IR receiver */
         /* Disable RB port change on interrupt */
         INTCONbits.RBIE = 0;
         NOP();
@@ -258,6 +259,7 @@ void low_isr(void)
     }
     else if (INTCONbits.TMR0IF)
     {
+        /* Used for IR receiver TimeOut */
         cleanBuffer16bit(IRRawCode, IRrawCodeNum);
         IRrawCodeNum = 0;
         INTCONbits.TMR0IF = 0;
@@ -266,8 +268,16 @@ void low_isr(void)
     else if(INTCONbits.INT0IF)
     {
         /* Push Button was pressed */
-        INTCONbits.INT0IE = 0;
         INTCONbits.INT0IF = 0;
+        INTCONbits.INT0IE = 0;
+
+    }
+    else if(PIR1bits.TMR1IF)
+    {
+        /* LCD timing interrupt */
+        LCDScreenUpdate();
+        PIR1bits.TMR1IF = 0;
+        PIE1bits.TMR1IE = 1;
     }
     else
     {
@@ -276,3 +286,6 @@ void low_isr(void)
     }
     INTCONbits.PEIE = 1; //Enable pheripheral interrupt
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

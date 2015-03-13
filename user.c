@@ -94,7 +94,8 @@ void InitApp(void)
 
     RCONbits.IPEN = 1; //enable priority interrupts
     INTCONbits.PEIE = 1; //Enable pheripheral interrupt
-    INTCONbits.GIE = 1; //global interrupts enabled
-   
+    INTCONbits.GIE = 1; //global interrupts enabled 
 }
-
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

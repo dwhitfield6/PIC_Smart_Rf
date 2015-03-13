@@ -19587,7 +19587,7 @@ extern int printf(const char *, ...);
 # 96 "user.h"
 void InitApp(void);
 
-# 87 "IR.h"
+# 100 "IR.h"
 extern unsigned int BlueLEDcount;
 extern unsigned int IRRawCode[72];
 extern unsigned long IR_NEC;
@@ -19595,18 +19595,22 @@ extern unsigned int IRrawCount;
 extern unsigned char IRrawCodeNum;
 extern unsigned char IR_New_Code;
 
+# 111
 void init_IR(void);
 unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
 
-# 31 "Timer.h"
+# 35 "Timer.h"
 void init_Timers(void);
 void init_Timer0(void);
 void Stop_Timer0(void);
 void Start_Timer0(void);
 void Reset_Timer0(void);
 void init_Timer1(void);
+void Stop_Timer1(void);
+void Start_Timer1(void);
+void Reset_Timer1(void);
 
 # 54 "system.h"
 void ConfigureOscillator(void);
@@ -19664,11 +19668,43 @@ void LCDScreenUpdate();
 void LCDdisplayFeedback(const unsigned char *Text);
 void LCD_Scroll(const unsigned char* This);
 
-# 31 "Button.h"
+# 35 "Button.h"
 void init_Button1_INT(void);
 unsigned char ReadButton1(void);
 
-# 46 "IR.c"
+# 96 "user.h"
+void InitApp(void);
+
+# 37 "EEPROM.h"
+typedef struct EEdata
+{
+unsigned long Baud;
+unsigned char Parity;
+unsigned long NEC1;
+}GBLdata;
+
+# 48
+GBLdata Global =0;
+
+# 79
+unsigned int ReadEEPROM_1Byte(unsigned int address);
+void EEPROM_UNLOCK(void);
+void WriteEEPROM_1Byte(unsigned int address, unsigned char data);
+unsigned long GetMemoryBaud(void);
+unsigned char SetMemoryBaud(unsigned long Baud);
+unsigned char GetMemoryParity(void);
+unsigned char SetMemoryParity(unsigned char Parity);
+GBLdata GetEEPROM(void);
+unsigned long SetEEPROM(GBLdata Temp,unsigned long burn);
+unsigned long GetMemoryLong(unsigned char AddressFirst);
+unsigned char SetMemoryLong(unsigned long Data, unsigned char AddressFirst);
+unsigned long GetMemoryInt(unsigned char AddressFirst);
+unsigned char SetMemoryInt(unsigned int Data, unsigned char AddressFirst);
+unsigned long GetMemoryChar(unsigned char AddressFirst);
+unsigned char SetMemoryChar(unsigned char Data, unsigned char AddressFirst);
+void SyncEEPROMandGLOBAL(void);
+
+# 50 "IR.c"
 unsigned int BlueLEDcount = 25;
 unsigned char IRfault = 0;
 extern unsigned char IRpinOLD;
@@ -19678,9 +19714,7 @@ unsigned int IRrawCount = 0;
 unsigned char IRrawCodeNum = 0;
 unsigned char IR_New_Code = 0;
 
-unsigned long NEC_Stored1 = 0;
-
-# 61
+# 68
 void init_IR(void)
 {
 
@@ -19703,7 +19737,7 @@ INTCONbits.TMR0IE = 0;
 INTCONbits.RBIE = 1;
 }
 
-# 88
+# 95
 unsigned char ReadIRpin(void)
 {
 
@@ -19717,11 +19751,11 @@ return 0;
 }
 }
 
-# 106
+# 113
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert)
 {
 
-# 134
+# 141
 unsigned char i;
 unsigned char Pause =0;
 unsigned char first =0;
@@ -19808,7 +19842,7 @@ return 0;
 else if(Raw[StartBit] == 0 && first == 1)
 {
 
-# 223
+# 230
 *NEC = NECtemp;
 return 1;
 }
@@ -19844,7 +19878,7 @@ StartBit++;
 return 0;
 }
 
-# 264
+# 271
 void UseIRCode(unsigned char* Code, unsigned long NEC)
 {
 unsigned char buf[100];
@@ -19852,7 +19886,7 @@ unsigned char i;
 
 if(ReadButton1())
 {
-if(NEC == NEC_Stored1)
+if(NEC == Global.NEC1)
 {
 if(*Code == 1)
 {
@@ -19868,7 +19902,12 @@ else
 {
 if(*Code == 1)
 {
-NEC_Stored1 = NEC;
+Global.NEC1 = NEC;
+if(SetEEPROM(Global, 0x04))
+{
+
+UARTstring("Error: Could not burn IR Code into Memory\r\n");
+}
 for(i =0; i <10;i++)
 {
 LATD |= 0b00000010;
@@ -19885,3 +19924,4 @@ LATD &= ~0b00000100;
 *Code = 0;
 BlueLEDcount = 0;
 }
+

@@ -46,3 +46,6 @@ void SetDuty(unsigned char Duty);
 void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/

@@ -19524,7 +19524,7 @@ typedef unsigned char bool;
 # 96 "user.h"
 void InitApp(void);
 
-# 87 "IR.h"
+# 100 "IR.h"
 extern unsigned int BlueLEDcount;
 extern unsigned int IRRawCode[72];
 extern unsigned long IR_NEC;
@@ -19532,27 +19532,33 @@ extern unsigned int IRrawCount;
 extern unsigned char IRrawCodeNum;
 extern unsigned char IR_New_Code;
 
+# 111
 void init_IR(void);
 unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
 
-# 31 "Timer.h"
+# 35 "Timer.h"
 void init_Timers(void);
 void init_Timer0(void);
 void Stop_Timer0(void);
 void Start_Timer0(void);
 void Reset_Timer0(void);
 void init_Timer1(void);
+void Stop_Timer1(void);
+void Start_Timer1(void);
+void Reset_Timer1(void);
 
 # 47 "Timer.c"
 void init_Timers(void)
 {
 
 init_Timer0();
+
+init_Timer1();
 }
 
-# 58
+# 60
 void init_Timer0(void)
 {
 Stop_Timer0();
@@ -19569,31 +19575,69 @@ T0CONbits.T0PS = 0x4;
 
 }
 
-# 79
+# 81
 void Stop_Timer0(void)
 {
 
 T0CONbits.TMR0ON =0;
 }
 
-# 90
+# 92
 void Start_Timer0(void)
 {
 
 T0CONbits.TMR0ON =1;
 }
 
-# 101
+# 103
 void Reset_Timer0(void)
 {
 
-# 107
+# 109
 TMR0H = 0;
 TMR0L = 2;
 }
 
-# 117
+# 119
 void init_Timer1(void)
 {
-__nop();
+
+T1CONbits.RD16 = 1;
+
+T1CONbits.TMR1CS = 0;
+
+T1CONbits.T1CKPS = 0x3;
+
+IPR1bits.TMR1IP = 0;
+Start_Timer1();
 }
+
+# 137
+void Stop_Timer1(void)
+{
+
+T1CONbits.TMR1ON =0;
+
+PIR1bits.TMR1IF = 0;
+PIE1bits.TMR1IE = 0;
+}
+
+# 151
+void Start_Timer1(void)
+{
+
+T1CONbits.TMR1ON =1;
+
+PIR1bits.TMR1IF = 0;
+PIE1bits.TMR1IE = 1;
+}
+
+# 165
+void Reset_Timer1(void)
+{
+
+# 171
+TMR1H = 0;
+TMR1L = 2;
+}
+

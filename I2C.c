@@ -422,3 +422,6 @@ if( ((SSPCON1&0x0F)==0x08) || ((SSPCON1&0x0F)==0x0B) )	//master mode only
   while ( !SSPSTATbits.BF );      // wait until byte received
   return ( SSPBUF );              // return with read byte
 }
+/*-----------------------------------------------------------------------------/
+ End of File
+/-----------------------------------------------------------------------------*/
