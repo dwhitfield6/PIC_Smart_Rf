@@ -10,9 +10,9 @@ CND_CONF=xc8_pic18f4685
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/Smart_Rf_PIC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=Smart_Rf_PIC.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=smartrfpic/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/PIC_Smart_Rf.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=PIC_Smart_Rf.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=picsmartrf/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/smartrfpic/bin
+makeDirectory ${TMPDIR}/picsmartrf/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/smartrfpic.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/picsmartrf.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/smartrfpic.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/picsmartrf.tar *
 checkReturnCode
 
 # Cleanup
