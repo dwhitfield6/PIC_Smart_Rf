@@ -19736,11 +19736,11 @@ void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 62 "LCD.h"
-unsigned long LCDclearCount=25000;
+# 66 "LCD.h"
+unsigned long LCDclearCount=17;
 unsigned char LCDwait=0;
 
-# 69
+# 73
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();

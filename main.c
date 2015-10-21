@@ -6,7 +6,7 @@
  * Date         Revision    Comments
  * MM/DD/YY
  * --------     ---------   ----------------------------------------------------
- * 01/22/15     1.0         Created log.
+ * 10/21/15     8.0_DW0a    Changed version number to match new scheme.
  * 03/12/15     1.0_DW0a    Added version banner.
  *                          Added EEPROM functionaity.
  *                          Added code to save the Baud rate in EEPROM.
@@ -17,6 +17,7 @@
  *                          Added new EEPROM functions.
  *                          LCD screen loop is called from interrupt instead
  *                            of main loop.
+ * 01/22/15     1.0         Created log.
 /******************************************************************************/
 
 /******************************************************************************/
@@ -63,7 +64,7 @@
 /* Version                                                                    */
 /******************************************************************************/
 
-unsigned char Version[20] = "1.0_DW0a";
+unsigned char Version[20] = "8.0_DW0a";
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/

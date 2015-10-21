@@ -19652,11 +19652,11 @@ void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
 unsigned long GetBaud(void);
 
-# 62 "LCD.h"
-unsigned long LCDclearCount=25000;
+# 66 "LCD.h"
+unsigned long LCDclearCount=17;
 unsigned char LCDwait=0;
 
-# 69
+# 73
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19705,7 +19705,7 @@ unsigned char SetMemoryChar(unsigned char Data, unsigned char AddressFirst);
 void SyncEEPROMandGLOBAL(void);
 
 # 50 "IR.c"
-unsigned int BlueLEDcount = 25;
+unsigned int BlueLEDcount = 2500;
 unsigned char IRfault = 0;
 extern unsigned char IRpinOLD;
 unsigned int IRRawCode[72];

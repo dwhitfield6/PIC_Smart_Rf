@@ -19744,11 +19744,11 @@ void SetFreq(unsigned int freq);
 void SetContrast(unsigned char Duty);
 void ContrastPWM_init();
 
-# 62 "LCD.h"
-unsigned long LCDclearCount=25000;
+# 66 "LCD.h"
+unsigned long LCDclearCount=17;
 unsigned char LCDwait=0;
 
-# 69
+# 73
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19850,8 +19850,8 @@ unsigned char ReadIRpin(void);
 unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 void UseIRCode(unsigned char* Code, unsigned long NEC);
 
-# 64 "main.c"
-unsigned char Version[20] = "1.0_DW0a";
+# 67 "main.c"
+unsigned char Version[20] = "8.0_DW0a";
 
 
 
@@ -19865,7 +19865,7 @@ extern char Rxdata[100];
 unsigned char buf[100];
 unsigned char bufferCount =0;
 
-# 82
+# 85
 void main(void)
 {
 unsigned char ii = 0;
@@ -19973,9 +19973,7 @@ init_IR();
 
 while(1)
 {
-
-LCDScreenUpdate();
-if(BlueLEDcount < 25)
+if(BlueLEDcount < 2500)
 {
 BlueLEDcount++;
 }

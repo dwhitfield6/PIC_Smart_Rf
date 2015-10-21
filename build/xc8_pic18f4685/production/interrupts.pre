@@ -19561,11 +19561,11 @@ void OpenUSART( unsigned char config, unsigned int spbrg);
 void SetBaud(unsigned long Baud, unsigned char Parity);
 unsigned long GetBaud(void);
 
-# 62 "LCD.h"
-unsigned long LCDclearCount=25000;
+# 66 "LCD.h"
+unsigned long LCDclearCount=17;
 unsigned char LCDwait=0;
 
-# 69
+# 73
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19752,7 +19752,7 @@ unsigned char IRpin;
 
 INTCONbits.PEIE = 0;
 
-if(PIR1bits.RCIF)
+if(PIR1bits.RCIF && PIE1bits.RCIE)
 {
 
 PIE1bits.RCIE = 0;
@@ -19861,7 +19861,7 @@ PIR1bits.RCIF = 0;
 PIE1bits.RCIE = 1;
 RCSTAbits.CREN = 1;
 }
-else if(INTCONbits.RBIF)
+else if(INTCONbits.RBIF && INTCONbits.RBIE)
 {
 
 
@@ -19915,7 +19915,7 @@ INTCONbits.RBIF = 0;
 
 INTCONbits.RBIE = 1;
 }
-else if (INTCONbits.TMR0IF)
+else if (INTCONbits.TMR0IF && INTCONbits.TMR0IE)
 {
 
 cleanBuffer16bit(IRRawCode, IRrawCodeNum);
@@ -19923,14 +19923,13 @@ IRrawCodeNum = 0;
 INTCONbits.TMR0IF = 0;
 INTCONbits.TMR0IE = 0;
 }
-else if(INTCONbits.INT0IF)
+else if(INTCONbits.INT0IF && INTCONbits.INT0IE)
 {
 
 INTCONbits.INT0IF = 0;
 INTCONbits.INT0IE = 0;
-
 }
-else if(PIR1bits.TMR1IF)
+else if(PIR1bits.TMR1IF && PIE1bits.TMR1IE)
 {
 
 LCDScreenUpdate();

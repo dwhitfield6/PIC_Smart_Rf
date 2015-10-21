@@ -19524,11 +19524,11 @@ typedef unsigned char bool;
 # 96 "user.h"
 void InitApp(void);
 
-# 62 "LCD.h"
-unsigned long LCDclearCount=25000;
+# 66 "LCD.h"
+unsigned long LCDclearCount=17;
 unsigned char LCDwait=0;
 
-# 69
+# 73
 void init_LCD();
 void SendLCDbyte(unsigned char data, unsigned char isCommand);
 void PulseEnablePin();
@@ -19755,32 +19755,33 @@ ClearLCD();
 SetLCDcursor(1, 0);
 LCDPrintString(Text);
 LCDwait = 1;
+Reset_Timer1();
+Start_Timer1();
 LCDclearCount =0;
 }
 
-# 269
+# 271
 void LCDPrintChar(unsigned char character)
 {
 SendLCDbyte(character, 1);
-Reset_Timer1();
-Start_Timer1();
 }
 
 # 282
 void LCDScreenUpdate(void)
 {
 
-if(LCDclearCount<(25000-1))
+if(LCDclearCount<(17-1))
 {
 LCDclearCount++;
 LCDwait = 1;
 }
-else if(LCDclearCount == (25000-1))
+else if(LCDclearCount == (17-1))
 {
 LCDclearCount++;
 LCDwait = 0;
 if(ScrollFIFOCount == 0)
 {
+Stop_Timer1();
 ScrollDisplayPosition = 0;
 ClearLCD();
 SetLCDcursor(0, 0);
@@ -19888,17 +19889,18 @@ if(ScrollDisplayPosition > ScrollFIFOCount)
 ScrollFIFOCount=0;
 ScrollDisplayPosition=0;
 }
-LCDclearCount = 15000;
+LCDclearCount = 0;
 }
 }
 }
 
-# 413
+# 414
 void LCD_Scroll(const unsigned char* This)
 {
+Start_Timer1();
 if(!LCDwait)
 {
-LCDclearCount = 15000;
+LCDclearCount = 0;
 ScrollFIFOCount++;
 if(ScrollFIFOCount == 1)
 {

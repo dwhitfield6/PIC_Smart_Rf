@@ -17,7 +17,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Init_I2C_Master `(v ~T0 @X0 0 ef ]
 "78 RTC.h
 [v _RTC_INIT `(v ~T0 @X0 0 ef ]
-"69 LCD.h
+"73 LCD.h
 [v _init_LCD `(v ~T0 @X0 0 ef ]
 "94 EEPROM.h
 [v _SyncEEPROMandGLOBAL `(v ~T0 @X0 0 ef ]
@@ -33,25 +33,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
 "47 PWM.h
 [v _SetContrast `(v ~T0 @X0 0 ef1`uc ]
-"72 LCD.h
+"76 LCD.h
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"74
+"78
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*Cuc ]
-"73
+"77
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
 "45 PWM.h
 [v _SetDuty `(v ~T0 @X0 0 ef1`uc ]
 "596 C:\Program Files (x86)\Microchip\xc8\v1.34\include\plib\usart.h
 [v _ReadUSART `(uc ~T0 @X0 0 ef ]
-"75 LCD.h
+"79 LCD.h
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
 "111 IR.h
 [v _init_IR `(v ~T0 @X0 0 ef ]
-"76 LCD.h
-[v _LCDScreenUpdate `(v ~T0 @X0 0 ef ]
-"100 IR.h
+"100
 [v _BlueLEDcount `ui ~T0 @X0 0 e ]
-"74 main.c
+"77 main.c
 [v _Rxdata `uc ~T0 @X0 -> 0 `x e ]
 "44 StringCommand.h
 [v _Command `(uc ~T0 @X0 0 ef1`*uc ]
@@ -15940,28 +15938,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;PWM.h: 46: void SetFreq(unsigned int freq);
 [; ;PWM.h: 47: void SetContrast(unsigned char Duty);
 [; ;PWM.h: 48: void ContrastPWM_init();
-"62 LCD.h
+"66 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
--> -> -> 25000 `i `l `ul
+-> -> -> 17 `i `l `ul
 ]
-[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
-"63
+[; ;LCD.h: 66: unsigned long LCDclearCount=17;
+"67
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 63: unsigned char LCDwait=0;
-[; ;LCD.h: 69: void init_LCD();
-[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 71: void PulseEnablePin();
-[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 73: void ClearLCD();
-[; ;LCD.h: 74: void LCDPrintString(const unsigned char *Text);
-[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 76: void LCDScreenUpdate();
-[; ;LCD.h: 77: void LCDdisplayFeedback(const unsigned char *Text);
-[; ;LCD.h: 78: void LCD_Scroll(const unsigned char* This);
+[; ;LCD.h: 67: unsigned char LCDwait=0;
+[; ;LCD.h: 73: void init_LCD();
+[; ;LCD.h: 74: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 75: void PulseEnablePin();
+[; ;LCD.h: 76: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 77: void ClearLCD();
+[; ;LCD.h: 78: void LCDPrintString(const unsigned char *Text);
+[; ;LCD.h: 79: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 80: void LCDScreenUpdate();
+[; ;LCD.h: 81: void LCDdisplayFeedback(const unsigned char *Text);
+[; ;LCD.h: 82: void LCD_Scroll(const unsigned char* This);
 [; ;I2C.h: 54: void Init_I2C_Master(void);
 [; ;I2C.h: 55: int I2C_Read_At_Address( unsigned char I2Caddress, unsigned char Register );
 [; ;I2C.h: 56: char I2C_Write_At_Address( unsigned char I2Caddress, unsigned char Register, unsigned char data );
@@ -16039,11 +16037,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;IR.h: 112: unsigned char ReadIRpin(void);
 [; ;IR.h: 113: unsigned char IRrawToNEC(unsigned int* Raw, unsigned long* NEC, unsigned char Invert);
 [; ;IR.h: 114: void UseIRCode(unsigned char* Code, unsigned long NEC);
-"64 main.c
+"67 main.c
 [v _Version `uc ~T0 @X0 -> 20 `i e ]
 [i _Version
 :U ..
--> 49 `c
+-> 56 `c
 -> 46 `c
 -> 48 `c
 -> 95 `c
@@ -16054,412 +16052,409 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;main.c: 64: unsigned char Version[20] = "1.0_DW0a";
-[; ;main.c: 69: extern unsigned char config;
-[; ;main.c: 70: extern unsigned int spbrg;
-[; ;main.c: 71: extern unsigned char baudconfig;
-[; ;main.c: 72: extern struct TIME NowTime;
-[; ;main.c: 73: extern char Txdata[100];
-[; ;main.c: 74: extern char Rxdata[100];
-"75
+[; ;main.c: 67: unsigned char Version[20] = "8.0_DW0a";
+[; ;main.c: 72: extern unsigned char config;
+[; ;main.c: 73: extern unsigned int spbrg;
+[; ;main.c: 74: extern unsigned char baudconfig;
+[; ;main.c: 75: extern struct TIME NowTime;
+[; ;main.c: 76: extern char Txdata[100];
+[; ;main.c: 77: extern char Rxdata[100];
+"78
 [v _buf `uc ~T0 @X0 -> 100 `i e ]
-[; ;main.c: 75: unsigned char buf[100];
-"76
+[; ;main.c: 78: unsigned char buf[100];
+"79
 [v _bufferCount `uc ~T0 @X0 1 e ]
 [i _bufferCount
 -> -> 0 `i `uc
 ]
-[; ;main.c: 76: unsigned char bufferCount =0;
-"82
+[; ;main.c: 79: unsigned char bufferCount =0;
+"85
 [v _main `(v ~T0 @X0 1 ef ]
-"83
+"86
 {
-[; ;main.c: 82: void main(void)
-[; ;main.c: 83: {
+[; ;main.c: 85: void main(void)
+[; ;main.c: 86: {
 [e :U _main ]
 [f ]
-"84
+"87
 [v _ii `uc ~T0 @X0 1 a ]
-[; ;main.c: 84: unsigned char ii = 0;
+[; ;main.c: 87: unsigned char ii = 0;
 [e = _ii -> -> 0 `i `uc ]
-"85
-[v _count `uc ~T0 @X0 1 a ]
-[; ;main.c: 85: unsigned char count = 0;
-[e = _count -> -> 0 `i `uc ]
-"86
-[v _MemoryBurnflag `uc ~T0 @X0 1 a ]
-[; ;main.c: 86: unsigned char MemoryBurnflag = 0;
-[e = _MemoryBurnflag -> -> 0 `i `uc ]
-[; ;main.c: 88: ConfigureOscillator();
 "88
-[e ( _ConfigureOscillator ..  ]
-[; ;main.c: 89: InitApp();
+[v _count `uc ~T0 @X0 1 a ]
+[; ;main.c: 88: unsigned char count = 0;
+[e = _count -> -> 0 `i `uc ]
 "89
-[e ( _InitApp ..  ]
-[; ;main.c: 90: EnableInternalADC(1);
-"90
-[e ( _EnableInternalADC (1 -> -> 1 `i `uc ]
-[; ;main.c: 91: PWM_init();
+[v _MemoryBurnflag `uc ~T0 @X0 1 a ]
+[; ;main.c: 89: unsigned char MemoryBurnflag = 0;
+[e = _MemoryBurnflag -> -> 0 `i `uc ]
+[; ;main.c: 91: ConfigureOscillator();
 "91
-[e ( _PWM_init ..  ]
-[; ;main.c: 92: ContrastPWM_init();
+[e ( _ConfigureOscillator ..  ]
+[; ;main.c: 92: InitApp();
 "92
-[e ( _ContrastPWM_init ..  ]
-[; ;main.c: 93: Init_I2C_Master();
+[e ( _InitApp ..  ]
+[; ;main.c: 93: EnableInternalADC(1);
 "93
-[e ( _Init_I2C_Master ..  ]
-[; ;main.c: 94: RTC_INIT();
+[e ( _EnableInternalADC (1 -> -> 1 `i `uc ]
+[; ;main.c: 94: PWM_init();
 "94
-[e ( _RTC_INIT ..  ]
-[; ;main.c: 95: init_LCD();
+[e ( _PWM_init ..  ]
+[; ;main.c: 95: ContrastPWM_init();
 "95
-[e ( _init_LCD ..  ]
-[; ;main.c: 97: SyncEEPROMandGLOBAL();
+[e ( _ContrastPWM_init ..  ]
+[; ;main.c: 96: Init_I2C_Master();
+"96
+[e ( _Init_I2C_Master ..  ]
+[; ;main.c: 97: RTC_INIT();
 "97
-[e ( _SyncEEPROMandGLOBAL ..  ]
-[; ;main.c: 99: if(Global.Baud < 2400 || Global.Baud > 115200)
-"99
-[e $ ! || < . _Global 0 -> -> -> 2400 `i `l `ul > . _Global 0 -> -> 115200 `l `ul 2164  ]
-[; ;main.c: 100: {
+[e ( _RTC_INIT ..  ]
+[; ;main.c: 98: init_LCD();
+"98
+[e ( _init_LCD ..  ]
+[; ;main.c: 100: SyncEEPROMandGLOBAL();
 "100
-{
-[; ;main.c: 102: Global.Baud = 9600;
+[e ( _SyncEEPROMandGLOBAL ..  ]
+[; ;main.c: 102: if(Global.Baud < 2400 || Global.Baud > 115200)
 "102
-[e = . _Global 0 -> -> -> 9600 `i `l `ul ]
-[; ;main.c: 103: Global.Parity = 0;
+[e $ ! || < . _Global 0 -> -> -> 2400 `i `l `ul > . _Global 0 -> -> 115200 `l `ul 2164  ]
+[; ;main.c: 103: {
 "103
-[e = . _Global 1 -> -> 0 `i `uc ]
-[; ;main.c: 105: if(!SetEEPROM(Global,0x3))
-"105
-[e $ ! ! != ( _SetEEPROM (2 , _Global -> -> -> 3 `i `l `ul -> -> 0 `i `ul 2165  ]
-[; ;main.c: 106: {
-"106
 {
-[; ;main.c: 108: MemoryBurnflag = 1;
+[; ;main.c: 105: Global.Baud = 9600;
+"105
+[e = . _Global 0 -> -> -> 9600 `i `l `ul ]
+[; ;main.c: 106: Global.Parity = 0;
+"106
+[e = . _Global 1 -> -> 0 `i `uc ]
+[; ;main.c: 108: if(!SetEEPROM(Global,0x3))
 "108
-[e = _MemoryBurnflag -> -> 1 `i `uc ]
+[e $ ! ! != ( _SetEEPROM (2 , _Global -> -> -> 3 `i `l `ul -> -> 0 `i `ul 2165  ]
+[; ;main.c: 109: {
 "109
+{
+[; ;main.c: 111: MemoryBurnflag = 1;
+"111
+[e = _MemoryBurnflag -> -> 1 `i `uc ]
+"112
 }
 [e :U 2165 ]
-"110
+"113
 }
 [e :U 2164 ]
-[; ;main.c: 109: }
-[; ;main.c: 110: }
-[; ;main.c: 111: SyncEEPROMandGLOBAL();
-"111
-[e ( _SyncEEPROMandGLOBAL ..  ]
-[; ;main.c: 112: InitUART(Global.Baud, Global.Parity);
-"112
-[e ( _InitUART (2 , . _Global 0 . _Global 1 ]
-[; ;main.c: 113: UARTstring("Firmware Version: ");
-"113
-[e ( _UARTstring (1 :s 1C ]
-[; ;main.c: 114: UARTstring(Version);
+[; ;main.c: 112: }
+[; ;main.c: 113: }
+[; ;main.c: 114: SyncEEPROMandGLOBAL();
 "114
-[e ( _UARTstring (1 -> &U _Version `*Cuc ]
-[; ;main.c: 115: UARTstring("\r\n");
+[e ( _SyncEEPROMandGLOBAL ..  ]
+[; ;main.c: 115: InitUART(Global.Baud, Global.Parity);
 "115
-[e ( _UARTstring (1 :s 2C ]
-[; ;main.c: 117: for(ii =0; ii <10;ii++)
+[e ( _InitUART (2 , . _Global 0 . _Global 1 ]
+[; ;main.c: 116: UARTstring("Firmware Version: ");
+"116
+[e ( _UARTstring (1 :s 1C ]
+[; ;main.c: 117: UARTstring(Version);
 "117
+[e ( _UARTstring (1 -> &U _Version `*Cuc ]
+[; ;main.c: 118: UARTstring("\r\n");
+"118
+[e ( _UARTstring (1 :s 2C ]
+[; ;main.c: 120: for(ii =0; ii <10;ii++)
+"120
 {
 [e = _ii -> -> 0 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2166  ]
 [e $U 2167  ]
-"118
-[e :U 2166 ]
-[; ;main.c: 118: {
-{
-[; ;main.c: 119: LATD |= 0b00000010;
-"119
-[e =| _LATD -> -> 2 `i `uc ]
-[; ;main.c: 120: LATD &= ~0b00000100;
-"120
-[e =& _LATD -> ~ -> 4 `i `uc ]
-[; ;main.c: 121: delayUS(50000);
 "121
-[e ( _delayUS (1 -> 50000 `l ]
-[; ;main.c: 122: LATD |= 0b00000100;
+[e :U 2166 ]
+[; ;main.c: 121: {
+{
+[; ;main.c: 122: LATD |= 0b00000010;
 "122
-[e =| _LATD -> -> 4 `i `uc ]
-[; ;main.c: 123: LATD &= ~0b00000010;
+[e =| _LATD -> -> 2 `i `uc ]
+[; ;main.c: 123: LATD &= ~0b00000100;
 "123
-[e =& _LATD -> ~ -> 2 `i `uc ]
+[e =& _LATD -> ~ -> 4 `i `uc ]
 [; ;main.c: 124: delayUS(50000);
 "124
 [e ( _delayUS (1 -> 50000 `l ]
+[; ;main.c: 125: LATD |= 0b00000100;
 "125
+[e =| _LATD -> -> 4 `i `uc ]
+[; ;main.c: 126: LATD &= ~0b00000010;
+"126
+[e =& _LATD -> ~ -> 2 `i `uc ]
+[; ;main.c: 127: delayUS(50000);
+"127
+[e ( _delayUS (1 -> 50000 `l ]
+"128
 }
-"117
+"120
 [e ++ _ii -> -> 1 `i `uc ]
 [e $ < -> _ii `i -> 10 `i 2166  ]
 [e :U 2167 ]
-"125
-}
-[; ;main.c: 125: }
-[; ;main.c: 126: LATD &= ~0b00000100;
-"126
-[e =& _LATD -> ~ -> 4 `i `uc ]
-[; ;main.c: 127: SetContrast(65);
-"127
-[e ( _SetContrast (1 -> -> 65 `i `uc ]
-[; ;main.c: 128: delayUS(20);
 "128
-[e ( _delayUS (1 -> -> 20 `i `l ]
-[; ;main.c: 129: SetLCDcursor(0, 0);
+}
+[; ;main.c: 128: }
+[; ;main.c: 129: LATD &= ~0b00000100;
 "129
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 130: if(MemoryBurnflag)
+[e =& _LATD -> ~ -> 4 `i `uc ]
+[; ;main.c: 130: SetContrast(65);
 "130
-[e $ ! != -> _MemoryBurnflag `i -> -> -> 0 `i `uc `i 2169  ]
-[; ;main.c: 131: {
+[e ( _SetContrast (1 -> -> 65 `i `uc ]
+[; ;main.c: 131: delayUS(20);
 "131
-{
-[; ;main.c: 132: UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
+[e ( _delayUS (1 -> -> 20 `i `l ]
+[; ;main.c: 132: SetLCDcursor(0, 0);
 "132
-[e ( _UARTstring (1 :s 3C ]
-[; ;main.c: 133: LCDPrintString("Err: Baud Mem");
-"133
-[e ( _LCDPrintString (1 :s 4C ]
-[; ;main.c: 134: delayUS(100000);
-"134
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 135: ClearLCD();
-"135
-[e ( _ClearLCD ..  ]
-[; ;main.c: 136: SetLCDcursor(0, 0);
-"136
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 133: if(MemoryBurnflag)
+"133
+[e $ ! != -> _MemoryBurnflag `i -> -> -> 0 `i `uc `i 2169  ]
+[; ;main.c: 134: {
+"134
+{
+[; ;main.c: 135: UARTstring("Error: Could not burn default Baud rate into Memory\r\n");
+"135
+[e ( _UARTstring (1 :s 3C ]
+[; ;main.c: 136: LCDPrintString("Err: Baud Mem");
+"136
+[e ( _LCDPrintString (1 :s 4C ]
+[; ;main.c: 137: delayUS(100000);
 "137
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 138: ClearLCD();
+"138
+[e ( _ClearLCD ..  ]
+[; ;main.c: 139: SetLCDcursor(0, 0);
+"139
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"140
 }
 [e :U 2169 ]
-[; ;main.c: 137: }
-[; ;main.c: 138: LCDPrintString("Starting");
-"138
-[e ( _LCDPrintString (1 :s 5C ]
-[; ;main.c: 139: UARTstring("Starting...");
-"139
-[e ( _UARTstring (1 :s 6C ]
-[; ;main.c: 140: delayUS(100000);
-"140
-[e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 141: SetLCDcursor(0, 0);
+[; ;main.c: 140: }
+[; ;main.c: 141: LCDPrintString("Starting");
 "141
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 142: LCDPrintString("Starting.");
+[e ( _LCDPrintString (1 :s 5C ]
+[; ;main.c: 142: UARTstring("Starting...");
 "142
-[e ( _LCDPrintString (1 :s 7C ]
+[e ( _UARTstring (1 :s 6C ]
 [; ;main.c: 143: delayUS(100000);
 "143
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 144: SetLCDcursor(0, 0);
 "144
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 145: LCDPrintString("Starting..");
+[; ;main.c: 145: LCDPrintString("Starting.");
 "145
-[e ( _LCDPrintString (1 :s 8C ]
+[e ( _LCDPrintString (1 :s 7C ]
 [; ;main.c: 146: delayUS(100000);
 "146
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 147: SetLCDcursor(0, 0);
 "147
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 148: LCDPrintString("Starting...");
+[; ;main.c: 148: LCDPrintString("Starting..");
 "148
-[e ( _LCDPrintString (1 :s 9C ]
+[e ( _LCDPrintString (1 :s 8C ]
 [; ;main.c: 149: delayUS(100000);
 "149
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 150: SetLCDcursor(0, 0);
 "150
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 151: LCDPrintString("Starting....");
+[; ;main.c: 151: LCDPrintString("Starting...");
 "151
-[e ( _LCDPrintString (1 :s 10C ]
+[e ( _LCDPrintString (1 :s 9C ]
 [; ;main.c: 152: delayUS(100000);
 "152
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 153: SetLCDcursor(0, 0);
 "153
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 154: LCDPrintString("Starting.....");
+[; ;main.c: 154: LCDPrintString("Starting....");
 "154
-[e ( _LCDPrintString (1 :s 11C ]
+[e ( _LCDPrintString (1 :s 10C ]
 [; ;main.c: 155: delayUS(100000);
 "155
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 156: SetLCDcursor(0, 0);
 "156
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 157: LCDPrintString("Starting......");
+[; ;main.c: 157: LCDPrintString("Starting.....");
 "157
-[e ( _LCDPrintString (1 :s 12C ]
+[e ( _LCDPrintString (1 :s 11C ]
 [; ;main.c: 158: delayUS(100000);
 "158
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 159: SetLCDcursor(0, 0);
 "159
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 160: LCDPrintString("Starting.......");
+[; ;main.c: 160: LCDPrintString("Starting......");
 "160
-[e ( _LCDPrintString (1 :s 13C ]
+[e ( _LCDPrintString (1 :s 12C ]
 [; ;main.c: 161: delayUS(100000);
 "161
 [e ( _delayUS (1 -> 100000 `l ]
 [; ;main.c: 162: SetLCDcursor(0, 0);
 "162
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 163: LCDPrintString("Starting........");
+[; ;main.c: 163: LCDPrintString("Starting.......");
 "163
-[e ( _LCDPrintString (1 :s 14C ]
+[e ( _LCDPrintString (1 :s 13C ]
 [; ;main.c: 164: delayUS(100000);
 "164
 [e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 165: SetLCDcursor(1, 0);
+[; ;main.c: 165: SetLCDcursor(0, 0);
 "165
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 166: LCDPrintString("Enter '?'");
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 166: LCDPrintString("Starting........");
 "166
-[e ( _LCDPrintString (1 :s 15C ]
+[e ( _LCDPrintString (1 :s 14C ]
 [; ;main.c: 167: delayUS(100000);
 "167
 [e ( _delayUS (1 -> 100000 `l ]
-[; ;main.c: 168: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+[; ;main.c: 168: SetLCDcursor(1, 0);
 "168
-[e ( _UARTstring (1 :s 16C ]
-[; ;main.c: 170: for(count =100; count >0; count-=5)
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 169: LCDPrintString("Enter '?'");
+"169
+[e ( _LCDPrintString (1 :s 15C ]
+[; ;main.c: 170: delayUS(100000);
 "170
+[e ( _delayUS (1 -> 100000 `l ]
+[; ;main.c: 171: UARTstring("\r\nEnter '?' for Help Menu\r\n>");
+"171
+[e ( _UARTstring (1 :s 16C ]
+[; ;main.c: 173: for(count =100; count >0; count-=5)
+"173
 {
 [e = _count -> -> 100 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2170  ]
 [e $U 2171  ]
-"171
-[e :U 2170 ]
-[; ;main.c: 171: {
-{
-[; ;main.c: 172: SetDuty(count);
-"172
-[e ( _SetDuty (1 _count ]
-[; ;main.c: 173: delayUS(50000);
-"173
-[e ( _delayUS (1 -> 50000 `l ]
 "174
+[e :U 2170 ]
+[; ;main.c: 174: {
+{
+[; ;main.c: 175: SetDuty(count);
+"175
+[e ( _SetDuty (1 _count ]
+[; ;main.c: 176: delayUS(50000);
+"176
+[e ( _delayUS (1 -> 50000 `l ]
+"177
 }
-"170
+"173
 [e =- _count -> -> 5 `i `uc ]
 [e $ > -> _count `i -> 0 `i 2170  ]
 [e :U 2171 ]
-"174
-}
-[; ;main.c: 174: }
-[; ;main.c: 176: LATD &= ~(0b00000010+0b00000100);
-"176
-[e =& _LATD -> ~ + -> 2 `i -> 4 `i `uc ]
-[; ;main.c: 177: ReadUSART();
 "177
-[e ( _ReadUSART ..  ]
-[; ;main.c: 178: ReadUSART();
-"178
-[e ( _ReadUSART ..  ]
-[; ;main.c: 179: ReadUSART();
-"179
-[e ( _ReadUSART ..  ]
-[; ;main.c: 181: ClearLCD();
-"181
-[e ( _ClearLCD ..  ]
-[; ;main.c: 182: SetLCDcursor(0, 0);
-"182
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 183: LCDPrintChar('>');
-"183
-[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
-[; ;main.c: 185: init_IR();
-"185
-[e ( _init_IR ..  ]
-[; ;main.c: 187: while(1)
-"187
-[e :U 2174 ]
-[; ;main.c: 188: {
-"188
-{
-[; ;main.c: 190: LCDScreenUpdate();
-"190
-[e ( _LCDScreenUpdate ..  ]
-[; ;main.c: 191: if(BlueLEDcount < 25)
-"191
-[e $ ! < _BlueLEDcount -> -> 25 `i `ui 2176  ]
-[; ;main.c: 192: {
-"192
-{
-[; ;main.c: 193: BlueLEDcount++;
-"193
-[e ++ _BlueLEDcount -> -> 1 `i `ui ]
-"194
 }
-[; ;main.c: 194: }
-[e $U 2177  ]
-"195
-[e :U 2176 ]
-[; ;main.c: 195: else
-[; ;main.c: 196: {
-"196
+[; ;main.c: 177: }
+[; ;main.c: 179: LATD &= ~(0b00000010+0b00000100);
+"179
+[e =& _LATD -> ~ + -> 2 `i -> 4 `i `uc ]
+[; ;main.c: 180: ReadUSART();
+"180
+[e ( _ReadUSART ..  ]
+[; ;main.c: 181: ReadUSART();
+"181
+[e ( _ReadUSART ..  ]
+[; ;main.c: 182: ReadUSART();
+"182
+[e ( _ReadUSART ..  ]
+[; ;main.c: 184: ClearLCD();
+"184
+[e ( _ClearLCD ..  ]
+[; ;main.c: 185: SetLCDcursor(0, 0);
+"185
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 186: LCDPrintChar('>');
+"186
+[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
+[; ;main.c: 188: init_IR();
+"188
+[e ( _init_IR ..  ]
+[; ;main.c: 190: while(1)
+"190
+[e :U 2174 ]
+[; ;main.c: 191: {
+"191
 {
-[; ;main.c: 197: LATD &= ~0b00000010;
+[; ;main.c: 192: if(BlueLEDcount < 2500)
+"192
+[e $ ! < _BlueLEDcount -> -> 2500 `i `ui 2176  ]
+[; ;main.c: 193: {
+"193
+{
+[; ;main.c: 194: BlueLEDcount++;
+"194
+[e ++ _BlueLEDcount -> -> 1 `i `ui ]
+"195
+}
+[; ;main.c: 195: }
+[e $U 2177  ]
+"196
+[e :U 2176 ]
+[; ;main.c: 196: else
+[; ;main.c: 197: {
 "197
-[e =& _LATD -> ~ -> 2 `i `uc ]
-[; ;main.c: 198: LATD &= ~0b00000100;
+{
+[; ;main.c: 198: LATD &= ~0b00000010;
 "198
-[e =& _LATD -> ~ -> 4 `i `uc ]
+[e =& _LATD -> ~ -> 2 `i `uc ]
+[; ;main.c: 199: LATD &= ~0b00000100;
 "199
+[e =& _LATD -> ~ -> 4 `i `uc ]
+"200
 }
 [e :U 2177 ]
-[; ;main.c: 199: }
-[; ;main.c: 200: if(Rxdata[0] != 0)
-"200
-[e $ ! != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `i -> 0 `i 2178  ]
-[; ;main.c: 201: {
+[; ;main.c: 200: }
+[; ;main.c: 201: if(Rxdata[0] != 0)
 "201
-{
-[; ;main.c: 202: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
+[e $ ! != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `i -> 0 `i 2178  ]
+[; ;main.c: 202: {
 "202
-[e $ ! && != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 13 `ui != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 10 `ui 2179  ]
-[; ;main.c: 203: {
+{
+[; ;main.c: 203: if (Rxdata[0] != '\r' && Rxdata[0] != '\n')
 "203
-{
-[; ;main.c: 204: if(Command(Rxdata))
+[e $ ! && != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 13 `ui != -> *U + &U _Rxdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _Rxdata `ui `ux `ui -> 10 `ui 2179  ]
+[; ;main.c: 204: {
 "204
-[e $ ! != -> ( _Command (1 &U _Rxdata `i -> -> -> 0 `i `uc `i 2180  ]
-[; ;main.c: 205: {
-"205
 {
-[; ;main.c: 206: UARTstring("\r\n>");
+[; ;main.c: 205: if(Command(Rxdata))
+"205
+[e $ ! != -> ( _Command (1 &U _Rxdata `i -> -> -> 0 `i `uc `i 2180  ]
+[; ;main.c: 206: {
 "206
-[e ( _UARTstring (1 :s 17C ]
+{
+[; ;main.c: 207: UARTstring("\r\n>");
 "207
-}
-[e :U 2180 ]
+[e ( _UARTstring (1 :s 17C ]
 "208
 }
-[e :U 2179 ]
-[; ;main.c: 207: }
-[; ;main.c: 208: }
-[; ;main.c: 209: cleanBuffer(Rxdata, 100);
+[e :U 2180 ]
 "209
-[e ( _cleanBuffer (2 , &U _Rxdata -> 100 `i ]
-"210
 }
-[e :U 2178 ]
+[e :U 2179 ]
+[; ;main.c: 208: }
+[; ;main.c: 209: }
+[; ;main.c: 210: cleanBuffer(Rxdata, 100);
+"210
+[e ( _cleanBuffer (2 , &U _Rxdata -> 100 `i ]
 "211
 }
+[e :U 2178 ]
+"212
+}
 [e :U 2173 ]
-"187
+"190
 [e $U 2174  ]
 [e :U 2175 ]
-[; ;main.c: 210: }
 [; ;main.c: 211: }
 [; ;main.c: 212: }
-"212
+[; ;main.c: 213: }
+"213
 [e :UE 2163 ]
 }
 [a 4C 69 114 114 58 32 66 97 117 100 32 77 101 109 0 ]

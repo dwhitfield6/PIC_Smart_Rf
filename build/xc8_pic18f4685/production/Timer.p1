@@ -74,8 +74,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1899 . . . . . ]
 "30955
 [v _IPR1bits `VS1899 ~T0 @X0 0 e@3999 ]
-"42 Timer.h
-[v _Start_Timer1 `(v ~T0 @X0 0 ef ]
+"41 Timer.h
+[v _Stop_Timer1 `(v ~T0 @X0 0 ef ]
 "30853 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [s S1896 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1896 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
@@ -104,7 +104,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1891 . . . . ]
 "30793
 [v _PIE1bits `VS1891 ~T0 @X0 0 e@3997 ]
-"33961
+"43 Timer.h
+[v _Reset_Timer1 `(v ~T0 @X0 0 ef ]
+"33961 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
 "33955
 [v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
@@ -15573,9 +15575,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Timer.c: 128: IPR1bits.TMR1IP = 0;
 "128
 [e = . . _IPR1bits 0 0 -> -> 0 `i `uc ]
-[; ;Timer.c: 129: Start_Timer1();
+[; ;Timer.c: 129: Stop_Timer1();
 "129
-[e ( _Start_Timer1 ..  ]
+[e ( _Stop_Timer1 ..  ]
 [; ;Timer.c: 130: }
 "130
 [e :UE 2165 ]
@@ -15612,31 +15614,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Timer.c: 154: T1CONbits.TMR1ON =1;
 "154
 [e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-[; ;Timer.c: 156: PIR1bits.TMR1IF = 0;
+[; ;Timer.c: 156: Reset_Timer1();
 "156
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;Timer.c: 157: PIE1bits.TMR1IE = 1;
-"157
-[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;Timer.c: 158: }
+[e ( _Reset_Timer1 ..  ]
+[; ;Timer.c: 158: PIR1bits.TMR1IF = 0;
 "158
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;Timer.c: 159: PIE1bits.TMR1IE = 1;
+"159
+[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
+[; ;Timer.c: 160: }
+"160
 [e :UE 2167 ]
 }
-"165
+"167
 [v _Reset_Timer1 `(v ~T0 @X0 1 ef ]
-"166
+"168
 {
-[; ;Timer.c: 165: void Reset_Timer1(void)
-[; ;Timer.c: 166: {
+[; ;Timer.c: 167: void Reset_Timer1(void)
+[; ;Timer.c: 168: {
 [e :U _Reset_Timer1 ]
 [f ]
-[; ;Timer.c: 171: TMR1H = 0;
-"171
-[e = _TMR1H -> -> 0 `i `uc ]
-[; ;Timer.c: 172: TMR1L = 2;
-"172
-[e = _TMR1L -> -> 2 `i `uc ]
-[; ;Timer.c: 173: }
+[; ;Timer.c: 173: TMR1H = 0;
 "173
+[e = _TMR1H -> -> 0 `i `uc ]
+[; ;Timer.c: 174: TMR1L = 2;
+"174
+[e = _TMR1L -> -> 2 `i `uc ]
+[; ;Timer.c: 175: }
+"175
 [e :UE 2168 ]
 }

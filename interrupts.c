@@ -94,7 +94,7 @@ void low_isr(void)
     
     INTCONbits.PEIE = 0; //Disable pheripheral interrupt
 
-    if(PIR1bits.RCIF)
+    if(PIR1bits.RCIF && PIE1bits.RCIE)
     {
         // UART rx interrupt
         PIE1bits.RCIE = 0; //Disable RX interrupt
@@ -203,7 +203,7 @@ void low_isr(void)
         PIE1bits.RCIE = 1; //Enable RX interrupt
         RCSTAbits.CREN = 1;
     }
-    else if(INTCONbits.RBIF)
+    else if(INTCONbits.RBIF && INTCONbits.RBIE)
     {
         /* Pin change interrupt */
         /* Used for IR receiver */
@@ -257,7 +257,7 @@ void low_isr(void)
         /* Enable RB port change on interrupt */
         INTCONbits.RBIE = 1;
     }
-    else if (INTCONbits.TMR0IF)
+    else if (INTCONbits.TMR0IF && INTCONbits.TMR0IE)
     {
         /* Used for IR receiver TimeOut */
         cleanBuffer16bit(IRRawCode, IRrawCodeNum);
@@ -265,14 +265,13 @@ void low_isr(void)
         INTCONbits.TMR0IF = 0;
         INTCONbits.TMR0IE = 0;
     }
-    else if(INTCONbits.INT0IF)
+    else if(INTCONbits.INT0IF && INTCONbits.INT0IE)
     {
         /* Push Button was pressed */
         INTCONbits.INT0IF = 0;
         INTCONbits.INT0IE = 0;
-
     }
-    else if(PIR1bits.TMR1IF)
+    else if(PIR1bits.TMR1IF && PIE1bits.TMR1IE)
     {
         /* LCD timing interrupt */
         LCDScreenUpdate();

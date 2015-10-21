@@ -1,15 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "29428 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
-"71 LCD.h
+"75 LCD.h
 [v _PulseEnablePin `(v ~T0 @X0 0 ef ]
 "65 MISC.h
 [v _delayUS `(v ~T0 @X0 0 ef1`l ]
-"70 LCD.h
+"74 LCD.h
 [v _SendLCDbyte `(v ~T0 @X0 0 ef2`uc`uc ]
 "29032 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4685.h
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"73 LCD.h
+"77 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
 "40 Timer.h
 [v _init_Timer1 `(v ~T0 @X0 0 ef ]
@@ -19,6 +19,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Reset_Timer1 `(v ~T0 @X0 0 ef ]
 "42
 [v _Start_Timer1 `(v ~T0 @X0 0 ef ]
+"41
+[v _Stop_Timer1 `(v ~T0 @X0 0 ef ]
 "66 MISC.h
 [v _cleanBuffer `(v ~T0 @X0 0 ef2`*uc`i ]
 "67
@@ -15353,28 +15355,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;user.h: 96: void InitApp(void);
-"62 LCD.h
+"66 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
--> -> -> 25000 `i `l `ul
+-> -> -> 17 `i `l `ul
 ]
-[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
-"63
+[; ;LCD.h: 66: unsigned long LCDclearCount=17;
+"67
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 63: unsigned char LCDwait=0;
-[; ;LCD.h: 69: void init_LCD();
-[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 71: void PulseEnablePin();
-[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 73: void ClearLCD();
-[; ;LCD.h: 74: void LCDPrintString(const unsigned char *Text);
-[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 76: void LCDScreenUpdate();
-[; ;LCD.h: 77: void LCDdisplayFeedback(const unsigned char *Text);
-[; ;LCD.h: 78: void LCD_Scroll(const unsigned char* This);
+[; ;LCD.h: 67: unsigned char LCDwait=0;
+[; ;LCD.h: 73: void init_LCD();
+[; ;LCD.h: 74: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 75: void PulseEnablePin();
+[; ;LCD.h: 76: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 77: void ClearLCD();
+[; ;LCD.h: 78: void LCDPrintString(const unsigned char *Text);
+[; ;LCD.h: 79: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 80: void LCDScreenUpdate();
+[; ;LCD.h: 81: void LCDdisplayFeedback(const unsigned char *Text);
+[; ;LCD.h: 82: void LCD_Scroll(const unsigned char* This);
 [; ;system.h: 54: void ConfigureOscillator(void);
 [; ;MISC.h: 65: void delayUS(long US);
 [; ;MISC.h: 66: void cleanBuffer(unsigned char* data, int count);
@@ -15899,33 +15901,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.c: 260: LCDwait = 1;
 "260
 [e = _LCDwait -> -> 1 `i `uc ]
-[; ;LCD.c: 261: LCDclearCount =0;
+[; ;LCD.c: 261: Reset_Timer1();
 "261
-[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
-[; ;LCD.c: 262: }
+[e ( _Reset_Timer1 ..  ]
+[; ;LCD.c: 262: Start_Timer1();
 "262
+[e ( _Start_Timer1 ..  ]
+[; ;LCD.c: 263: LCDclearCount =0;
+"263
+[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
+[; ;LCD.c: 264: }
+"264
 [e :UE 2184 ]
 }
-"269
-[v _LCDPrintChar `(v ~T0 @X0 1 ef1`uc ]
-"270
-{
-[; ;LCD.c: 269: void LCDPrintChar(unsigned char character)
-[; ;LCD.c: 270: {
-[e :U _LCDPrintChar ]
-"269
-[v _character `uc ~T0 @X0 1 r1 ]
-"270
-[f ]
-[; ;LCD.c: 271: SendLCDbyte(character, 1);
 "271
-[e ( _SendLCDbyte (2 , _character -> -> 1 `i `uc ]
-[; ;LCD.c: 272: Reset_Timer1();
+[v _LCDPrintChar `(v ~T0 @X0 1 ef1`uc ]
 "272
-[e ( _Reset_Timer1 ..  ]
-[; ;LCD.c: 273: Start_Timer1();
+{
+[; ;LCD.c: 271: void LCDPrintChar(unsigned char character)
+[; ;LCD.c: 272: {
+[e :U _LCDPrintChar ]
+"271
+[v _character `uc ~T0 @X0 1 r1 ]
+"272
+[f ]
+[; ;LCD.c: 273: SendLCDbyte(character, 1);
 "273
-[e ( _Start_Timer1 ..  ]
+[e ( _SendLCDbyte (2 , _character -> -> 1 `i `uc ]
 [; ;LCD.c: 274: }
 "274
 [e :UE 2185 ]
@@ -15938,9 +15940,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.c: 283: {
 [e :U _LCDScreenUpdate ]
 [f ]
-[; ;LCD.c: 285: if(LCDclearCount<(25000-1))
+[; ;LCD.c: 285: if(LCDclearCount<(17-1))
 "285
-[e $ ! < _LCDclearCount -> -> - -> 25000 `i -> 1 `i `l `ul 2187  ]
+[e $ ! < _LCDclearCount -> -> - -> 17 `i -> 1 `i `l `ul 2187  ]
 [; ;LCD.c: 286: {
 "286
 {
@@ -15956,8 +15958,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 2188  ]
 "290
 [e :U 2187 ]
-[; ;LCD.c: 290: else if(LCDclearCount == (25000-1))
-[e $ ! == _LCDclearCount -> -> - -> 25000 `i -> 1 `i `l `ul 2189  ]
+[; ;LCD.c: 290: else if(LCDclearCount == (17-1))
+[e $ ! == _LCDclearCount -> -> - -> 17 `i -> 1 `i `l `ul 2189  ]
 [; ;LCD.c: 291: {
 "291
 {
@@ -15973,334 +15975,337 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.c: 295: {
 "295
 {
-[; ;LCD.c: 296: ScrollDisplayPosition = 0;
+[; ;LCD.c: 296: Stop_Timer1();
 "296
-[e = _ScrollDisplayPosition -> -> 0 `i `uc ]
-[; ;LCD.c: 297: ClearLCD();
+[e ( _Stop_Timer1 ..  ]
+[; ;LCD.c: 297: ScrollDisplayPosition = 0;
 "297
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 298: SetLCDcursor(0, 0);
+[e = _ScrollDisplayPosition -> -> 0 `i `uc ]
+[; ;LCD.c: 298: ClearLCD();
 "298
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 299: LCDPrintChar('>');
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 299: SetLCDcursor(0, 0);
 "299
-[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 300: LCDPrintChar('>');
 "300
-}
-[; ;LCD.c: 300: }
-[e $U 2191  ]
+[e ( _LCDPrintChar (1 -> -> 62 `ui `uc ]
 "301
-[e :U 2190 ]
-[; ;LCD.c: 301: else
-[; ;LCD.c: 302: {
+}
+[; ;LCD.c: 301: }
+[e $U 2191  ]
 "302
-{
-[; ;LCD.c: 303: ScrollDisplayPosition++;
+[e :U 2190 ]
+[; ;LCD.c: 302: else
+[; ;LCD.c: 303: {
 "303
-[e ++ _ScrollDisplayPosition -> -> 1 `i `uc ]
-[; ;LCD.c: 304: if(ScrollDisplayPosition == 1)
+{
+[; ;LCD.c: 304: ScrollDisplayPosition++;
 "304
-[e $ ! == -> _ScrollDisplayPosition `i -> 1 `i 2192  ]
-[; ;LCD.c: 305: {
+[e ++ _ScrollDisplayPosition -> -> 1 `i `uc ]
+[; ;LCD.c: 305: if(ScrollDisplayPosition == 1)
 "305
-{
-[; ;LCD.c: 306: ClearLCD();
+[e $ ! == -> _ScrollDisplayPosition `i -> 1 `i 2192  ]
+[; ;LCD.c: 306: {
 "306
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 307: SetLCDcursor(1, 0);
+{
+[; ;LCD.c: 307: ClearLCD();
 "307
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 308: LCDPrintString(Scroll_1);
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 308: SetLCDcursor(1, 0);
 "308
-[e ( _LCDPrintString (1 -> &U _Scroll_1 `*Cuc ]
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 309: LCDPrintString(Scroll_1);
 "309
-}
-[; ;LCD.c: 309: }
-[e $U 2193  ]
-"310
-[e :U 2192 ]
-[; ;LCD.c: 310: else if(ScrollDisplayPosition == 2)
-[e $ ! == -> _ScrollDisplayPosition `i -> 2 `i 2194  ]
-[; ;LCD.c: 311: {
-"311
-{
-[; ;LCD.c: 312: ClearLCD();
-"312
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 313: SetLCDcursor(0, 0);
-"313
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 314: LCDPrintString(Scroll_1);
-"314
 [e ( _LCDPrintString (1 -> &U _Scroll_1 `*Cuc ]
-[; ;LCD.c: 315: SetLCDcursor(1, 0);
+"310
+}
+[; ;LCD.c: 310: }
+[e $U 2193  ]
+"311
+[e :U 2192 ]
+[; ;LCD.c: 311: else if(ScrollDisplayPosition == 2)
+[e $ ! == -> _ScrollDisplayPosition `i -> 2 `i 2194  ]
+[; ;LCD.c: 312: {
+"312
+{
+[; ;LCD.c: 313: ClearLCD();
+"313
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 314: SetLCDcursor(0, 0);
+"314
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 315: LCDPrintString(Scroll_1);
 "315
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 316: LCDPrintString(Scroll_2);
+[e ( _LCDPrintString (1 -> &U _Scroll_1 `*Cuc ]
+[; ;LCD.c: 316: SetLCDcursor(1, 0);
 "316
-[e ( _LCDPrintString (1 -> &U _Scroll_2 `*Cuc ]
-[; ;LCD.c: 317: cleanBuffer(Scroll_1, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 317: LCDPrintString(Scroll_2);
 "317
-[e ( _cleanBuffer (2 , &U _Scroll_1 -> 16 `i ]
-"318
-}
-[; ;LCD.c: 318: }
-[e $U 2195  ]
-"319
-[e :U 2194 ]
-[; ;LCD.c: 319: else if(ScrollDisplayPosition == 3)
-[e $ ! == -> _ScrollDisplayPosition `i -> 3 `i 2196  ]
-[; ;LCD.c: 320: {
-"320
-{
-[; ;LCD.c: 321: ClearLCD();
-"321
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 322: SetLCDcursor(0, 0);
-"322
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 323: LCDPrintString(Scroll_2);
-"323
 [e ( _LCDPrintString (1 -> &U _Scroll_2 `*Cuc ]
-[; ;LCD.c: 324: SetLCDcursor(1, 0);
+[; ;LCD.c: 318: cleanBuffer(Scroll_1, 16);
+"318
+[e ( _cleanBuffer (2 , &U _Scroll_1 -> 16 `i ]
+"319
+}
+[; ;LCD.c: 319: }
+[e $U 2195  ]
+"320
+[e :U 2194 ]
+[; ;LCD.c: 320: else if(ScrollDisplayPosition == 3)
+[e $ ! == -> _ScrollDisplayPosition `i -> 3 `i 2196  ]
+[; ;LCD.c: 321: {
+"321
+{
+[; ;LCD.c: 322: ClearLCD();
+"322
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 323: SetLCDcursor(0, 0);
+"323
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 324: LCDPrintString(Scroll_2);
 "324
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 325: LCDPrintString(Scroll_3);
+[e ( _LCDPrintString (1 -> &U _Scroll_2 `*Cuc ]
+[; ;LCD.c: 325: SetLCDcursor(1, 0);
 "325
-[e ( _LCDPrintString (1 -> &U _Scroll_3 `*Cuc ]
-[; ;LCD.c: 326: cleanBuffer(Scroll_2, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 326: LCDPrintString(Scroll_3);
 "326
-[e ( _cleanBuffer (2 , &U _Scroll_2 -> 16 `i ]
-"327
-}
-[; ;LCD.c: 327: }
-[e $U 2197  ]
-"328
-[e :U 2196 ]
-[; ;LCD.c: 328: else if(ScrollDisplayPosition == 4)
-[e $ ! == -> _ScrollDisplayPosition `i -> 4 `i 2198  ]
-[; ;LCD.c: 329: {
-"329
-{
-[; ;LCD.c: 330: ClearLCD();
-"330
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 331: SetLCDcursor(0, 0);
-"331
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 332: LCDPrintString(Scroll_3);
-"332
 [e ( _LCDPrintString (1 -> &U _Scroll_3 `*Cuc ]
-[; ;LCD.c: 333: SetLCDcursor(1, 0);
+[; ;LCD.c: 327: cleanBuffer(Scroll_2, 16);
+"327
+[e ( _cleanBuffer (2 , &U _Scroll_2 -> 16 `i ]
+"328
+}
+[; ;LCD.c: 328: }
+[e $U 2197  ]
+"329
+[e :U 2196 ]
+[; ;LCD.c: 329: else if(ScrollDisplayPosition == 4)
+[e $ ! == -> _ScrollDisplayPosition `i -> 4 `i 2198  ]
+[; ;LCD.c: 330: {
+"330
+{
+[; ;LCD.c: 331: ClearLCD();
+"331
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 332: SetLCDcursor(0, 0);
+"332
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 333: LCDPrintString(Scroll_3);
 "333
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 334: LCDPrintString(Scroll_4);
+[e ( _LCDPrintString (1 -> &U _Scroll_3 `*Cuc ]
+[; ;LCD.c: 334: SetLCDcursor(1, 0);
 "334
-[e ( _LCDPrintString (1 -> &U _Scroll_4 `*Cuc ]
-[; ;LCD.c: 335: cleanBuffer(Scroll_3, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 335: LCDPrintString(Scroll_4);
 "335
-[e ( _cleanBuffer (2 , &U _Scroll_3 -> 16 `i ]
-"336
-}
-[; ;LCD.c: 336: }
-[e $U 2199  ]
-"337
-[e :U 2198 ]
-[; ;LCD.c: 337: else if(ScrollDisplayPosition == 5)
-[e $ ! == -> _ScrollDisplayPosition `i -> 5 `i 2200  ]
-[; ;LCD.c: 338: {
-"338
-{
-[; ;LCD.c: 339: ClearLCD();
-"339
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 340: SetLCDcursor(0, 0);
-"340
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 341: LCDPrintString(Scroll_4);
-"341
 [e ( _LCDPrintString (1 -> &U _Scroll_4 `*Cuc ]
-[; ;LCD.c: 342: SetLCDcursor(1, 0);
+[; ;LCD.c: 336: cleanBuffer(Scroll_3, 16);
+"336
+[e ( _cleanBuffer (2 , &U _Scroll_3 -> 16 `i ]
+"337
+}
+[; ;LCD.c: 337: }
+[e $U 2199  ]
+"338
+[e :U 2198 ]
+[; ;LCD.c: 338: else if(ScrollDisplayPosition == 5)
+[e $ ! == -> _ScrollDisplayPosition `i -> 5 `i 2200  ]
+[; ;LCD.c: 339: {
+"339
+{
+[; ;LCD.c: 340: ClearLCD();
+"340
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 341: SetLCDcursor(0, 0);
+"341
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 342: LCDPrintString(Scroll_4);
 "342
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 343: LCDPrintString(Scroll_5);
+[e ( _LCDPrintString (1 -> &U _Scroll_4 `*Cuc ]
+[; ;LCD.c: 343: SetLCDcursor(1, 0);
 "343
-[e ( _LCDPrintString (1 -> &U _Scroll_5 `*Cuc ]
-[; ;LCD.c: 344: cleanBuffer(Scroll_4, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 344: LCDPrintString(Scroll_5);
 "344
-[e ( _cleanBuffer (2 , &U _Scroll_4 -> 16 `i ]
-"345
-}
-[; ;LCD.c: 345: }
-[e $U 2201  ]
-"346
-[e :U 2200 ]
-[; ;LCD.c: 346: else if(ScrollDisplayPosition == 6)
-[e $ ! == -> _ScrollDisplayPosition `i -> 6 `i 2202  ]
-[; ;LCD.c: 347: {
-"347
-{
-[; ;LCD.c: 348: ClearLCD();
-"348
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 349: SetLCDcursor(0, 0);
-"349
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 350: LCDPrintString(Scroll_5);
-"350
 [e ( _LCDPrintString (1 -> &U _Scroll_5 `*Cuc ]
-[; ;LCD.c: 351: SetLCDcursor(1, 0);
+[; ;LCD.c: 345: cleanBuffer(Scroll_4, 16);
+"345
+[e ( _cleanBuffer (2 , &U _Scroll_4 -> 16 `i ]
+"346
+}
+[; ;LCD.c: 346: }
+[e $U 2201  ]
+"347
+[e :U 2200 ]
+[; ;LCD.c: 347: else if(ScrollDisplayPosition == 6)
+[e $ ! == -> _ScrollDisplayPosition `i -> 6 `i 2202  ]
+[; ;LCD.c: 348: {
+"348
+{
+[; ;LCD.c: 349: ClearLCD();
+"349
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 350: SetLCDcursor(0, 0);
+"350
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 351: LCDPrintString(Scroll_5);
 "351
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 352: LCDPrintString(Scroll_6);
+[e ( _LCDPrintString (1 -> &U _Scroll_5 `*Cuc ]
+[; ;LCD.c: 352: SetLCDcursor(1, 0);
 "352
-[e ( _LCDPrintString (1 -> &U _Scroll_6 `*Cuc ]
-[; ;LCD.c: 353: cleanBuffer(Scroll_5, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 353: LCDPrintString(Scroll_6);
 "353
-[e ( _cleanBuffer (2 , &U _Scroll_5 -> 16 `i ]
-"354
-}
-[; ;LCD.c: 354: }
-[e $U 2203  ]
-"355
-[e :U 2202 ]
-[; ;LCD.c: 355: else if(ScrollDisplayPosition == 7)
-[e $ ! == -> _ScrollDisplayPosition `i -> 7 `i 2204  ]
-[; ;LCD.c: 356: {
-"356
-{
-[; ;LCD.c: 357: ClearLCD();
-"357
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 358: SetLCDcursor(0, 0);
-"358
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 359: LCDPrintString(Scroll_6);
-"359
 [e ( _LCDPrintString (1 -> &U _Scroll_6 `*Cuc ]
-[; ;LCD.c: 360: SetLCDcursor(1, 0);
+[; ;LCD.c: 354: cleanBuffer(Scroll_5, 16);
+"354
+[e ( _cleanBuffer (2 , &U _Scroll_5 -> 16 `i ]
+"355
+}
+[; ;LCD.c: 355: }
+[e $U 2203  ]
+"356
+[e :U 2202 ]
+[; ;LCD.c: 356: else if(ScrollDisplayPosition == 7)
+[e $ ! == -> _ScrollDisplayPosition `i -> 7 `i 2204  ]
+[; ;LCD.c: 357: {
+"357
+{
+[; ;LCD.c: 358: ClearLCD();
+"358
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 359: SetLCDcursor(0, 0);
+"359
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 360: LCDPrintString(Scroll_6);
 "360
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 361: LCDPrintString(Scroll_7);
+[e ( _LCDPrintString (1 -> &U _Scroll_6 `*Cuc ]
+[; ;LCD.c: 361: SetLCDcursor(1, 0);
 "361
-[e ( _LCDPrintString (1 -> &U _Scroll_7 `*Cuc ]
-[; ;LCD.c: 362: cleanBuffer(Scroll_6, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 362: LCDPrintString(Scroll_7);
 "362
-[e ( _cleanBuffer (2 , &U _Scroll_6 -> 16 `i ]
-"363
-}
-[; ;LCD.c: 363: }
-[e $U 2205  ]
-"364
-[e :U 2204 ]
-[; ;LCD.c: 364: else if(ScrollDisplayPosition == 8)
-[e $ ! == -> _ScrollDisplayPosition `i -> 8 `i 2206  ]
-[; ;LCD.c: 365: {
-"365
-{
-[; ;LCD.c: 366: ClearLCD();
-"366
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 367: SetLCDcursor(0, 0);
-"367
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 368: LCDPrintString(Scroll_7);
-"368
 [e ( _LCDPrintString (1 -> &U _Scroll_7 `*Cuc ]
-[; ;LCD.c: 369: SetLCDcursor(1, 0);
+[; ;LCD.c: 363: cleanBuffer(Scroll_6, 16);
+"363
+[e ( _cleanBuffer (2 , &U _Scroll_6 -> 16 `i ]
+"364
+}
+[; ;LCD.c: 364: }
+[e $U 2205  ]
+"365
+[e :U 2204 ]
+[; ;LCD.c: 365: else if(ScrollDisplayPosition == 8)
+[e $ ! == -> _ScrollDisplayPosition `i -> 8 `i 2206  ]
+[; ;LCD.c: 366: {
+"366
+{
+[; ;LCD.c: 367: ClearLCD();
+"367
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 368: SetLCDcursor(0, 0);
+"368
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 369: LCDPrintString(Scroll_7);
 "369
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 370: LCDPrintString(Scroll_8);
+[e ( _LCDPrintString (1 -> &U _Scroll_7 `*Cuc ]
+[; ;LCD.c: 370: SetLCDcursor(1, 0);
 "370
-[e ( _LCDPrintString (1 -> &U _Scroll_8 `*Cuc ]
-[; ;LCD.c: 371: cleanBuffer(Scroll_7, 16);
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 371: LCDPrintString(Scroll_8);
 "371
-[e ( _cleanBuffer (2 , &U _Scroll_7 -> 16 `i ]
-"372
-}
-[; ;LCD.c: 372: }
-[e $U 2207  ]
-"373
-[e :U 2206 ]
-[; ;LCD.c: 373: else if(ScrollDisplayPosition == 9)
-[e $ ! == -> _ScrollDisplayPosition `i -> 9 `i 2208  ]
-[; ;LCD.c: 374: {
-"374
-{
-[; ;LCD.c: 375: ClearLCD();
-"375
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 376: SetLCDcursor(0, 0);
-"376
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 377: LCDPrintString(Scroll_8);
-"377
 [e ( _LCDPrintString (1 -> &U _Scroll_8 `*Cuc ]
-[; ;LCD.c: 378: SetLCDcursor(1, 0);
+[; ;LCD.c: 372: cleanBuffer(Scroll_7, 16);
+"372
+[e ( _cleanBuffer (2 , &U _Scroll_7 -> 16 `i ]
+"373
+}
+[; ;LCD.c: 373: }
+[e $U 2207  ]
+"374
+[e :U 2206 ]
+[; ;LCD.c: 374: else if(ScrollDisplayPosition == 9)
+[e $ ! == -> _ScrollDisplayPosition `i -> 9 `i 2208  ]
+[; ;LCD.c: 375: {
+"375
+{
+[; ;LCD.c: 376: ClearLCD();
+"376
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 377: SetLCDcursor(0, 0);
+"377
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 378: LCDPrintString(Scroll_8);
 "378
-[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 379: LCDPrintString(Scroll_9);
+[e ( _LCDPrintString (1 -> &U _Scroll_8 `*Cuc ]
+[; ;LCD.c: 379: SetLCDcursor(1, 0);
 "379
-[e ( _LCDPrintString (1 -> &U _Scroll_9 `*Cuc ]
-[; ;LCD.c: 380: cleanBuffer(Scroll_8, 16);
-"380
-[e ( _cleanBuffer (2 , &U _Scroll_8 -> 16 `i ]
-"381
-}
-[; ;LCD.c: 381: }
-[e $U 2209  ]
-"382
-[e :U 2208 ]
-[; ;LCD.c: 382: else if(ScrollDisplayPosition == 10)
-[e $ ! == -> _ScrollDisplayPosition `i -> 10 `i 2210  ]
-[; ;LCD.c: 383: {
-"383
-{
-[; ;LCD.c: 384: ClearLCD();
-"384
-[e ( _ClearLCD ..  ]
-[; ;LCD.c: 385: SetLCDcursor(0, 0);
-"385
-[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 386: LCDPrintString(Scroll_9);
-"386
-[e ( _LCDPrintString (1 -> &U _Scroll_9 `*Cuc ]
-[; ;LCD.c: 387: SetLCDcursor(1, 0);
-"387
 [e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 388: LCDPrintString(Scroll_10);
-"388
-[e ( _LCDPrintString (1 -> &U _Scroll_10 `*Cuc ]
-[; ;LCD.c: 389: cleanBuffer(Scroll_9, 16);
-"389
-[e ( _cleanBuffer (2 , &U _Scroll_9 -> 16 `i ]
-"390
+[; ;LCD.c: 380: LCDPrintString(Scroll_9);
+"380
+[e ( _LCDPrintString (1 -> &U _Scroll_9 `*Cuc ]
+[; ;LCD.c: 381: cleanBuffer(Scroll_8, 16);
+"381
+[e ( _cleanBuffer (2 , &U _Scroll_8 -> 16 `i ]
+"382
 }
-[; ;LCD.c: 390: }
-[e $U 2211  ]
-"391
-[e :U 2210 ]
-[; ;LCD.c: 391: else if(ScrollDisplayPosition == 11)
-[e $ ! == -> _ScrollDisplayPosition `i -> 11 `i 2212  ]
-[; ;LCD.c: 392: {
-"392
+[; ;LCD.c: 382: }
+[e $U 2209  ]
+"383
+[e :U 2208 ]
+[; ;LCD.c: 383: else if(ScrollDisplayPosition == 10)
+[e $ ! == -> _ScrollDisplayPosition `i -> 10 `i 2210  ]
+[; ;LCD.c: 384: {
+"384
 {
-[; ;LCD.c: 393: ClearLCD();
-"393
+[; ;LCD.c: 385: ClearLCD();
+"385
 [e ( _ClearLCD ..  ]
-[; ;LCD.c: 394: SetLCDcursor(0, 0);
-"394
+[; ;LCD.c: 386: SetLCDcursor(0, 0);
+"386
 [e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;LCD.c: 395: LCDPrintString(Scroll_10);
-"395
+[; ;LCD.c: 387: LCDPrintString(Scroll_9);
+"387
+[e ( _LCDPrintString (1 -> &U _Scroll_9 `*Cuc ]
+[; ;LCD.c: 388: SetLCDcursor(1, 0);
+"388
+[e ( _SetLCDcursor (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 389: LCDPrintString(Scroll_10);
+"389
 [e ( _LCDPrintString (1 -> &U _Scroll_10 `*Cuc ]
-[; ;LCD.c: 396: cleanBuffer(Scroll_10, 16);
+[; ;LCD.c: 390: cleanBuffer(Scroll_9, 16);
+"390
+[e ( _cleanBuffer (2 , &U _Scroll_9 -> 16 `i ]
+"391
+}
+[; ;LCD.c: 391: }
+[e $U 2211  ]
+"392
+[e :U 2210 ]
+[; ;LCD.c: 392: else if(ScrollDisplayPosition == 11)
+[e $ ! == -> _ScrollDisplayPosition `i -> 11 `i 2212  ]
+[; ;LCD.c: 393: {
+"393
+{
+[; ;LCD.c: 394: ClearLCD();
+"394
+[e ( _ClearLCD ..  ]
+[; ;LCD.c: 395: SetLCDcursor(0, 0);
+"395
+[e ( _SetLCDcursor (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;LCD.c: 396: LCDPrintString(Scroll_10);
 "396
-[e ( _cleanBuffer (2 , &U _Scroll_10 -> 16 `i ]
+[e ( _LCDPrintString (1 -> &U _Scroll_10 `*Cuc ]
+[; ;LCD.c: 397: cleanBuffer(Scroll_10, 16);
 "397
+[e ( _cleanBuffer (2 , &U _Scroll_10 -> 16 `i ]
+"398
 }
 [e :U 2212 ]
-"398
+"399
 [e :U 2211 ]
 [e :U 2209 ]
 [e :U 2207 ]
@@ -16311,200 +16316,203 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2197 ]
 [e :U 2195 ]
 [e :U 2193 ]
-[; ;LCD.c: 397: }
-[; ;LCD.c: 398: if(ScrollDisplayPosition > ScrollFIFOCount)
+[; ;LCD.c: 398: }
+[; ;LCD.c: 399: if(ScrollDisplayPosition > ScrollFIFOCount)
 [e $ ! > -> _ScrollDisplayPosition `i -> _ScrollFIFOCount `i 2213  ]
-[; ;LCD.c: 399: {
-"399
-{
-[; ;LCD.c: 400: ScrollFIFOCount=0;
+[; ;LCD.c: 400: {
 "400
-[e = _ScrollFIFOCount -> -> 0 `i `uc ]
-[; ;LCD.c: 401: ScrollDisplayPosition=0;
+{
+[; ;LCD.c: 401: ScrollFIFOCount=0;
 "401
-[e = _ScrollDisplayPosition -> -> 0 `i `uc ]
+[e = _ScrollFIFOCount -> -> 0 `i `uc ]
+[; ;LCD.c: 402: ScrollDisplayPosition=0;
 "402
+[e = _ScrollDisplayPosition -> -> 0 `i `uc ]
+"403
 }
 [e :U 2213 ]
-[; ;LCD.c: 402: }
-[; ;LCD.c: 403: LCDclearCount = 15000;
-"403
-[e = _LCDclearCount -> -> -> 15000 `i `l `ul ]
+[; ;LCD.c: 403: }
+[; ;LCD.c: 404: LCDclearCount = 0;
 "404
-}
-[e :U 2191 ]
+[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
 "405
 }
-[e :U 2189 ]
+[e :U 2191 ]
 "406
+}
+[e :U 2189 ]
+"407
 [e :U 2188 ]
-[; ;LCD.c: 404: }
 [; ;LCD.c: 405: }
 [; ;LCD.c: 406: }
+[; ;LCD.c: 407: }
 [e :UE 2186 ]
 }
-"413
+"414
 [v _LCD_Scroll `(v ~T0 @X0 1 ef1`*Cuc ]
-"414
-{
-[; ;LCD.c: 413: void LCD_Scroll(const unsigned char* This)
-[; ;LCD.c: 414: {
-[e :U _LCD_Scroll ]
-"413
-[v _This `*Cuc ~T0 @X0 1 r1 ]
-"414
-[f ]
-[; ;LCD.c: 415: if(!LCDwait)
 "415
-[e $ ! ! != -> _LCDwait `i -> -> -> 0 `i `uc `i 2215  ]
-[; ;LCD.c: 416: {
+{
+[; ;LCD.c: 414: void LCD_Scroll(const unsigned char* This)
+[; ;LCD.c: 415: {
+[e :U _LCD_Scroll ]
+"414
+[v _This `*Cuc ~T0 @X0 1 r1 ]
+"415
+[f ]
+[; ;LCD.c: 416: Start_Timer1();
 "416
-{
-[; ;LCD.c: 417: LCDclearCount = 15000;
+[e ( _Start_Timer1 ..  ]
+[; ;LCD.c: 417: if(!LCDwait)
 "417
-[e = _LCDclearCount -> -> -> 15000 `i `l `ul ]
-[; ;LCD.c: 418: ScrollFIFOCount++;
+[e $ ! ! != -> _LCDwait `i -> -> -> 0 `i `uc `i 2215  ]
+[; ;LCD.c: 418: {
 "418
-[e ++ _ScrollFIFOCount -> -> 1 `i `uc ]
-[; ;LCD.c: 419: if(ScrollFIFOCount == 1)
+{
+[; ;LCD.c: 419: LCDclearCount = 0;
 "419
-[e $ ! == -> _ScrollFIFOCount `i -> 1 `i 2216  ]
-[; ;LCD.c: 420: {
+[e = _LCDclearCount -> -> -> 0 `i `l `ul ]
+[; ;LCD.c: 420: ScrollFIFOCount++;
 "420
-{
-[; ;LCD.c: 421: BufferCopy((unsigned char*) This,Scroll_1, 16, 0);
+[e ++ _ScrollFIFOCount -> -> 1 `i `uc ]
+[; ;LCD.c: 421: if(ScrollFIFOCount == 1)
 "421
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_1 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e $ ! == -> _ScrollFIFOCount `i -> 1 `i 2216  ]
+[; ;LCD.c: 422: {
 "422
-}
-[; ;LCD.c: 422: }
-[e $U 2217  ]
+{
+[; ;LCD.c: 423: BufferCopy((unsigned char*) This,Scroll_1, 16, 0);
 "423
-[e :U 2216 ]
-[; ;LCD.c: 423: else if(ScrollFIFOCount == 2)
-[e $ ! == -> _ScrollFIFOCount `i -> 2 `i 2218  ]
-[; ;LCD.c: 424: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_1 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "424
-{
-[; ;LCD.c: 425: BufferCopy((unsigned char*) This,Scroll_2, 16, 0);
+}
+[; ;LCD.c: 424: }
+[e $U 2217  ]
 "425
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_2 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2216 ]
+[; ;LCD.c: 425: else if(ScrollFIFOCount == 2)
+[e $ ! == -> _ScrollFIFOCount `i -> 2 `i 2218  ]
+[; ;LCD.c: 426: {
 "426
-}
-[; ;LCD.c: 426: }
-[e $U 2219  ]
+{
+[; ;LCD.c: 427: BufferCopy((unsigned char*) This,Scroll_2, 16, 0);
 "427
-[e :U 2218 ]
-[; ;LCD.c: 427: else if(ScrollFIFOCount == 3)
-[e $ ! == -> _ScrollFIFOCount `i -> 3 `i 2220  ]
-[; ;LCD.c: 428: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_2 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "428
-{
-[; ;LCD.c: 429: BufferCopy((unsigned char*) This,Scroll_3, 16, 0);
+}
+[; ;LCD.c: 428: }
+[e $U 2219  ]
 "429
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_3 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2218 ]
+[; ;LCD.c: 429: else if(ScrollFIFOCount == 3)
+[e $ ! == -> _ScrollFIFOCount `i -> 3 `i 2220  ]
+[; ;LCD.c: 430: {
 "430
-}
-[; ;LCD.c: 430: }
-[e $U 2221  ]
+{
+[; ;LCD.c: 431: BufferCopy((unsigned char*) This,Scroll_3, 16, 0);
 "431
-[e :U 2220 ]
-[; ;LCD.c: 431: else if(ScrollFIFOCount == 4)
-[e $ ! == -> _ScrollFIFOCount `i -> 4 `i 2222  ]
-[; ;LCD.c: 432: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_3 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "432
-{
-[; ;LCD.c: 433: BufferCopy((unsigned char*) This,Scroll_4, 16, 0);
+}
+[; ;LCD.c: 432: }
+[e $U 2221  ]
 "433
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_4 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2220 ]
+[; ;LCD.c: 433: else if(ScrollFIFOCount == 4)
+[e $ ! == -> _ScrollFIFOCount `i -> 4 `i 2222  ]
+[; ;LCD.c: 434: {
 "434
-}
-[; ;LCD.c: 434: }
-[e $U 2223  ]
+{
+[; ;LCD.c: 435: BufferCopy((unsigned char*) This,Scroll_4, 16, 0);
 "435
-[e :U 2222 ]
-[; ;LCD.c: 435: else if(ScrollFIFOCount == 5)
-[e $ ! == -> _ScrollFIFOCount `i -> 5 `i 2224  ]
-[; ;LCD.c: 436: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_4 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "436
-{
-[; ;LCD.c: 437: BufferCopy((unsigned char*) This,Scroll_5, 16, 0);
+}
+[; ;LCD.c: 436: }
+[e $U 2223  ]
 "437
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_5 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2222 ]
+[; ;LCD.c: 437: else if(ScrollFIFOCount == 5)
+[e $ ! == -> _ScrollFIFOCount `i -> 5 `i 2224  ]
+[; ;LCD.c: 438: {
 "438
-}
-[; ;LCD.c: 438: }
-[e $U 2225  ]
+{
+[; ;LCD.c: 439: BufferCopy((unsigned char*) This,Scroll_5, 16, 0);
 "439
-[e :U 2224 ]
-[; ;LCD.c: 439: else if(ScrollFIFOCount == 6)
-[e $ ! == -> _ScrollFIFOCount `i -> 6 `i 2226  ]
-[; ;LCD.c: 440: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_5 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "440
-{
-[; ;LCD.c: 441: BufferCopy((unsigned char*) This,Scroll_6, 16, 0);
+}
+[; ;LCD.c: 440: }
+[e $U 2225  ]
 "441
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_6 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2224 ]
+[; ;LCD.c: 441: else if(ScrollFIFOCount == 6)
+[e $ ! == -> _ScrollFIFOCount `i -> 6 `i 2226  ]
+[; ;LCD.c: 442: {
 "442
-}
-[; ;LCD.c: 442: }
-[e $U 2227  ]
+{
+[; ;LCD.c: 443: BufferCopy((unsigned char*) This,Scroll_6, 16, 0);
 "443
-[e :U 2226 ]
-[; ;LCD.c: 443: else if(ScrollFIFOCount == 7)
-[e $ ! == -> _ScrollFIFOCount `i -> 7 `i 2228  ]
-[; ;LCD.c: 444: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_6 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "444
-{
-[; ;LCD.c: 445: BufferCopy((unsigned char*) This,Scroll_7, 16, 0);
+}
+[; ;LCD.c: 444: }
+[e $U 2227  ]
 "445
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_7 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2226 ]
+[; ;LCD.c: 445: else if(ScrollFIFOCount == 7)
+[e $ ! == -> _ScrollFIFOCount `i -> 7 `i 2228  ]
+[; ;LCD.c: 446: {
 "446
-}
-[; ;LCD.c: 446: }
-[e $U 2229  ]
+{
+[; ;LCD.c: 447: BufferCopy((unsigned char*) This,Scroll_7, 16, 0);
 "447
-[e :U 2228 ]
-[; ;LCD.c: 447: else if(ScrollFIFOCount == 8)
-[e $ ! == -> _ScrollFIFOCount `i -> 8 `i 2230  ]
-[; ;LCD.c: 448: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_7 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "448
-{
-[; ;LCD.c: 449: BufferCopy((unsigned char*) This,Scroll_8, 16, 0);
+}
+[; ;LCD.c: 448: }
+[e $U 2229  ]
 "449
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_8 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2228 ]
+[; ;LCD.c: 449: else if(ScrollFIFOCount == 8)
+[e $ ! == -> _ScrollFIFOCount `i -> 8 `i 2230  ]
+[; ;LCD.c: 450: {
 "450
-}
-[; ;LCD.c: 450: }
-[e $U 2231  ]
+{
+[; ;LCD.c: 451: BufferCopy((unsigned char*) This,Scroll_8, 16, 0);
 "451
-[e :U 2230 ]
-[; ;LCD.c: 451: else if(ScrollFIFOCount == 9)
-[e $ ! == -> _ScrollFIFOCount `i -> 9 `i 2232  ]
-[; ;LCD.c: 452: {
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_8 -> -> 16 `i `uc -> -> 0 `i `uc ]
 "452
-{
-[; ;LCD.c: 453: BufferCopy((unsigned char*) This,Scroll_9, 16, 0);
-"453
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_9 -> -> 16 `i `uc -> -> 0 `i `uc ]
-"454
 }
-[; ;LCD.c: 454: }
-[e $U 2233  ]
-"455
-[e :U 2232 ]
-[; ;LCD.c: 455: else if(ScrollFIFOCount == 10)
-[e $ ! == -> _ScrollFIFOCount `i -> 10 `i 2234  ]
-[; ;LCD.c: 456: {
-"456
+[; ;LCD.c: 452: }
+[e $U 2231  ]
+"453
+[e :U 2230 ]
+[; ;LCD.c: 453: else if(ScrollFIFOCount == 9)
+[e $ ! == -> _ScrollFIFOCount `i -> 9 `i 2232  ]
+[; ;LCD.c: 454: {
+"454
 {
-[; ;LCD.c: 457: BufferCopy((unsigned char*) This,Scroll_10, 16, 0);
+[; ;LCD.c: 455: BufferCopy((unsigned char*) This,Scroll_9, 16, 0);
+"455
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_9 -> -> 16 `i `uc -> -> 0 `i `uc ]
+"456
+}
+[; ;LCD.c: 456: }
+[e $U 2233  ]
 "457
-[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_10 -> -> 16 `i `uc -> -> 0 `i `uc ]
+[e :U 2232 ]
+[; ;LCD.c: 457: else if(ScrollFIFOCount == 10)
+[e $ ! == -> _ScrollFIFOCount `i -> 10 `i 2234  ]
+[; ;LCD.c: 458: {
 "458
+{
+[; ;LCD.c: 459: BufferCopy((unsigned char*) This,Scroll_10, 16, 0);
+"459
+[e ( _BufferCopy (4 , , , -> _This `*uc &U _Scroll_10 -> -> 16 `i `uc -> -> 0 `i `uc ]
+"460
 }
 [e :U 2234 ]
-"459
+"461
 [e :U 2233 ]
 [e :U 2231 ]
 [e :U 2229 ]
@@ -16516,9 +16524,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 2217 ]
 }
 [e :U 2215 ]
-[; ;LCD.c: 458: }
-[; ;LCD.c: 459: }
 [; ;LCD.c: 460: }
-"460
+[; ;LCD.c: 461: }
+[; ;LCD.c: 462: }
+"462
 [e :UE 2214 ]
 }

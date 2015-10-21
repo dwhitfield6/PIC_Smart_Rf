@@ -15467,28 +15467,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
 [; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
 [; ;UART.h: 123: unsigned long GetBaud(void);
-"62 LCD.h
+"66 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
--> -> -> 25000 `i `l `ul
+-> -> -> 17 `i `l `ul
 ]
-[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
-"63
+[; ;LCD.h: 66: unsigned long LCDclearCount=17;
+"67
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 63: unsigned char LCDwait=0;
-[; ;LCD.h: 69: void init_LCD();
-[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 71: void PulseEnablePin();
-[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 73: void ClearLCD();
-[; ;LCD.h: 74: void LCDPrintString(const unsigned char *Text);
-[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 76: void LCDScreenUpdate();
-[; ;LCD.h: 77: void LCDdisplayFeedback(const unsigned char *Text);
-[; ;LCD.h: 78: void LCD_Scroll(const unsigned char* This);
+[; ;LCD.h: 67: unsigned char LCDwait=0;
+[; ;LCD.h: 73: void init_LCD();
+[; ;LCD.h: 74: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 75: void PulseEnablePin();
+[; ;LCD.h: 76: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 77: void ClearLCD();
+[; ;LCD.h: 78: void LCDPrintString(const unsigned char *Text);
+[; ;LCD.h: 79: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 80: void LCDScreenUpdate();
+[; ;LCD.h: 81: void LCDdisplayFeedback(const unsigned char *Text);
+[; ;LCD.h: 82: void LCD_Scroll(const unsigned char* This);
 [; ;Button.h: 35: void init_Button1_INT(void);
 [; ;Button.h: 36: unsigned char ReadButton1(void);
 [; ;user.h: 96: void InitApp(void);
@@ -15527,9 +15527,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "50 IR.c
 [v _BlueLEDcount `ui ~T0 @X0 1 e ]
 [i _BlueLEDcount
--> -> 25 `i `ui
+-> -> 2500 `i `ui
 ]
-[; ;IR.c: 50: unsigned int BlueLEDcount = 25;
+[; ;IR.c: 50: unsigned int BlueLEDcount = 2500;
 "51
 [v _IRfault `uc ~T0 @X0 1 e ]
 [i _IRfault

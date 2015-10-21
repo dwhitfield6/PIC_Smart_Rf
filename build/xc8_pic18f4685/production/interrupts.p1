@@ -81,13 +81,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i ___nop ]
 "115 UART.h
 [v _UARTstring `(v ~T0 @X0 0 ef1`*Cuc ]
-"73 LCD.h
+"77 LCD.h
 [v _ClearLCD `(v ~T0 @X0 0 ef ]
-"72
+"76
 [v _SetLCDcursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"75
+"79
 [v _LCDPrintChar `(v ~T0 @X0 0 ef1`uc ]
-"74
+"78
 [v _LCDPrintString `(v ~T0 @X0 0 ef1`*Cuc ]
 "77 MISC.h
 [v _IsPrintableASCII `(uc ~T0 @X0 0 ef1`uc ]
@@ -123,7 +123,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _IRrawToNEC `(uc ~T0 @X0 0 ef3`*ui`*ul`uc ]
 "78 MISC.h
 [v _cleanBuffer16bit `(v ~T0 @X0 0 ef2`*ui`i ]
-"76 LCD.h
+"80 LCD.h
 [v _LCDScreenUpdate `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -15484,28 +15484,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;UART.h: 121: void OpenUSART( unsigned char config, unsigned int spbrg);
 [; ;UART.h: 122: void SetBaud(unsigned long Baud, unsigned char Parity);
 [; ;UART.h: 123: unsigned long GetBaud(void);
-"62 LCD.h
+"66 LCD.h
 [v _LCDclearCount `ul ~T0 @X0 1 e ]
 [i _LCDclearCount
--> -> -> 25000 `i `l `ul
+-> -> -> 17 `i `l `ul
 ]
-[; ;LCD.h: 62: unsigned long LCDclearCount=25000;
-"63
+[; ;LCD.h: 66: unsigned long LCDclearCount=17;
+"67
 [v _LCDwait `uc ~T0 @X0 1 e ]
 [i _LCDwait
 -> -> 0 `i `uc
 ]
-[; ;LCD.h: 63: unsigned char LCDwait=0;
-[; ;LCD.h: 69: void init_LCD();
-[; ;LCD.h: 70: void SendLCDbyte(unsigned char data, unsigned char isCommand);
-[; ;LCD.h: 71: void PulseEnablePin();
-[; ;LCD.h: 72: void SetLCDcursor(char Row, char Col);
-[; ;LCD.h: 73: void ClearLCD();
-[; ;LCD.h: 74: void LCDPrintString(const unsigned char *Text);
-[; ;LCD.h: 75: void LCDPrintChar(unsigned char character);
-[; ;LCD.h: 76: void LCDScreenUpdate();
-[; ;LCD.h: 77: void LCDdisplayFeedback(const unsigned char *Text);
-[; ;LCD.h: 78: void LCD_Scroll(const unsigned char* This);
+[; ;LCD.h: 67: unsigned char LCDwait=0;
+[; ;LCD.h: 73: void init_LCD();
+[; ;LCD.h: 74: void SendLCDbyte(unsigned char data, unsigned char isCommand);
+[; ;LCD.h: 75: void PulseEnablePin();
+[; ;LCD.h: 76: void SetLCDcursor(char Row, char Col);
+[; ;LCD.h: 77: void ClearLCD();
+[; ;LCD.h: 78: void LCDPrintString(const unsigned char *Text);
+[; ;LCD.h: 79: void LCDPrintChar(unsigned char character);
+[; ;LCD.h: 80: void LCDScreenUpdate();
+[; ;LCD.h: 81: void LCDdisplayFeedback(const unsigned char *Text);
+[; ;LCD.h: 82: void LCD_Scroll(const unsigned char* This);
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
 [; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
@@ -15643,9 +15643,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 95: INTCONbits.PEIE = 0;
 "95
 [e = . . _INTCONbits 1 6 -> -> 0 `i `uc ]
-[; ;interrupts.c: 97: if(PIR1bits.RCIF)
+[; ;interrupts.c: 97: if(PIR1bits.RCIF && PIE1bits.RCIE)
 "97
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 2163  ]
+[e $ ! && != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i != -> . . _PIE1bits 0 5 `i -> -> -> 0 `i `Vuc `i 2163  ]
 [; ;interrupts.c: 98: {
 "98
 {
@@ -15956,8 +15956,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 2187  ]
 "206
 [e :U 2163 ]
-[; ;interrupts.c: 206: else if(INTCONbits.RBIF)
-[e $ ! != -> . . _INTCONbits 0 0 `i -> -> -> 0 `i `Vuc `i 2188  ]
+[; ;interrupts.c: 206: else if(INTCONbits.RBIF && INTCONbits.RBIE)
+[e $ ! && != -> . . _INTCONbits 0 0 `i -> -> -> 0 `i `Vuc `i != -> . . _INTCONbits 0 3 `i -> -> -> 0 `i `Vuc `i 2188  ]
 [; ;interrupts.c: 207: {
 "207
 {
@@ -16106,8 +16106,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 2196  ]
 "260
 [e :U 2188 ]
-[; ;interrupts.c: 260: else if (INTCONbits.TMR0IF)
-[e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 2197  ]
+[; ;interrupts.c: 260: else if (INTCONbits.TMR0IF && INTCONbits.TMR0IE)
+[e $ ! && != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _INTCONbits 0 5 `i -> -> -> 0 `i `Vuc `i 2197  ]
 [; ;interrupts.c: 261: {
 "261
 {
@@ -16129,8 +16129,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 2198  ]
 "268
 [e :U 2197 ]
-[; ;interrupts.c: 268: else if(INTCONbits.INT0IF)
-[e $ ! != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i 2199  ]
+[; ;interrupts.c: 268: else if(INTCONbits.INT0IF && INTCONbits.INT0IE)
+[e $ ! && != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i != -> . . _INTCONbits 0 4 `i -> -> -> 0 `i `Vuc `i 2199  ]
 [; ;interrupts.c: 269: {
 "269
 {
@@ -16140,52 +16140,52 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupts.c: 272: INTCONbits.INT0IE = 0;
 "272
 [e = . . _INTCONbits 0 4 -> -> 0 `i `uc ]
-"274
+"273
 }
-[; ;interrupts.c: 274: }
+[; ;interrupts.c: 273: }
 [e $U 2200  ]
-"275
+"274
 [e :U 2199 ]
-[; ;interrupts.c: 275: else if(PIR1bits.TMR1IF)
-[e $ ! != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i 2201  ]
-[; ;interrupts.c: 276: {
-"276
+[; ;interrupts.c: 274: else if(PIR1bits.TMR1IF && PIE1bits.TMR1IE)
+[e $ ! && != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i != -> . . _PIE1bits 0 0 `i -> -> -> 0 `i `Vuc `i 2201  ]
+[; ;interrupts.c: 275: {
+"275
 {
-[; ;interrupts.c: 278: LCDScreenUpdate();
-"278
+[; ;interrupts.c: 277: LCDScreenUpdate();
+"277
 [e ( _LCDScreenUpdate ..  ]
-[; ;interrupts.c: 279: PIR1bits.TMR1IF = 0;
-"279
+[; ;interrupts.c: 278: PIR1bits.TMR1IF = 0;
+"278
 [e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;interrupts.c: 280: PIE1bits.TMR1IE = 1;
-"280
+[; ;interrupts.c: 279: PIE1bits.TMR1IE = 1;
+"279
 [e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-"281
+"280
 }
-[; ;interrupts.c: 281: }
+[; ;interrupts.c: 280: }
 [e $U 2202  ]
-"282
+"281
 [e :U 2201 ]
-[; ;interrupts.c: 282: else
-[; ;interrupts.c: 283: {
-"283
+[; ;interrupts.c: 281: else
+[; ;interrupts.c: 282: {
+"282
 {
-[; ;interrupts.c: 285: __nop();
-"285
+[; ;interrupts.c: 284: __nop();
+"284
 [e ( ___nop ..  ]
-"286
+"285
 }
 [e :U 2202 ]
 [e :U 2200 ]
 [e :U 2198 ]
 [e :U 2196 ]
 [e :U 2187 ]
-[; ;interrupts.c: 286: }
-[; ;interrupts.c: 287: INTCONbits.PEIE = 1;
-"287
+[; ;interrupts.c: 285: }
+[; ;interrupts.c: 286: INTCONbits.PEIE = 1;
+"286
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;interrupts.c: 288: }
-"288
+[; ;interrupts.c: 287: }
+"287
 [e :UE 2162 ]
 }
 [a 4C 62 0 ]

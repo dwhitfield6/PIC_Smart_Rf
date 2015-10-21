@@ -19609,7 +19609,7 @@ T1CONbits.TMR1CS = 0;
 T1CONbits.T1CKPS = 0x3;
 
 IPR1bits.TMR1IP = 0;
-Start_Timer1();
+Stop_Timer1();
 }
 
 # 137
@@ -19628,15 +19628,17 @@ void Start_Timer1(void)
 
 T1CONbits.TMR1ON =1;
 
+Reset_Timer1();
+
 PIR1bits.TMR1IF = 0;
 PIE1bits.TMR1IE = 1;
 }
 
-# 165
+# 167
 void Reset_Timer1(void)
 {
 
-# 171
+# 173
 TMR1H = 0;
 TMR1L = 2;
 }
